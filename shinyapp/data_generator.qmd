@@ -1,0 +1,48 @@
+---
+title: "data_generator"
+format: html
+---
+
+```{r}
+library(tidyverse)
+
+# To-Do:
+# Full Hopper Timer, >5-10s Solo Shooting, Preferred Zone / Role, Lap Timer to Shoot???
+
+# Edit team numbers and length of dataframe here
+team = sample(c(116, 422, 449, 1323, 1690, 2910, 3937, 4821, 5084, 8592, 10004), 72, replace = TRUE)
+
+data <- data.frame(team, match = 0) |>
+    rowwise() |>
+    mutate(
+        auto_type = sample(c('Depot', 'HP', 'NZ', '', 'HP, Depot'), size = 1),
+        auto_trench = sample(0:1 * 2, size = 1),
+        auto_bump = 2 - auto_trench,
+        auto_climb = sample(c(TRUE, FALSE), , size = 1, prob = c(75, 25)),
+        auto_cap = sample(0:100 / 100, size = 1),
+        auto_acc = sample(50:100 / 100, size = 1),
+        num_int_cycles = sample(2:8, size = 1, prob = c(1, 1, 2, 2, 1, 0.5, 0.5)),
+        tele_trench = sample(0:num_int_cycles, size = 1, prob = c(5, rep(1, num_int_cycles))),
+        tele_bump = num_int_cycles*2 - tele_trench,
+        climb_time = sample(1000:10000 / 1000, size = 1),
+        tele_cap1 = sample(0:100 / 100, size = 1),
+        tele_cap2 = sample(0:100 / 100, size = 1),
+        tele_cap3 = ifelse(num_int_cycles > 2, sample(0:100 / 100, size = 1), 0),
+        tele_cap4 = ifelse(num_int_cycles > 3, sample(0:100 / 100, size = 1), 0),
+        tele_cap5 = ifelse(num_int_cycles > 4, sample(0:100 / 100, size = 1), 0),
+        tele_cap6 = ifelse(num_int_cycles > 5, sample(0:100 / 100, size = 1), 0),
+        tele_cap7 = ifelse(num_int_cycles > 6, sample(0:100 / 100, size = 1), 0),
+        tele_cap8 = ifelse(num_int_cycles > 7, sample(0:100 / 100, size = 1), 0),
+        tele_acc1 = sample(50:100 / 100, size = 1),
+        tele_acc2 = sample(50:100 / 100, size = 1),
+        tele_acc3 = ifelse(num_int_cycles > 2, sample(50:100 / 100, size = 1), 0),
+        tele_acc4 = ifelse(num_int_cycles > 3, sample(50:100 / 100, size = 1), 0),
+        tele_acc5 = ifelse(num_int_cycles > 4, sample(50:100 / 100, size = 1), 0),
+        tele_acc6 = ifelse(num_int_cycles > 5, sample(50:100 / 100, size = 1), 0),
+        tele_acc7 = ifelse(num_int_cycles > 6, sample(50:100 / 100, size = 1), 0),
+        tele_acc8 = ifelse(num_int_cycles > 7, sample(50:100 / 100, size = 1), 0),
+        climb = sample(1:3, size = 1, prob = c(75, 5, 20))
+        )
+
+write.csv(data, "data/test_data/data.csv")
+```
