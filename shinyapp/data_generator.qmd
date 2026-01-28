@@ -3,24 +3,30 @@ title: "data_generator"
 format: html
 ---
 
+# Data, Schedule, & Teams
+
 ```{r}
 library(tidyverse)
-
+write_to_csv <- FALSE
 # To-Do:
 # Full Hopper Timer, >5-10s Solo Shooting, Preferred Zone / Role, Lap Timer to Shoot???
 
 # Edit team numbers and length of dataframe here
-team = sample(c(116, 422, 449, 1323, 1690, 2910, 3937, 4821, 5084, 8592, 10004), 72, replace = TRUE)
+size = 6*80
+teams_list = c(116,122,449,526,539,611,612,620,1731,1793,1885,1895,1908,2028,2068,2186,2363,2377,2534,2890,2963,2988,3136,3258,3359,3373,4099,4472,4638,5243,5338,5353,5549,5587,6882,8230,8326,9072,9403,10449)
+team = as.vector(replicate(ceiling(size / length(teams_list)), sample(teams_list, length(teams_list), replace = FALSE)))
+team = team[-seq(length(team) - (ceiling(size/length(teams_list))*length(teams_list)-size) + 1, length(team)+1)]
+match = floor(seq(from=6,to=size+5)/6)
 
-data <- data.frame(team, match = 0) |>
+data <- data.frame(team, match) |>
     rowwise() |>
     mutate(
-        auto_type = sample(c('Depot', 'HP', 'NZ', '', 'HP, Depot'), size = 1),
-        auto_trench = sample(0:1 * 2, size = 1),
-        auto_bump = 2 - auto_trench,
+        auto_type = sample(c('Depot', 'HP', 'NZ', '', 'HP, Depot'), size = 1, prob = c(20, 20, 20, 10, 10)),
+        auto_trench = ifelse(auto_type == 'NZ', sample(0:1 * 2, size = 1), 0),
+        auto_bump = ifelse(auto_type == 'NZ', 2 - auto_trench, 0),
         auto_climb = sample(c(TRUE, FALSE), , size = 1, prob = c(75, 25)),
-        auto_cap = sample(0:100 / 100, size = 1),
-        auto_acc = sample(50:100 / 100, size = 1),
+        auto_cap = ifelse(auto_type != '', sample(0:100 / 100, size = 1), 0),
+        auto_acc = ifelse(auto_type != '', sample(50:100 / 100, size = 1), 0),
         num_int_cycles = sample(2:8, size = 1, prob = c(1, 1, 2, 2, 1, 0.5, 0.5)),
         tele_trench = sample(0:num_int_cycles, size = 1, prob = c(5, rep(1, num_int_cycles))),
         tele_bump = num_int_cycles*2 - tele_trench,
@@ -41,8 +47,112 @@ data <- data.frame(team, match = 0) |>
         tele_acc6 = ifelse(num_int_cycles > 5, sample(50:100 / 100, size = 1), 0),
         tele_acc7 = ifelse(num_int_cycles > 6, sample(50:100 / 100, size = 1), 0),
         tele_acc8 = ifelse(num_int_cycles > 7, sample(50:100 / 100, size = 1), 0),
-        climb = sample(1:3, size = 1, prob = c(75, 5, 20))
+        climb = sample(0:3, size = 1, prob = c(15, 60, 5, 20))
         )
 
-write.csv(data, "data/test_data/data.csv")
+if (write_to_csv) write.csv(data, "data/test_data/data.csv", row.names = FALSE)
+# --- #
+raw <- read.csv("data/test_data/data.csv")
+teams <- unlist(raw$team)
+data <- matrix(teams, nrow = 6)
+data <- t(data)
+match <- 1:max(raw$match)
+data <- as.data.frame(data)
+data <- cbind(match, data) |>
+    mutate(
+        R1 = V1,
+        R2 = V2, 
+        R3 = V3, 
+        B1 = V4,
+        B2 = V5,
+        B3 = V6
+    ) |>
+    select(match, R1, R2, R3, B1, B2, B3)
+
+if (write_to_csv) write.csv(data, "../shinyapp/data/test_data/schedule.csv", row.names = FALSE)
+
+# --- #
+raw <- read.csv("data/test_data/data.csv")
+team <- unique(raw$team)[order(unique(raw$team))]
+if (write_to_csv) write.csv(as.data.frame(team), "../shinyapp/data/test_data/teams.csv", row.names = FALSE)
+```
+
+# Data
+
+```{r}
+library(tidyverse)
+
+# To-Do:
+# Full Hopper Timer, >5-10s Solo Shooting, Preferred Zone / Role, Lap Timer to Shoot???
+
+# Edit team numbers and length of dataframe here
+size = 6*80
+teams_list = c(116,122,449,526,539,611,612,620,1731,1793,1885,1895,1908,2028,2068,2186,2363,2377,2534,2890,2963,2988,3136,3258,3359,3373,4099,4472,4638,5243,5338,5353,5549,5587,6882,8230,8326,9072,9403,10449)
+team = as.vector(replicate(ceiling(size / length(teams_list)), sample(teams_list, length(teams_list), replace = FALSE)))
+team = team[-seq(length(team) - (ceiling(size/length(teams_list))*length(teams_list)-size) + 1, length(team)+1)]
+match = floor(seq(from=6,to=size+5)/6)
+
+data <- data.frame(team, match) |>
+    rowwise() |>
+    mutate(
+        auto_type = sample(c('Depot', 'HP', 'NZ', '', 'HP, Depot'), size = 1, prob = c(20, 20, 20, 10, 10)),
+        auto_trench = ifelse(auto_type == 'NZ', sample(0:1 * 2, size = 1), 0),
+        auto_bump = ifelse(auto_type == 'NZ', 2 - auto_trench, 0),
+        auto_climb = sample(c(TRUE, FALSE), , size = 1, prob = c(75, 25)),
+        auto_cap = ifelse(auto_type != '', sample(0:100 / 100, size = 1), 0),
+        auto_acc = ifelse(auto_type != '', sample(50:100 / 100, size = 1), 0),
+        num_int_cycles = sample(2:8, size = 1, prob = c(1, 1, 2, 2, 1, 0.5, 0.5)),
+        tele_trench = sample(0:num_int_cycles, size = 1, prob = c(5, rep(1, num_int_cycles))),
+        tele_bump = num_int_cycles*2 - tele_trench,
+        climb_time = sample(1000:10000 / 1000, size = 1),
+        tele_cap1 = sample(0:100 / 100, size = 1),
+        tele_cap2 = sample(0:100 / 100, size = 1),
+        tele_cap3 = ifelse(num_int_cycles > 2, sample(0:100 / 100, size = 1), 0),
+        tele_cap4 = ifelse(num_int_cycles > 3, sample(0:100 / 100, size = 1), 0),
+        tele_cap5 = ifelse(num_int_cycles > 4, sample(0:100 / 100, size = 1), 0),
+        tele_cap6 = ifelse(num_int_cycles > 5, sample(0:100 / 100, size = 1), 0),
+        tele_cap7 = ifelse(num_int_cycles > 6, sample(0:100 / 100, size = 1), 0),
+        tele_cap8 = ifelse(num_int_cycles > 7, sample(0:100 / 100, size = 1), 0),
+        tele_acc1 = sample(50:100 / 100, size = 1),
+        tele_acc2 = sample(50:100 / 100, size = 1),
+        tele_acc3 = ifelse(num_int_cycles > 2, sample(50:100 / 100, size = 1), 0),
+        tele_acc4 = ifelse(num_int_cycles > 3, sample(50:100 / 100, size = 1), 0),
+        tele_acc5 = ifelse(num_int_cycles > 4, sample(50:100 / 100, size = 1), 0),
+        tele_acc6 = ifelse(num_int_cycles > 5, sample(50:100 / 100, size = 1), 0),
+        tele_acc7 = ifelse(num_int_cycles > 6, sample(50:100 / 100, size = 1), 0),
+        tele_acc8 = ifelse(num_int_cycles > 7, sample(50:100 / 100, size = 1), 0),
+        climb = sample(0:3, size = 1, prob = c(15, 60, 5, 20))
+        )
+
+write.csv(data, "data/test_data/data.csv", row.names = FALSE)
+```
+
+# Schedule
+
+```{r}
+raw <- read.csv("data/test_data/data.csv")
+teams <- unlist(raw$team)
+data <- matrix(teams, ncol = 6)
+match <- 1:max(raw$match)
+data <- as.data.frame(data)
+data <- cbind(match, data) |>
+    mutate(
+        R1 = V1,
+        R2 = V2, 
+        R3 = V3, 
+        B1 = V4,
+        B2 = V5,
+        B3 = V6
+    ) |>
+    select(match, R1, R2, R3, B1, B2, B3)
+
+write.csv(data, "../shinyapp/data/test_data/schedule.csv", row.names = FALSE)
+```
+
+# Teams
+
+```{r}
+raw <- read.csv("data/test_data/data.csv")
+team <- unique(raw$team)[order(unique(raw$team))]
+write.csv(as.data.frame(team), "../shinyapp/data/test_data/teams.csv")
 ```
