@@ -1,0 +1,29 @@
+---
+title: "matches_before_trust"
+format: html
+---
+
+```{r}
+# Question: 
+# Do want to use each event's optimal lamba? 
+# Or the average/median lambda across that week or year?
+# Or some random lambda to simulate the varying levels of trust (iffy on the logic behind this)
+# something else?
+# Running on the first assumption in this code
+
+# Main Ideas:
+# Use scoutR's match_sb(key = "2025vagle_qm1"), but somehow iterate over every match? rough...
+# Use that to calculate EPA's MSE???
+# Pull that event's optimal lambda from the lambda_opts dataframe
+# Run pridge_lambda_cv with that event's start EPAs and limited by match size
+#   start EPAs probably pulled through scoutR event_sb
+#   this is going to take so much computing power...
+#   MSE based on LOOCV on matches before n, or do we want to include the results from later matches?
+# make pretty graff
+
+library(tidyverse)
+library(ggplot2)
+library(scoutR)
+lambda_opts <- read.csv("pridge_pct_improvement15-25.csv") |> select(key, lambda_opt)
+#lowkey going to sleep rn, will send out an update tmrw by 10am with progress (so maybe people [as in margaret] at the meeting can work on it)
+```

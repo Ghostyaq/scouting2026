@@ -1,0 +1,244 @@
+---
+title: "cleaning_pridge_pct_improvement"
+format: html
+---
+
+#### Combine all pridge_pct_improvement
+
+```{r}
+library(tidyverse)
+
+data <- read.csv("pridge_pct_improvement15-25.csv")
+district_result <- result |>
+    filter(event_type_string == "District") |>
+    rowwise() |>
+    mutate(
+        abbreviation = as.character(unlist(district)[1]),
+        display_name = unlist(district)[2],
+        key2 = unlist(district)[3],
+        ) |>
+    select(!c(webcasts, district, division_keys, remap_teams))
+
+regional_result <- result |>
+    filter(event_type_string == "Regional") |>
+    select(!c(webcasts, district, division_keys, remap_teams))
+
+regional_result$abbreviation <- NA
+regional_result$display_name <- NA
+regional_result$key2 <- NA
+
+data <- rbind(data, district_result, regional_result)
+#write.csv(data, "pridge_pct_improvement15-25.csv", row.names = FALSE)
+```
+
+#### Density Curves (per year)
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+data <- read.csv("pridge_pct_improvement15-25.csv")
+data <- data |>
+    filter(week == 5) |>
+    mutate(
+        year = factor(year, levels = c(2015, 2016, 2017, 2018, 2019, 2022, 2023, 2024, 2025))
+    )
+
+ggplot(data, aes(x = lambda_opt, color = year)) +
+    geom_density(alpha = 0.5) +
+    labs(title = "Optimal (Week Six) Lambda Distribution per Year") +
+    theme_bw()
+```
+
+#### Density Curves for One Year (per week)
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+data <- read.csv("pridge_pct_improvement15-25.csv")
+data <- data |>
+    filter(year == 2022) |>
+    filter(week %in% c(0, 1, 2, 3,4,  5)) |>
+    mutate(
+        week = factor(week, 0:max(data$week))
+    )
+
+ggplot(data, aes(x = lambda_opt, color = week)) +
+    geom_density(alpha = 0.5) +
+    labs(title = "2022 Optimal Lambda Distribution per Week") + 
+    theme_bw()
+```
+
+#### Data Summary (per year)
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+data <- read.csv("pridge_pct_improvement15-25.csv")
+data <- data |>
+    group_by(year) |>
+    mutate(year = factor(year, 2015:2025)) |>
+    summarize(
+        lambda_opt_min = quantile(lambda_opt, na.rm = TRUE)[1],
+        lambda_opt_Q1 = quantile(lambda_opt, na.rm = TRUE)[2],
+        lambda_opt_med = quantile(lambda_opt, na.rm = TRUE)[3],
+        lambda_opt_Q3 = quantile(lambda_opt, na.rm = TRUE)[4],
+        lambda_opt_max = quantile(lambda_opt, na.rm = TRUE)[5],
+        lambda_opt_mean = mean(lambda_opt, na.rm = TRUE),
+        lambda_opt_sd = sd(lambda_opt, na.rm = TRUE),
+        pct_imp_min = quantile(pct_imp, na.rm = TRUE)[1],
+        pct_imp_Q1 = quantile(pct_imp, na.rm = TRUE)[2],
+        pct_imp_med = quantile(pct_imp, na.rm = TRUE)[3],
+        pct_imp_Q3 = quantile(pct_imp, na.rm = TRUE)[4],
+        pct_imp_max = quantile(pct_imp, na.rm = TRUE)[5],
+        pct_imp_mean = mean(pct_imp, na.rm = TRUE),
+        pct_imp_sd = sd(pct_imp, na.rm = TRUE),    
+    ) |>
+    select(year, lambda_opt_min, lambda_opt_Q1, lambda_opt_med, lambda_opt_Q3, lambda_opt_max, lambda_opt_mean, lambda_opt_sd, pct_imp_min, pct_imp_Q1, pct_imp_med, pct_imp_Q3, pct_imp_max, pct_imp_mean, pct_imp_sd)
+```
+
+#### Data Summary (per week)
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+data <- read.csv("pridge_pct_improvement15-25.csv")
+data <- data |>
+    group_by(week) |>
+    summarize(
+        lambda_opt_min = quantile(lambda_opt, na.rm = TRUE)[1],
+        lambda_opt_Q1 = quantile(lambda_opt, na.rm = TRUE)[2],
+        lambda_opt_med = quantile(lambda_opt, na.rm = TRUE)[3],
+        lambda_opt_Q3 = quantile(lambda_opt, na.rm = TRUE)[4],
+        lambda_opt_max = quantile(lambda_opt, na.rm = TRUE)[5],
+        lambda_opt_mean = mean(lambda_opt, na.rm = TRUE),
+        lambda_opt_sd = sd(lambda_opt, na.rm = TRUE),
+        pct_imp_min = quantile(pct_imp, na.rm = TRUE)[1],
+        pct_imp_Q1 = quantile(pct_imp, na.rm = TRUE)[2],
+        pct_imp_med = quantile(pct_imp, na.rm = TRUE)[3],
+        pct_imp_Q3 = quantile(pct_imp, na.rm = TRUE)[4],
+        pct_imp_max = quantile(pct_imp, na.rm = TRUE)[5],
+        pct_imp_mean = mean(pct_imp, na.rm = TRUE),
+        pct_imp_sd = sd(pct_imp, na.rm = TRUE),    
+    ) |>
+    select(week, lambda_opt_min, lambda_opt_Q1, lambda_opt_med, lambda_opt_Q3, lambda_opt_max, lambda_opt_mean, lambda_opt_sd, pct_imp_min, pct_imp_Q1, pct_imp_med, pct_imp_Q3, pct_imp_max, pct_imp_mean, pct_imp_sd)
+```
+
+#### Optimal Lambda Linear Regression (by year)
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+data <- read.csv("pridge_pct_improvement15-25.csv")
+data <- data |>
+    #filter(week == 0) |>
+    mutate(
+        year = factor(year, c(2015, 2016, 2017, 2018, 2019, 2022, 2023, 2024, 2025))
+    )
+
+data <- data[order(data$year, data$week),]
+data$row <- 1:nrow(data)
+
+model <- lm(lambda_opt ~ row, data = data)
+
+ggplot(data, aes(x = row, y = lambda_opt, color = year)) +
+    geom_point() +
+    geom_smooth(method = "lm") + 
+    labs(title = "Optimal Lambda Linear Regression", x = "ordered by year, then week") + 
+    theme_bw()
+```
+
+#### Optimal Lambda Linear Regression Residuals (by year)
+
+```{r}
+library(tidyverse)
+library(broom)
+
+data <- read.csv("pridge_pct_improvement15-25.csv") |>
+    mutate(
+        year = factor(year, c(2015, 2016, 2017, 2018, 2019, 2022, 2023, 2024, 2025))
+    ) |>
+    filter(!is.na(lambda_opt)) |>
+    arrange(year, week) |>
+    mutate(row = row_number()) |>
+    group_by(year)
+
+#lowkey this data2 assignment was ChatGPT'd
+data2 <- data |>
+    nest() |>
+    mutate(
+        model = map(data, ~ lm(lambda_opt ~ row, data = .x)),
+        augmented = map2(model, data, augment)
+    ) |>
+    unnest(augmented)
+
+ggplot(data2, aes(x = row, y = .resid, color = year)) +
+    geom_point() +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "#a9000a") +
+    labs(
+        title = "Optimal Lambda Linear Regression Residuals (per year)",
+        x = "same as the left",
+        y = "residuals"
+    ) +
+    theme_bw()
+```
+
+#### Optimal Lambda Linear Regression Residuals (by week)
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+data <- read.csv("pridge_pct_improvement15-25.csv")
+data <- data |>
+    mutate(
+        week = factor(week+1, 1:7)
+    )
+
+data <- data[order(data$week, data$year),]
+data$row <- 1:nrow(data)
+
+model <- lm(lambda_opt ~ row, data = data)
+
+ggplot(data, aes(x = row, y = lambda_opt, color = week)) +
+    geom_point() +
+    geom_smooth(method = "lm") + 
+    labs(title = "Optimal Lambda Linear Regression (per week)", x = "ordered by week, year") + 
+    theme_bw()
+```
+
+```{r}
+library(tidyverse)
+library(broom)
+
+data <- read.csv("pridge_pct_improvement15-25.csv") |>
+  mutate(
+    week = factor(week+1, 1:7)
+  ) |>
+  filter(!is.na(lambda_opt)) |>
+  arrange(week) |>
+  mutate(row = row_number()) |>
+  group_by(week)
+
+data2 <- data |>
+  nest() |>
+  mutate(
+    model = map(data, ~ lm(lambda_opt ~ row, data = .x)),
+    augmented = map2(model, data, augment)
+  ) |>
+  unnest(augmented)
+
+ggplot(data2, aes(x = row, y = .resid, color = week)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "#a9000a") +
+  labs(
+    title = "Optimal Lambda Linear Regression Residuals (per week)",
+    x = "ordered by week, then year",
+    y = "residuals"
+  ) +
+  theme_bw()
+```

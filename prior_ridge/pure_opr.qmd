@@ -13,8 +13,6 @@ schedule <- read.csv("../shinyapp/data/test_data/schedule.csv")
 unique_teams <- unique(raw$team)[order(unique(raw$team))]
 capacity_list <- sample(20:60, size = length(unique_teams), replace = TRUE)
 
-
-
 data <- raw |>
     rowwise() |>
     mutate(
@@ -71,7 +69,6 @@ pridge_lambda_cv(
     rep(mean(opr), 40),
     1:100
     )
-
 ```
 
 \
