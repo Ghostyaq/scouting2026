@@ -152,9 +152,9 @@
           "formResetBehavior": "reset",
           "defaultValue": "",
           "choices": {
-            "R1": "Outpost Side",
-            "R2": "Middle",
-            "R3": "Depot Side"
+            "O": "Outpost Side",
+            "M": "Middle",
+            "D": "Depot Side"
           }
         },
         {
