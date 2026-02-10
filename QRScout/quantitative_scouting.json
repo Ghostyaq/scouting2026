@@ -338,6 +338,15 @@
           "step": 1
         },
         {
+          "title": "Solo Shooting",
+          "description": "Robot shot by itself for more than 3 seconds?",
+          "type": "boolean",
+          "required": false,
+          "code": "soloShooting",
+          "formResetBehavior": "reset",
+          "defaultValue": false
+        },
+        {
           "title": "Yellow/Red Card",
           "type": "select",
           "required": true,
