@@ -152,9 +152,9 @@
           "formResetBehavior": "reset",
           "defaultValue": "",
           "choices": {
-            "R1": "Outpost Side",
-            "R2": "Middle",
-            "R3": "Depot Side"
+            "O": "Outpost Side",
+            "M": "Middle",
+            "D": "Depot Side"
           }
         },
         {
@@ -203,15 +203,15 @@
           "defaultValue": false
         },
         {
-          "title": "Hopper Capacity",
+          "title": "Amount of Cycles (Tenths)",
           "description": "How much fuel the robot held compared to the total possible fuel it can hold.",
           "type": "range",
           "required": false,
           "code": "hopcapAuto",
           "formResetBehavior": "reset",
-          "defaultValue": 5,
+          "defaultValue": 0,
           "min": 0,
-          "max": 10,
+          "max": 20,
           "step": 1
         }
       ]
@@ -262,9 +262,9 @@
           "required": false,
           "code": "cycles",
           "formResetBehavior": "reset",
-          "defaultValue": 5,
+          "defaultValue": 0,
           "min": 0,
-          "max": 10,
+          "max": 9,
           "step": 1
         }
       ]
@@ -296,14 +296,6 @@
           "code": "climbTime",
           "formResetBehavior": "reset",
           "defaultValue": false
-        },
-        {
-          "title": "Died?",
-          "type": "boolean",
-          "required": false,
-          "code": "died",
-          "formResetBehavior": "reset",
-          "defaultValue": false
         }
       ]
     },
@@ -332,10 +324,18 @@
           "required": false,
           "code": "driverRating",
           "formResetBehavior": "reset",
-          "defaultValue": 3,
+          "defaultValue": 1,
           "min": 1,
           "max": 5,
           "step": 1
+        },
+        {
+          "title": "Died?",
+          "type": "boolean",
+          "required": false,
+          "code": "died",
+          "formResetBehavior": "reset",
+          "defaultValue": false
         },
         {
           "title": "Solo Shooting",
