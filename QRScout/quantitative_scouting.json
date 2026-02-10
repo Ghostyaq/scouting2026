@@ -296,14 +296,6 @@
           "code": "climbTime",
           "formResetBehavior": "reset",
           "defaultValue": false
-        },
-        {
-          "title": "Died?",
-          "type": "boolean",
-          "required": false,
-          "code": "died",
-          "formResetBehavior": "reset",
-          "defaultValue": false
         }
       ]
     },
@@ -336,6 +328,14 @@
           "min": 1,
           "max": 5,
           "step": 1
+        },
+        {
+          "title": "Died?",
+          "type": "boolean",
+          "required": false,
+          "code": "died",
+          "formResetBehavior": "reset",
+          "defaultValue": false
         },
         {
           "title": "Solo Shooting",
