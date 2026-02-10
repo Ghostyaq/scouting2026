@@ -203,15 +203,15 @@
           "defaultValue": false
         },
         {
-          "title": "Hopper Capacity",
+          "title": "Amount of Cycles (Tenths)",
           "description": "How much fuel the robot held compared to the total possible fuel it can hold.",
           "type": "range",
           "required": false,
           "code": "hopcapAuto",
           "formResetBehavior": "reset",
-          "defaultValue": 5,
+          "defaultValue": 0,
           "min": 0,
-          "max": 10,
+          "max": 20,
           "step": 1
         }
       ]
@@ -262,7 +262,7 @@
           "required": false,
           "code": "cycles",
           "formResetBehavior": "reset",
-          "defaultValue": 5,
+          "defaultValue": 0,
           "min": 0,
           "max": 10,
           "step": 1
@@ -332,7 +332,7 @@
           "required": false,
           "code": "driverRating",
           "formResetBehavior": "reset",
-          "defaultValue": 3,
+          "defaultValue": 1,
           "min": 1,
           "max": 5,
           "step": 1
