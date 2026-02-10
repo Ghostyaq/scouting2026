@@ -17,37 +17,27 @@ teams_list = c(116,122,449,526,539,611,612,620,1731,1793,1885,1895,1908,2028,206
 team = as.vector(replicate(ceiling(size / length(teams_list)), sample(teams_list, length(teams_list), replace = FALSE)))
 team = team[-seq(length(team) - (ceiling(size/length(teams_list))*length(teams_list)-size) + 1, length(team)+1)]
 match = floor(seq(from=6,to=size+5)/6)
+robot = rep(c("R1", "R2", "R3", "B1", "B2", "B3"), size/6)
 
 data <- data.frame(team, match) |>
     rowwise() |>
     mutate(
-        auto_type = sample(c('Depot', 'HP', 'NZ', '', 'HP, Depot'), size = 1, prob = c(20, 20, 20, 10, 10)),
-        auto_trench = ifelse(auto_type == 'NZ', sample(0:1 * 2, size = 1), 0),
-        auto_bump = ifelse(auto_type == 'NZ', 2 - auto_trench, 0),
-        auto_climb = sample(c(TRUE, FALSE), , size = 1, prob = c(75, 25)),
-        auto_cap = ifelse(auto_type != '', sample(0:100 / 100, size = 1), 0),
-        auto_acc = ifelse(auto_type != '', sample(50:100 / 100, size = 1), 0),
-        num_int_cycles = sample(2:8, size = 1, prob = c(1, 1, 2, 2, 1, 0.5, 0.5)),
-        tele_trench = sample(0:num_int_cycles, size = 1, prob = c(5, rep(1, num_int_cycles))),
-        tele_bump = num_int_cycles*2 - tele_trench,
-        climb_time = sample(1000:10000 / 1000, size = 1),
-        tele_cap1 = sample(0:100 / 100, size = 1),
-        tele_cap2 = sample(0:100 / 100, size = 1),
-        tele_cap3 = ifelse(num_int_cycles > 2, sample(0:100 / 100, size = 1), 0),
-        tele_cap4 = ifelse(num_int_cycles > 3, sample(0:100 / 100, size = 1), 0),
-        tele_cap5 = ifelse(num_int_cycles > 4, sample(0:100 / 100, size = 1), 0),
-        tele_cap6 = ifelse(num_int_cycles > 5, sample(0:100 / 100, size = 1), 0),
-        tele_cap7 = ifelse(num_int_cycles > 6, sample(0:100 / 100, size = 1), 0),
-        tele_cap8 = ifelse(num_int_cycles > 7, sample(0:100 / 100, size = 1), 0),
-        tele_acc1 = sample(50:100 / 100, size = 1),
-        tele_acc2 = sample(50:100 / 100, size = 1),
-        tele_acc3 = ifelse(num_int_cycles > 2, sample(50:100 / 100, size = 1), 0),
-        tele_acc4 = ifelse(num_int_cycles > 3, sample(50:100 / 100, size = 1), 0),
-        tele_acc5 = ifelse(num_int_cycles > 4, sample(50:100 / 100, size = 1), 0),
-        tele_acc6 = ifelse(num_int_cycles > 5, sample(50:100 / 100, size = 1), 0),
-        tele_acc7 = ifelse(num_int_cycles > 6, sample(50:100 / 100, size = 1), 0),
-        tele_acc8 = ifelse(num_int_cycles > 7, sample(50:100 / 100, size = 1), 0),
-        climb = sample(0:3, size = 1, prob = c(15, 60, 5, 20))
+        auto_type = sample(c("CW", "RY", "MH", "MY", "JD", "GK", "DK"), size = 1),
+        no_show = sample(c(TRUE, FALSE), size = 1, prob = c(5, 95)),
+        auto_bump = sample(c(TRUE, FALSE), size = 1, prob = c(75, 25)),
+        auto_climb = sample(c(TRUE, FALSE), size = 1, prob = c(75, 25)),
+        auto_cycles = sample(0:20, size = 1),
+        teleop_trench = sample(0:10, size = 1, prob = c(50, rep(5, 10))),
+        teleop_bump = sample(0:10, size = 1, prob = c(50, rep(5, 10))),
+        num_cycles = sample(0:6, size = 1),
+        num_cycles_tenths = sample(0:9, size = 1),
+        endgame_climb = sample(c("No", "L1", "L2", "L3", "F"), size = 1),
+        climb_less_than_5 = sample(c(TRUE, FALSE), size = 1),
+        died = sample(c(TRUE, FALSE), size = 1, prob = c(75, 25)),
+        inactive_strat = sample(c(1, 2, 3, 4, 5), size = 1),
+        driver_rating = sample(0:5, size = 1),
+        solo_shooting = sample(c(TRUE, FALSE), size = 1),
+        card = sample(c("No Card", "Yellow", "Red"), size = 1)
         )
 
 if (write_to_csv) write.csv(data, "data/test_data/data.csv", row.names = FALSE)
@@ -81,7 +71,7 @@ if (write_to_csv) write.csv(as.data.frame(team), "../shinyapp/data/test_data/tea
 
 ```{r}
 library(tidyverse)
-
+write_to_csv <- FALSE
 # To-Do:
 # Full Hopper Timer, >5-10s Solo Shooting, Preferred Zone / Role, Lap Timer to Shoot???
 
@@ -91,37 +81,29 @@ teams_list = c(116,122,449,526,539,611,612,620,1731,1793,1885,1895,1908,2028,206
 team = as.vector(replicate(ceiling(size / length(teams_list)), sample(teams_list, length(teams_list), replace = FALSE)))
 team = team[-seq(length(team) - (ceiling(size/length(teams_list))*length(teams_list)-size) + 1, length(team)+1)]
 match = floor(seq(from=6,to=size+5)/6)
+robot = rep(c("R1", "R2", "R3", "B1", "B2", "B3"), size/6)
+start_pos = rep(c("O", "M", "D"), size/3)
 
-data <- data.frame(team, match) |>
+data <- data.frame(team, match, robot, start_pos) |>
     rowwise() |>
     mutate(
-        auto_type = sample(c('Depot', 'HP', 'NZ', '', 'HP, Depot'), size = 1, prob = c(20, 20, 20, 10, 10)),
-        auto_trench = ifelse(auto_type == 'NZ', sample(0:1 * 2, size = 1), 0),
-        auto_bump = ifelse(auto_type == 'NZ', 2 - auto_trench, 0),
-        auto_climb = sample(c(TRUE, FALSE), , size = 1, prob = c(75, 25)),
-        auto_cap = ifelse(auto_type != '', sample(0:100 / 100, size = 1), 0),
-        auto_acc = ifelse(auto_type != '', sample(50:100 / 100, size = 1), 0),
-        num_int_cycles = sample(2:8, size = 1, prob = c(1, 1, 2, 2, 1, 0.5, 0.5)),
-        tele_trench = sample(0:num_int_cycles, size = 1, prob = c(5, rep(1, num_int_cycles))),
-        tele_bump = num_int_cycles*2 - tele_trench,
-        climb_time = sample(1000:10000 / 1000, size = 1),
-        tele_cap1 = sample(0:100 / 100, size = 1),
-        tele_cap2 = sample(0:100 / 100, size = 1),
-        tele_cap3 = ifelse(num_int_cycles > 2, sample(0:100 / 100, size = 1), 0),
-        tele_cap4 = ifelse(num_int_cycles > 3, sample(0:100 / 100, size = 1), 0),
-        tele_cap5 = ifelse(num_int_cycles > 4, sample(0:100 / 100, size = 1), 0),
-        tele_cap6 = ifelse(num_int_cycles > 5, sample(0:100 / 100, size = 1), 0),
-        tele_cap7 = ifelse(num_int_cycles > 6, sample(0:100 / 100, size = 1), 0),
-        tele_cap8 = ifelse(num_int_cycles > 7, sample(0:100 / 100, size = 1), 0),
-        tele_acc1 = sample(50:100 / 100, size = 1),
-        tele_acc2 = sample(50:100 / 100, size = 1),
-        tele_acc3 = ifelse(num_int_cycles > 2, sample(50:100 / 100, size = 1), 0),
-        tele_acc4 = ifelse(num_int_cycles > 3, sample(50:100 / 100, size = 1), 0),
-        tele_acc5 = ifelse(num_int_cycles > 4, sample(50:100 / 100, size = 1), 0),
-        tele_acc6 = ifelse(num_int_cycles > 5, sample(50:100 / 100, size = 1), 0),
-        tele_acc7 = ifelse(num_int_cycles > 6, sample(50:100 / 100, size = 1), 0),
-        tele_acc8 = ifelse(num_int_cycles > 7, sample(50:100 / 100, size = 1), 0),
-        climb = sample(0:3, size = 1, prob = c(15, 60, 5, 20))
+        scout = sample(c("CW", "RY", "MH", "MY", "JD", "GK", "DK"), size = 1),
+        no_show = sample(c(TRUE, FALSE), size = 1, prob = c(5, 95)),
+        auto_type = sample(c("1", "2", "3", "1, 2"), size = 1),
+        auto_bump = sample(c(TRUE, FALSE), size = 1, prob = c(75, 25)),
+        auto_climb = sample(c(TRUE, FALSE), size = 1, prob = c(75, 25)),
+        auto_cycles = sample(0:20, size = 1),
+        teleop_trench = sample(0:10, size = 1, prob = c(50, rep(5, 10))),
+        teleop_bump = sample(0:10, size = 1, prob = c(50, rep(5, 10))),
+        num_cycles = sample(0:6, size = 1),
+        num_cycles_tenths = sample(0:9, size = 1),
+        endgame_climb = sample(c("No", "L1", "L2", "L3", "F"), size = 1),
+        climb_less_than_5 = sample(c(TRUE, FALSE), size = 1),
+        died = sample(c(TRUE, FALSE), size = 1, prob = c(75, 25)),
+        inactive_strat = sample(c(1, 2, 3, 4, 5), size = 1),
+        driver_rating = sample(0:5, size = 1),
+        solo_shooting = sample(c(TRUE, FALSE), size = 1),
+        card = sample(c("No Card", "Yellow", "Red"), size = 1, prob = c(95, 4, 1))
         )
 
 write.csv(data, "data/test_data/data.csv", row.names = FALSE)
