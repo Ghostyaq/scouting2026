@@ -29,6 +29,19 @@
 
 # Table of team-level summary statistics (needs someone!) 
 # [intended for match tab, compare teams]
-# Code should compute a table of summary level statistics for each robot.
-# Shinyapp side will need a DT to display; ideally we could use gt() to make
-# the table look *good*. 
+# Code should compute a table of summary level statistics for each robot. Output
+# the table using a gt() (https://gt.rstudio.com/)
+# Statistics to include:
+# - Prior ridge (if computable, otherwise NA) broken down by auto/teleop
+# - Endgame rates (including fast climb)
+# - died rates
+# - driver rating avg + 3rdQ
+# - average, medium, and 3Q cycles
+# - probably others, but that's a good place to start.
+
+# Strategy summary
+# [intended for compare teams]
+# Visualize the rates of inactive strategy for possibly-many teams
+# Baseline choice this could be a stacked bar chart. Boring but effective.
+# Look at the way we handled multiselect comments in 2025 for inspiration; 
+# I (Gabriel) found that quite effective
