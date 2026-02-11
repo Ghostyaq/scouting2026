@@ -12,7 +12,9 @@ format: html
 # Running on the first assumption in this code
 
 # Main Ideas:
-# Use scoutR's match_sb(key = "2025vagle_qm1"), but somehow iterate over every match? rough...
+# Use TBA schedules to get a list of teams per match per event
+# Combine all the TBA schedules for one team into one long (but easy) statbotics call
+# Use scoutR's team_matches_sb(team = x, event = "key") and select the matches we're interested in
 # Use that to calculate EPA's MSE???
 # Pull that event's optimal lambda from the lambda_opts dataframe
 # Run pridge_lambda_cv with that event's start EPAs and limited by match size
@@ -24,6 +26,106 @@ format: html
 library(tidyverse)
 library(ggplot2)
 library(scoutR)
+
 lambda_opts <- read.csv("pridge_pct_improvement15-25.csv") |> select(key, lambda_opt)
+lambda_opts <- lambda_opts |> filter(is.na(lambda_opt) == FALSE)
+
+data <- lambda_opts |>
+    rowwise() |>
+    mutate(
+        teams = list(sort(sapply(event_teams(key)$team_number, as.integer)))
+    )
+
+team <- sort(unique(unlist(data$teams)))
+team_epas <- data.frame(team)
+
+temp <- matrix(ncol = length(team), nrow = length(data[[1]]), data = 0)
+temp <- as.data.frame(temp)
+#rownames(temp) <- team
+names(temp) <- team
+
+get_epa_progression <- function(team_key, event_key){
+    tm <- team_matches_sb(team = team_key, event = event_key, elim = FALSE)
+    result <- map(tm, ~{
+        data.frame(
+            team = .x$team, 
+            match = .x$match, 
+            time = .x$time, 
+            pre_epa = .x$epa$total_points, 
+            post_epa = .x$epa$post
+        )}) |>
+        list_rbind() |>
+        arrange(time)
+    return(result)
+}
+
+temp <- cbind(data, temp)
+
+for (i in 1:nrow(temp)) {
+    for (j in 1:length(temp$teams[[i]])) {
+        temp[i, as.character(unlist(temp$teams[i])[j])] = 1
+    }
+}
+
+temp <- select(temp, !c(lambda_opt, teams))
+
+team_epas <- data.frame(team)
+
+for (i in 1:nrow(temp)) {
+    for (j in 1:ncol(temp)) {
+        if (temp[[i]][j] == 1) {
+            get_epa_regression(colnames(temp)[j+1], temp$key[i])
+        }
+    }
+}
+
 #lowkey going to sleep rn, will send out an update tmrw by 10am with progress (so maybe people [as in margaret] at the meeting can work on it)
 ```
+
+```{r}
+event_key <- "2025vagle"
+
+get_epa_progression <- function(team_key, event_key){
+        tm <- team_matches_sb(team = team_key, event = event_key, elim = FALSE)
+        result <- map(tm, ~{
+            data.frame(
+                team = .x$team, 
+                match = as.integer(gsub(paste0(event_key, "_qm"), "", .x$match)), 
+                alliance = .x$alliance,
+                time = .x$time, 
+                pre_epa = .x$epa$total_points, 
+                post_epa = .x$epa$post
+            )}) |>
+            list_rbind() |>
+            arrange(time)
+        return(result)
+    }
+
+event_epa_mse <- function(event_key) {
+    team <- sort(as.integer(event_teams(event_key)$team_number))
+    data <- lapply(team, get_epa_progression, event = event_key) |>
+        purrr::reduce(rbind) |>
+        group_by(match, alliance) |>
+        summarise(
+            pred_score = sum(pre_epa)
+        )
+    
+    real_scores <- event_matches(event_key, match_type = "quals")[, c("blue_score", "red_score")] |>
+        pivot_longer(
+            cols = c("blue_score", "red_score"),
+            names_to = "alliance",
+            values_to = "scores"
+        ) |>
+        select(scores)
+    data <- cbind(data, real_scores) 
+    data <- data |>
+        rowwise() |>
+        mutate(
+            residuals = pred_score - scores,
+        )
+    
+    mean(data$residuals^2)
+}
+```
+
+\
