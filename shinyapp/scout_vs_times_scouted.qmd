@@ -1,0 +1,23 @@
+---
+title: "scout_vs_times_scouted"
+format: html
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+raw <- read.csv("~/Documents/R/scouting2026/shinyapp/data/test_data/data.csv")
+
+scout <-raw$scout
+
+scout_count <- count(raw, scout, sort = TRUE)
+
+ggplot(raw, aes(x = reorder(scout, scout, length))) + 
+    geom_bar() +
+    theme_bw() +
+    labs(
+        x = "Scout Initials",
+        y = "Number of Times Scouted",
+        title = "Scout and Their Number of Times Scouted")
+```

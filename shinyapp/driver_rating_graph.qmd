@@ -1,0 +1,37 @@
+---
+title: "driver_rating_graph"
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+
+df <- read.csv("~/Documents/R/scouting2026/shinyapp/data/test_data/data.csv")
+
+select_team <- function(team_id){
+    selected_team <- df |>
+        filter(team %in% c(team_id))
+    
+    selected_team
+    
+}
+
+team <- select_team(c(2988, 2028, 449))
+
+team
+
+ggplot(team, aes(x = match, y = driver_rating, color = team, group = team)) + 
+    geom_line() + 
+    geom_point() +
+    theme_bw() +
+    scale_x_continuous(breaks = c(team$match)) +
+    labs(
+        x = "Match",
+        y = "Driver Rating",
+        title = "Driver Rating")
+```
