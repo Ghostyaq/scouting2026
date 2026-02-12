@@ -25,7 +25,7 @@ team <- select_team(c(2988, 2028, 449))
 
 team
 
-ggplot(team, aes(x = match, y = driver_rating, color = team, group = team)) + 
+ggplot(team, aes(x = match, y = driver_rating, color = as.factor(team), group = as.factor(team))) + 
     geom_line() + 
     geom_point() +
     theme_bw() +
