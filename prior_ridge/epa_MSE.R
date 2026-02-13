@@ -54,7 +54,8 @@ fit_event_pridge <- function(
     epas <- sapply(sb_data, function(te){te$epa$stats$start})
     names(epas) <- sapply(sb_data, function(te){te$team})
     
-    mses <- pridge_lambda_cv(design, response, epas, lambda, n_cores = n_cores, plot_mses = FALSE)
+    mses <- pridge_lambda_cv(
+        design, response, epas, lambda, n_cores = n_cores, plot_mses = FALSE)
     return(mses)
 }
 
