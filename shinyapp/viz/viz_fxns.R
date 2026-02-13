@@ -1,6 +1,6 @@
 # Visualization functions
 
-# Endgame plot (penciled: Margaret)
+# Endgame plot (Margaret)
 # [intended for the match tab and compare teams tab]
 # This one should show proportion of none/l1/l2/l3 AS WELL as auto
 # use ggplot patterns (https://r-graph-gallery.com/package/ggpattern.html)
@@ -23,7 +23,7 @@
 # points to show bump vs trench.
 # link: https://ggplot2.tidyverse.org/reference/geom_jitter.html
 
-# Driver rating history (needs someone!)
+# Driver rating history (Rosy)
 # See 2025 single team tab; overlay a moving average to the plot; this was super
 # useful last year
 
