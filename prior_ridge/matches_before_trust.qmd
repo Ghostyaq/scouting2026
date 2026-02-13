@@ -83,14 +83,14 @@ for (i in 1:nrow(temp)) {
 ```
 
 ```{r}
-event_key <- "2025vagle"
-
+library(tidyverse)
+library(scoutR)
 get_epa_progression <- function(team_key, event_key){
         tm <- team_matches_sb(team = team_key, event = event_key, elim = FALSE)
         result <- map(tm, ~{
             data.frame(
                 team = .x$team, 
-                match = as.integer(gsub(paste0(event_key, "_qm"), "", .x$match)), 
+                match = as.integer(gsub(paste0(event_key, "_qm"), "", .x$match)),
                 alliance = .x$alliance,
                 time = .x$time, 
                 pre_epa = .x$epa$total_points, 
@@ -100,7 +100,7 @@ get_epa_progression <- function(team_key, event_key){
             arrange(time)
         return(result)
     }
-
+#event_key = "2025vagle"
 event_epa_mse <- function(event_key) {
     team <- sort(as.integer(event_teams(event_key)$team_number))
     data <- lapply(team, get_epa_progression, event = event_key) |>
@@ -126,6 +126,163 @@ event_epa_mse <- function(event_key) {
     
     mean(data$residuals^2)
 }
+event_epa_mse("2025vagle")
+# ~0.147 tba calls per second
 ```
 
-\
+```{r}
+library(tidyverse)
+library(scoutR)
+library(purrr)
+
+get_epa_progression <- function(team_key){
+    tm1 <- team_matches_sb(team = team_key, elim = FALSE, year = 2015)
+    tm2 <- team_matches_sb(team = team_key, elim = FALSE, year = 2016)
+    tm3 <- team_matches_sb(team = team_key, elim = FALSE, year = 2017)
+    tm4 <- team_matches_sb(team = team_key, elim = FALSE, year = 2018)
+    tm5 <- team_matches_sb(team = team_key, elim = FALSE, year = 2019)
+    tm6 <- team_matches_sb(team = team_key, elim = FALSE, year = 2022)
+    tm7 <- team_matches_sb(team = team_key, elim = FALSE, year = 2023)
+    tm8 <- team_matches_sb(team = team_key, elim = FALSE, year = 2024)
+    tm9 <- team_matches_sb(team = team_key, elim = FALSE, year = 2025)
+    tm <- rbind(tm1, tm2, tm3, tm4, tm5, tm6, tm7, tm8, tm9)
+    #tm <- team_matches_sb(team = team_key, elim = FALSE)
+    
+    result <- map(tm, ~{
+        data.frame(
+            team = .x$team, 
+            year = .x$year,
+            event = .x$event,
+            match = as.integer(sub(".*_qm", "", .x$match)),
+            alliance = .x$alliance,
+            time = .x$time, 
+            week = .x$week,
+            pre_epa = .x$epa$total_points
+            #pre_epa = pluck(.x, "epa", "total_points", .default = NA)
+        )}) |>
+        list_rbind()
+    return(result)
+}
+
+#year <- 2025
+lambda_opt <- read.csv("pridge_pct_improvement15-25.csv") |>
+    filter(!is.na(lambda_opt)) 
+data <- lambda_opt#[grepl(as.character(year), lambda_opt$key), ] 
+unique_teams <- data |>
+    rowwise() |>
+    mutate(
+        teams = list(sort(sapply(event_teams(key)$team_number, as.integer)))
+    ) # ~three minutes
+
+unique_teams2 <- sort(as.integer(unique(unlist(unique_teams$teams))))
+
+team_info <- lapply(unique_teams2, get_epa_progression) |> #35 mins
+    reduce(rbind) #|>
+write.csv(team_info, "all_epas_for_all_teams.csv", row.names = FALSE)
+
+    arrange(event, match, alliance) |>
+    group_by(event, match, alliance) |>
+    summarise(
+        pred_score = sum(pre_epa)
+    )
+
+real_scores <- map_dfr(
+    sort(data$key), 
+    ~event_matches(event_key = .x, match_type = "quals")) |>
+    select(blue_score, red_score, key) |>
+    pivot_longer(
+        cols = c("blue_score", "red_score"),
+        names_to = "alliance",
+        values_to = "scores"
+    )
+real_scores <- real_scores |>
+    rowwise() |>
+    mutate(
+        event = sub(paste0("_qm", ".*"), "", key),
+        match = as.integer(sub(".*_qm", "", key))
+    ) |>
+    arrange(event, match, alliance)
+
+```
+
+```{r}
+library(tidyverse)
+library(scoutR)
+
+team_info <- read.csv("data/all_epas_for_all_teams.csv") |>
+    arrange(event, match, alliance) |>
+    filter(event %in% lambda_opt$key) |>
+    unique()
+lambda_opt <- read.csv("data/pdridge_pct_improvement15-25.csv") |>
+    filter(!is.na(lambda_opt)) 
+
+data <- team_info |>
+    group_by(event, match, alliance) |>
+    summarise(
+        pred_score = sum(pre_epa),
+        num_teams = n()
+    ) |>
+    ungroup() |>
+    rowwise() |>
+    mutate(
+        event_key = paste0(event, "_qm", match)
+    ) |>
+    filter(event_key %in% real_scores$key)
+
+data$score <- real_scores$scores
+data <- data |>
+    mutate(
+        residual = pred_score - score
+    ) |>
+    group_by(event) |>
+    summarise(
+        EPA_mse = mean(residual^2)
+    )
+```
+
+```{r}
+fit_event_pridge <- function(
+        event_key, grid = seq(0, 20, length.out = 1000), n_cores = NULL
+){
+    matches <- event_matches(event_key, match_type = "qual")
+
+    design <- as.matrix(lineup_design_matrix(matches))
+    response <- c(matches$blue_score, matches$red_score)
+
+    sb_data <- team_events_sb(event = event_key)
+    epas <- sapply(sb_data, function(te){te$epa$stats$start})
+    names(epas) <- sapply(sb_data, function(te){te$team})
+
+    mses <- pridge_lambda_cv(design, response, epas, grid, n_cores = n_cores, plot_mses = FALSE)
+    return(mses)
+}
+
+lambda_opt <- read.csv("data/pridge_pct_improvement15-25.csv") |>
+    filter(!is.na(lambda_opt))
+lambda_opt <- lambda_opt |>
+    rowwise() |>
+    mutate(
+        pridge_mse = min(fit_event_pridge(key))
+    )
+
+lambda_opt <- lambda_opt |>
+    arrange(key)
+
+data$key <- lambda_opt$key
+data$pct_imp <- lambda_opt$pct_imp
+data$lambda_opt <- lambda_opt$lambda_opt
+data$pridge_mse <- lambda_opt$pridge_mse
+
+data$rows <- 1:length(data$key)
+
+data2 <- data |> filter(substring(key))
+
+ggplot(data, aes(x = rows)) + 
+    geom_line(aes(y = EPA_mse), color = "#a9000a") + 
+    geom_line(aes(y = pridge_mse), color = "blue") +
+    scale_y_log10() +
+    theme_bw()
+
+
+
+```
