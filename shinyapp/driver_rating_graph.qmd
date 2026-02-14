@@ -11,27 +11,24 @@ editor:
 library(dplyr)
 library(ggplot2)
 
-df <- read.csv("~/Documents/R/scouting2026/shinyapp/data/test_data/data.csv")
+df <- read.csv("data/test_data/data.csv")
 
-select_team <- function(team_id){
-    selected_team <- df |>
+
+plot_driver_rating_graph <- function(dataframe, team_id) {
+    selected_team <- dataframe |>
         filter(team %in% c(team_id))
-    
-    selected_team
-    
+    ggplot(selected_team, aes(x = match, y = driver_rating, 
+               color = as.factor(team), group = as.factor(team))) + 
+        geom_line() + 
+        geom_point() +
+        theme_bw() +
+        scale_x_continuous(breaks = c(team$match)) +
+        labs(
+            x = "Match",
+            y = "Driver Rating",
+            title = "Driver Rating")
+
 }
 
-team <- select_team(c(2988, 2028, 449))
-
-team
-
-ggplot(team, aes(x = match, y = driver_rating, color = as.factor(team), group = as.factor(team))) + 
-    geom_line() + 
-    geom_point() +
-    theme_bw() +
-    scale_x_continuous(breaks = c(team$match)) +
-    labs(
-        x = "Match",
-        y = "Driver Rating",
-        title = "Driver Rating")
+plot_driver_rating_graph(df, c(2988, 2028, 449))
 ```
