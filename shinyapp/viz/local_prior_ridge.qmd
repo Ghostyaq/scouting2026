@@ -1,0 +1,69 @@
+---
+title: "local_prior_ridge"
+format: html
+---
+
+```{r}
+prior_ridge <- function(X, y, lambda, beta_0) {
+    stopifnot("lambda must be a single value" = {length(lambda) == 1})
+    stopifnot("coefficients in beta_0 must match ncol(X)" =
+                  {length(beta_0) == ncol(X)})
+    p <- ncol(X)
+    lambda <- diag(lambda, p)
+    solve(crossprod(X) + lambda, crossprod(X, y) + lambda %*% beta_0)[, 1]
+}
+
+# event_key needed to write pridge.csv to the right folder (switch to a .R?)
+pridge_calculation <- function(raw, schedule, tba_data, event_key) {
+    unique_teams <- sort(unique(unlist(schedule[,2:7])))
+    design <- matrix(0, 
+        nrow = length(unique(raw$match)) * 2, 
+        ncol = length(unique_teams))
+    colnames(design) <- unique_teams
+    
+    for (i in 1:nrow(design)) {
+        chipotle <- filter(
+            raw,
+            match == ceiling(i/2), 
+            substring(robot, 1, 1) == ifelse(i %% 2, "R", "B"))
+        design[i, as.character(chipotle$team)] = 1
+    }
+    
+    response <- tba_data |>
+        pivot_longer(
+            cols = names(tba_data)[2:5],
+            names_to = "alliance",
+            values_to = "score"
+        )
+    
+    priors <- rep(25, length(unique_teams))     # Hard Coded
+    auto_priors <- rep(8, length(unique_teams)) # Hard Coded
+    grid <- seq(0, 20, length.out = 1000)
+    
+    auto_mses <- pridge_lambda_cv(
+        design, 
+        response$score[!(response$alliance %in% c('red_score', 'blue_score'))], 
+        auto_priors, grid, plot_mses = FALSE)
+    
+    tele_mses <- pridge_lambda_cv(
+        design, 
+        response$score[response$alliance %in% c('red_score', 'blue_score')], 
+        priors, grid, plot_mses = FALSE)
+    
+    auto_lambda_opt <- grid[which.min(auto_mses)]
+    tele_lambda_opt <- grid[which.min(tele_mses)]
+    
+    auto_fuel <- prior_ridge(
+        design, 
+        response$score[!(response$alliance %in% c('red_score', 'blue_score'))],  
+        auto_lambda_opt, priors)
+    tele_fuel <- prior_ridge(
+        design, 
+        response$score[response$alliance %in% c('red_score', 'blue_score')],  
+        tele_lambda_opt, priors)
+    
+    priors_df <- data.frame(team = unique_teams, auto_fuel, tele_fuel)
+    write.csv(priors_df, 
+              paste0("../data/", event_key, "/pridge.csv"), row.names = FALSE)
+}
+```
