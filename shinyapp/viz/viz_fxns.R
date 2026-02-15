@@ -27,7 +27,7 @@
 # See 2025 single team tab; overlay a moving average to the plot; this was super
 # useful last year
 
-# Table of team-level summary statistics (needs someone!) 
+# Table of team-level summary statistics (Mitchell) 
 # [intended for match tab, compare teams]
 # Code should compute a table of summary level statistics for each robot. Output
 # the table using a gt() (https://gt.rstudio.com/)

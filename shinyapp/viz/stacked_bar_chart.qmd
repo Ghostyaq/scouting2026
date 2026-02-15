@@ -1,0 +1,36 @@
+---
+title: "stacked_bar_chart"
+format: html
+---
+
+```{r}
+stacked_bar_chart <- function(raw, schedule, tba_data, teams, pridge, order){
+    data <- summary_stats(raw, schedule, tba_data, teams, pridge) |>
+        select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
+        rename(`Auto Climb` = ACP) |>
+        arrange(desc(`Total Score`))
+    
+    team_order <- data$Team
+    
+    data <- pivot_longer(
+        data,
+        cols = c('Auto Fuel', 'Tele Fuel', 'Auto Climb', 'Climb'),
+        names_to = 'type',
+        values_to = 'score',
+    )
+
+    data$Team <- factor(data$Team, levels = team_order, ordered = order)
+    data$type <- factor(
+        data$type, 
+        c("Auto Fuel", "Auto Climb", "Tele Fuel", "Climb"), 
+        ordered = TRUE)
+
+    ggplot(data, aes(x = Team, y = score, fill = type)) +
+        geom_bar(stat ="identity") + 
+        labs(
+            title = "Stacked Bar Chart", x = "Climb + PRidge Score", y = "Team"
+        ) + 
+        coord_flip() + 
+        theme_bw()
+}
+```
