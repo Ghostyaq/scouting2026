@@ -34,8 +34,8 @@ endgame_graph <- function(raw, teams) {
     
 }
 
-raw <- read.csv("shinyapp/data/test_data/data.csv")
-endgame_graph(raw, c(449, 612))
+#raw <- read.csv("shinyapp/data/test_data/data.csv")
+#endgame_graph(raw, c(449, 612))
 
 
     
