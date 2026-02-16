@@ -11,14 +11,15 @@ editor:
 library(dplyr)
 library(ggplot2)
 
-df <- read.csv("data/test_data/data.csv")
+df <- read.csv("../data/test_data/data.csv")
 
 
 plot_driver_rating_graph <- function(dataframe, team_id) {
     selected_team <- dataframe |>
-        filter(team %in% c(team_id))
+        filter(team %in% c(team_id)) |>
+        mutate(team = factor(team))
     ggplot(selected_team, aes(x = match, y = driver_rating, 
-               color = as.factor(team), group = as.factor(team))) + 
+               color = team, group = team)) + 
         geom_line() + 
         geom_point() +
         theme_bw() +
@@ -26,6 +27,7 @@ plot_driver_rating_graph <- function(dataframe, team_id) {
         labs(
             x = "Match",
             y = "Driver Rating",
+            color = "Teams",
             title = "Driver Rating")
 
 }

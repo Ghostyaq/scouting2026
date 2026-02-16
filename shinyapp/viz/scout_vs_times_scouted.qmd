@@ -1,32 +1,30 @@
----
-title: "scout_vs_times_scouted"
-format: html
----
+![]()
 
 ```{r}
 library(dplyr)
 library(ggplot2)
 library(plotly)
 
-raw <- read.csv("data/test_data/data.csv")
+raw <- read.csv("../data/test_data/data.csv")
 
 plot_scouting_graph <- function() {
     scout <-raw$scout
-    scout_count <- count(raw, scout, sort = TRUE)
+    scout_count <- count(raw, scout, sort = TRUE, name = "number_of_times")
     
-    ggplot(raw, aes(x = reorder(scout, scout, length))) + 
-    geom_bar() +
+    still_graph <- ggplot(scout_count, aes(
+        text = paste("Scout:", scout, "|| Count:", number_of_times),
+        x = reorder(scout, number_of_times),
+        y = number_of_times )) + 
+    geom_col() +
     theme_bw() +
     labs(
         x = "Scout Initials",
         y = "Number of Times Scouted",
         title = "Scout and Their Number of Times Scouted")
     
+    ggplotly(still_graph, tooltip = "text")
+    
 }
 
-still_graph <- plot_scouting_graph()
-
-interactive_plot <- ggplotly(still_graph)
-
-interactive_plot
+plot_scouting_graph()
 ```
