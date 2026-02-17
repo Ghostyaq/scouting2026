@@ -1,0 +1,44 @@
+---
+title: "Bumper+Trench Plot"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(readr)
+library(ggplot2)
+
+read_data<-read.csv("data.csv")
+
+team_list<- c("449","2988")
+
+# calculates avg n times a team crossed bump: 
+#avg_tbump <- read_data |> 
+#group_by(team) |>
+#summarize(mean_val = round(mean(teleop_bump), 2))  |> 
+#arrange(desc(mean_val))
+# print(avg_tbump)
+
+filtered_df <- read_data |> filter(team %in% team_list)
+
+
+df_bump <- filtered_df |>
+    select(team, count=teleop_bump) |> 
+    mutate(obstacle = "Bump")
+
+df_trench <- filtered_df |> 
+    select(team, count = teleop_trench) |> 
+    mutate(obstacle = "Trench")
+
+combined_df <- rbind(df_bump,df_trench)
+
+ggplot(combined_df, aes(x = factor(team), y = count, fill = obstacle)) + 
+    geom_boxplot(position = position_dodge(width = .75)) +
+    labs(title = "Mean Crossing Comparison",
+         x = "Team Number",
+         y = "Average Times Crossed",
+         fill = "Obstacle Type") + 
+    theme_minimal()
+```

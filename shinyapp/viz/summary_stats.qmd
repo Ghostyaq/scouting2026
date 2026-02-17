@@ -9,16 +9,16 @@ library(ggplot2)
 
 #raw <- read.csv("../data/test_data/data.csv")
 #schedule <- read.csv("../data/test_data/schedule.csv")
-#tba_data <- read.csv("../data/test_data/tba_data.csv")
-#teams <- sort(unique(unlist(schedule[,2:7])))
 #pridge <- read.csv("../data/test_data/pridge.csv")
 
-summary_stats <- function(raw, schedule, tba_data, teams, pridge) {
+summary_stats <- function(raw, schedule, pridge) {
+    teams <- sort(unique(unlist(schedule[,2:7])))
     data <- raw |>
         filter(team %in% teams) |>
         group_by(team) |>
         summarise(
             Team = mean(team),
+            `Matches Played` = n(),
             Climb = round(mean(
                 ifelse(endgame_climb == "L1", 10, 
                        ifelse(endgame_climb == "L2", 20, 
@@ -28,13 +28,13 @@ summary_stats <- function(raw, schedule, tba_data, teams, pridge) {
             `Tele Fuel` = round(pridge$tele_fuel[pridge$team == team], 2),
             `Total Fuel` = `Auto Fuel` + `Tele Fuel`,
             `Total Score` = `Auto Fuel` + `Tele Fuel` + ACP + Climb,
-            `Auto Cycles` = round(mean(auto_cycles/10), 2),
-            `Tele Cycles` = round(mean(num_cycles + num_cycles_tenths/10), 2),
+            `Auto Cycles` = round(mean(auto_cycles / 10), 2),
+            `Tele Cycles` = round(mean(num_cycles + num_cycles_tenths / 10), 2),
             `Total Cycles` = `Auto Cycles` + `Tele Cycles`,
             `Auto Bump` = sum(auto_bump),
             `Tele Trench` = round(mean(teleop_trench), 2),
             `Tele Bump` = round(mean(teleop_bump), 2),
-            `Auto Climb` = paste0(sum(auto_climb), "/", n()),
+            `Auto Climb` = sum(auto_climb),
             Driver = round(mean(driver_rating), 2),
             `Quick Climb` = sum(climb_less_than_5),
             `Solo Shot` = sum(solo_shooting),
@@ -45,8 +45,8 @@ summary_stats <- function(raw, schedule, tba_data, teams, pridge) {
             Team, `Auto Fuel`, `Tele Fuel`, `Total Fuel`, `Total Score`,
             `Auto Cycles`, `Tele Cycles`, `Total Cycles`, `Auto Bump`,
             `Tele Bump`, `Tele Trench`, `Auto Climb`, Climb, `Quick Climb`, 
-            Driver, `Solo Shot`, Died, Card, ACP)
+            Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP)
 }
 
-mldf <- summary_stats(raw, schedule, tba_data, teams, pridge)
+#tldf <- summary_stats(raw, schedule, pridge)
 ```
