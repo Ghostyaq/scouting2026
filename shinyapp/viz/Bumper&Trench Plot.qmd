@@ -4,14 +4,6 @@ format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
 ```{r}
 library(tidyverse)
 library(dplyr)
@@ -21,7 +13,6 @@ library(ggplot2)
 read_data<-read.csv("data.csv")
 
 team_list<- c("449","2988")
-
 
 # calculates avg n times a team crossed bump: 
 #avg_tbump <- read_data |> 
@@ -51,65 +42,3 @@ ggplot(combined_df, aes(x = factor(team), y = count, fill = obstacle)) +
          fill = "Obstacle Type") + 
     theme_minimal()
 ```
-
-\#
-
-You can add options to executable code like this
-
-```{r}
-
-#two separate functions for bump plot and trench plot (to see them in two different graphs)
-bump_plot<- function(data, team_list) {
-
-    filtered_df <- read_data |> filter(team %in% team_list)
-    
-        ggplot(data = filtered_df, 
-               aes(x = teleop_bump,
-                   y = factor(team))) + 
-        geom_boxplot(fill = "grey") + 
-        labs(title="Box plot of bump crossing per selected team",
-             x ="Times Crossed",
-             y = "Team(s)",
-             caption = "Median = red \n Mean = orange") + 
-        stat_summary(
-              fun = median,
-              geom = "point",
-              color = "red",  # This makes it stand out
-            )+
-        stat_summary(
-          fun = mean,
-          geom = "point",
-          color = "orange", aes(color="mean"))+ theme_minimal()
-
-}
-
-bump_plot(read_data,team_list)
-
-#trench plot
-trench_plot<-function(data, team_list) { 
-    
-    filtered_df <- read_data |> filter(team %in% team_list)
-    
-        ggplot(data = filtered_df,
-               aes(x = teleop_trench, 
-                   y = factor(team))) +
-        geom_boxplot(fill = "lightblue") + 
-        labs(title="Box plot of trench crossing per selected team",
-             x ="Times Crossed", 
-             y = "Team(s)", 
-             caption = "Median = red \n Mean = orange") + 
-        stat_summary(
-          fun = median,
-          geom = "point",
-          color = "red",  # This makes it stand out
-        ) +
-        stat_summary(
-          fun = mean,
-          geom = "point",
-          color = "orange", aes(color="mean"))+ theme_minimal()
-        }
-trench_plot(read_data,team_list)
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
