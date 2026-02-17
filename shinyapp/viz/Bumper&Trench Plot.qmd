@@ -44,10 +44,7 @@ df_trench <- filtered_df |>
 combined_df <- rbind(df_bump,df_trench)
 
 ggplot(combined_df, aes(x = factor(team), y = count, fill = obstacle)) + 
-    geom_bar(stat = "summary",
-             fun = "mean", 
-             position = position_dodge(width = .75), 
-             width = .7) + 
+    geom_boxplot(position = position_dodge(width = .75)) +
     labs(title = "Mean Crossing Comparison",
          x = "Team Number",
          y = "Average Times Crossed",
