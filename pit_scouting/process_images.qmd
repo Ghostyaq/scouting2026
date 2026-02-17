@@ -13,15 +13,31 @@ Quarto enables you to weave together content and executable code into a finished
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
-#put images in png format. final dest. git repo
-install.packages("readr")
-install.packages("tidyverse")
-#install.packages("magick")
 library(readr)
 library(tidyverse)
-#library(magick)
-#str(magick::magick_config())
+library(magick)
+
+#Process images from imported dataset and convert them to pngs (all in vector_pics array)
 pit_data<-read.csv("pit_scouting_2026.csv")
+
+# taking links and converting them to images
+pic_link <- pit_data$Upload.robot.photo
+pics_link <- gsub("open\\?id=", "uc?export=download&id=", pic_link)
+
+#convert to vector and apply image_read on every img in pics_link
+vector_pics<-sapply(pics_link,image_read) 
+
+if (!dir.exists("robot_pics")) dir.create("robot_pics")
+for (i in seq_along(vector_pics)) { 
+    image_write(vector_pics[[i]], path = paste0("robot_pics/robot_",i, ".png"), format = "png")}
+
+#Check to see all image files are pngs
+# vector_pics <- image_join(vector_pics)
+# imginfo <- image_info(vector_pics)
+# print(imginfo)
+
+
+
 ```
 
 You can add options to executable code like this
