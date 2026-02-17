@@ -29,7 +29,11 @@ vector_pics<-sapply(pics_link,image_read)
 
 if (!dir.exists("robot_pics")) dir.create("robot_pics")
 for (i in seq_along(vector_pics)) { 
-    image_write(vector_pics[[i]], path = paste0("robot_pics/robot_",i, ".png"), format = "png")}
+    image_write(
+        vector_pics[[i]],
+        path = paste0("robot_pics/robot_",i, ".png"), 
+        format = "png")
+    }
 
 #Check to see all image files are pngs
 # vector_pics <- image_join(vector_pics)
