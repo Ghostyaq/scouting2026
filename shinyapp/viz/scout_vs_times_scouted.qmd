@@ -15,10 +15,9 @@ plot_scouting_graph <- function(dataframe) {
     still_graph <- ggplot(scout_count, aes(
         text = paste("Scout:", scout, "|| Count:", number_of_times),
         x = reorder(scout, number_of_times, decreasing = TRUE),
-        y = number_of_times, fill = scout)) + 
-    geom_col() +
+        y = number_of_times)) + 
+    geom_col(fill = "steelblue") +
     theme_bw() +
-    scale_fill_brewer(palette = "Blues") + 
     theme(legend.position = "none") + 
     labs(
         x = "Scout Initials",
