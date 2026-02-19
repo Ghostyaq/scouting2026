@@ -110,12 +110,12 @@ pridge_calculation <- function(raw, schedule, tba_data, event_key) {
     
     auto_mses <- pridge_lambda_cv(
         design, 
-        response$score[!(response$alliance %in% c('red_score', 'blue_score'))], 
+        response$score[!(response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel'))], 
         auto_priors, grid, plot_mses = FALSE)
     
     tele_mses <- pridge_lambda_cv(
         design, 
-        response$score[response$alliance %in% c('red_score', 'blue_score')], 
+        response$score[response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')], 
         priors, grid, plot_mses = FALSE)
     
     auto_lambda_opt <- grid[which.min(auto_mses)]
@@ -123,17 +123,19 @@ pridge_calculation <- function(raw, schedule, tba_data, event_key) {
     
     auto_fuel <- prior_ridge(
         design, 
-        response$score[!(response$alliance %in% c('red_score', 'blue_score'))],  
+        response$score[
+            (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
         auto_lambda_opt, priors)
     tele_fuel <- prior_ridge(
         design, 
-        response$score[response$alliance %in% c('red_score', 'blue_score')],  
+        response$score[
+            response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
         tele_lambda_opt, priors)
     
     priors_df <- data.frame(team = unique_teams, auto_fuel, tele_fuel)
-    write.csv(priors_df, 
-              paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
-    getwd()
+    write.csv(
+        priors_df, 
+        paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
 }
 
 plot_scouting_graph <- function(raw) {

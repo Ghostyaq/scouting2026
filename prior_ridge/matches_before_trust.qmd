@@ -282,7 +282,98 @@ ggplot(data, aes(x = rows)) +
     geom_line(aes(y = pridge_mse), color = "blue") +
     scale_y_log10() +
     theme_bw()
+```
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(scoutR)
 
 
+pridge_lambda_cv <- function(
+        design, response, priors, lambda, plot_mses = FALSE, n_cores = NULL
+){
+    design <- as.matrix(design)
+    
+    # Leave one core free by default
+    if (is.null(n_cores)) {
+        n_cores <- max(1, parallel::detectCores() - 1)
+    }
+    cl <- parallel::makeCluster(n_cores)
+    doParallel::registerDoParallel(cl)
+    
+    mses <- tryCatch({
+        foreach::foreach(
+            lambda = grid, .export = c("pridge_loocv", "prior_ridge"), .combine = 'c', .packages = 'scoutR'
+        ) %dopar% {
+            pridge_loocv(design, response, lambda, priors)
+        }
+    }, finally = {
+        # Always stop the cluster to free up resources
+        parallel::stopCluster(cl)
+    })
+    
+    return(mses)
+}
+
+
+pridge_loocv <- function(X, y, lambda, beta_0, mse = TRUE){
+    errors <- rep(NA, length(y))
+    for (i in seq_along(y)){
+        X_train <- X[-i, ]
+        y_train <- y[-i]
+        X_test <- X[i, ]
+        y_test <- y[i]
+        # train on the training data
+        coefs <- prior_ridge(X_train, y_train, lambda, beta_0)
+        # make predictions using test data and compute error
+        pred <- X_test %*% coefs
+        # use drop() to ensure the error is a vector, not a matrix
+        errors[i] <- drop(pred - y_test)
+    }
+    if(mse) return(mean(errors ^ 2))
+    return(errors)
+}
+prior_ridge <- function(X, y, lambda, beta_0) {
+    stopifnot("lambda must be a single value" = {length(lambda) == 1})
+    stopifnot("coefficients in beta_0 must match ncol(X)" =
+                  {length(beta_0) == ncol(X)})
+    p <- ncol(X)
+    lambda <- diag(lambda, p)
+    solve(crossprod(X) + lambda, crossprod(X, y) + lambda %*% beta_0)[, 1]
+}
+
+event_key <- "2025mdsev"
+
+team_info <- read.csv("data/all_epas_for_all_teams.csv")
+team_info <- filter(team_info, event == event_key) |> distinct()
+
+data <- team_info |>
+    group_by(event, match, alliance) |>
+    summarise(
+        pred_score = sum(pre_epa),
+        num_teams = n()
+    ) |>
+    ungroup() |>
+    rowwise() |>
+    mutate(
+        event_key = paste0(event, "_qm", match)
+    )
+
+matches <- event_matches(event_key, match_type = "qual")
+
+design <- as.matrix(lineup_design_matrix(matches))
+response <- c(matches$blue_score, matches$red_score)
+
+sb_data <- team_events_sb(event = event_key)
+epas <- sapply(sb_data, function(te){te$epa$stats$start})
+names(epas) <- sapply(sb_data, function(te){te$team})
+
+grid <- seq(0, 20, length.out = 1000)
+
+min_mses <- sapply(5:10, function(i){
+    mses <- pridge_lambda_cv(design[1:(2*i), ], response[1:(2*i)], epas, grid)
+    min(mses)
+})
 
 ```
+
