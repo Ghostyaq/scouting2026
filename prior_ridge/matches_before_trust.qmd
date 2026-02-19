@@ -283,11 +283,13 @@ ggplot(data, aes(x = rows)) +
     scale_y_log10() +
     theme_bw()
 ```
+
 ```{r}
 library(tidyverse)
 library(ggplot2)
 library(scoutR)
-
+library(foreach)
+library(doParallel)
 
 pridge_lambda_cv <- function(
         design, response, priors, lambda, plot_mses = FALSE, n_cores = NULL
@@ -303,7 +305,8 @@ pridge_lambda_cv <- function(
     
     mses <- tryCatch({
         foreach::foreach(
-            lambda = grid, .export = c("pridge_loocv", "prior_ridge"), .combine = 'c', .packages = 'scoutR'
+            lambda = grid, .export = c("pridge_loocv", "prior_ridge"), 
+            .combine = 'c', .packages = 'scoutR'
         ) %dopar% {
             pridge_loocv(design, response, lambda, priors)
         }
@@ -311,7 +314,6 @@ pridge_lambda_cv <- function(
         # Always stop the cluster to free up resources
         parallel::stopCluster(cl)
     })
-    
     return(mses)
 }
 
@@ -333,6 +335,7 @@ pridge_loocv <- function(X, y, lambda, beta_0, mse = TRUE){
     if(mse) return(mean(errors ^ 2))
     return(errors)
 }
+
 prior_ridge <- function(X, y, lambda, beta_0) {
     stopifnot("lambda must be a single value" = {length(lambda) == 1})
     stopifnot("coefficients in beta_0 must match ncol(X)" =
@@ -342,38 +345,92 @@ prior_ridge <- function(X, y, lambda, beta_0) {
     solve(crossprod(X) + lambda, crossprod(X, y) + lambda %*% beta_0)[, 1]
 }
 
+per_match_comparison <- function(team_info, event_key, matches_interested) {
+    team_info <- filter(team_info, event == event_key) |> distinct()
+    
+    data <- team_info |>
+        group_by(event, match, alliance) |>
+        summarise(
+            pred_score = sum(pre_epa),
+            num_teams = n()
+        ) |>
+        ungroup() |>
+        rowwise() |>
+        mutate(
+            event_key = paste0(event, "_qm", match)
+        )
+    
+    matches <- event_matches(event_key, match_type = "qual") # Set-up pridge_lambda_cv
+    design <- as.matrix(lineup_design_matrix(matches))
+    response <- c(matches$blue_score, matches$red_score)
+    sb_data <- team_events_sb(event = event_key)
+    epas <- sapply(sb_data, function(te){te$epa$stats$start})
+    names(epas) <- sapply(sb_data, function(te){te$team})
+    grid <- seq(1, 20, length.out = 1000) # why does it break if we start at 0?
+    
+    pridge_mses <- sapply(matches_interested, function(i){
+        red_indices_start <- length(design[ ,1]) / 2
+        design_temp <- rbind(
+            design[1:i, ], design[red_indices_start:(red_indices_start + i), ])
+        response_temp <- c(
+            response[1:i], response[red_indices_start:(red_indices_start + i)]
+        )
+        mses <- pridge_lambda_cv(design_temp, response_temp, epas, grid)
+        min(mses)
+    })
+    
+    real_scores <- event_matches(event_key, match_type = "quals")[, c("blue_score", "red_score")] |>
+            pivot_longer(
+                cols = c("blue_score", "red_score"),
+                names_to = "alliance",
+                values_to = "scores"
+            ) |>
+            select(scores)
+    
+    data$score <- real_scores$scores
+    data <- data |>
+        mutate(
+            epa_residual_squared = (pred_score - score)^2
+        )
+    
+    epa_mse <- sapply(matches_interested, function(i) {
+        mean(data$epa_residual_squared[1:i])
+        })
+    
+    opr_mse <- sapply(matches_interested, function(i){
+        red_indices_start <- length(design[ ,1]) / 2
+        design_temp <- rbind(
+            design[1:i, ], design[red_indices_start:(red_indices_start + i), ])
+        response_temp <- c(
+            response[1:i], response[red_indices_start:(red_indices_start + i)]
+        )
+        
+        design_temp <- cbind(as.data.frame(design_temp), response_temp)
+        
+        mses <- mean((lm(
+            response_temp ~ 0, data = design_temp, 
+            weights = rep(1, nrow(design_temp)))$residuals) ** 2)
+    })
+    
+    comparison <- data.frame(pridge_mses, epa_mse) |>
+        pivot_longer(
+            cols = c("pridge_mses", "epa_mse"),
+            names_to = "type", 
+            values_to = "values"
+        )
+    
+    comparison$matches_interested <- 
+        sort(rep(matches_interested, length(unique(comparison$type))))
+    
+    ggplot(comparison, aes(x = matches_interested, y = values, color = type)) +
+        geom_line() + 
+        theme_bw()
+}
+
 event_key <- "2025mdsev"
+team_info <- read.csv("data/all_epas_for_all_teams.csv")    
+matches_interested <- 5:30
 
-team_info <- read.csv("data/all_epas_for_all_teams.csv")
-team_info <- filter(team_info, event == event_key) |> distinct()
-
-data <- team_info |>
-    group_by(event, match, alliance) |>
-    summarise(
-        pred_score = sum(pre_epa),
-        num_teams = n()
-    ) |>
-    ungroup() |>
-    rowwise() |>
-    mutate(
-        event_key = paste0(event, "_qm", match)
-    )
-
-matches <- event_matches(event_key, match_type = "qual")
-
-design <- as.matrix(lineup_design_matrix(matches))
-response <- c(matches$blue_score, matches$red_score)
-
-sb_data <- team_events_sb(event = event_key)
-epas <- sapply(sb_data, function(te){te$epa$stats$start})
-names(epas) <- sapply(sb_data, function(te){te$team})
-
-grid <- seq(0, 20, length.out = 1000)
-
-min_mses <- sapply(5:10, function(i){
-    mses <- pridge_lambda_cv(design[1:(2*i), ], response[1:(2*i)], epas, grid)
-    min(mses)
-})
-
+a <- per_match_comparison(team_info, event_key, matches_interested)
+a
 ```
-
