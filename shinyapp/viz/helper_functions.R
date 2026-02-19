@@ -156,11 +156,12 @@ plot_scouting_graph <- function(raw) {
     ggplotly(still_graph, tooltip = "text")
 }
 
-stacked_bar_chart <- function(raw, schedule, pridge, order){
+stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
     data <- summary_stats(raw, schedule, pridge) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
         rename(`Auto Climb` = ACP) |>
-        arrange(desc(`Total Score`))
+        arrange(desc(`Total Score`)) |>
+        filter(Team %in% teams)
     
     team_order <- data$Team
     
