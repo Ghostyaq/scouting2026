@@ -192,7 +192,7 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
 
 summary_stats <- function(raw, schedule, pridge) {
     teams <- sort(unique(unlist(schedule[,2:7])))
-    data <- raw |>
+    result <- raw |>
         filter(team %in% teams) |>
         group_by(team) |>
         summarise(
@@ -225,6 +225,8 @@ summary_stats <- function(raw, schedule, pridge) {
             `Auto Cycles`, `Tele Cycles`, `Total Cycles`, `Auto Bump`,
             `Tele Bump`, `Tele Trench`, `Auto Climb`, Climb, `Quick Climb`, 
             Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP)
+    
+    return(result)
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
