@@ -41,34 +41,6 @@ ui <- fluidPage(
             )
         ),
         tabPanel(
-            title = "Single Team",
-            layout_sidebar(
-                sidebar = card(
-                    virtualSelectInput("selected_team", label = "Select a Team", choices = NULL, 
-                                       search = TRUE),
-                    height = "500px"
-                ),
-                card(
-                    card_header("Summary Fuel Points"),
-                    plotOutput("summary_point")
-                ),
-                layout_columns(
-                    card(
-                        card_header("Trench Bump Relationship Boxplot"),
-                        plotOutput("trench_bump")
-                    ),
-                    card(
-                        card_header("Endgame Stacked Bar Chart"),
-                        plotOutput("end_bar")
-                    ),
-                    card(
-                        card_header("Driver Rating by Match"),
-                        plotOutput("driver_rating")
-                    )
-                )
-            )
-        ),
-        tabPanel(
             title = "Compare Teams",
             layout_sidebar(
                 sidebar = card(
@@ -102,23 +74,29 @@ ui <- fluidPage(
             title = "Match",
             layout_sidebar(
                 sidebar = card(
-                    virtualSelectInput("selected_match", label = "Select a Match", choices = NULL),
+                    virtualSelectInput("selected_match", label = "Select a Match", choices = NULL, selected = 1),
                     height = "500px"
-                ),
-                card(
-                    card_header("Team Points Boxplot"),
-                    plotOutput("boxplot_match")
                 ),
                 layout_columns(
                     card(
-                        card_header("Autonomous/Teleop Stacked Bar Chart"),
-                        plotOutput("fuel_bar_match")
+                        card_header("Summary Fuel Points"),
+                        plotOutput("summary_point_match")
                     ),
                     card(
                         card_header("Endgame Stacked Bar Chart"),
                         plotOutput("end_bar_match")
                     )
-                )
+                ),
+                layout_columns(
+                    card(
+                        card_header("Trench Bump Relationship Boxplot"),
+                        plotOutput("trench_bump_match")
+                    ),
+                    card(
+                        card_header("Driver Rating by Match"),
+                        plotOutput("driver_rating_match")
+                    )
+                ),
             )
         ),
         tabPanel(

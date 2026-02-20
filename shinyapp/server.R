@@ -87,4 +87,42 @@ server <- function(input, output, session) {
         team <- input$selected_teams_comp
         bump_trench_boxplot(data, team)
     })
+    
+    #SUMMARY POINT MATCH
+    output$summary_point_match <- renderPlot({
+        #Make sure sure that the input is within data manipulation pipeline
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), names_to = "position", values_to = "tnum") |>
+            pull(tnum)
+        
+        stacked_bar_chart(data, schedule, pridge, TRUE, teams)
+    })
+    
+    output$end_bar_match <- renderPlot({
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), names_to = "position", values_to = "tnum") |>
+            pull(tnum)
+        
+        endgame_graph(data, teams)
+    })
+    
+    output$trench_bump_match <- renderPlot({
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), names_to = "position", values_to = "tnum") |>
+            pull(tnum)
+        
+        bump_trench_boxplot(data, teams)
+    })
+    
+    output$driver_rating_match <- renderPlot({
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), names_to = "position", values_to = "tnum") |>
+            pull(tnum)
+        
+        plot_driver_rating_graph(data, teams)
+    })
 }
