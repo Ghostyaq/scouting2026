@@ -160,8 +160,11 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
     data <- summary_stats(raw, schedule, pridge) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
         rename(`Auto Climb` = ACP) |>
-        arrange(desc(`Total Score`)) |>
         filter(Team %in% teams)
+    
+    if (order) {
+        data <- data |> arrange(desc(`Total Score`))
+    }
     
     team_order <- data$Team
     
@@ -172,7 +175,7 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
         values_to = 'score',
     )
     
-    data$Team <- factor(data$Team, levels = team_order, ordered = order)
+    data$Team <- factor(data$Team, levels = team_order, ordered = TRUE)
     data$type <- factor(
         data$type, 
         c("Auto Fuel", "Auto Climb", "Tele Fuel", "Climb"), 
