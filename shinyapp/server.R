@@ -40,6 +40,10 @@ server <- function(input, output, session) {
         stacked_bar_chart(data, schedule, pridge, TRUE, teams)
     })
     
+    output$summary_stats <- renderDT({
+        summary_stats(data, pridge)
+    })
+    
     #POINT SUMMARY BAR PLOT
     output$summary_point <- renderPlot({
         team <- input$selected_team
@@ -125,4 +129,19 @@ server <- function(input, output, session) {
         
         plot_driver_rating_graph(data, teams)
     })
+    
+    output$summary_stats_comp <- renderDT({
+        summary_stats(data, pridge, input$selected_teams_comp)
+    })
+    
+    output$summary_stats_match <- renderDT({
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), 
+                         names_to = "position", values_to = "tnum") |>
+            pull(tnum)
+        
+        summary_stats(data, pridge, teams)
+    })
+    
 }

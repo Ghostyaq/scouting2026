@@ -38,6 +38,10 @@ ui <- fluidPage(
             card(
                 card_header("Event Summary"),
                 plotOutput("event_summary")
+            ),
+            card(
+                card_header("Summary Stats"),
+                DTOutput("summary_stats")
             )
         ),
         tabPanel(
@@ -68,6 +72,10 @@ ui <- fluidPage(
                         plotOutput("driver_rating_comp")
                     )
                 ),
+                card(
+                    card_header("Summary Stats"), 
+                    DTOutput("summary_stats_comp")
+                )
             )
         ),
         tabPanel(
@@ -97,6 +105,10 @@ ui <- fluidPage(
                         plotOutput("driver_rating_match")
                     )
                 ),
+                card(
+                    card_header("Summary Stats"),
+                    DTOutput("summary_stats_match")
+                )
             )
         ),
         tabPanel(
