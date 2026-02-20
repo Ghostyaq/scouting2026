@@ -157,7 +157,7 @@ plot_scouting_graph <- function(raw) {
 }
 
 stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
-    data <- summary_stats(raw, schedule, pridge) |>
+    data <- summary_stats(raw, schedule, teams = NULL) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
         rename(`Auto Climb` = ACP) |>
         filter(Team %in% teams)
