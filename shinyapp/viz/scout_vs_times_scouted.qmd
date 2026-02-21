@@ -5,18 +5,20 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-raw <- read.csv("../data/test_data/data.csv")
+data <- "../data/test_data/data.csv"
 
-plot_scouting_graph <- function() {
+plot_scouting_graph <- function(dataframe) {
+    raw <- read.csv(dataframe)
     scout <-raw$scout
     scout_count <- count(raw, scout, sort = TRUE, name = "number_of_times")
     
     still_graph <- ggplot(scout_count, aes(
         text = paste("Scout:", scout, "|| Count:", number_of_times),
-        x = reorder(scout, number_of_times),
-        y = number_of_times )) + 
-    geom_col() +
+        x = reorder(scout, number_of_times, decreasing = TRUE),
+        y = number_of_times)) + 
+    geom_col(fill = "steelblue") +
     theme_bw() +
+    theme(legend.position = "none") + 
     labs(
         x = "Scout Initials",
         y = "Number of Times Scouted",
@@ -26,5 +28,5 @@ plot_scouting_graph <- function() {
     
 }
 
-plot_scouting_graph()
+plot_scouting_graph(data)
 ```

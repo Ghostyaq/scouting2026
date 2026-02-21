@@ -145,16 +145,16 @@
         },
         {
           "title": "Starting Position",
-          "description": "The starting position of the robot.",
+          "description": "The starting position of the robot relative to the other robots.",
           "type": "select",
           "required": false,
           "code": "Prsp",
           "formResetBehavior": "reset",
           "defaultValue": "",
           "choices": {
-            "O": "Outpost Side",
+            "C": "Close",
             "M": "Middle",
-            "D": "Depot Side"
+            "F": "Far"
           }
         },
         {
@@ -221,7 +221,7 @@
       "fields": [
         {
           "title": "Trench",
-          "description": "Chech if the robot went under the trench.",
+          "description": "Count how many times the robot went under the trench.",
           "type": "counter",
           "required": false,
           "code": "trenchTele",
@@ -233,7 +233,7 @@
         },
         {
           "title": "Bump",
-          "description": "Check if the robot went over the bump.",
+          "description": "Count how many times the robot went over the bump.",
           "type": "counter",
           "required": false,
           "code": "bumpTele",

@@ -2,8 +2,6 @@ library(shiny)
 library(DT)
 library(ggplot2)
 library(plotly)
-library(dplyr)
-library(scales)
 library(shinyWidgets)
 library(tidyverse)
 library(shinythemes)
@@ -15,52 +13,68 @@ library(ggbeeswarm)
 library(bslib)
 library(fmsb)
 library(here)
+library(shiny.fluent)
+library(colourpicker)
 
-scheduled_matches = tibble(matches = 1:78)
-played_matches = tibble(matches = 1:40)
+source("viz/helper_functions.R")
+source("server.R")
 
-#--------------------------------------------FUNCTION-------------------------------------------------------------------
-
-boxplot = function(curr_match, selected_match) {
-    data = tibble(x = 0, y = 1)
-    is_played = ggplot(data = NULL, aes(x = x, y = y)) +
-        geom_point()
-    is_played = if(curr_match > selected_match) {
-        ggplot(data = data, aes(x = x, y = y)) +
-            geom_point()
-    }
-    
-    return(is_played)
-}
+data <- read.csv("data/test_data/data.csv")
+pridge <- read.csv("data/test_data/pridge.csv")
+tba_data <- read.csv("data/test_data/tba_data.csv")
+schedule <- read.csv("data/test_data/schedule.csv")
 
 #----------------------------------------------UI-----------------------------------------------------------------------
 
-
 ui <- fluidPage(
-    theme = bs_theme(version = 5, bootswatch = "flatly"),
+    theme = bs_theme(
+        version = 5,
+        bootswatch = "flatly"
+    ),
     navbarPage(
         title = "2026 REBUILT 449 Data",
         tabPanel(
             title = "Event Summary",
             card(
                 card_header("Event Summary"),
-                plotlyOutput("event_summary")
-            )
-        ),
-        tabPanel(
-            title = "Single Team",
-            layout_sidebar(
-                sidebar = card(
-                    virtualSelectInput("selected_team", label = "Select a Team", choices = NULL, search = TRUE),
-                    height = "500px"
-                )
+                plotOutput("event_summary")
+            ),
+            card(
+                card_header("Summary Stats"),
+                DTOutput("summary_stats")
             )
         ),
         tabPanel(
             title = "Compare Teams",
             layout_sidebar(
                 sidebar = card(
-                    virtualSelectInput("selected_teams_compare", label = "Select Teams", choices = NULL, multiple = TRUE, search = TRUE)
+                    virtualSelectInput("selected_teams_comp", label = "Select Teams", choices = NULL, multiple = TRUE, search = TRUE
+                    ),
+                    height = "500px"
+                ),
+                layout_columns(
+                    card(
+                        card_header("Summary Fuel Points"),
+                        plotOutput("summary_point_comp")
+                    ),
+                    card(
+                        card_header("Endgame Stacked Bar Chart"),
+                        plotOutput("end_bar_comp")
+                    )
+                ),
+                layout_columns(
+                    card(
+                        card_header("Trench Bump Relationship Boxplot"),
+                        plotOutput("trench_bump_comp")
+                    ),
+                    card(
+                        card_header("Driver Rating by Match"),
+                        plotOutput("driver_rating_comp")
+                    )
+                ),
+                card(
+                    card_header("Summary Stats"), 
+                    DTOutput("summary_stats_comp")
                 )
             )
         ),
@@ -68,41 +82,67 @@ ui <- fluidPage(
             title = "Match",
             layout_sidebar(
                 sidebar = card(
-                    virtualSelectInput("selected_match", label = "Select a Match", choices = NULL),
+                    virtualSelectInput("selected_match", label = "Select a Match", choices = NULL, selected = 1),
                     height = "500px"
                 ),
+                layout_columns(
+                    card(
+                        card_header("Summary Fuel Points"),
+                        plotOutput("summary_point_match")
+                    ),
+                    card(
+                        card_header("Endgame Stacked Bar Chart"),
+                        plotOutput("end_bar_match")
+                    )
+                ),
+                layout_columns(
+                    card(
+                        card_header("Trench Bump Relationship Boxplot"),
+                        plotOutput("trench_bump_match")
+                    ),
+                    card(
+                        card_header("Driver Rating by Match"),
+                        plotOutput("driver_rating_match")
+                    )
+                ),
                 card(
-                    card_header("Team Points Boxplot"),
-                    plotOutput("boxplot_match")
+                    card_header("Summary Stats"),
+                    DTOutput("summary_stats_match")
                 )
             )
         ),
         tabPanel(
             title = "Scouts",
-            card(
-                plotlyOutput("Average Yaps"),
-                plotlyOutput("Total Matches Scouted")
+            layout_columns(
+                card(
+                    card_header("Average Yaps by Scout"),
+                    plotlyOutput("scout_yaps")
+                ),
+                card(
+                    card_header("Total Matches Scouted by Scout"),
+                    plotlyOutput("matches_scouted")
+                )
+            )
+        ),
+        tabPanel(
+            title = "Settings",
+            layout_columns(
+                card(
+                    card_header("Refresh Data"),
+                    actionButton("pridge_button", "Reload Data")
+                ),
+                card(
+                    card_header("Custom Theme Color"),
+                    ColorPicker("theme_color")
+                )
             )
         )
     )
 )
 
-#-------------------------------------------SERVER----------------------------------------------------------------------
-
-server <- function(input, output, session) {
-    observe({
-        updateVirtualSelect("selected_match", choices = scheduled_matches$matches)
-    })
-    
-    output$boxplot_match <- renderPlot({
-        curr_match = max(played_matches$matches)
-        selected_match = input$selected_match
-        
-        boxplot(curr_match, selected_match)
-    })
-    
-}
-
 #--------------------------------------------INITIALIZE-----------------------------------------------------------------
 
-shinyApp(ui = ui, server = server)
+shinyApp(
+    ui = ui, 
+    server = server, 
+    options = list(height = 1000))
