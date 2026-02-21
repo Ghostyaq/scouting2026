@@ -82,7 +82,7 @@ team = as.vector(replicate(ceiling(size / length(teams_list)), sample(teams_list
 team = team[-seq(length(team) - (ceiling(size/length(teams_list))*length(teams_list)-size) + 1, length(team)+1)]
 match = floor(seq(from=6,to=size+5)/6)
 robot = rep(c("R1", "R2", "R3", "B1", "B2", "B3"), size/6)
-start_pos = rep(c("O", "M", "D"), size/3)
+start_pos = rep(c("C", "M", "F"), size/3)
 
 data <- data.frame(team, match, robot, start_pos) |>
     rowwise() |>
