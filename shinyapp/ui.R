@@ -19,10 +19,10 @@ library(colourpicker)
 source("viz/helper_functions.R")
 source("server.R")
 
-data <- read.csv("data/test_data/data.csv")
-pridge <- read.csv("data/test_data/pridge.csv")
-tba_data <- read.csv("data/test_data/tba_data.csv")
-schedule <- read.csv("data/test_data/schedule.csv")
+data <- read.csv("data/week0/data.csv")
+pridge <- read.csv("data/week0/pridge.csv")
+tba_data <- read.csv("data/week0/tba_data.csv")
+schedule <- read.csv("data/week0/schedule.csv")
 
 #----------------------------------------------UI-----------------------------------------------------------------------
 
