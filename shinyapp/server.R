@@ -143,5 +143,4 @@ server <- function(input, output, session) {
         
         summary_stats(data, pridge, teams)
     })
-    
 }

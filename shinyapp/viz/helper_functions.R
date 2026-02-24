@@ -184,7 +184,7 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
     ggplot(data, aes(x = Team, y = score, fill = type)) +
         geom_bar(stat ="identity") + 
         labs(
-            title = "Stacked Bar Chart", x = "Climb + PRidge Score", y = "Team"
+            title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
         ) + 
         coord_flip() + 
         theme_bw()
