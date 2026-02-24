@@ -110,12 +110,12 @@ pridge_calculation <- function(raw, schedule, tba_data, event_key) {
     
     auto_mses <- pridge_lambda_cv(
         design, 
-        response$score[!(response$alliance %in% c('red_score', 'blue_score'))], 
+        response$score[!(response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel'))], 
         auto_priors, grid, plot_mses = FALSE)
     
     tele_mses <- pridge_lambda_cv(
         design, 
-        response$score[response$alliance %in% c('red_score', 'blue_score')], 
+        response$score[response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')], 
         priors, grid, plot_mses = FALSE)
     
     auto_lambda_opt <- grid[which.min(auto_mses)]
@@ -123,17 +123,19 @@ pridge_calculation <- function(raw, schedule, tba_data, event_key) {
     
     auto_fuel <- prior_ridge(
         design, 
-        response$score[!(response$alliance %in% c('red_score', 'blue_score'))],  
+        response$score[
+            (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
         auto_lambda_opt, priors)
     tele_fuel <- prior_ridge(
         design, 
-        response$score[response$alliance %in% c('red_score', 'blue_score')],  
+        response$score[
+            response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
         tele_lambda_opt, priors)
     
     priors_df <- data.frame(team = unique_teams, auto_fuel, tele_fuel)
-    write.csv(priors_df, 
-              paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
-    getwd()
+    write.csv(
+        priors_df, 
+        paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
 }
 
 plot_scouting_graph <- function(raw) {
@@ -154,11 +156,15 @@ plot_scouting_graph <- function(raw) {
     ggplotly(still_graph, tooltip = "text")
 }
 
-stacked_bar_chart <- function(raw, schedule, pridge, order){
-    data <- summary_stats(raw, schedule, pridge) |>
+stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
+    data <- summary_stats(raw, pridge, teams = NULL) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
         rename(`Auto Climb` = ACP) |>
-        arrange(desc(`Total Score`))
+        filter(Team %in% teams)
+    
+    if (order) {
+        data <- data |> arrange(desc(`Total Score`))
+    }
     
     team_order <- data$Team
     
@@ -169,7 +175,7 @@ stacked_bar_chart <- function(raw, schedule, pridge, order){
         values_to = 'score',
     )
     
-    data$Team <- factor(data$Team, levels = team_order, ordered = order)
+    data$Team <- factor(data$Team, levels = team_order, ordered = TRUE)
     data$type <- factor(
         data$type, 
         c("Auto Fuel", "Auto Climb", "Tele Fuel", "Climb"), 
@@ -178,47 +184,52 @@ stacked_bar_chart <- function(raw, schedule, pridge, order){
     ggplot(data, aes(x = Team, y = score, fill = type)) +
         geom_bar(stat ="identity") + 
         labs(
-            title = "Stacked Bar Chart", x = "Climb + PRidge Score", y = "Team"
+            title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
         ) + 
         coord_flip() + 
         theme_bw()
 }
 
-summary_stats <- function(raw, schedule, pridge) {
-    teams <- sort(unique(unlist(schedule[,2:7])))
-    data <- raw |>
+summary_stats <- function(raw, pridge, teams = NULL) {
+    if (is.null(teams)) teams <- unique(raw$team)
+    result <- raw |>
         filter(team %in% teams) |>
         group_by(team) |>
         summarise(
-            Team = mean(team),
             `Matches Played` = n(),
-            Climb = round(mean(
+            Climb = mean(
                 ifelse(endgame_climb == "L1", 10, 
                        ifelse(endgame_climb == "L2", 20, 
-                              ifelse(endgame_climb == "L3", 30, 0)))), 2),
-            ACP = round(mean(auto_climb * 15), 2),
-            `Auto Fuel` = round(pridge$auto_fuel[pridge$team == team], 2),
-            `Tele Fuel` = round(pridge$tele_fuel[pridge$team == team], 2),
-            `Total Fuel` = `Auto Fuel` + `Tele Fuel`,
-            `Total Score` = `Auto Fuel` + `Tele Fuel` + ACP + Climb,
-            `Auto Cycles` = round(mean(auto_cycles / 10), 2),
-            `Tele Cycles` = round(mean(num_cycles + num_cycles_tenths / 10), 2),
+                              ifelse(endgame_climb == "L3", 30, 0)))),
+            ACP = mean(auto_climb * 15, na.rm = TRUE),
+            `Auto Cycles` = mean(auto_cycles / 10, na.rm = TRUE),
+            `Tele Cycles` = mean(num_cycles + num_cycles_tenths / 10, na.rm = TRUE),
             `Total Cycles` = `Auto Cycles` + `Tele Cycles`,
-            `Auto Bump` = sum(auto_bump),
-            `Tele Trench` = round(mean(teleop_trench), 2),
-            `Tele Bump` = round(mean(teleop_bump), 2),
-            `Auto Climb` = sum(auto_climb),
-            Driver = round(mean(driver_rating), 2),
-            `Quick Climb` = sum(climb_less_than_5),
-            `Solo Shot` = sum(solo_shooting),
-            Died = sum(died),
-            Card = sum(card != 'No Card')
+            `Auto Bump` = sum(auto_bump, na.rm = TRUE),
+            `Tele Trench` = mean(teleop_trench, na.rm = TRUE),
+            `Tele Bump` = mean(teleop_bump, na.rm = TRUE),
+            `Auto Climb` = sum(auto_climb, na.rm = TRUE),
+            Driver = mean(driver_rating, na.rm = TRUE),
+            `Quick Climb` = sum(climb_less_than_5, na.rm = TRUE),
+            `Solo Shot` = sum(solo_shooting, na.rm = TRUE),
+            Died = sum(died, na.rm = TRUE),
+            Card = sum(card != 'No Card', na.rm = TRUE)
+        ) |>
+        left_join(pridge) |>
+        mutate(
+            `Auto Fuel` = auto_fuel,
+            `Tele Fuel` = tele_fuel,
+            `Total Fuel` = `Auto Fuel` + `Tele Fuel`,
+            `Total Score` = `Auto Fuel` + `Tele Fuel` + ACP + Climb
         ) |>
         select(
-            Team, `Auto Fuel`, `Tele Fuel`, `Total Fuel`, `Total Score`,
+            Team = team, `Auto Fuel`, `Tele Fuel`, `Total Fuel`, `Total Score`,
             `Auto Cycles`, `Tele Cycles`, `Total Cycles`, `Auto Bump`,
             `Tele Bump`, `Tele Trench`, `Auto Climb`, Climb, `Quick Climb`, 
-            Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP)
+            Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP) |>
+        modify_if(~is.numeric(.), ~round(., 2))
+    
+    return(result)
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
