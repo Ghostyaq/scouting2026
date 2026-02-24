@@ -200,7 +200,7 @@
           "defaultValue": false
         },
         {
-          "title": "Amount of Cycles (Tenths)",
+          "title": "Amount of Full Hoppers (Tenths)",
           "description": "How much fuel the robot held compared to the total possible fuel it can hold.",
           "type": "counter",
           "required": false,
@@ -241,8 +241,8 @@
           "step": 1
         },
         {
-          "title": "Number of Cycles",
-          "description": "Count number of cycles the robot completed.",
+          "title": "Number of Full Hoppers",
+          "description": "Count number of full hoppers the robot scored into the hub.",
           "type": "counter",
           "required": false,
           "code": "numCycles",
@@ -253,8 +253,8 @@
           "step": 1
         },
         {
-          "title": "Amount of Cycles (Tenths)",
-          "description": "..",
+          "title": "Partial of a Full Hopper (Tenths)",
+          "description": "More descriptive count of full hopper count. Measured in tenths.",
           "type": "range",
           "required": false,
           "code": "cycles",
