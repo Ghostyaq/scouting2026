@@ -1,1 +1,43 @@
-team,match,robot,start_pos,scout,no_show,auto_type,auto_bump,auto_climb,auto_cycles,teleop_trench,teleop_bump,num_cycles,num_cycles_tenths,endgame_climb,climb_less_than_5,died,inactive_strat,driver_rating,solo_shooting,card
+team,match,robot,start_pos,scout,no_show,auto_type,auto_bump,auto_climb,auto_cycles,teleop_trench,teleop_bump,num_cycles,num_cycles_tenths,endgame_climb,climb_less_than_5,died,inactive_strat,driver_rating,solo_shooting,card,
+RY,5,R1,190,C,FALSE,3,FALSE,FALSE,5,2,1,3,5,L1,TRUE,1,4,FALSE,FALSE,No Card,huge hopper size but unable to clear it every cycle
+RY,5,R2,8724,M,FALSE,,FALSE,FALSE,9,4,4,4,6,No,FALSE,5,4,FALSE,FALSE,No Card,"during inactive, it pushes herds of balls into their zone. Also it shot preload for autonomous?"
+RY,5,R3,2342,F,FALSE,,FALSE,FALSE,0,5,1,0,1,No,FALSE,"3,4",2,FALSE,FALSE,No Card,"intake broke, had to play defense and herd balls to their side."
+RY,5,B1,1512,F,FALSE,,FALSE,FALSE,0,2,0,1,1,No,FALSE,,1,FALSE,FALSE,No Card,Either they were really bad or their robot malfunctioned
+RY,5,B2,1721,,TRUE,,FALSE,FALSE,0,0,0,0,0,No,FALSE,,1,FALSE,FALSE,No Card,IDK WHERE THEY ARE
+RY,5,B3,5687,C,FALSE,,FALSE,FALSE,0,0,4,3,0,No,FALSE,1,3,FALSE,FALSE,No Card,cool double turret system
+CW,6,R3,1768,F,FALSE,3,FALSE,FALSE,0,3,2,3,0,No,FALSE,5,3,FALSE,FALSE,No Card,
+MY,6,B3,2877,F,FALSE,3,FALSE,FALSE,8,5,0,1,2,No,FALSE,,4,FALSE,FALSE,No Card,"Liked passing, even during hub active"
+TA,6,B1,2423,M,FALSE,,FALSE,FALSE,0,5,2,0,4,No,FALSE,"1,2",3,FALSE,FALSE,No Card,"Didn»t score any, mostly passed"
+JD,6,R2,88,M,FALSE,,FALSE,FALSE,0,0,3,1,4,No,FALSE,,2,FALSE,FALSE,No Card,
+RY,6,R1,1073,C,FALSE,,FALSE,FALSE,0,2,0,1,1,No,FALSE,,1,FALSE,FALSE,No Card,"Bad bad robot, no intake"
+MH,6,B2,6328,C,FALSE,2,FALSE,FALSE,4,0,5,2,4,No,FALSE,"1,5",3,FALSE,FALSE,No Card,Got defended pretty hard
+JD,9,R1,8724,M,FALSE,,FALSE,FALSE,4,3,5,3,1,No,FALSE,5,3,TRUE,FALSE,No Card,
+DK,9,R1,1721,C,FALSE,,FALSE,FALSE,0,1,0,0,0,No,FALSE,,2,FALSE,FALSE,No Card,"Tried pushing a robot over the bump, but failed."
+MY,9,B3,78,M,FALSE,3,FALSE,FALSE,0,0,4,0,2,No,FALSE,,2,FALSE,FALSE,No Card,Scored while hub inactive
+TA,9,B1,5962,F,FALSE,,FALSE,FALSE,0,0,0,0,0,No,FALSE,,2,FALSE,FALSE,No Card,"I think they had issues with their drive and mechanisms, they stayed on one section of their zone"
+CW,9,R3,4909,F,FALSE,"3,1",FALSE,FALSE,0,3,2,3,3,No,FALSE,5,4,FALSE,FALSE,No Card,Pretty fast
+MH,9,B2,151,C,FALSE,,FALSE,FALSE,0,8,0,1,4,No,FALSE,5,2,FALSE,FALSE,No Card,"Was unsure of where to go, bad intake and very small hopper, underpowered shooter"
+CW,14,R3,5422,F,FALSE,1,FALSE,FALSE,4,5,0,0,1,No,FALSE,,1,FALSE,FALSE,No Card,Could not intake much and scored very little
+MH,14,B2,4909,C,FALSE,,FALSE,FALSE,3,8,1,3,5,No,FALSE,1,4,FALSE,FALSE,No Card,Efficient collection of balls
+DK,14,R1,5000,F,FALSE,3,FALSE,TRUE,0,1,0,2,5,No,FALSE,"5,2",5,FALSE,FALSE,No Card,
+JD,14,R1,1512,M,FALSE,,FALSE,FALSE,0,1,1,1,9,No,FALSE,,2,FALSE,FALSE,No Card,Hypothesis
+RY,14,B1,78,F,FALSE,3,TRUE,FALSE,4,1,3,1,3,No,FALSE,1,2,TRUE,FALSE,No Card,Got bumped into and died for the last minute of the match. Shoots fast but maybe 20% accuracy.
+MY,14,B3,88,C,FALSE,,FALSE,FALSE,0,0,3,0,2,F,FALSE,3,1,FALSE,FALSE,No Card,
+MH,15,B2,1735,C,FALSE,,FALSE,FALSE,0,1,0,0,0,No,FALSE,1,3,FALSE,FALSE,No Card,"Only herded the entire match, but passed hella balls"
+BP,15,R3,5962,,FALSE,3,FALSE,FALSE,7,7,0,0,0,No,FALSE,,1,FALSE,FALSE,No Card,
+DK,15,R1,2877,C,FALSE,3,FALSE,FALSE,9,1,0,3,7,No,FALSE,"5,1,2,3",5,FALSE,FALSE,No Card,
+MY,15,B3,6328,F,FALSE,1,FALSE,FALSE,4,0,6,2,0,No,FALSE,5,4,FALSE,TRUE,No Card,"Very good at shooting, double shooter. Probably the reason the blue alliance won by a t, lost auto."
+RY,15,B1,2079,M,FALSE,,FALSE,FALSE,0,1,3,1,0,No,FALSE,1,2,FALSE,FALSE,No Card,"Basically only passed, hopper broke at the end"
+JD,15,R1,5687,,FALSE,,FALSE,FALSE,0,1,3,2,6,No,FALSE,"1,5",2,FALSE,FALSE,No Card,Came back when inactive
+MH,101,R3,2342,M,FALSE,,FALSE,FALSE,0,7,6,0,0,No,FALSE,"4,3",4,FALSE,FALSE,No Card,herded a lot (only herded)
+MH,101,R2,6328,F,FALSE,1,FALSE,FALSE,3,0,4,3,6,No,FALSE,"5,1",3,FALSE,FALSE,No Card,beached on fuel
+MH,101,R1,2877,C,FALSE,"3,1",FALSE,FALSE,16,4,2,2,8,No,FALSE,"1,5",3,FALSE,FALSE,No Card,"beached on fuel, not efficient ball intaking"
+MH,101,B1,1768,C,FALSE,3,FALSE,FALSE,18,1,2,4,4,No,FALSE,"5,1",2,FALSE,TRUE,No Card,"Spent time bumming around, waiting for active period, testing character inputs !@#$%^&*()_+~|}{"
+MH,101,B2,4909,F,FALSE,3,FALSE,FALSE,2,4,2,3,8,No,FALSE,"1,5",3,FALSE,FALSE,No Card,"got heavily defended, failed auto (missed all their shots but had many many shots)"
+MH,101,B3,5962,M,FALSE,,FALSE,FALSE,0,2,0,0,0,No,FALSE,,2,FALSE,FALSE,No Card,"tried to herd the entire match, wasn’t effective/good at it"
+MH,103,B2,1768,M,FALSE,,FALSE,FALSE,0,2,0,0,0,No,FALSE,"3,4",3,FALSE,FALSE,No Card,"Got some pinning penalties, sticked with a bot and stopped a bunch of alignment attempts"
+RY,103,R3,2877,C,FALSE,3,FALSE,FALSE,15,3,1,6,5,No,FALSE,1,5,FALSE,TRUE,No Card,Consistent
+DK,103,R1,2342,F,FALSE,,FALSE,FALSE,0,0,4,0,0,No,FALSE,"3,4",4,FALSE,FALSE,No Card,Committed D.
+MY,103,B3,4909,C,FALSE,3,FALSE,FALSE,3,6,0,0,7,No,FALSE,5,3,FALSE,FALSE,No Card,Didn»t contribute very much?
+JD,103,R1,6328,F,FALSE,2,FALSE,FALSE,3,0,5,3,3,No,FALSE,5,4,FALSE,FALSE,No Card,Shot a bit too early for active phase
+BP,16,B1,9644,F,FALSE,,FALSE,FALSE,20,3,0,9,9,No,FALSE,"1,5",5,FALSE,FALSE,No Card,
