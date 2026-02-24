@@ -34,6 +34,7 @@ plot_driver_rating_graph <- function(dataframe, team_id) {
         geom_point() +
         theme_bw() +
         scale_x_continuous(breaks = c(selected_team$match)) +
+        ylim(0, 5) +
         labs(
             x = "Match",
             y = "Driver Rating",

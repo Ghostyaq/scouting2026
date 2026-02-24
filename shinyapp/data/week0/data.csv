@@ -1,4 +1,4 @@
-team,match,robot,start_pos,scout,no_show,auto_type,auto_bump,auto_climb,auto_cycles,teleop_trench,teleop_bump,num_cycles,num_cycles_tenths,endgame_climb,climb_less_than_5,died,inactive_strat,driver_rating,solo_shooting,card,
+scout,match,robot,team,start_pos,no_show,auto_type,auto_bump,auto_climb,auto_cycles,teleop_trench,teleop_bump,num_cycles,num_cycles_tenths,endgame_climb,climb_less_than_5,inactive_strat,driver_rating,died,solo_shooting,card,comments
 RY,5,R1,190,C,FALSE,3,FALSE,FALSE,5,2,1,3,5,L1,TRUE,1,4,FALSE,FALSE,No Card,huge hopper size but unable to clear it every cycle
 RY,5,R2,8724,M,FALSE,,FALSE,FALSE,9,4,4,4,6,No,FALSE,5,4,FALSE,FALSE,No Card,"during inactive, it pushes herds of balls into their zone. Also it shot preload for autonomous?"
 RY,5,R3,2342,F,FALSE,,FALSE,FALSE,0,5,1,0,1,No,FALSE,"3,4",2,FALSE,FALSE,No Card,"intake broke, had to play defense and herd balls to their side."
