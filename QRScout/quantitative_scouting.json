@@ -202,7 +202,7 @@
         {
           "title": "Amount of Cycles (Tenths)",
           "description": "How much fuel the robot held compared to the total possible fuel it can hold.",
-          "type": "range",
+          "type": "counter",
           "required": false,
           "code": "hopcapAuto",
           "formResetBehavior": "reset",
@@ -364,7 +364,7 @@
           "formResetBehavior": "reset",
           "defaultValue": "",
           "min": 0,
-          "max": 100
+          "max": 10000
         }
       ]
     }
