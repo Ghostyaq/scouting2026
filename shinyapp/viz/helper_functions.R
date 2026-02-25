@@ -73,15 +73,6 @@ endgame_graph <- function(raw, teams) {
     
 }
 
-prior_ridge <- function(X, y, lambda, beta_0) {
-    stopifnot("lambda must be a single value" = {length(lambda) == 1})
-    stopifnot("coefficients in beta_0 must match ncol(X)" =
-                  {length(beta_0) == ncol(X)})
-    p <- ncol(X)
-    lambda <- diag(lambda, p)
-    solve(crossprod(X) + lambda, crossprod(X, y) + lambda %*% beta_0)[, 1]
-}
-
 # event_key needed to write pridge.csv to the right folder (switch to a .R?)
 pridge_calculation <- function(schedule, tba_data, event_key) {
     unique_teams <- sort(unique(unlist(schedule[,2:7])))
