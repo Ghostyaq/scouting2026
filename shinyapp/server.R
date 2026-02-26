@@ -21,12 +21,14 @@ pridge <- read.csv("data/week0/pridge.csv")
 tba_data <- read.csv("data/week0/tba_data.csv")
 schedule <- read.csv("data/week0/schedule.csv")
 
+addResourcePath("images_d", "data/test_data/images")
+
 server <- function(input, output, session) {
     #UPDATE PICKERS
     observe({
         updateVirtualSelect("selected_match", choices = schedule$match)
         updateVirtualSelect("selected_team", choices = sort(unique(data$team)))
-        updateVirtualSelect("selected_teams_comp", choices = sort(unique(data$team)))
+        updateVirtualSelect("selected_teams_comp", choices = c(449,422))
     })
     
     #MATCHES SCOUTED
@@ -146,5 +148,14 @@ server <- function(input, output, session) {
     
     output$scout_yaps <- renderPlotly({
         yap_graph(data)
+    })
+    
+    output$images <- renderUI({
+        teamnum <- input$selected_teams_comp
+        teamnum1 = 422
+        img_src <- paste0("images_d/", teamnum,".png")
+        img_src1 <- paste0("images_d/", teamnum1,".png")
+        tags$img(src = img_src, alt = paste("Robot Image for Team", teamnum), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
+        tags$img(src = img_src1, alt = paste("Robot Image for Team", teamnum1), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
     })
 }
