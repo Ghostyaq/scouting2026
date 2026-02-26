@@ -39,7 +39,7 @@ server <- function(input, output, session) {
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
         teams <- unique(data$team)
-        stacked_bar_chart(data, schedule, pridge, TRUE, teams)
+        stacked_bar_chart(data, schedule, pridge, TRUE, teams, TRUE)
     })
     
     output$summary_stats <- renderDT({
@@ -49,7 +49,7 @@ server <- function(input, output, session) {
     #POINT SUMMARY BAR PLOT
     output$summary_point <- renderPlot({
         team <- input$selected_team
-        stacked_bar_chart(data, schedule, pridge, TRUE, team)
+        stacked_bar_chart(data, schedule, pridge, TRUE, team, FALSE)
     })
     
     #ENDGAME BAR GRAPH
@@ -73,7 +73,7 @@ server <- function(input, output, session) {
     #COMPARE POINT SUMMARY
     output$summary_point_comp <- renderPlot({
         team <- input$selected_teams_comp
-        stacked_bar_chart(data, schedule, pridge, FALSE, team)
+        stacked_bar_chart(data, schedule, pridge, FALSE, team, FALSE)
     })
     
     #COMPARE ENDGAME BAR
@@ -102,7 +102,7 @@ server <- function(input, output, session) {
             pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), names_to = "position", values_to = "tnum") |>
             pull(tnum)
         
-        stacked_bar_chart(data, schedule, pridge, FALSE, teams)
+        stacked_bar_chart(data, schedule, pridge, FALSE, teams, FALSE)
     })
     
     output$end_bar_match <- renderPlot({
