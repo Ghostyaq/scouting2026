@@ -10,6 +10,7 @@ yap_graph <- function(raw) {
             mean_yaps = round(mean(number_of_yaps), digits = 2),
             count = n()
         ) |>
+        filter(count > 10) |>
         mutate(
             scout_name = reorder(scout, mean_yaps, decreasing = TRUE)
         )
