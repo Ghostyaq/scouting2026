@@ -6,14 +6,14 @@ library(scoutR)
 bump_trench_boxplot <- function(raw, team_list){
     filtered_df <- raw |> filter(team %in% team_list)
     df_bump <- filtered_df |>
-        select(team, count=teleop_bump) |> 
+        select(team, count = teleop_bump) |> 
         mutate(obstacle = "Bump")
     
     df_trench <- filtered_df |> 
         select(team, count = teleop_trench) |> 
         mutate(obstacle = "Trench")
     
-    combined_df <- rbind(df_bump,df_trench)
+    combined_df <- rbind(df_bump, df_trench)
     
     ggplot(combined_df, aes(x = factor(team), y = count, fill = obstacle)) + 
         geom_boxplot(position = position_dodge(width = .75)) +
