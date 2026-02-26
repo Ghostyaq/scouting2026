@@ -1,0 +1,36 @@
+---
+title: "tba_extracted"
+format: html
+---
+
+```{r}
+
+qual_matches <- event_matches("2026week0") |>
+    filter(comp_level == "qm") |>
+    data_frame()
+
+extract_auto <- function(x) {
+  x$autoCount
+}
+
+extract_teleop <- function(x) {
+  x$teleopCount
+}
+
+extract_total <- function(x) {
+  x$totalCount
+}
+
+auto_count <- sapply(qual_matches[[32]], extract_auto)
+teleop_count <- sapply(qual_matches[[32]], extract_teleop)
+total_count <- sapply(qual_matches[[32]], extract_total)
+
+
+extracted_data <- data.frame(Match = qual_matches$match_number, 
+                             Auto_Count = auto_count,
+                             TeleOp_Count = teleop_count,
+                             Total_Count = total_count)
+
+view(extracted_data)
+
+```
