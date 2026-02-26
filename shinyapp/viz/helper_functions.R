@@ -6,22 +6,34 @@ library(scoutR)
 bump_trench_boxplot <- function(raw, team_list){
     filtered_df <- raw |> filter(team %in% team_list)
     df_bump <- filtered_df |>
-        select(team, count=teleop_bump) |> 
+        select(team, count = teleop_bump) |> 
         mutate(obstacle = "Bump")
     
     df_trench <- filtered_df |> 
         select(team, count = teleop_trench) |> 
         mutate(obstacle = "Trench")
     
-    combined_df <- rbind(df_bump,df_trench)
+    combined_df <- rbind(df_bump, df_trench)
+    combined_df$team <- 
+        factor(combined_df$team, levels = team_list, ordered = TRUE)
     
-    ggplot(combined_df, aes(x = factor(team), y = count, fill = obstacle)) + 
+    ggplot(combined_df, aes(x = team, y = count, fill = obstacle)) + 
         geom_boxplot(position = position_dodge(width = .75)) +
         labs(title = "Mean Crossing Comparison",
              x = "Team Number",
              y = "Average Times Crossed",
              fill = "Obstacle Type") + 
-        theme_bw()
+        theme_bw() + 
+        {if (length(team_list) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(combined_df$team) %in% team_list[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
 }
 
 plot_driver_rating_graph <- function(dataframe, team_id) {
@@ -34,6 +46,7 @@ plot_driver_rating_graph <- function(dataframe, team_id) {
         geom_point() +
         theme_bw() +
         scale_x_continuous(breaks = c(selected_team$match)) +
+        ylim(0, 5) +
         labs(
             x = "Match",
             y = "Driver Rating",
@@ -44,7 +57,7 @@ plot_driver_rating_graph <- function(dataframe, team_id) {
 
 endgame_graph <- function(raw, teams) {
     number_of_teams <- length(unique(raw$team))
-    specific_data <- raw |>
+    data <- raw |>
         filter(team %in% teams) |>
         mutate(
             endgame_climb = factor(
@@ -56,8 +69,9 @@ endgame_graph <- function(raw, teams) {
             number_of_climbs = n()
         )
     
-    ggplot(specific_data, 
-           aes(fill = endgame_climb, y = number_of_climbs, x = factor(team))) + 
+    data$team = factor(data$team, levels = teams, ordered = TRUE)
+    
+    ggplot(data, aes(fill = endgame_climb, y = number_of_climbs, x = team)) + 
         geom_bar(position = "stack", stat = "identity") +
         labs(title = "Endgame climb",
              x = "Team",
@@ -68,31 +82,39 @@ endgame_graph <- function(raw, teams) {
             labels = c("F" = "Fail", "No" = "Didn't attempt", "L1" = "L1", 
                        "L2" = "L2", "L3" = "L3")
         ) +
-        theme_bw()
-    
-}
-
-prior_ridge <- function(X, y, lambda, beta_0) {
-    stopifnot("lambda must be a single value" = {length(lambda) == 1})
-    stopifnot("coefficients in beta_0 must match ncol(X)" =
-                  {length(beta_0) == ncol(X)})
-    p <- ncol(X)
-    lambda <- diag(lambda, p)
-    solve(crossprod(X) + lambda, crossprod(X, y) + lambda %*% beta_0)[, 1]
+        theme_bw() + 
+        {if (length(teams) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(data$team) %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
 }
 
 # event_key needed to write pridge.csv to the right folder (switch to a .R?)
-pridge_calculation <- function(raw, schedule, tba_data, event_key) {
+pridge_calculation <- function(schedule, tba_data, event_key) {
     unique_teams <- sort(unique(unlist(schedule[,2:7])))
     design <- matrix(0, 
-                     nrow = length(unique(raw$match)) * 2, 
+                     nrow = length(unique(tba_data$match)) * 2, 
                      ncol = length(unique_teams))
     colnames(design) <- unique_teams
+    matches <- unique(tba_data$match)
+    
+    longer_schedule <- schedule |>
+        pivot_longer(
+            cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
+            names_to = "robot",
+            values_to = "team"
+        )
     
     for (i in 1:nrow(design)) {
         chipotle <- filter(
-            raw,
-            match == ceiling(i/2), 
+            longer_schedule,
+            match == matches[ceiling(i/2)], 
             substring(robot, 1, 1) == ifelse(i %% 2, "R", "B"))
         design[i, as.character(chipotle$team)] = 1
     }
@@ -108,12 +130,12 @@ pridge_calculation <- function(raw, schedule, tba_data, event_key) {
     auto_priors <- rep(8, length(unique_teams)) # Hard Coded
     grid <- seq(0, 20, length.out = 1000)
     
-    auto_mses <- pridge_lambda_cv(
+    auto_mses <- scoutR:::pridge_lambda_cv(
         design, 
         response$score[!(response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel'))], 
         auto_priors, grid, plot_mses = FALSE)
     
-    tele_mses <- pridge_lambda_cv(
+    tele_mses <- scoutR:::pridge_lambda_cv(
         design, 
         response$score[response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')], 
         priors, grid, plot_mses = FALSE)
@@ -121,12 +143,12 @@ pridge_calculation <- function(raw, schedule, tba_data, event_key) {
     auto_lambda_opt <- grid[which.min(auto_mses)]
     tele_lambda_opt <- grid[which.min(tele_mses)]
     
-    auto_fuel <- prior_ridge(
+    auto_fuel <- scoutR:::prior_ridge(
         design, 
         response$score[
             (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
         auto_lambda_opt, priors)
-    tele_fuel <- prior_ridge(
+    tele_fuel <- scoutR:::prior_ridge(
         design, 
         response$score[
             response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
@@ -139,15 +161,16 @@ pridge_calculation <- function(raw, schedule, tba_data, event_key) {
 }
 
 plot_scouting_graph <- function(raw) {
-    scout <-raw$scout
+    scout <- raw$scout
     scout_count <- count(raw, scout, sort = TRUE, name = "number_of_times")
     
     still_graph <- ggplot(scout_count, aes(
         text = paste("Scout:", scout, "|| Count:", number_of_times),
-        x = reorder(scout, number_of_times),
-        y = number_of_times )) + 
-        geom_col() +
+        x = reorder(scout, number_of_times, decreasing = TRUE),
+        y = number_of_times)) + 
+        geom_col(fill = "steelblue") +
         theme_bw() +
+        theme(legend.position = "none") + 
         labs(
             x = "Scout Initials",
             y = "Number of Times Scouted",
@@ -156,17 +179,17 @@ plot_scouting_graph <- function(raw) {
     ggplotly(still_graph, tooltip = "text")
 }
 
-stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
+stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
     data <- summary_stats(raw, pridge, teams = NULL) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
         rename(`Auto Climb` = ACP) |>
         filter(Team %in% teams)
     
     if (order) {
-        data <- data |> arrange(desc(`Total Score`))
+        team_order <- arrange(data, desc(`Total Score`))$Team
+    } else {
+        team_order <- teams
     }
-    
-    team_order <- data$Team
     
     data <- pivot_longer(
         data,
@@ -182,12 +205,22 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
         ordered = TRUE)
     
     ggplot(data, aes(x = Team, y = score, fill = type)) +
-        geom_bar(stat ="identity") + 
+        geom_bar(stat = "identity") + 
         labs(
-            title = "Stacked Bar Chart", x = "Climb + PRidge Score", y = "Team"
+            title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
         ) + 
-        coord_flip() + 
-        theme_bw()
+        theme_bw() +
+        {if (length(teams) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(data$Team) %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+            } +
+        {if (flip) coord_flip() else NULL}
 }
 
 summary_stats <- function(raw, pridge, teams = NULL) {
@@ -230,6 +263,32 @@ summary_stats <- function(raw, pridge, teams = NULL) {
         modify_if(~is.numeric(.), ~round(., 2))
     
     return(result)
+}
+
+yap_graph <- function(raw) {
+    spliting <- strsplit(raw$comments, split = " ")
+    
+    raw$number_of_yaps <- sapply(spliting, length)
+    
+    scout_comments <- raw |>
+        group_by(scout) |>
+        summarize(
+            mean_yaps = round(mean(number_of_yaps), digits = 2),
+            count = n()
+        ) |>
+        mutate(
+            scout_name = reorder(scout, mean_yaps, decreasing = TRUE)
+        )
+    
+    
+    plot <- ggplot(scout_comments, aes(x = scout_name, y = mean_yaps)) +
+        geom_bar(stat = "identity", position = position_dodge(), 
+                 fill = "rosybrown1", colour = "black") +
+        labs(title = "Comments Summary: Mean Yappage per Scout", 
+             x = "Scouts", y = "Mean yappage") +
+        theme_bw()
+    
+    ggplotly(plot)
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')

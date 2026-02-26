@@ -16,17 +16,19 @@ library(here)
 library(shiny.fluent)
 library(colourpicker)
 
-data <- read.csv("data/test_data/data.csv")
-pridge <- read.csv("data/test_data/pridge.csv")
-tba_data <- read.csv("data/test_data/tba_data.csv")
-schedule <- read.csv("data/test_data/schedule.csv")
+data <- read.csv("data/week0/data.csv")
+pridge <- read.csv("data/week0/pridge.csv")
+tba_data <- read.csv("data/week0/tba_data.csv")
+schedule <- read.csv("data/week0/schedule.csv")
+
+addResourcePath("images_d", "data/test_data/images")
 
 server <- function(input, output, session) {
     #UPDATE PICKERS
     observe({
         updateVirtualSelect("selected_match", choices = schedule$match)
         updateVirtualSelect("selected_team", choices = sort(unique(data$team)))
-        updateVirtualSelect("selected_teams_comp", choices = sort(unique(data$team)))
+        updateVirtualSelect("selected_teams_comp", choices = c(449,422))
     })
     
     #MATCHES SCOUTED
@@ -37,7 +39,7 @@ server <- function(input, output, session) {
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
         teams <- unique(data$team)
-        stacked_bar_chart(data, schedule, pridge, TRUE, teams)
+        stacked_bar_chart(data, schedule, pridge, TRUE, teams, TRUE)
     })
     
     output$summary_stats <- renderDT({
@@ -47,7 +49,7 @@ server <- function(input, output, session) {
     #POINT SUMMARY BAR PLOT
     output$summary_point <- renderPlot({
         team <- input$selected_team
-        stacked_bar_chart(data, schedule, pridge, TRUE, team)
+        stacked_bar_chart(data, schedule, pridge, TRUE, team, FALSE)
     })
     
     #ENDGAME BAR GRAPH
@@ -71,7 +73,7 @@ server <- function(input, output, session) {
     #COMPARE POINT SUMMARY
     output$summary_point_comp <- renderPlot({
         team <- input$selected_teams_comp
-        stacked_bar_chart(data, schedule, pridge, FALSE, team)
+        stacked_bar_chart(data, schedule, pridge, FALSE, team, FALSE)
     })
     
     #COMPARE ENDGAME BAR
@@ -100,7 +102,7 @@ server <- function(input, output, session) {
             pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), names_to = "position", values_to = "tnum") |>
             pull(tnum)
         
-        stacked_bar_chart(data, schedule, pridge, FALSE, teams)
+        stacked_bar_chart(data, schedule, pridge, FALSE, teams, FALSE)
     })
     
     output$end_bar_match <- renderPlot({
@@ -144,4 +146,16 @@ server <- function(input, output, session) {
         summary_stats(data, pridge, teams)
     })
     
+    output$scout_yaps <- renderPlotly({
+        yap_graph(data)
+    })
+    
+    output$images <- renderUI({
+        teamnum <- input$selected_teams_comp
+        teamnum1 = 422
+        img_src <- paste0("images_d/", teamnum,".png")
+        img_src1 <- paste0("images_d/", teamnum1,".png")
+        tags$img(src = img_src, alt = paste("Robot Image for Team", teamnum), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
+        tags$img(src = img_src1, alt = paste("Robot Image for Team", teamnum1), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
+    })
 }

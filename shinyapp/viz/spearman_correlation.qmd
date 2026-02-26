@@ -1,0 +1,43 @@
+---
+title: "spearman_correlation"
+format: html
+---
+
+```{r}
+rm(list = ls())
+
+library(ggplot2)
+library(scoutR)
+data("cars")
+
+initialize_scoutR("dYy6mTfIimyXAsG5aDnNb0ng01QDge0bgA8A7mwNWKvIOhNyON69HsZmMD0g2klS")
+
+spearman_correlation <- function(event) {
+    event_opr <- event_oprs(event)
+    event_ranking <- event_rankings(event)
+    
+    opr_data <- event_opr |>
+    select(opr, team) |>
+        mutate(
+        team = paste0("frc", team)
+        )
+    
+    ranking_data <- event_ranking |>
+        select(`Ranking Score`, team_key)
+    
+    ranking_data_renamed <- ranking_data |>
+        rename(team = team_key)
+    
+    opr_and_ranking <- merge(ranking_data_renamed, opr_data)
+    
+    corr <- cor.test(x=opr_and_ranking$`Ranking Score`, 
+                     y=opr_and_ranking$opr, method = 'spearman')
+    
+    corr$estimate
+    
+}
+
+correlation <- spearman_correlation("2025mil")
+
+correlation
+```
