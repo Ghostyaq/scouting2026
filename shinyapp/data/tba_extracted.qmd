@@ -4,7 +4,6 @@ format: html
 ---
 
 ```{r}
-
 qual_matches <- event_matches("2026week0") |>
     filter(comp_level == "qm") |>
     data_frame()
@@ -17,19 +16,18 @@ extract_teleop <- function(x) {
   x$teleopCount
 }
 
-extract_total <- function(x) {
-  x$totalCount
-}
+blue_auto_fuel <- sapply(qual_matches[[32]], extract_auto)
+blue_tele_fuel <- sapply(qual_matches[[32]], extract_teleop)
 
-auto_count <- sapply(qual_matches[[32]], extract_auto)
-teleop_count <- sapply(qual_matches[[32]], extract_teleop)
-total_count <- sapply(qual_matches[[32]], extract_total)
+red_auto_fuel <- sapply(qual_matches[[55]], extract_auto)
+red_tele_fuel <- sapply(qual_matches[[55]], extract_teleop)
 
 
 extracted_data <- data.frame(Match = qual_matches$match_number, 
-                             Auto_Count = auto_count,
-                             TeleOp_Count = teleop_count,
-                             Total_Count = total_count)
+                             blue_auto_fuel = blue_auto_fuel,
+                             blue_tele_fuel = blue_tele_fuel,
+                             red_auto_fuel = red_auto_fuel,
+                             red_tele_fuel = red_tele_fuel)
 
 view(extracted_data)
 

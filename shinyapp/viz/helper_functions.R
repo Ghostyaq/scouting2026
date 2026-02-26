@@ -144,16 +144,18 @@ plot_scouting_graph <- function(raw) {
     
     still_graph <- ggplot(scout_count, aes(
         text = paste("Scout:", scout, "|| Count:", number_of_times),
-        x = reorder(scout, number_of_times),
-        y = number_of_times )) + 
-        geom_col() +
+        x = reorder(scout, number_of_times, decreasing = TRUE),
+        y = number_of_times)) + 
+        geom_col(fill = "steelblue") +
         theme_bw() +
+        theme(legend.position = "none") + 
         labs(
             x = "Scout Initials",
             y = "Number of Times Scouted",
             title = "Scout and Their Number of Times Scouted")
     
     ggplotly(still_graph, tooltip = "text")
+    
 }
 
 stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
