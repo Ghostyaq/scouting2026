@@ -143,4 +143,8 @@ server <- function(input, output, session) {
         
         summary_stats(data, pridge, teams)
     })
+    
+    output$scout_yaps <- renderPlotly({
+        yap_graph(data)
+    })
 }
