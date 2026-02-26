@@ -1,4 +1,4 @@
-team,match,robot,start_pos,scout,no_show,auto_type,auto_bump,auto_climb,auto_cycles,teleop_trench,teleop_bump,num_cycles,num_cycles_tenths,endgame_climb,climb_less_than_5,died,inactive_strat,driver_rating,solo_shooting,card,
+scout,match,robot,team,start_pos,no_show,auto_type,auto_bump,auto_climb,auto_cycles,teleop_trench,teleop_bump,num_cycles,num_cycles_tenths,endgame_climb,climb_less_than_5,inactive_strat,driver_rating,died,solo_shooting,card,comments
 RY,5,R1,190,C,FALSE,3,FALSE,FALSE,5,2,1,3,5,L1,TRUE,1,4,FALSE,FALSE,No Card,huge hopper size but unable to clear it every cycle
 RY,5,R2,8724,M,FALSE,,FALSE,FALSE,9,4,4,4,6,No,FALSE,5,4,FALSE,FALSE,No Card,"during inactive, it pushes herds of balls into their zone. Also it shot preload for autonomous?"
 RY,5,R3,2342,F,FALSE,,FALSE,FALSE,0,5,1,0,1,No,FALSE,"3,4",2,FALSE,FALSE,No Card,"intake broke, had to play defense and herd balls to their side."
@@ -40,4 +40,4 @@ RY,103,R3,2877,C,FALSE,3,FALSE,FALSE,15,3,1,6,5,No,FALSE,1,5,FALSE,TRUE,No Card,
 DK,103,R1,2342,F,FALSE,,FALSE,FALSE,0,0,4,0,0,No,FALSE,"3,4",4,FALSE,FALSE,No Card,Committed D.
 MY,103,B3,4909,C,FALSE,3,FALSE,FALSE,3,6,0,0,7,No,FALSE,5,3,FALSE,FALSE,No Card,Didn»t contribute very much?
 JD,103,R1,6328,F,FALSE,2,FALSE,FALSE,3,0,5,3,3,No,FALSE,5,4,FALSE,FALSE,No Card,Shot a bit too early for active phase
-BP,16,B1,9644,F,FALSE,,FALSE,FALSE,20,3,0,9,9,No,FALSE,"1,5",5,FALSE,FALSE,No Card,
+BP,103,B1,9644,F,FALSE,,FALSE,FALSE,20,3,0,9,9,No,FALSE,"1,5",5,FALSE,FALSE,No Card,

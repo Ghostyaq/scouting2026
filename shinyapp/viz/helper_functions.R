@@ -34,6 +34,7 @@ plot_driver_rating_graph <- function(dataframe, team_id) {
         geom_point() +
         theme_bw() +
         scale_x_continuous(breaks = c(selected_team$match)) +
+        ylim(0, 5) +
         labs(
             x = "Match",
             y = "Driver Rating",
@@ -72,27 +73,26 @@ endgame_graph <- function(raw, teams) {
     
 }
 
-prior_ridge <- function(X, y, lambda, beta_0) {
-    stopifnot("lambda must be a single value" = {length(lambda) == 1})
-    stopifnot("coefficients in beta_0 must match ncol(X)" =
-                  {length(beta_0) == ncol(X)})
-    p <- ncol(X)
-    lambda <- diag(lambda, p)
-    solve(crossprod(X) + lambda, crossprod(X, y) + lambda %*% beta_0)[, 1]
-}
-
 # event_key needed to write pridge.csv to the right folder (switch to a .R?)
-pridge_calculation <- function(raw, schedule, tba_data, event_key) {
+pridge_calculation <- function(schedule, tba_data, event_key) {
     unique_teams <- sort(unique(unlist(schedule[,2:7])))
     design <- matrix(0, 
-                     nrow = length(unique(raw$match)) * 2, 
+                     nrow = length(unique(tba_data$match)) * 2, 
                      ncol = length(unique_teams))
     colnames(design) <- unique_teams
+    matches <- unique(tba_data$match)
+    
+    longer_schedule <- schedule |>
+        pivot_longer(
+            cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
+            names_to = "robot",
+            values_to = "team"
+        )
     
     for (i in 1:nrow(design)) {
         chipotle <- filter(
-            raw,
-            match == ceiling(i/2), 
+            longer_schedule,
+            match == matches[ceiling(i/2)], 
             substring(robot, 1, 1) == ifelse(i %% 2, "R", "B"))
         design[i, as.character(chipotle$team)] = 1
     }
@@ -108,12 +108,12 @@ pridge_calculation <- function(raw, schedule, tba_data, event_key) {
     auto_priors <- rep(8, length(unique_teams)) # Hard Coded
     grid <- seq(0, 20, length.out = 1000)
     
-    auto_mses <- pridge_lambda_cv(
+    auto_mses <- scoutR:::pridge_lambda_cv(
         design, 
         response$score[!(response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel'))], 
         auto_priors, grid, plot_mses = FALSE)
     
-    tele_mses <- pridge_lambda_cv(
+    tele_mses <- scoutR:::pridge_lambda_cv(
         design, 
         response$score[response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')], 
         priors, grid, plot_mses = FALSE)
@@ -121,12 +121,12 @@ pridge_calculation <- function(raw, schedule, tba_data, event_key) {
     auto_lambda_opt <- grid[which.min(auto_mses)]
     tele_lambda_opt <- grid[which.min(tele_mses)]
     
-    auto_fuel <- prior_ridge(
+    auto_fuel <- scoutR:::prior_ridge(
         design, 
         response$score[
             (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
         auto_lambda_opt, priors)
-    tele_fuel <- prior_ridge(
+    tele_fuel <- scoutR:::prior_ridge(
         design, 
         response$score[
             response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
