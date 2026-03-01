@@ -41,11 +41,6 @@ server <- function(input, output, session) {
         updateVirtualSelect("selected_teams_comp", choices = c(449, 422))
     })
     
-    #MATCHES SCOUTED
-    output$matches_scouted <- renderPlotly({
-        plot_scouting_graph(raw)
-    })
-    
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
         teams <- unique(raw$team)
@@ -53,7 +48,13 @@ server <- function(input, output, session) {
     })
     
     output$summary_stats <- renderDT({
-        summary_stats(raw, pridge)
+        dataframe <- summary_stats(raw, pridge)
+        datatable(
+            dataframe,
+            options = list(
+                pageLength = nrow(dataframe)
+            )
+        )
     })
     
     #AUTO PICKLISTING
@@ -96,17 +97,17 @@ server <- function(input, output, session) {
         #datatable
         datatable(team_scores, 
                   options = list(
-                      pageLength = 15,
+                      pageLength = length(team_scores$Team),
                       dom = 'ftip',
                       scrollX = TRUE
                   ),
-                  rownames = FALSE)# |>
-        #formatStyle('Team Score',
-        #            background = styleColorBar(
-        #                c(0, max(team_scores$`Team Score`)), 'lightblue'),
-        #            backgroundSize = '100% 90%',
-        #            backgroundRepeat = 'no-repeat',
-        #            backgroundPosition = 'center')    
+                  rownames = FALSE) |>
+        formatStyle('Team Score',
+                    background = styleColorBar(
+                        c(0, max(team_scores$`Team Score`)), 'lightblue'),
+                    backgroundSize = '100% 90%',
+                    backgroundRepeat = 'no-repeat',
+                    backgroundPosition = 'center')    
     })
     
     #COMPARE POINT SUMMARY
@@ -205,11 +206,20 @@ server <- function(input, output, session) {
             pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), 
                          names_to = "position", values_to = "tnum") |>
             pull(tnum)
+        
         comments_df(raw)
+    })
+    
+    output$matches_scouted <- renderPlotly({
+        plot_scouting_graph(raw)
     })
     
     output$scout_yaps <- renderPlotly({
         yap_graph(raw)
+    })
+    
+    output$scouter_streak <- renderPlot({
+        high_streak(raw)
     })
     
     output$images <- renderUI({
@@ -219,9 +229,5 @@ server <- function(input, output, session) {
         img_src1 <- paste0("images_d/", teamnum1,".png")
         tags$img(src = img_src, alt = paste("Robot Image for Team", teamnum), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
         tags$img(src = img_src1, alt = paste("Robot Image for Team", teamnum1), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
-    })
-    
-    output$scouter_streak <- renderPlot({
-        high_streak(raw)
     })
 }

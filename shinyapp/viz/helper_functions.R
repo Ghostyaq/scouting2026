@@ -289,7 +289,9 @@ comments_df <- function(raw) {
 
     return(comment_df)
 }
+
 yap_graph <- function(raw) {
+    browser()
     spliting <- strsplit(raw$comments, split = " ")
     
     raw$number_of_yaps <- sapply(spliting, length)
@@ -304,7 +306,6 @@ yap_graph <- function(raw) {
             scout_name = reorder(scout, mean_yaps, decreasing = TRUE)
         )
     
-    
     plot <- ggplot(scout_comments, aes(x = scout_name, y = mean_yaps)) +
         geom_bar(stat = "identity", position = position_dodge(), 
                  fill = "rosybrown1", colour = "black") +
@@ -313,6 +314,33 @@ yap_graph <- function(raw) {
         theme_bw()
     
     ggplotly(plot)
+}
+
+high_streak <- function(raw){
+    current_match = max(raw$match)
+    all_matches <- 1:current_match
+    streak_df <- raw |>
+        mutate(
+            scout = toupper(scout),
+            scout = trimws(scout),
+            scout = gsub("[^[:alpha:]]", "", scout)
+        ) |>
+        group_by(scout) |>
+        summarise(
+            scouted_matches = list(unique(match))
+        ) |>
+        rowwise() |>
+        mutate(
+            missed_matches = list(setdiff(all_matches, scouted_matches)),
+            streak = current_match - max(missed_matches)
+        ) |>
+        filter(streak > 0)
+    
+    ggplot(streak_df, aes(x = `scout`, streak)) + 
+        geom_bar(position = "stack", stat = "identity", fill = "chartreuse2") + 
+        labs(title = "Current Streak", 
+             x = "Scouts", y = "Matches") +
+        theme_bw()
 }
 
 normalize_column <- function(x) {
@@ -415,33 +443,6 @@ weights_modal <- function(weights) {
             actionButton("apply_weights", "Apply Weights", class = "btn-primary")
         )
     )
-}
-
-high_streak <- function(raw){
-    current_match = max(raw$match)
-    all_matches <- 1:current_match
-    streak_df <- raw |>
-        mutate(
-            scout = toupper(scout),
-            scout = trimws(scout),
-            scout = gsub("[^[:alpha:]]", "", scout)
-        ) |>
-        group_by(scout) |>
-        summarise(
-            scouted_matches = list(unique(match))
-        ) |>
-        rowwise() |>
-        mutate(
-            missed_matches = list(setdiff(all_matches, scouted_matches)),
-            streak = current_match - max(missed_matches)
-        ) |>
-        filter(streak>0)
-    
-    ggplot(streak_df, aes(x = `scout`, streak)) + 
-        geom_bar(position = "stack", stat = "identity", fill = "chartreuse2") + 
-        labs(title = "Current Streak", 
-             x = "Scouts", y = "Matches") +
-        theme_bw()
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
