@@ -19,6 +19,12 @@ bump_trench_boxplot <- function(raw, team_list){
     
     ggplot(combined_df, aes(x = team, y = count, fill = obstacle)) + 
         geom_boxplot(position = position_dodge(width = .75)) +
+        ggbeeswarm::geom_quasirandom(
+            shape = 21, color = "black", 
+            alpha = 0.8, size = 3,
+            aes(fill = obstacle),
+            dodge.width = 0.8
+        ) +
         labs(title = "Mean Crossing Comparison",
              x = "Team Number",
              y = "Average Times Crossed",
