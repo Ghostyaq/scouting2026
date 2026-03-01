@@ -37,14 +37,16 @@ ui <- fluidPage(
             ),
             card(
                 card_header("Summary Stats"),
-                DTOutput("summary_stats")
-            )
+                DTOutput("summary_stats"),
+                height = 1100
+                )
         ),
         tabPanel(
             title = "Auto-Picklisting",
             card(
                 card_header("Auto Picklisting"),
-                DTOutput("auto_picklist")
+                DTOutput("auto_picklist"),
+                height = 1100
             ),
             actionButton(
                 "open_weights", "Adjust Weights", class = "btn btn-primary")
@@ -132,19 +134,17 @@ ui <- fluidPage(
         ),
         tabPanel(
             title = "Scouts",
-            layout_columns(
-                card(
-                    card_header("Average Yaps by Scout"),
-                    plotlyOutput("scout_yaps")
-                ),
-                card(
-                    card_header("Total Matches Scouted by Scout"),
-                    plotlyOutput("matches_scouted")
-                ),
-                card(
-                    card_header("Scout Yap Streak"),
-                    plotlyOutput("scouter_streak")
-                )
+            card(
+                card_header("Average Yaps by Scout"),
+                plotlyOutput("scout_yaps")
+            ),
+            card(
+                card_header("Total Matches Scouted by Scout"),
+                plotlyOutput("matches_scouted")
+            ),
+            card(
+                card_header("Scout Yap Streak"),
+                plotlyOutput("scouter_streak")
             )
         ),
         tabPanel(
