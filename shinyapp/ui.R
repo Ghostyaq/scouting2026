@@ -19,11 +19,7 @@ library(colourpicker)
 source("viz/helper_functions.R")
 source("server.R")
 
-data <- read.csv("data/week0/data.csv")
-pridge <- read.csv("data/week0/pridge.csv")
-tba_data <- read.csv("data/week0/tba_data.csv")
-schedule <- read.csv("data/week0/schedule.csv")
-
+options(sass.cache = FALSE)
 #----------------------------------------------UI-----------------------------------------------------------------------
 
 ui <- fluidPage(
@@ -45,10 +41,22 @@ ui <- fluidPage(
             )
         ),
         tabPanel(
+            title = "Auto-Picklisting",
+            card(
+                card_header("Auto Picklisting"),
+                DTOutput("auto_picklist")
+            ),
+            actionButton(
+                "open_weights", "Adjust Weights", class = "btn btn-primary")
+        ),
+        tabPanel(
             title = "Compare Teams",
             layout_sidebar(
                 sidebar = card(
-                    virtualSelectInput("selected_teams_comp", label = "Select Teams", choices = NULL, multiple = TRUE, search = TRUE
+                    virtualSelectInput(
+                        "selected_teams_comp", 
+                        label = "Select Teams", 
+                        choices = NULL, multiple = TRUE, search = TRUE
                     ),
                     height = "500px"
                 ),
@@ -86,7 +94,10 @@ ui <- fluidPage(
             title = "Match",
             layout_sidebar(
                 sidebar = card(
-                    virtualSelectInput("selected_match", label = "Select a Match", choices = NULL, selected = 1),
+                    virtualSelectInput(
+                        "selected_match", 
+                        label = "Select a Match", 
+                        choices = NULL, selected = 1),
                     height = "500px"
                 ),
                 layout_columns(

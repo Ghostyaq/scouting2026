@@ -291,6 +291,108 @@ yap_graph <- function(raw) {
     ggplotly(plot)
 }
 
+normalize_column <- function(x) {
+    if (sd(x, na.rm = TRUE) == 0) {
+        return(rep(0, length(x)))
+    }
+    
+    normalized <- (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+    normalized[is.nan(normalized)] <- 0
+    return(normalized)
+}
+
+calculate_team_scores <- function(weights, team_data){
+    numeric_cols <- setdiff(names(team_data), c("Team", "Died"))
+    normalized_data <- team_data
+    
+    for (col in numeric_cols) {
+        normalized_data[[col]] <- normalize_column(team_data[[col]])
+    }
+    
+    team_scores <- team_data[, "Team", drop = FALSE]
+    team_scores$`Team Score` <- 0
+    
+    for (col in numeric_cols) {
+        if (col %in% names(weights)) {
+            weight_val <- weights[[col]]
+            team_scores$`Team Score` <-
+                team_scores$`Team Score` + normalized_data[[col]] * weight_val
+            team_scores$`Team Score` <- round(team_scores$`Team Score`, 2)
+        }
+    }
+    
+    team_scores <- merge(team_scores, team_data, by = "Team")
+    team_scores <- team_scores[order(-team_scores$`Team Score`), ]
+    return(team_scores)
+}
+
+weights_modal <- function(weights) {
+    modalDialog(
+        title = "Adjust Team Weighting Factors",
+        size = "l",
+        fluidRow(
+            column(6,
+                   sliderInput(
+                       "weight_auto_fuel", "Auto Fuel", min = -20, max = 20, 
+                       value = weights$`Auto.Fuel`, step = 1),
+                   sliderInput(
+                       "weight_tele_fuel", "Tele Fuel", min = -20, max = 20, 
+                       value = weights$`Tele.Fuel`, step = 1),
+                   sliderInput(
+                       "weight_total_fuel", "Total Fuel", min = -20, max = 20, 
+                       value = weights$`Total.Fuel`, step = 1),
+                   sliderInput(
+                       "weight_total_score", "Total Score", min = -20, max = 20, 
+                       value = weights$`Total.Score`, step = 1),
+                   sliderInput(
+                       "weight_auto_cycle", "Auto Cycles", min = -20, max = 20, 
+                       value = weights$`Auto.Cycles`, step = 1),
+                   sliderInput(
+                       "weight_tele_cycle", "Tele Cycles", min = -20, max = 20, 
+                       value = weights$`Tele.Cycles`, step = 1),
+                   sliderInput(
+                       "weight_total_cycle", "Total Cycles", min = -20, max = 20, 
+                       value = weights$`Total.Cycles`, step = 1),
+                   sliderInput(
+                       "weight_auto_bump", "Auto Bump", min = -20, max = 20, 
+                       value = weights$`Auto.Bump`, step = 1),
+                   sliderInput(
+                       "weight_tele_bump", "Tele Bump", min = -20, max = 20, 
+                       value = weights$`Tele.Bump`, step = 1),
+                   sliderInput(
+                       "weight_tele_trench", "Tele Trench", min = -20, max = 20, 
+                       value = weights$`Tele.Trench`, step = 1)
+            ),
+            column(6,
+                   sliderInput(
+                       "weight_auto_climb", "Auto Climb", min = -20, max = 20, 
+                       value = weights$`Auto.Climb`, step = 1),
+                   sliderInput(
+                       "weight_climb", "Climb", min = -20, max = 20, 
+                       value = weights$`Climb`, step = 1),
+                   sliderInput(
+                       "weight_quick_climb", "Quick Climb", min = -20, max = 20, 
+                       value = weights$`Quick.Climb`, step = 1),
+                   sliderInput(
+                       "weight_driver", "Driver", min = -20, max = 20, 
+                       value = weights$`Driver`, step = 1),
+                   sliderInput(
+                       "weight_died", "Died", min = -20, max = 20, 
+                       value = weights$Died, step = 1),
+                   sliderInput(
+                       "weight_card", "Card", min = -20, max = 20, 
+                       value = weights$Card, step = 1)
+            )
+        ),
+        
+        footer = tagList(
+            modalButton("Cancel"),
+            actionButton("reset_weights", "Reset to Default", class = "btn-warning"),
+            actionButton("apply_weights", "Apply Weights", class = "btn-primary")
+        )
+    )
+}
+
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
 #schedule <- read.csv('shinyapp/data/test_data/schedule.csv')
 #tba_data <- read.csv('shinyapp/data/test_data/tba_data.csv')
