@@ -199,6 +199,15 @@ server <- function(input, output, session) {
         summary_stats(raw, pridge, teams)
     })
     
+    output$comments_df <- renderDT({
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), 
+                         names_to = "position", values_to = "tnum") |>
+            pull(tnum)
+        comments_df(raw)
+    })
+    
     output$scout_yaps <- renderPlotly({
         yap_graph(raw)
     })

@@ -87,6 +87,10 @@ ui <- fluidPage(
                 card(
                     card_header("Summary Stats"), 
                     DTOutput("summary_stats_comp")
+                ),
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df")
                 )
             )
         ),

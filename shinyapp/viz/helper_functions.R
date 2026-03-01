@@ -264,7 +264,17 @@ summary_stats <- function(raw, pridge, teams = NULL) {
     
     return(result)
 }
+comments_df <- function(raw) { 
+comment_df <- data.frame( 
+    team = raw$team,
+    comments = raw$commentOpen,
+    match = raw$match
+) |>
+    arrange(team, desc(match)) |>
+    filter(comments > 0)
 
+    return(comment_df)
+}
 yap_graph <- function(raw) {
     spliting <- strsplit(raw$comments, split = " ")
     
