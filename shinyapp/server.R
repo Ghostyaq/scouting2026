@@ -220,4 +220,8 @@ server <- function(input, output, session) {
         tags$img(src = img_src, alt = paste("Robot Image for Team", teamnum), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
         tags$img(src = img_src1, alt = paste("Robot Image for Team", teamnum1), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
     })
+    
+    output$scouter_streak <- renderPlot({
+        high_streak(raw)
+    })
 }

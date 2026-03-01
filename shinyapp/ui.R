@@ -140,6 +140,10 @@ ui <- fluidPage(
                 card(
                     card_header("Total Matches Scouted by Scout"),
                     plotlyOutput("matches_scouted")
+                ),
+                card(
+                    card_header("Scout Yap Streak"),
+                    plotlyOutput("scouter_streak")
                 )
             )
         ),
