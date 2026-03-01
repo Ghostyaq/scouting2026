@@ -4,13 +4,6 @@ format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
 library(readr)
@@ -18,37 +11,40 @@ library(tidyverse)
 library(magick)
 
 #Process images from imported dataset and convert them to pngs (all in vector_pics array)
-pit_data<-read.csv("pit_scouting_2026.csv")
+pit_data <- read.csv("pit_scouting_2026.csv")
 
 # taking links and converting them to images
 pic_link <- pit_data$Upload.robot.photo
 pics_link <- gsub("open\\?id=", "uc?export=download&id=", pic_link)
+pit_data$Timestamp <- NULL
+pit_data <- cbind("team#" = c(449,9732), pit_data)
 
+colnames(pit_data) <- c("team_num","scout_initials", "weight", "length", "width", "height", "drive_base", "hopper_length","hopper_width", "hopper_height", "hopper_capacity", "robot_photo","turret", "current_issues", "battery_type", "num_batteries", "elec_quality","build_quality", "add_comments")
+
+default_image <- image_read("default_image.png")
 #convert to vector and apply image_read on every img in pics_link
-vector_pics<-sapply(pics_link,image_read) 
+vector_pics <- sapply(pics_link,image_read) 
+vector_pics <- c(vector_pics, default_image)
 
+
+write_pit_pics <- function(pit_data) { 
 if (!dir.exists("robot_pics")) dir.create("robot_pics")
-for (i in seq_along(vector_pics)) { 
+for (i in seq_along(vector_pics)) {
+  path = paste0(pit_data$team_num[i], ".png")
+  if (path == "NA.png") { 
+    path = paste0("default_image",".png")
+    print(path)
+    next}
+  else {
     image_write(
         vector_pics[[i]],
-        path = paste0("robot_pics/robot_",i, ".png"), 
-        format = "png")
-    }
-
-#Check to see all image files are pngs
-# vector_pics <- image_join(vector_pics)
-# imginfo <- image_info(vector_pics)
-# print(imginfo)
+        path = path,
+        format = "png")}
+    print(path)
+} 
+}
+write_pit_pics(pit_data)
 
 
 
 ```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).

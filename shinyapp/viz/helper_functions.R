@@ -6,22 +6,34 @@ library(scoutR)
 bump_trench_boxplot <- function(raw, team_list){
     filtered_df <- raw |> filter(team %in% team_list)
     df_bump <- filtered_df |>
-        select(team, count=teleop_bump) |> 
+        select(team, count = teleop_bump) |> 
         mutate(obstacle = "Bump")
     
     df_trench <- filtered_df |> 
         select(team, count = teleop_trench) |> 
         mutate(obstacle = "Trench")
     
-    combined_df <- rbind(df_bump,df_trench)
+    combined_df <- rbind(df_bump, df_trench)
+    combined_df$team <- 
+        factor(combined_df$team, levels = team_list, ordered = TRUE)
     
-    ggplot(combined_df, aes(x = factor(team), y = count, fill = obstacle)) + 
+    ggplot(combined_df, aes(x = team, y = count, fill = obstacle)) + 
         geom_boxplot(position = position_dodge(width = .75)) +
         labs(title = "Mean Crossing Comparison",
              x = "Team Number",
              y = "Average Times Crossed",
              fill = "Obstacle Type") + 
-        theme_bw()
+        theme_bw() + 
+        {if (length(team_list) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(combined_df$team) %in% team_list[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
 }
 
 plot_driver_rating_graph <- function(dataframe, team_id) {
@@ -45,7 +57,7 @@ plot_driver_rating_graph <- function(dataframe, team_id) {
 
 endgame_graph <- function(raw, teams) {
     number_of_teams <- length(unique(raw$team))
-    specific_data <- raw |>
+    data <- raw |>
         filter(team %in% teams) |>
         mutate(
             endgame_climb = factor(
@@ -57,8 +69,9 @@ endgame_graph <- function(raw, teams) {
             number_of_climbs = n()
         )
     
-    ggplot(specific_data, 
-           aes(fill = endgame_climb, y = number_of_climbs, x = factor(team))) + 
+    data$team = factor(data$team, levels = teams, ordered = TRUE)
+    
+    ggplot(data, aes(fill = endgame_climb, y = number_of_climbs, x = team)) + 
         geom_bar(position = "stack", stat = "identity") +
         labs(title = "Endgame climb",
              x = "Team",
@@ -69,8 +82,17 @@ endgame_graph <- function(raw, teams) {
             labels = c("F" = "Fail", "No" = "Didn't attempt", "L1" = "L1", 
                        "L2" = "L2", "L3" = "L3")
         ) +
-        theme_bw()
-    
+        theme_bw() + 
+        {if (length(teams) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(data$team) %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
 }
 
 # event_key needed to write pridge.csv to the right folder (switch to a .R?)
@@ -139,7 +161,7 @@ pridge_calculation <- function(schedule, tba_data, event_key) {
 }
 
 plot_scouting_graph <- function(raw) {
-    scout <-raw$scout
+    scout <- raw$scout
     scout_count <- count(raw, scout, sort = TRUE, name = "number_of_times")
     
     still_graph <- ggplot(scout_count, aes(
@@ -155,20 +177,19 @@ plot_scouting_graph <- function(raw) {
             title = "Scout and Their Number of Times Scouted")
     
     ggplotly(still_graph, tooltip = "text")
-    
 }
 
-stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
+stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
     data <- summary_stats(raw, pridge, teams = NULL) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
         rename(`Auto Climb` = ACP) |>
         filter(Team %in% teams)
     
     if (order) {
-        data <- data |> arrange(desc(`Total Score`))
+        team_order <- arrange(data, desc(`Total Score`))$Team
+    } else {
+        team_order <- teams
     }
-    
-    team_order <- data$Team
     
     data <- pivot_longer(
         data,
@@ -184,12 +205,22 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams){
         ordered = TRUE)
     
     ggplot(data, aes(x = Team, y = score, fill = type)) +
-        geom_bar(stat ="identity") + 
+        geom_bar(stat = "identity") + 
         labs(
             title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
         ) + 
-        coord_flip() + 
-        theme_bw()
+        theme_bw() +
+        {if (length(teams) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(data$Team) %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+            } +
+        {if (flip) coord_flip() else NULL}
 }
 
 summary_stats <- function(raw, pridge, teams = NULL) {
@@ -258,7 +289,6 @@ yap_graph <- function(raw) {
         theme_bw()
     
     ggplotly(plot)
-    
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
