@@ -1,0 +1,97 @@
+---
+title: "imageProcessDS"
+format: html
+editor: visual
+---
+
+```{r}
+library(reticulate)
+library(imager)
+library(magick)
+py_require(c("pillow"))
+getwd()
+
+zip_path = "C:\\Users\\jp10d\\Downloads\\images.zip"
+
+source_python("imageProcessSupport.py")
+
+load_images_from_zip(zip_path)
+
+blank <- image_read("pathImages//blankBoard.png")
+
+schedule <- read.csv("../shinyapp/data/week0/schedule.csv")
+
+teams <- read.csv("teams.csv")$team
+
+color1 = "#ef4444"
+color2 = "#22c55e"
+color3 = "#3b82f6"
+
+for (team in teams){
+    dir.create(paste0("pathImages//teams//", team), showWarnings = FALSE)
+}
+
+for (match_num in 1:nrow(schedule)) {
+    if (file.exists(paste0("pathImages//blue//B", match_num, ".png"))){
+        filter(match_num, 'B', paste0("pathImages//blue//B", match_num, ".png"), color1, color2, color3)
+    }
+    
+    if (file.exists(paste0("pathImages//red//R", match_num, ".png"))){
+        filter(match_num, 'R', paste0("pathImages//red//R", match_num, ".png"), color1, color2, color3)
+    }
+    
+    for (i in 2:7){
+        if (file.exists(paste0("pathImages//matches//", match_num ,"//B", i-4, ".png"))){
+            team_assign(
+                image = paste0("pathImages//matches//", match_num ,"//B", as.character(i-4), ".png"), 
+                team = schedule[match_num,i], 
+                color = 'B', 
+                number = length(list.files(path = paste0("pathImages//teams//", as.character(schedule[match_num,i])), pattern = "^B[0-9]+")) + 1)
+        }
+        if (file.exists(paste0("pathImages//matches//", match_num ,"//R", i-1, ".png"))){
+            team_assign(
+                image = paste0("pathImages//matches//", match_num ,"//R", as.character(i-1), ".png"), 
+                team = schedule[match_num,i], 
+                color = 'R', 
+                number = length(list.files(path = paste0("pathImages//teams//", as.character(schedule[match_num,i])), pattern = "^R[0-9]+")) + 1)
+                #something in the line above me isn't working right
+        }
+    }
+}
+
+for (team in teams){
+    
+    team_image = blank
+    empty = clear("pathImages//blankBoard.png")
+    empty_annotated = image_read("pathImages//empty.png")
+    
+    for (img in list.files(paste0("pathImages//teams//", as.character(team)))){
+        if(team == 449){
+            print(img)
+        }
+        if(grepl("1.png", img, fixed = TRUE)){
+            fill(paste0("pathImages//teams//", team, "//",img), "#f82553")
+        } else if(grepl("2.png", img, fixed = TRUE)){
+            fill(paste0("pathImages//teams//", team, "//",img), "#fb6640")
+        } else if(grepl("3.png", img, fixed = TRUE)){
+            fill(paste0("pathImages//teams//", team, "//",img), "#f8c421")
+        } else if(grepl("4.png", img, fixed = TRUE)){
+            fill(paste0("pathImages//teams//", team, "//",img), "#49cc5c")
+        } else if(grepl("5.png", img, fixed = TRUE)){
+            fill(paste0("pathImages//teams//", team, "//",img), "#2c7ce5")
+        } else if(grepl("6.png", img, fixed = TRUE)){
+            fill(paste0("pathImages//teams//", team, "//",img), "#6434e9")
+        } else if(grepl("7.png", img, fixed = TRUE)){
+            fill(paste0("pathImages//teams//", team, "//",img), "#F06292")
+        }
+    }
+    for (img in list.files(paste0("pathImages//teams//", as.character(team)))){
+        image = image_read(paste0("pathImages//teams//", team, "//",img))
+        empty_annotated = image_composite(empty_annotated, image, operator = "Over")
+    }
+    team_image = image_composite(team_image, empty_annotated, operator = "Over")
+    image_write(team_image, paste0("pathImages//finals//", team, ".png"))
+}
+
+
+```
