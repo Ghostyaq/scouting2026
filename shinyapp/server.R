@@ -85,7 +85,7 @@ server <- function(input, output, session) {
     
     output$auto_picklist <- renderDT({
         data <- summary_stats(raw, pridge)
-        team_scores <- calculate_team_scores(weights, data)
+        team_scores <- calculate_team_scores(weights(), data)
         team_scores$Rank <- 1:nrow(team_scores)
         
         #reorder columns to show rank and score first

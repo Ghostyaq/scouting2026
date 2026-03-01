@@ -270,12 +270,13 @@ summary_stats <- function(raw, pridge, teams = NULL) {
     
     return(result)
 }
+
 comments_df <- function(raw) { 
-comment_df <- data.frame( 
-    team = raw$team,
-    comments = raw$commentOpen,
-    match = raw$match
-) |>
+    comment_df <- data.frame( 
+        team = raw$team,
+        comments = raw$commentOpen,
+        match = raw$match
+    ) |>
     arrange(team, desc(match)) |>
     filter(comments > 0)
 
