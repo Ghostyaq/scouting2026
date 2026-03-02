@@ -83,8 +83,8 @@ endgame_graph <- function(raw, teams) {
              x = "Team",
              y = "Number of Climbs") + 
         scale_fill_manual(
-            values = c("F" = "#f2b5d4", "No" = "#f7d6e0", "L1" = "#eff7f6", 
-                       "L2" = "#b2f7ef", "L3" = "#7bdff2"),
+            values = c("F" ="#E6CCB2", "No" = "#DDB892", "L1" = "#B08968", 
+                       "L2" = "#9C6644", "L3" = "#7F5539"),
             labels = c("F" = "Fail", "No" = "Didn't attempt", "L1" = "L1", 
                        "L2" = "L2", "L3" = "L3")
         ) +
@@ -215,6 +215,13 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
         labs(
             title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
         ) + 
+        scale_fill_manual(
+            values = c("Auto Fuel" ="#6B705C", 
+                       "Auto Climb" = "#A5A58D",
+                       "Tele Fuel" = "#B7B7A4",
+                       "Climb" = "#DDBEA9"
+            ) 
+        ) +
         theme_bw() +
         {if (length(teams) == 6)
             theme(
