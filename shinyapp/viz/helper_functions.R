@@ -268,23 +268,28 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP) |>
         modify_if(~is.numeric(.), ~round(., 2))
     
+    if (!is.null(teams)){
+        result$Team <- result$Team[order(match(result$Team, teams))]
+    }
     return(result)
 }
 
-comments_df <- function(raw) { 
-    comment_df <- data.frame( 
-        team = raw$team,
-        comments = raw$commentOpen,
-        match = raw$match
-    ) |>
-    arrange(team, desc(match)) |>
-    filter(comments > 0)
-
-    return(comment_df)
+comments_df <- function(raw, team_list = NULL) { 
+    data <- raw |>
+        select(team, match, comments) |>
+        filter(comments > 0) |>
+        filter(team %in% team_list) |>
+        rowwise() |>
+        mutate(
+            team = factor(team, levels = team_list, ordered = TRUE),
+            match = as.integer(match)
+        ) |>
+        arrange(team, desc(match))
+    
+    return(data)
 }
 
 yap_graph <- function(raw) {
-    browser()
     spliting <- strsplit(raw$comments, split = " ")
     
     raw$number_of_yaps <- sapply(spliting, length)

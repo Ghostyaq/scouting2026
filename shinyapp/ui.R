@@ -20,7 +20,6 @@ source("viz/helper_functions.R")
 source("server.R")
 
 options(sass.cache = FALSE)
-#----------------------------------------------UI-----------------------------------------------------------------------
 
 ui <- fluidPage(
     theme = bs_theme(
@@ -92,7 +91,7 @@ ui <- fluidPage(
                 ),
                 card(
                     card_header("Comments Data"),
-                    DTOutput("comments_df")
+                    DTOutput("comments_df_comp")
                 )
             )
         ),
@@ -127,24 +126,32 @@ ui <- fluidPage(
                     )
                 ),
                 card(
+                    card_header("Robot Images in Match"),
+                    uiOutput("images_match")
+                ),
+                card(
                     card_header("Summary Stats"),
                     DTOutput("summary_stats_match")
+                ),
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_match")
                 )
             )
         ),
         tabPanel(
             title = "Scouts",
             card(
-                card_header("Average Yaps by Scout"),
-                plotlyOutput("scout_yaps")
-            ),
-            card(
                 card_header("Total Matches Scouted by Scout"),
                 plotlyOutput("matches_scouted")
             ),
             card(
+                card_header("Average Yaps by Scout"),
+                plotlyOutput("scout_yaps")
+            ),
+            card(
                 card_header("Scout Yap Streak"),
-                plotlyOutput("scouter_streak")
+                plotOutput("scouter_streak")
             )
         ),
         tabPanel(
@@ -162,8 +169,6 @@ ui <- fluidPage(
         )
     )
 )
-
-#--------------------------------------------INITIALIZE-----------------------------------------------------------------
 
 shinyApp(
     ui = ui, 

@@ -36,9 +36,10 @@ addResourcePath("images_d", "data/test_data/images")
 server <- function(input, output, session) {
     #UPDATE PICKERS
     observe({
+        unique_teams <- sort(unique(raw$team))
         updateVirtualSelect("selected_match", choices = schedule$match)
-        updateVirtualSelect("selected_team", choices = sort(unique(raw$team)))
-        updateVirtualSelect("selected_teams_comp", choices = c(449, 422))
+        updateVirtualSelect("selected_team", choices = unique_teams)
+        updateVirtualSelect("selected_teams_comp", choices = unique_teams)
     })
     
     #EVENT SUMMARY
@@ -134,9 +135,13 @@ server <- function(input, output, session) {
         bump_trench_boxplot(raw, team)
     })
     
+    output$comments_df_comp <- renderDT({
+        team <- input$selected_teams_comp
+        comments_df(raw, team)
+    })
+    
     #SUMMARY POINT MATCH
     output$summary_point_match <- renderPlot({
-        #Make sure sure that the input is within data manipulation pipeline
         teams <- schedule |>
             filter(match == input$selected_match) |>
             pivot_longer(
@@ -200,14 +205,16 @@ server <- function(input, output, session) {
         summary_stats(raw, pridge, teams)
     })
     
-    output$comments_df <- renderDT({
+    output$comments_df_match <- renderDT({
         teams <- schedule |>
             filter(match == input$selected_match) |>
-            pivot_longer(cols = c(R1, R2, R3, B1, B2, B3), 
-                         names_to = "position", values_to = "tnum") |>
+            pivot_longer(
+                cols = c(R1, R2, R3, B1, B2, B3), 
+                names_to = "position", 
+                values_to = "tnum") |>
             pull(tnum)
         
-        comments_df(raw)
+        comments_df(raw, teams)
     })
     
     output$matches_scouted <- renderPlotly({
@@ -222,12 +229,33 @@ server <- function(input, output, session) {
         high_streak(raw)
     })
     
-    output$images <- renderUI({
-        teamnum <- input$selected_teams_comp
-        teamnum1 = 422
-        img_src <- paste0("images_d/", teamnum,".png")
-        img_src1 <- paste0("images_d/", teamnum1,".png")
-        tags$img(src = img_src, alt = paste("Robot Image for Team", teamnum), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
-        tags$img(src = img_src1, alt = paste("Robot Image for Team", teamnum1), style = "width: 100%; height: auto; display: block; margin: 0 auto;")
+    output$images_match <- renderUI({
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(
+                cols = c(R1, R2, R3, B1, B2, B3), 
+                names_to = "position", 
+                values_to = "tnum") |>
+            pull(tnum)
+        
+        tags_m <- lapply(teams, function(team) {
+            img_src_m <- paste0("images_d/", team,".png")
+            tag_temp_m <- tags$img(
+                src = img_src_m, 
+                alt = paste("Robot Image for Team", team), 
+                style = "height: 90%; width: auto; object-fit: cover;")
+            
+            cap_tag_m <- tags$p(paste("Team:", team), style = "text-align: center;")
+            
+            full_m <- tags$div(
+                tag_temp_m, cap_tag_m, 
+                style = "display: flex; flex-direction: column; 
+                align-items: center; height: 300px; padding: 5px; 
+                border: 1px solid #555; overflow: hidden;")
+            
+            column(4, full_m, style = "padding: 5px;")
+        })
+        
+        fluidRow(tags_m)
     })
 }
