@@ -308,10 +308,11 @@
           "formResetBehavior": "reset",
           "choices": {
             "1": "Pass",
-            "2": "Thief",
-            "3": "Defense(OZ)",
-            "4": "Defense(NZ)",
-            "5": "Intaked Full"
+            "2": "Herd/Bulldoze",
+            "3": "Thief",
+            "4": "Defense(OZ)",
+            "5": "Defense(NZ)",
+            "6": "Intaked Full"
           }
         },
         {
