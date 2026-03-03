@@ -147,7 +147,7 @@ server <- function(input, output, session) {
     })
     
     #SUMMARY POINT MATCH
-    output$summary_point_match <- renderPlot({A
+    output$summary_point_match <- renderPlot({
         teams <- schedule |>
             filter(match == input$selected_match) |>
             pivot_longer(
