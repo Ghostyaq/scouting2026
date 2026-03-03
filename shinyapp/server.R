@@ -133,7 +133,7 @@ server <- function(input, output, session) {
     # COMPARE INACTIVE STRATEGY
     output$inactive_strategy_comp <- renderPlot({
         team <- input$selected_teams_comp
-        inactive_stategy_summary(raw, team)
+        inactive_stategy_summary(raw, team, FALSE, FALSE)
     })
     
     #COMPARE TRENCH BUMP
@@ -205,7 +205,7 @@ server <- function(input, output, session) {
                 values_to = "tnum") |>
             pull(tnum)
         
-        inactive_stategy_summary(raw, teams)
+        inactive_stategy_summary(raw, teams, FALSE, teams, FALSE)
     })
     
     output$summary_stats_comp <- renderDT({
@@ -248,7 +248,75 @@ server <- function(input, output, session) {
         high_streak(raw)
     })
     
+    output$images_comp <- renderUI({
+        tags <- lapply(input$selected_teams_comp, function(teamnum) {
+            img_src <- paste0("images_d/", teamnum,".png")
+            tag_temp <- tags$img(src = img_src, 
+                                 alt = paste("Robot Image for Team", teamnum), 
+                                 style = "height: 90%; width: auto; object-fit: cover;")
+            
+            cap_tag <- tags$p(paste("Team:", teamnum), style = "text-align: center;")
+            
+            full <- tags$div(tag_temp, cap_tag, style = "display: flex; flex-direction: column; align-items: center; 
+               height: 300px; padding: 5px; border: 1px solid #555; overflow: hidden;")
+            
+            column(4, full, style = "padding: 5px;")
+        })
+        
+        fluidRow(tags)
+    })
+    
+    
     output$images_match <- renderUI({
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(
+                cols = c(R1, R2, R3, B1, B2, B3), 
+                names_to = "position", 
+                values_to = "tnum") |>
+            pull(tnum)
+        
+        tags_m <- lapply(teams, function(team) {
+            img_src_m <- paste0("images_d/", team,".png")
+            tag_temp_m <- tags$img(
+                src = img_src_m, 
+                alt = paste("Robot Image for Team", team), 
+                style = "height: 90%; width: auto; object-fit: cover;")
+            
+            cap_tag_m <- tags$p(paste("Team:", team), style = "text-align: center;")
+            
+            full_m <- tags$div(
+                tag_temp_m, cap_tag_m, 
+                style = "display: flex; flex-direction: column; 
+                align-items: center; height: 300px; padding: 5px; 
+                border: 1px solid #555; overflow: hidden;")
+            
+            column(4, full_m, style = "padding: 5px;")
+        })
+        
+        fluidRow(tags_m)
+    })
+    
+    output$auto_heatmap_comp <- renderUI({
+        tags <- lapply(input$selected_teams_comp, function(teamnum) {
+            img_src <- paste0("images_d/", teamnum,".png")
+            tag_temp <- tags$img(src = img_src, 
+                                 alt = paste("Robot Image for Team", teamnum), 
+                                 style = "height: 90%; width: auto; object-fit: cover;")
+            
+            cap_tag <- tags$p(paste("Team:", teamnum), style = "text-align: center;")
+            
+            full <- tags$div(tag_temp, cap_tag, style = "display: flex; flex-direction: column; align-items: center; 
+               height: 300px; padding: 5px; border: 1px solid #555; overflow: hidden;")
+            
+            column(4, full, style = "padding: 5px;")
+        })
+        
+        fluidRow(tags)
+    })
+    
+    
+    output$auto_heatmap_match <- renderUI({
         teams <- schedule |>
             filter(match == input$selected_match) |>
             pivot_longer(

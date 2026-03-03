@@ -450,7 +450,7 @@ weights_modal <- function(weights) {
     )
 }
 
-inactive_stategy_summary <- function(raw, selected_teams) {
+inactive_stategy_summary <- function(raw, selected_teams, order, teams, flip) {
     comments <- raw |>
         group_by(team) |>
         filter(team %in% selected_teams) |>
@@ -494,7 +494,17 @@ inactive_stategy_summary <- function(raw, selected_teams) {
                        "c_theif_3" = "theif (3)",
                        "b_herd_2" = "herd (2)",
                        "a_pass_1" = "pass (1)" )) +
-        theme_bw()
+        theme_bw() +
+        {if (length(teams) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(data$Team) %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
