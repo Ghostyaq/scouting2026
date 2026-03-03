@@ -82,6 +82,10 @@ ui <- fluidPage(
                     )
                 ),
                 card(
+                    card_header("Inactive Strategy Summary"),
+                    plotOutput("inactive_strategy_comp")
+                ),
+                card(
                     card_header("Robot Images"),
                     uiOutput("images")
                 ),
