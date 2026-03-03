@@ -33,11 +33,18 @@ spearman_correlation <- function(event) {
     corr <- cor.test(x=opr_and_ranking$`Ranking Score`, 
                      y=opr_and_ranking$opr, method = 'spearman')
     
-    corr$estimate
+    graph <- ggplot(
+        opr_and_ranking,
+        aes( x = `Ranking Score`, y = opr)) + 
+        geom_point() +
+        theme_bw() + 
+        labs(
+    title = paste0(
+        "Spearman Correlation: ", corr$estimate)
+    )
     
+    print(graph)
 }
 
 correlation <- spearman_correlation("2025mil")
-
-correlation
 ```
