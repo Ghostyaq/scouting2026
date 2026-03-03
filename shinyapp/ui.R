@@ -1,6 +1,7 @@
 library(shiny)
 library(DT)
 library(ggplot2)
+library(httr2)
 library(plotly)
 library(shinyWidgets)
 library(tidyverse)
@@ -19,12 +20,7 @@ library(colourpicker)
 source("viz/helper_functions.R")
 source("server.R")
 
-data <- read.csv("data/week0/data.csv")
-pridge <- read.csv("data/week0/pridge.csv")
-tba_data <- read.csv("data/week0/tba_data.csv")
-schedule <- read.csv("data/week0/schedule.csv")
-
-#----------------------------------------------UI-----------------------------------------------------------------------
+options(sass.cache = FALSE)
 
 ui <- fluidPage(
     theme = bs_theme(
@@ -41,14 +37,28 @@ ui <- fluidPage(
             ),
             card(
                 card_header("Summary Stats"),
-                DTOutput("summary_stats")
-            )
+                DTOutput("summary_stats"),
+                height = 1100
+                )
+        ),
+        tabPanel(
+            title = "Auto-Picklisting",
+            card(
+                card_header("Auto Picklisting"),
+                DTOutput("auto_picklist"),
+                height = 1100
+            ),
+            actionButton(
+                "open_weights", "Adjust Weights", class = "btn btn-primary")
         ),
         tabPanel(
             title = "Compare Teams",
             layout_sidebar(
                 sidebar = card(
-                    virtualSelectInput("selected_teams_comp", label = "Select Teams", choices = NULL, multiple = TRUE, search = TRUE
+                    virtualSelectInput(
+                        "selected_teams_comp", 
+                        label = "Select Teams", 
+                        choices = NULL, multiple = TRUE, search = TRUE
                     ),
                     height = "500px"
                 ),
@@ -73,12 +83,24 @@ ui <- fluidPage(
                     )
                 ),
                 card(
+                    card_header("Inactive Strategy Summary"),
+                    plotOutput("inactive_strategy_comp")
+                ),
+                card(
                     card_header("Robot Images"),
                     uiOutput("images")
                 ),
                 card(
+                    card_header("Auto Heatmaps"),
+                    uiOutput("auto_heatmap_comp")
+                ),
+                card(
                     card_header("Summary Stats"), 
                     DTOutput("summary_stats_comp")
+                ),
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_comp")
                 )
             )
         ),
@@ -86,7 +108,10 @@ ui <- fluidPage(
             title = "Match",
             layout_sidebar(
                 sidebar = card(
-                    virtualSelectInput("selected_match", label = "Select a Match", choices = NULL, selected = 1),
+                    virtualSelectInput(
+                        "selected_match", 
+                        label = "Select a Match", 
+                        choices = NULL, selected = 1),
                     height = "500px"
                 ),
                 layout_columns(
@@ -109,23 +134,43 @@ ui <- fluidPage(
                         plotOutput("driver_rating_match")
                     )
                 ),
+                layout_columns(
+                    card(
+                        card_header("Inactive Strategy Summary"),
+                        plotOutput("inactive_strategy_match")
+                    ),
+                ),
+                card(
+                    card_header("Robot Images in Match"),
+                    uiOutput("images_match")
+                ),
+                card(
+                    card_header("Auto Heatmaps"),
+                    uiOutput("auto_heatmap_match")
+                ),
                 card(
                     card_header("Summary Stats"),
                     DTOutput("summary_stats_match")
+                ),
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_match")
                 )
             )
         ),
         tabPanel(
             title = "Scouts",
-            layout_columns(
-                card(
-                    card_header("Average Yaps by Scout"),
-                    plotlyOutput("scout_yaps")
-                ),
-                card(
-                    card_header("Total Matches Scouted by Scout"),
-                    plotlyOutput("matches_scouted")
-                )
+            card(
+                card_header("Total Matches Scouted by Scout"),
+                plotlyOutput("matches_scouted")
+            ),
+            card(
+                card_header("Average Yaps by Scout"),
+                plotlyOutput("scout_yaps")
+            ),
+            card(
+                card_header("Scout Yap Streak"),
+                plotOutput("scouter_streak")
             )
         ),
         tabPanel(
@@ -143,8 +188,6 @@ ui <- fluidPage(
         )
     )
 )
-
-#--------------------------------------------INITIALIZE-----------------------------------------------------------------
 
 shinyApp(
     ui = ui, 

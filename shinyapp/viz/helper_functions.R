@@ -19,6 +19,12 @@ bump_trench_boxplot <- function(raw, team_list){
     
     ggplot(combined_df, aes(x = team, y = count, fill = obstacle)) + 
         geom_boxplot(position = position_dodge(width = .75)) +
+        ggbeeswarm::geom_quasirandom(
+            shape = 21, color = "black", 
+            alpha = 0.8, size = 3,
+            aes(fill = obstacle),
+            dodge.width = 0.8
+        ) +
         labs(title = "Mean Crossing Comparison",
              x = "Team Number",
              y = "Average Times Crossed",
@@ -77,8 +83,8 @@ endgame_graph <- function(raw, teams) {
              x = "Team",
              y = "Number of Climbs") + 
         scale_fill_manual(
-            values = c("F" = "#f2b5d4", "No" = "#f7d6e0", "L1" = "#eff7f6", 
-                       "L2" = "#b2f7ef", "L3" = "#7bdff2"),
+            values = c("F" ="#E6CCB2", "No" = "#DDB892", "L1" = "#B08968", 
+                       "L2" = "#9C6644", "L3" = "#7F5539"),
             labels = c("F" = "Fail", "No" = "Didn't attempt", "L1" = "L1", 
                        "L2" = "L2", "L3" = "L3")
         ) +
@@ -209,6 +215,13 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
         labs(
             title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
         ) + 
+        scale_fill_manual(
+            values = c("Auto Fuel" ="#6B705C", 
+                       "Auto Climb" = "#A5A58D",
+                       "Tele Fuel" = "#B7B7A4",
+                       "Climb" = "#DDBEA9"
+            ) 
+        ) +
         theme_bw() +
         {if (length(teams) == 6)
             theme(
@@ -262,7 +275,25 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP) |>
         modify_if(~is.numeric(.), ~round(., 2))
     
+    if (!is.null(teams)){
+        result$Team <- result$Team[order(match(result$Team, teams))]
+    }
     return(result)
+}
+
+comments_df <- function(raw, team_list = NULL) { 
+    data <- raw |>
+        select(team, match, comments) |>
+        filter(comments > 0) |>
+        filter(team %in% team_list) |>
+        rowwise() |>
+        mutate(
+            team = factor(team, levels = team_list, ordered = TRUE),
+            match = as.integer(match)
+        ) |>
+        arrange(team, desc(match))
+    
+    return(data)
 }
 
 yap_graph <- function(raw) {
@@ -280,7 +311,6 @@ yap_graph <- function(raw) {
             scout_name = reorder(scout, mean_yaps, decreasing = TRUE)
         )
     
-    
     plot <- ggplot(scout_comments, aes(x = scout_name, y = mean_yaps)) +
         geom_bar(stat = "identity", position = position_dodge(), 
                  fill = "rosybrown1", colour = "black") +
@@ -289,6 +319,192 @@ yap_graph <- function(raw) {
         theme_bw()
     
     ggplotly(plot)
+}
+
+high_streak <- function(raw){
+    current_match = max(raw$match)
+    all_matches <- 1:current_match
+    streak_df <- raw |>
+        mutate(
+            scout = toupper(scout),
+            scout = trimws(scout),
+            scout = gsub("[^[:alpha:]]", "", scout)
+        ) |>
+        group_by(scout) |>
+        summarise(
+            scouted_matches = list(unique(match))
+        ) |>
+        rowwise() |>
+        mutate(
+            missed_matches = list(setdiff(all_matches, scouted_matches)),
+            streak = current_match - max(missed_matches)
+        ) |>
+        filter(streak > 0)
+    
+    ggplot(streak_df, aes(x = `scout`, streak)) + 
+        geom_bar(position = "stack", stat = "identity", fill = "chartreuse2") + 
+        labs(title = "Current Streak", 
+             x = "Scouts", y = "Matches") +
+        theme_bw()
+}
+
+normalize_column <- function(x) {
+    if (sd(x, na.rm = TRUE) == 0) {
+        return(rep(0, length(x)))
+    }
+    
+    normalized <- (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+    normalized[is.nan(normalized)] <- 0
+    return(normalized)
+}
+
+calculate_team_scores <- function(weights, team_data){
+    numeric_cols <- setdiff(names(team_data), c("Team", "Died"))
+    normalized_data <- team_data
+    
+    for (col in numeric_cols) {
+        normalized_data[[col]] <- normalize_column(team_data[[col]])
+    }
+    
+    team_scores <- team_data[, "Team", drop = FALSE]
+    team_scores$`Team Score` <- 0
+    
+    for (col in numeric_cols) {
+        if (col %in% names(weights)) {
+            weight_val <- weights[[col]]
+            team_scores$`Team Score` <-
+                team_scores$`Team Score` + normalized_data[[col]] * weight_val
+            team_scores$`Team Score` <- round(team_scores$`Team Score`, 2)
+        }
+    }
+    
+    team_scores <- merge(team_scores, team_data, by = "Team")
+    team_scores <- team_scores[order(-team_scores$`Team Score`), ]
+    return(team_scores)
+}
+
+weights_modal <- function(weights) {
+    modalDialog(
+        title = "Adjust Team Weighting Factors",
+        size = "l",
+        fluidRow(
+            column(6,
+                   sliderInput(
+                       "weight_auto_fuel", "Auto Fuel", min = -20, max = 20, 
+                       value = weights$`Auto.Fuel`, step = 1),
+                   sliderInput(
+                       "weight_tele_fuel", "Tele Fuel", min = -20, max = 20, 
+                       value = weights$`Tele.Fuel`, step = 1),
+                   sliderInput(
+                       "weight_total_fuel", "Total Fuel", min = -20, max = 20, 
+                       value = weights$`Total.Fuel`, step = 1),
+                   sliderInput(
+                       "weight_total_score", "Total Score", min = -20, max = 20, 
+                       value = weights$`Total.Score`, step = 1),
+                   sliderInput(
+                       "weight_auto_cycle", "Auto Cycles", min = -20, max = 20, 
+                       value = weights$`Auto.Cycles`, step = 1),
+                   sliderInput(
+                       "weight_tele_cycle", "Tele Cycles", min = -20, max = 20, 
+                       value = weights$`Tele.Cycles`, step = 1),
+                   sliderInput(
+                       "weight_total_cycle", "Total Cycles", min = -20, max = 20, 
+                       value = weights$`Total.Cycles`, step = 1),
+                   sliderInput(
+                       "weight_auto_bump", "Auto Bump", min = -20, max = 20, 
+                       value = weights$`Auto.Bump`, step = 1),
+                   sliderInput(
+                       "weight_tele_bump", "Tele Bump", min = -20, max = 20, 
+                       value = weights$`Tele.Bump`, step = 1),
+                   sliderInput(
+                       "weight_tele_trench", "Tele Trench", min = -20, max = 20, 
+                       value = weights$`Tele.Trench`, step = 1)
+            ),
+            column(6,
+                   sliderInput(
+                       "weight_auto_climb", "Auto Climb", min = -20, max = 20, 
+                       value = weights$`Auto.Climb`, step = 1),
+                   sliderInput(
+                       "weight_climb", "Climb", min = -20, max = 20, 
+                       value = weights$`Climb`, step = 1),
+                   sliderInput(
+                       "weight_quick_climb", "Quick Climb", min = -20, max = 20, 
+                       value = weights$`Quick.Climb`, step = 1),
+                   sliderInput(
+                       "weight_driver", "Driver", min = -20, max = 20, 
+                       value = weights$`Driver`, step = 1),
+                   sliderInput(
+                       "weight_died", "Died", min = -20, max = 20, 
+                       value = weights$Died, step = 1),
+                   sliderInput(
+                       "weight_card", "Card", min = -20, max = 20, 
+                       value = weights$Card, step = 1)
+            )
+        ),
+        
+        footer = tagList(
+            modalButton("Cancel"),
+            actionButton("reset_weights", "Reset to Default", class = "btn-warning"),
+            actionButton("apply_weights", "Apply Weights", class = "btn-primary")
+        )
+    )
+}
+
+inactive_stategy_summary <- function(raw, selected_teams, order, teams, flip) {
+    comments <- raw |>
+        group_by(team) |>
+        filter(team %in% selected_teams) |>
+        mutate(team = as.factor(team)) |>
+        summarise(
+            a_pass_1 = length(grep("1", inactive_strat)),
+            b_herd_2 = length(grep("2", inactive_strat)),
+            c_theif_3 = length(grep("3", inactive_strat)),
+            d_defense_oz_4 = length(grep("4", inactive_strat)),
+            e_defense_nz_5 = length(grep("5", inactive_strat)),
+            f_intaked_full_6 = length(grep("6", inactive_strat))
+        ) |>
+        
+        pivot_longer(cols = c("a_pass_1",
+                              "b_herd_2",
+                              "c_theif_3",
+                              "d_defense_oz_4",
+                              "e_defense_nz_5",
+                              "f_intaked_full_6"),
+                     names_to = "comment_type",
+                     values_to = "level")
+    
+    team <- raw |>
+        group_by(team)
+    
+    ggplot(comments, aes(fill = comment_type, 
+                         x = team, 
+                         y = level)) +
+        geom_bar(position = "stack", stat = "identity") +
+        labs(title = "Comments Summary", x = "Teams", y = "# of comments") +
+        scale_fill_manual(
+            values = c("f_intaked_full_6" = "#f2b5d4", 
+                       "e_defense_nz_5" = "#f7d6e0",
+                       "d_defense_oz_4" = "#eff7f6", 
+                       "c_theif_3" = "#b2f7ef", 
+                       "b_herd_2" = "#7bdff2",
+                       "a_pass_1" = "#358c8f" ),
+            labels = c("f_intaked_full_6" = "Intaked full (6)", 
+                       "e_defense_nz_5" = "defense nz (5)", 
+                       "d_defense_oz_4" = "defense oz (4)", 
+                       "c_theif_3" = "theif (3)",
+                       "b_herd_2" = "herd (2)",
+                       "a_pass_1" = "pass (1)" )) +
+        theme_bw() +
+        {if (length(teams) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(data$Team) %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')

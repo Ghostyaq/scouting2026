@@ -1,0 +1,38 @@
+```{r}
+
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+
+auto_type_graph <- function(raw, teams) {
+    auto_type_data <- raw |>
+        filter(team %in% teams) |>
+        mutate(
+            auto_type = factor(
+                auto_type, 
+                ordered = TRUE, 
+                levels = c("1", "2", "3")))|>
+        group_by(team, auto_type) |>
+        summarise(
+            auto_type_numbers = n()
+        )
+    
+    ggplot(auto_type_data, 
+           aes(fill = auto_type, y = auto_type_numbers, x = factor(team))) + 
+        geom_bar(position = "stack", stat = "identity") +
+        labs(title = "Auto Types",
+             x = "Team",
+             y = "Number of Different Auto Types") + 
+        scale_fill_manual(
+            values = c("3" = "#996D99", 
+                       "2" = "#CC91CC", "1" = "#F7B5F7"),
+            labels = c("3" = "Depot", 
+                       "2" = "Outpost/HP", "1" = "Neutral")
+        ) +
+        theme_bw()
+}
+
+raw <- read.csv("~/Documents/R/scouting2026/shinyapp/data/test_data/data.csv")
+auto_type_graph(raw, 3359)
+
+```
