@@ -129,6 +129,12 @@ ui <- fluidPage(
                         plotOutput("driver_rating_match")
                     )
                 ),
+                layout_columns(
+                    card(
+                        card_header("Inactive Strategy Summary"),
+                        plotOutput("inactive_strategy_match")
+                    ),
+                ),
                 card(
                     card_header("Robot Images in Match"),
                     uiOutput("images_match")
