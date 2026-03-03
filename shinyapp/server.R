@@ -129,6 +129,12 @@ server <- function(input, output, session) {
         plot_driver_rating_graph(raw, team)
     })
     
+    # COMPARE INACTIVE STRATEGY
+    output$inactive_strategy_comp <- renderPlot({
+        team <- input$selected_teams_comp
+        inactive_stategy_summary(raw, team)
+    })
+    
     #COMPARE TRENCH BUMP
     output$trench_bump_comp <- renderPlot({
         team <- input$selected_teams_comp
@@ -187,6 +193,18 @@ server <- function(input, output, session) {
             pull(tnum)
         
         plot_driver_rating_graph(raw, teams)
+    })
+    
+    output$inactive_strategy_match <- renderPlot({
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(
+                cols = c(R1, R2, R3, B1, B2, B3), 
+                names_to = "position", 
+                values_to = "tnum") |>
+            pull(tnum)
+        
+        inactive_stategy_summary(raw, teams)
     })
     
     output$summary_stats_comp <- renderDT({
