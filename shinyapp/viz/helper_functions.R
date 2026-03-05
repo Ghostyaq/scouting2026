@@ -465,7 +465,7 @@ normalize_column <- function(x) {
 }
 
 calculate_team_scores <- function(weights, team_data){
-    numeric_cols <- setdiff(names(team_data), c("Team", "Died"))
+    numeric_cols <- names(team_data)
     normalized_data <- team_data
     
     for (col in numeric_cols) {
@@ -479,15 +479,15 @@ calculate_team_scores <- function(weights, team_data){
         if (col %in% names(weights)) {
             weight_val <- weights[[col]]
             team_scores$`Team Score` <-
-                team_scores$`Team Score` + normalized_data[[col]] * weight_val
-            team_scores$`Team Score` <- round(team_scores$`Team Score`, 2)
+                team_scores$`Team Score` + (normalized_data[[col]] * weight_val)
+            #team_scores$`Team Score` <- round(team_scores$`Team Score`, 2)
         }
     }
     
     team_scores <- merge(team_scores, team_data, by = "Team")
     team_scores <- team_scores[order(-team_scores$`Team Score`), ]
     return(team_scores)
-}
+    }
 
 weights_modal <- function(weights) {
     modalDialog(
