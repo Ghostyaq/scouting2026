@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 shinyapp/rsconnect
+.DS_Store

@@ -21,7 +21,6 @@ source("viz/helper_functions.R")
 source("server.R")
 
 options(sass.cache = FALSE)
-in_rstudio <- rstudioapi::isAvailable()
 
 ui <- fluidPage(
     theme = bs_theme(
@@ -40,7 +39,7 @@ ui <- fluidPage(
                 card_header("Summary Stats"),
                 DTOutput("summary_stats"),
                 height = 1100
-                )
+            )
         ),
         tabPanel(
             title = "Auto-Picklisting",
@@ -95,7 +94,7 @@ ui <- fluidPage(
                 ),
                 card(
                     card_header("Robot Images"),
-                    uiOutput("images")
+                    uiOutput("images_comp")
                 ),
                 card(
                     card_header("Auto Heatmaps"),
@@ -105,18 +104,10 @@ ui <- fluidPage(
                     card_header("Summary Stats"), 
                     DTOutput("summary_stats_comp")
                 ),
-                if (in_rstudio) {
-                    card(
-                        card_header("Comments Data"),
-                        DTOutput("comments_df_comp")
-                    )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_comp")
-                    )
-                }
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_comp")
+                )
             )
         ),
         tabPanel(
@@ -171,18 +162,10 @@ ui <- fluidPage(
                     card_header("Summary Stats"),
                     DTOutput("summary_stats_match")
                 ),
-                if (in_rstudio) {
-                    card(
-                        card_header("Comments Data"),
-                        DTOutput("comments_df_match")
-                    )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_match")
-                    )
-                }
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_match")
+                )
             )
         ),
         tabPanel(

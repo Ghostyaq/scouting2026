@@ -18,13 +18,12 @@ library(shiny.fluent)
 library(colourpicker)
 
 default_linear_weights <- data.frame(
-    Team = 0,
-    `Auto Fuel` = 0, `Tele Fuel` = 0, `Total Fuel` = 1, `Total Score` = 0,
+    Team = 0, `ACP` = 0,
+    `Auto Fuel` = 1, `Tele Fuel` = 1, `Total Fuel` = 1, `Total Score` = 0,
     `Auto Cycles` = 0, `Tele Cycles` = 0, `Total Cycles` = 0,
     `Auto Bump` = 10, `Tele Bump` = 10, `Tele Trench` = 5, 
     `Auto Climb` = 15, Climb = 15, `Quick Climb` = 15,
-    Driver = 10, `Solo Shot` = 0, Died = 0, Card = -20, `Matches Played` = 0,
-    `ACP` = 0
+    Driver = 10, `Solo Shot` = 0, Died = 0, Card = -20, `Matches Played` = 0
 ) #temp, remove later
 
 raw <- read.csv("data/week0/data.csv")
@@ -34,7 +33,7 @@ schedule <- read.csv("data/week0/schedule.csv")
 weights <- reactiveVal(default_linear_weights)
 
 addResourcePath("images_d", "data/test_data/images")
-in_rstudio <- rstudioapi::isAvailable()
+addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
 
 server <- function(input, output, session) {
     #UPDATE PICKERS
@@ -44,10 +43,6 @@ server <- function(input, output, session) {
         updateVirtualSelect("selected_team", choices = unique_teams)
         updateVirtualSelect("selected_teams_comp", choices = unique_teams)
     })
-    
-    #Password logic
-    correct_password <- "0322"
-    user_logged_in <- reactiveVal(in_rstudio)
     
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
@@ -72,7 +67,7 @@ server <- function(input, output, session) {
     
     observeEvent(input$apply_weights, {
         new_weights <- data.frame(
-            Team = 0,
+            Team = 0, `ACP` = 0,
             `Auto Fuel` = input$weight_auto_fuel,
             `Tele Fuel` = input$weight_tele_fuel,
             `Total Fuel` = input$weight_total_fuel,
@@ -86,8 +81,7 @@ server <- function(input, output, session) {
             `Auto Climb` = input$weight_auto_climb, Climb = input$weight_climb,
             `Quick Climb` = input$weight_quick_climb,
             Driver = input$weight_driver, Died = input$weight_died,
-            Card = input$weight_card, `Matches Played` = 0,
-            `ACP` = 0
+            Card = input$weight_card, `Matches Played` = 0
         )
         weights(new_weights)
         removeModal()
@@ -111,12 +105,12 @@ server <- function(input, output, session) {
                       scrollX = TRUE
                   ),
                   rownames = FALSE) |>
-        formatStyle('Team Score',
-                    background = styleColorBar(
-                        c(0, max(team_scores$`Team Score`)), 'lightblue'),
-                    backgroundSize = '100% 90%',
-                    backgroundRepeat = 'no-repeat',
-                    backgroundPosition = 'center')    
+            formatStyle('Team Score',
+                        background = styleColorBar(
+                            c(0, max(team_scores$`Team Score`)), 'lightblue'),
+                        backgroundSize = '100% 90%',
+                        backgroundRepeat = 'no-repeat',
+                        backgroundPosition = 'center')    
     })
     
     #COMPARE POINT SUMMARY
@@ -152,39 +146,12 @@ server <- function(input, output, session) {
     # COMPARE AUTO TYPE
     output$auto_type_comp <- renderPlot({
         team <- input$selected_teams_comp
-        auto_type_graph(raw, team)
+        auto_type_graph(raw, FALSE, team, FALSE)
     })
     
     output$comments_df_comp <- renderDT({
-        req(user_logged_in())
         team <- input$selected_teams_comp
         comments_df(raw, team)
-    })
-    
-    output$login_ui <- renderUI({
-        if (!user_logged_in()) {
-            tagList(
-                passwordInput("password", "Enter password to access comments: "),
-                actionButton("login", "Login")
-            )
-        }
-    })
-    
-    observeEvent(input$login, {
-        if (input$password == correct_password) {
-            user_logged_in(TRUE)
-        } else {
-            user_logged_in(FALSE)
-        }
-    })
-    
-    output$login_status <- renderUI({
-        req(input$login)
-        if (user_logged_in()) {
-            tags$p(style = "color: green;", "Access granted.")
-        } else {
-            tags$p(style = "color: red;", "Incorrect password.")
-        }
     })
     
     #SUMMARY POINT MATCH
@@ -257,7 +224,7 @@ server <- function(input, output, session) {
                 values_to = "tnum") |>
             pull(tnum)
         
-        auto_type_graph(raw, teams)
+        auto_type_graph(raw, FALSE, teams, FALSE)
     })
     
     output$summary_stats_comp <- renderDT({
@@ -277,7 +244,6 @@ server <- function(input, output, session) {
     })
     
     output$comments_df_match <- renderDT({
-        req(user_logged_in())
         teams <- schedule |>
             filter(match == input$selected_match) |>
             pivot_longer(
@@ -352,17 +318,17 @@ server <- function(input, output, session) {
     
     output$auto_heatmap_comp <- renderUI({
         tags <- lapply(input$selected_teams_comp, function(teamnum) {
-            img_src <- paste0("images_d/", teamnum,".png")
+            img_src <- paste0("heatmaps/", teamnum,".png")
             tag_temp <- tags$img(src = img_src, 
-                                 alt = paste("Robot Image for Team", teamnum), 
-                                 style = "height: 90%; width: auto; object-fit: cover;")
+                                 alt = paste("Robot Auto Heatmap for Team", teamnum), 
+                                 style = "height: auto; width: 90%; object-fit: cover;")
             
             cap_tag <- tags$p(paste("Team:", teamnum), style = "text-align: center;")
             
             full <- tags$div(tag_temp, cap_tag, style = "display: flex; flex-direction: column; align-items: center; 
-               height: 300px; padding: 5px; border: 1px solid #555; overflow: hidden;")
+               height: 250px; padding: 5px; border: 1px solid #555; overflow: hidden;")
             
-            column(4, full, style = "padding: 5px;")
+            column(6, full, style = "padding: 5px;")
         })
         
         fluidRow(tags)
@@ -379,21 +345,21 @@ server <- function(input, output, session) {
             pull(tnum)
         
         tags_m <- lapply(teams, function(team) {
-            img_src_m <- paste0("images_d/", team,".png")
+            img_src_m <- paste0("heatmaps/", team,".png")
             tag_temp_m <- tags$img(
                 src = img_src_m, 
-                alt = paste("Robot Image for Team", team), 
-                style = "height: 90%; width: auto; object-fit: cover;")
+                alt = paste("Robot Auto Heatmap for Team", team), 
+                style = "height: auto; width: 90%; object-fit: cover;")
             
             cap_tag_m <- tags$p(paste("Team:", team), style = "text-align: center;")
             
             full_m <- tags$div(
                 tag_temp_m, cap_tag_m, 
                 style = "display: flex; flex-direction: column; 
-                align-items: center; height: 300px; padding: 5px; 
+                align-items: center; height: 250px; padding: 5px; 
                 border: 1px solid #555; overflow: hidden;")
             
-            column(4, full_m, style = "padding: 5px;")
+            column(6, full_m, style = "padding: 5px;")
         })
         
         fluidRow(tags_m)

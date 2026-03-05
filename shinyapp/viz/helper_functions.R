@@ -101,13 +101,8 @@ endgame_graph <- function(raw, teams) {
         }
 }
 
-# event_key needed to write pridge.csv to the right folderf
-pridge_calculation_offline <- function(event_key) {
-    data_dir_path <- paste0("shinyapp/data/", event_key)
-    schedule <- read.csv(paste0(data_dir_path, "/schedule.csv"))
-    tba_data <- read.csv(paste0(data_dir_path, "/tba_data.csv"))
-    statbotics_data <- read.csv(paste0(data_dir_path, "/statbotics_data.csv"))
-    
+# event_key needed to write pridge.csv to the right folder (switch to a .R?)
+pridge_calculation <- function(schedule, tba_data, event_key) {
     unique_teams <- sort(unique(unlist(schedule[,2:7])))
     design <- matrix(0, 
                      nrow = length(unique(tba_data$match)) * 2, 
@@ -115,7 +110,7 @@ pridge_calculation_offline <- function(event_key) {
     colnames(design) <- unique_teams
     matches <- unique(tba_data$match)
     
-    long_schedule <- schedule |>
+    longer_schedule <- schedule |>
         pivot_longer(
             cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
             names_to = "robot",
@@ -124,9 +119,9 @@ pridge_calculation_offline <- function(event_key) {
     
     for (i in 1:nrow(design)) {
         chipotle <- filter(
-            long_schedule,
+            longer_schedule,
             match == matches[ceiling(i/2)], 
-            substring(robot, 1, 1) == ifelse(i %% 2, "B", "R"))
+            substring(robot, 1, 1) == ifelse(i %% 2, "R", "B"))
         design[i, as.character(chipotle$team)] = 1
     }
     
@@ -137,35 +132,33 @@ pridge_calculation_offline <- function(event_key) {
             values_to = "score"
         )
     
-    auto_priors <- statbotics_data$auto_fuel_epa
-    tele_priors <- statbotics_data$tele_fuel_epa
-    names(auto_priors) <- names(tele_priors) <- statbotics_data$team
+    priors <- rep(25, length(unique_teams))     # Hard Coded
+    auto_priors <- rep(8, length(unique_teams)) # Hard Coded
     grid <- seq(0, 20, length.out = 1000)
-    tele_fuel_columns <- c('red_tele_fuel', 'blue_tele_fuel') # 80 char limit
     
     auto_mses <- scoutR:::pridge_lambda_cv(
         design, 
-        response$score[!(response$alliance %in% tele_fuel_columns)], 
+        response$score[!(response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel'))], 
         auto_priors, grid, plot_mses = FALSE)
     
     tele_mses <- scoutR:::pridge_lambda_cv(
         design, 
-        response$score[response$alliance %in% tele_fuel_columns], 
-        tele_priors, grid, plot_mses = FALSE)
+        response$score[response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')], 
+        priors, grid, plot_mses = FALSE)
     
     auto_lambda_opt <- grid[which.min(auto_mses)]
     tele_lambda_opt <- grid[which.min(tele_mses)]
     
-    auto_fuel <- round(scoutR:::prior_ridge(
+    auto_fuel <- scoutR:::prior_ridge(
         design, 
         response$score[
-            response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel')],  
-        auto_lambda_opt, auto_priors), 2)
-    tele_fuel <- round(scoutR:::prior_ridge(
+            (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
+        auto_lambda_opt, priors)
+    tele_fuel <- scoutR:::prior_ridge(
         design, 
         response$score[
             response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
-        tele_lambda_opt, tele_priors), 2)
+        tele_lambda_opt, priors)
     
     priors_df <- data.frame(team = unique_teams, auto_fuel, tele_fuel)
     write.csv(
@@ -173,87 +166,20 @@ pridge_calculation_offline <- function(event_key) {
         paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
 }
 
-recent_team_epas <- function(schedule, matches, event_key) {
-    schedule <- schedule[1:max(matches$match_number), ] # only matches played
-    
-    long_schedule <- schedule |>
-        pivot_longer(
-            cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
-            names_to = "robot",
-            values_to = "team"
-        )
-    
-    last_instance <- data.frame(team = sort(unique(long_schedule$team))) |>
-        rowwise() |>
-        mutate(
-            last_match = max(long_schedule$match[long_schedule$team == team]),
-            match_key = paste0("2026", event_key, "_qm", last_match),
-            sb = list(team_sb(team, match = match_key)),
-            auto_fuel_epa = sb$epa$breakdown$auto_fuel,
-            total_fuel_epa = sb$epa$breakdown$total_fuel,
-            tele_fuel_epa = total_fuel_epa - auto_fuel_epa
-        ) |>
-        select(team, match_key, auto_fuel_epa, tele_fuel_epa)
-    
-    return(last_instance)
-}
-
-pridge_calculation_online <- function(event_key){
-    matches <- event_matches(paste0("2026", event_key), match_type = "quals")
-
-    schedule <- data.frame(
-        match = matches$match_number,
-        R1 = matches$red1,
-        R2 = matches$red2,
-        R3 = matches$red3,
-        B1 = matches$blue1,
-        B2 = matches$blue2,
-        B3 = matches$blue3
-    ) |>
-        rowwise() |>
-        mutate(
-            R1 = as.numeric(gsub("frc", "", R1)),
-            R2 = as.numeric(gsub("frc", "", R2)),
-            R3 = as.numeric(gsub("frc", "", R3)),
-            B1 = as.numeric(gsub("frc", "", B1)),
-            B2 = as.numeric(gsub("frc", "", B2)),
-            B3 = as.numeric(gsub("frc", "", B3)),
-        )
-    
-    blue_auto_fuel <- sapply(matches[['blue_hubScore']], \(x) x$autoCount)
-    blue_tele_fuel <- sapply(matches[['blue_hubScore']], \(x) x$teleopCount)
-    
-    red_auto_fuel <- sapply(matches[['red_hubScore']], \(x) x$autoCount)
-    red_tele_fuel <- sapply(matches[['red_hubScore']], \(x) x$teleopCount)
-    
-    extracted_data <- data.frame(
-        match = matches$match_number, 
-        blue_auto_fuel,
-        blue_tele_fuel,
-        red_auto_fuel,
-        red_tele_fuel)
-    
-    file_path_1 <- paste0("shinyapp/data/", event_key, "/tba_data.csv")
-    write.csv(extracted_data, file_path_1, row.names = FALSE)
-
-    statbotics_data <- recent_team_epas(schedule, matches, event_key)
-    file_path_2 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
-    write.csv(statbotics_data, file_path_2, row.names = FALSE)
-    
-    pridge_calculation_offline(event_key)
-}
-
 plot_scouting_graph <- function(raw) {
     scout <- raw$scout
-    scout_count <- count(raw, scout, sort = TRUE, name = "number_of_times")
+    scout_count <- count(raw, scout, sort = TRUE, name = "number_of_times")|>
+        mutate(percentile = percent_rank(number_of_times))
     
     still_graph <- ggplot(scout_count, aes(
         text = paste("Scout:", scout, "|| Count:", number_of_times),
         x = reorder(scout, number_of_times, decreasing = TRUE),
-        y = number_of_times)) + 
-        geom_col(fill = "steelblue") +
+        y = number_of_times,
+        fill = percentile)) +
+        geom_col() +
         theme_bw() +
         theme(legend.position = "none") + 
+        scale_fill_gradient2(high = "forestgreen", mid = "grey90", low = "firebrick2", midpoint = 0.5) +
         labs(
             x = "Scout Initials",
             y = "Number of Times Scouted",
@@ -309,12 +235,12 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
                         "blue"), size = 15)
             )
             else NULL
-            } +
+        } +
         {if (flip) coord_flip() else NULL}
 }
 
 summary_stats <- function(raw, pridge, teams = NULL) {
-    if (is.null(teams)) teams <- sort(unique(raw$team))
+    if (is.null(teams)) teams <- unique(raw$team)
     result <- raw |>
         filter(team %in% teams) |>
         group_by(team) |>
@@ -384,15 +310,16 @@ yap_graph <- function(raw) {
             mean_yaps = round(mean(number_of_yaps), digits = 2),
             count = n()
         ) |>
+        mutate(percentile = percent_rank(mean_yaps))|>
         mutate(
             scout_name = reorder(scout, mean_yaps, decreasing = TRUE)
         )
     
-    plot <- ggplot(scout_comments, aes(x = scout_name, y = mean_yaps)) +
-        geom_bar(stat = "identity", position = position_dodge(), 
-                 fill = "rosybrown1", colour = "black") +
+    plot <- ggplot(scout_comments, aes(x = scout_name, y = mean_yaps, fill = percentile)) +
+        geom_bar(stat = "identity", position = position_dodge()) +
         labs(title = "Comments Summary: Mean Yappage per Scout", 
              x = "Scouts", y = "Mean yappage") +
+        scale_fill_gradient2(high = "forestgreen", mid = "grey90", low = "firebrick2", midpoint = 0.5) +
         theme_bw()
     
     ggplotly(plot)
@@ -445,12 +372,14 @@ high_streak <- function(raw){
             missed_matches = list(setdiff(all_matches, scouted_matches)),
             streak = current_match - max(missed_matches)
         ) |>
+        mutate(percentile = percent_rank(streak)) |>
         filter(streak > 0)
     
-    ggplot(streak_df, aes(x = `scout`, streak)) + 
-        geom_bar(position = "stack", stat = "identity", fill = "chartreuse2") + 
+    ggplot(streak_df, aes(x = `scout`, streak, fill = percentile)) + 
+        geom_bar(position = "stack", stat = "identity") + 
         labs(title = "Current Streak", 
              x = "Scouts", y = "Matches") +
+        scale_fill_gradient2(high = "firebrick2", mid = "grey90", low = "cornflowerblue", midpoint = 0.5) +
         theme_bw()
 }
 
@@ -465,7 +394,7 @@ normalize_column <- function(x) {
 }
 
 calculate_team_scores <- function(weights, team_data){
-    numeric_cols <- names(team_data)
+    numeric_cols <- setdiff(names(team_data), c("Team", "Died"))
     normalized_data <- team_data
     
     for (col in numeric_cols) {
@@ -479,15 +408,15 @@ calculate_team_scores <- function(weights, team_data){
         if (col %in% names(weights)) {
             weight_val <- weights[[col]]
             team_scores$`Team Score` <-
-                team_scores$`Team Score` + (normalized_data[[col]] * weight_val)
-            #team_scores$`Team Score` <- round(team_scores$`Team Score`, 2)
+                team_scores$`Team Score` + normalized_data[[col]] * weight_val
+            team_scores$`Team Score` <- round(team_scores$`Team Score`, 2)
         }
     }
     
     team_scores <- merge(team_scores, team_data, by = "Team")
     team_scores <- team_scores[order(-team_scores$`Team Score`), ]
     return(team_scores)
-    }
+}
 
 weights_modal <- function(weights) {
     modalDialog(
@@ -582,6 +511,16 @@ inactive_stategy_summary <- function(raw, selected_teams, order, teams, flip) {
     team <- raw |>
         group_by(team)
     
+    team_order <- selected_teams
+    
+    comments$team <- factor(comments$team, levels = team_order, ordered = TRUE)
+    
+    comments$comment_type <- factor(
+        comments$comment_type, 
+        levels = c("a_pass_1", "b_herd_2", "c_theif_3", "d_defense_oz_4", "e_defense_nz_5", "f_intaked_full_6"), 
+        ordered = TRUE
+    )
+    
     ggplot(comments, aes(fill = comment_type, 
                          x = team, 
                          y = level)) +
@@ -605,7 +544,53 @@ inactive_stategy_summary <- function(raw, selected_teams, order, teams, flip) {
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
-                        levels(data$Team) %in% teams[1:3],
+                        levels(comments$team) %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
+}
+
+auto_type_graph <- function(raw, order, teams, flip) {
+    auto_type_data <- raw |>
+        filter(team %in% teams) |>
+        mutate(
+            auto_type = factor(
+                auto_type, 
+                ordered = TRUE, 
+                levels = c("1", "2", "3")))|>
+        group_by(team, auto_type) |>
+        summarise(
+            auto_type_numbers = n()
+        )
+    
+    team_order <- teams
+    
+    auto_type_data$team <- factor(auto_type_data$team, levels = team_order, ordered = TRUE)
+    auto_type_data$auto_type <- factor(
+        auto_type_data$auto_type, 
+        c("1", "2", "3"), 
+        ordered = TRUE)
+    
+    ggplot(auto_type_data, 
+           aes(fill = auto_type, y = auto_type_numbers, x = factor(team))) + 
+        geom_bar(position = "stack", stat = "identity") +
+        labs(title = "Auto Types",
+             x = "Team",
+             y = "Number of Different Auto Types") + 
+        scale_fill_manual(
+            values = c("3" = "#996D99", 
+                       "2" = "#CC91CC", "1" = "#F7B5F7"),
+            labels = c("3" = "Depot", 
+                       "2" = "Outpost/HP", "1" = "Neutral")
+        ) +
+        theme_bw()  +
+        {if (length(teams) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(auto_type_data$team) %in% teams[1:3],
                         "red", 
                         "blue"), size = 15)
             )
