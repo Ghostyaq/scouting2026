@@ -142,6 +142,12 @@ server <- function(input, output, session) {
         bump_trench_boxplot(raw, team)
     })
     
+    # COMPARE AUTO TYPE
+    output$auto_type_comp <- renderPlot({
+        team <- input$selected_teams_comp
+        auto_type_graph(raw, team)
+    })
+    
     output$comments_df_comp <- renderDT({
         team <- input$selected_teams_comp
         comments_df(raw, team)
@@ -206,6 +212,18 @@ server <- function(input, output, session) {
             pull(tnum)
         
         inactive_stategy_summary(raw, teams, FALSE, teams, FALSE)
+    })
+    
+    output$auto_type_match <- renderPlot({
+        teams <- schedule |>
+            filter(match == input$selected_match) |>
+            pivot_longer(
+                cols = c(R1, R2, R3, B1, B2, B3), 
+                names_to = "position", 
+                values_to = "tnum") |>
+            pull(tnum)
+        
+        auto_type_graph(raw, teams)
     })
     
     output$summary_stats_comp <- renderDT({

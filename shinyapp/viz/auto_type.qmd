@@ -32,7 +32,6 @@ auto_type_graph <- function(raw, teams) {
         theme_bw()
 }
 
-raw <- read.csv("~/Documents/R/scouting2026/shinyapp/data/test_data/data.csv")
-auto_type_graph(raw, 3359)
+# auto_type_graph(raw, c(190, 8724))
 
 ```
