@@ -101,8 +101,13 @@ endgame_graph <- function(raw, teams) {
         }
 }
 
-# event_key needed to write pridge.csv to the right folder (switch to a .R?)
-pridge_calculation <- function(schedule, tba_data, event_key) {
+# event_key needed to write pridge.csv to the right folderf
+pridge_calculation_offline <- function(event_key) {
+    data_dir_path <- paste0("shinyapp/data/", event_key)
+    schedule <- read.csv(paste0(data_dir_path, "/schedule.csv"))
+    tba_data <- read.csv(paste0(data_dir_path, "/tba_data.csv"))
+    statbotics_data <- read.csv(paste0(data_dir_path, "/statbotics_data.csv"))
+    
     unique_teams <- sort(unique(unlist(schedule[,2:7])))
     design <- matrix(0, 
                      nrow = length(unique(tba_data$match)) * 2, 
@@ -110,7 +115,7 @@ pridge_calculation <- function(schedule, tba_data, event_key) {
     colnames(design) <- unique_teams
     matches <- unique(tba_data$match)
     
-    longer_schedule <- schedule |>
+    long_schedule <- schedule |>
         pivot_longer(
             cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
             names_to = "robot",
@@ -119,9 +124,9 @@ pridge_calculation <- function(schedule, tba_data, event_key) {
     
     for (i in 1:nrow(design)) {
         chipotle <- filter(
-            longer_schedule,
+            long_schedule,
             match == matches[ceiling(i/2)], 
-            substring(robot, 1, 1) == ifelse(i %% 2, "R", "B"))
+            substring(robot, 1, 1) == ifelse(i %% 2, "B", "R"))
         design[i, as.character(chipotle$team)] = 1
     }
     
@@ -132,38 +137,110 @@ pridge_calculation <- function(schedule, tba_data, event_key) {
             values_to = "score"
         )
     
-    priors <- rep(25, length(unique_teams))     # Hard Coded
-    auto_priors <- rep(8, length(unique_teams)) # Hard Coded
+    auto_priors <- statbotics_data$auto_fuel_epa
+    tele_priors <- statbotics_data$tele_fuel_epa
+    names(auto_priors) <- names(tele_priors) <- statbotics_data$team
     grid <- seq(0, 20, length.out = 1000)
+    tele_fuel_columns <- c('red_tele_fuel', 'blue_tele_fuel') # 80 char limit
     
     auto_mses <- scoutR:::pridge_lambda_cv(
         design, 
-        response$score[!(response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel'))], 
+        response$score[!(response$alliance %in% tele_fuel_columns)], 
         auto_priors, grid, plot_mses = FALSE)
     
     tele_mses <- scoutR:::pridge_lambda_cv(
         design, 
-        response$score[response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')], 
-        priors, grid, plot_mses = FALSE)
+        response$score[response$alliance %in% tele_fuel_columns], 
+        tele_priors, grid, plot_mses = FALSE)
     
     auto_lambda_opt <- grid[which.min(auto_mses)]
     tele_lambda_opt <- grid[which.min(tele_mses)]
     
-    auto_fuel <- scoutR:::prior_ridge(
+    auto_fuel <- round(scoutR:::prior_ridge(
         design, 
         response$score[
-            (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
-        auto_lambda_opt, priors)
-    tele_fuel <- scoutR:::prior_ridge(
+            response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel')],  
+        auto_lambda_opt, auto_priors), 2)
+    tele_fuel <- round(scoutR:::prior_ridge(
         design, 
         response$score[
             response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
-        tele_lambda_opt, priors)
+        tele_lambda_opt, tele_priors), 2)
     
     priors_df <- data.frame(team = unique_teams, auto_fuel, tele_fuel)
     write.csv(
         priors_df, 
         paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
+}
+
+recent_team_epas <- function(schedule, matches, event_key) {
+    schedule <- schedule[1:max(matches$match_number), ] # only matches played
+    
+    long_schedule <- schedule |>
+        pivot_longer(
+            cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
+            names_to = "robot",
+            values_to = "team"
+        )
+    
+    last_instance <- data.frame(team = sort(unique(long_schedule$team))) |>
+        rowwise() |>
+        mutate(
+            last_match = max(long_schedule$match[long_schedule$team == team]),
+            match_key = paste0("2026", event_key, "_qm", last_match),
+            sb = list(team_sb(team, match = match_key)),
+            auto_fuel_epa = sb$epa$breakdown$auto_fuel,
+            total_fuel_epa = sb$epa$breakdown$total_fuel,
+            tele_fuel_epa = total_fuel_epa - auto_fuel_epa
+        ) |>
+        select(team, match_key, auto_fuel_epa, tele_fuel_epa)
+    
+    return(last_instance)
+}
+
+pridge_calculation_online <- function(event_key){
+    matches <- event_matches(paste0("2026", event_key), match_type = "quals")
+
+    schedule <- data.frame(
+        match = matches$match_number,
+        R1 = matches$red1,
+        R2 = matches$red2,
+        R3 = matches$red3,
+        B1 = matches$blue1,
+        B2 = matches$blue2,
+        B3 = matches$blue3
+    ) |>
+        rowwise() |>
+        mutate(
+            R1 = as.numeric(gsub("frc", "", R1)),
+            R2 = as.numeric(gsub("frc", "", R2)),
+            R3 = as.numeric(gsub("frc", "", R3)),
+            B1 = as.numeric(gsub("frc", "", B1)),
+            B2 = as.numeric(gsub("frc", "", B2)),
+            B3 = as.numeric(gsub("frc", "", B3)),
+        )
+    
+    blue_auto_fuel <- sapply(matches[['blue_hubScore']], \(x) x$autoCount)
+    blue_tele_fuel <- sapply(matches[['blue_hubScore']], \(x) x$teleopCount)
+    
+    red_auto_fuel <- sapply(matches[['red_hubScore']], \(x) x$autoCount)
+    red_tele_fuel <- sapply(matches[['red_hubScore']], \(x) x$teleopCount)
+    
+    extracted_data <- data.frame(
+        match = matches$match_number, 
+        blue_auto_fuel,
+        blue_tele_fuel,
+        red_auto_fuel,
+        red_tele_fuel)
+    
+    file_path_1 <- paste0("shinyapp/data/", event_key, "/tba_data.csv")
+    write.csv(extracted_data, file_path_1, row.names = FALSE)
+
+    statbotics_data <- recent_team_epas(schedule, matches, event_key)
+    file_path_2 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
+    write.csv(statbotics_data, file_path_2, row.names = FALSE)
+    
+    pridge_calculation_offline(event_key)
 }
 
 plot_scouting_graph <- function(raw) {
@@ -237,7 +314,7 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
 }
 
 summary_stats <- function(raw, pridge, teams = NULL) {
-    if (is.null(teams)) teams <- unique(raw$team)
+    if (is.null(teams)) teams <- sort(unique(raw$team))
     result <- raw |>
         filter(team %in% teams) |>
         group_by(team) |>
