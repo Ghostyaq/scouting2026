@@ -82,9 +82,15 @@ ui <- fluidPage(
                         plotOutput("driver_rating_comp")
                     )
                 ),
-                card(
-                    card_header("Inactive Strategy Summary"),
-                    plotOutput("inactive_strategy_comp")
+                layout_columns(
+                    card(
+                        card_header("Inactive Strategy Summary"),
+                        plotOutput("inactive_strategy_comp")
+                    ),
+                    card(
+                        card_header("Auto Type"),
+                        plotOutput("auto_type_comp")
+                    )
                 ),
                 card(
                     card_header("Robot Images"),
@@ -138,6 +144,10 @@ ui <- fluidPage(
                     card(
                         card_header("Inactive Strategy Summary"),
                         plotOutput("inactive_strategy_match")
+                    ),
+                    card(
+                        card_header("Auto Type"),
+                        plotOutput("auto_type_match")
                     ),
                 ),
                 card(
