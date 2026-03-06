@@ -18,12 +18,13 @@ library(shiny.fluent)
 library(colourpicker)
 
 default_linear_weights <- data.frame(
-    Team = 0, `ACP` = 0,
+    Team = 0,
     `Auto Fuel` = 1, `Tele Fuel` = 1, `Total Fuel` = 1, `Total Score` = 0,
     `Auto Cycles` = 0, `Tele Cycles` = 0, `Total Cycles` = 0,
     `Auto Bump` = 10, `Tele Bump` = 10, `Tele Trench` = 5, 
     `Auto Climb` = 15, Climb = 15, `Quick Climb` = 15,
-    Driver = 10, `Solo Shot` = 0, Died = 0, Card = -20, `Matches Played` = 0
+    Driver = 10, `Solo Shot` = 0, Died = 0, Card = -20, `Matches Played` = 0,
+    `ACP` = 0
 ) #temp, remove later
 
 raw <- read.csv("data/week0/data.csv")
@@ -34,6 +35,7 @@ weights <- reactiveVal(default_linear_weights)
 
 addResourcePath("images_d", "data/test_data/images")
 addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
+in_rstudio <- rstudioapi::isAvailable()
 
 server <- function(input, output, session) {
     #UPDATE PICKERS
@@ -43,6 +45,10 @@ server <- function(input, output, session) {
         updateVirtualSelect("selected_team", choices = unique_teams)
         updateVirtualSelect("selected_teams_comp", choices = unique_teams)
     })
+    
+    #Password logic
+    correct_password <- "0322"
+    user_logged_in <- reactiveVal(in_rstudio)
     
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
@@ -67,7 +73,7 @@ server <- function(input, output, session) {
     
     observeEvent(input$apply_weights, {
         new_weights <- data.frame(
-            Team = 0, `ACP` = 0,
+            Team = 0,
             `Auto Fuel` = input$weight_auto_fuel,
             `Tele Fuel` = input$weight_tele_fuel,
             `Total Fuel` = input$weight_total_fuel,
@@ -81,7 +87,8 @@ server <- function(input, output, session) {
             `Auto Climb` = input$weight_auto_climb, Climb = input$weight_climb,
             `Quick Climb` = input$weight_quick_climb,
             Driver = input$weight_driver, Died = input$weight_died,
-            Card = input$weight_card, `Matches Played` = 0
+            Card = input$weight_card, `Matches Played` = 0,
+            `ACP` = 0
         )
         weights(new_weights)
         removeModal()
@@ -156,6 +163,7 @@ server <- function(input, output, session) {
     
     #SUMMARY POINT MATCH
     output$summary_point_match <- renderPlot({
+        req(user_logged_in())
         teams <- schedule |>
             filter(match == input$selected_match) |>
             pivot_longer(
@@ -165,6 +173,32 @@ server <- function(input, output, session) {
             pull(tnum)
         
         stacked_bar_chart(raw, schedule, pridge, FALSE, teams, FALSE)
+    })
+    
+    output$login_ui <- renderUI({
+        if (!user_logged_in()) {
+            tagList(
+                passwordInput("password", "Enter password to access comments: "),
+                actionButton("login", "Login")
+            )
+        }
+    })
+    
+    observeEvent(input$login, {
+        if (input$password == correct_password) {
+            user_logged_in(TRUE)
+        } else {
+            user_logged_in(FALSE)
+        }
+    })
+    
+    output$login_status <- renderUI({
+        req(input$login)
+        if (user_logged_in()) {
+            tags$p(style = "color: green;", "Access granted.")
+        } else {
+            tags$p(style = "color: red;", "Incorrect password.")
+        }
     })
     
     output$end_bar_match <- renderPlot({
@@ -244,6 +278,7 @@ server <- function(input, output, session) {
     })
     
     output$comments_df_match <- renderDT({
+        req(user_logged_in())
         teams <- schedule |>
             filter(match == input$selected_match) |>
             pivot_longer(
