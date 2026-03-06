@@ -23,49 +23,22 @@ read_data <- read.csv("../data/test_data/data.csv")
 
 team_list<- c("449","2988")
 
-# calculates avg n times a team crossed bump: 
-#avg_tbump <- read_data |> 
-#group_by(team) |>
-#summarize(mean_val = round(mean(teleop_bump), 2))  |> 
-#arrange(desc(mean_val))
-# print(avg_tbump)
-
 filtered_df <- read_data |> filter(team %in% team_list)
 
-df_bump <- filtered_df |>
-    select(team, count = teleop_bump) |> 
+combined_more <- filtered_df |>
     group_by(team) |>
-    mutate(obstacle = "Bump",
-           avg = mean(count))
+    summarize(avg_trench = mean(teleop_trench), 
+              avg_bump = mean(teleop_bump))
 
-df_trench <- filtered_df |> 
-    select(team, count = teleop_trench) |> 
-    group_by(team) |>
-    mutate(obstacle = "Trench",
-           avg = mean(count))
-
-combined_df <- rbind(df_trench, df_bump) |>
-    group_by(team, obstacle) |>
-    summarize(avg_trench = ifelse(obstacle == "Trench", avg, 0),
-              avg_bump = ifelse(obstacle == "Bump", avg, 0)) |>
-    unique() 
-    
-combined_more <- combined_df |>
-    group_by(team) |>
-    summarize(
-        avg_trench1 = sum(avg_trench),
-        avg_bump1 = sum(avg_bump)
-    )
-
-ggplot(combined_more, aes(x = avg_trench1, y = avg_bump1)) + 
+ggplot(combined_more, aes(x = avg_trench, y = avg_bump)) + 
     geom_point() +
     geom_label(
     label = combined_more$team,
     nudge_x = 0.25, nudge_y = 0.25,
     check_overlap = T
   ) +
-    scale_x_continuous(expand = c(0, 0), limits = c(0, max(combined_more$avg_trench1 + 1))) + 
-    scale_y_continuous(expand = c(0, 0), limits = c(0, max(combined_more$avg_bump1 + 1))) +
+    scale_x_continuous(expand = c(0, 0), limits = c(0, max(combined_more$avg_trench + 1))) + 
+    scale_y_continuous(expand = c(0, 0), limits = c(0, max(combined_more$avg_bump + 1))) +
     labs(title = "Mean Crossing Comparison",
          x = "Trench count",
          y = "Bump count") + 
