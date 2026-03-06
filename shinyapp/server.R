@@ -31,7 +31,9 @@ raw <- read.csv("data/week0/data.csv")
 pridge <- read.csv("data/week0/pridge.csv")
 tba_data <- read.csv("data/week0/tba_data.csv")
 schedule <- read.csv("data/week0/schedule.csv")
+alliances <- read.csv("data/week0/alliances.csv")
 weights <- reactiveVal(default_linear_weights)
+team <- reactiveVal(sort(unique(raw$team)))
 
 addResourcePath("images_d", "data/test_data/images")
 addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
@@ -42,8 +44,9 @@ server <- function(input, output, session) {
     observe({
         unique_teams <- sort(unique(raw$team))
         updateVirtualSelect("selected_match", choices = schedule$match)
-        updateVirtualSelect("selected_team", choices = unique_teams)
         updateVirtualSelect("selected_teams_comp", choices = unique_teams)
+        updateVirtualSelect("selected_red", choices = alliances$alliance)
+        updateVirtualSelect("selected_blue", choices = alliances$alliance)
     })
     
     #Password logic
@@ -120,50 +123,55 @@ server <- function(input, output, session) {
                         backgroundPosition = 'center')    
     })
     
+    # UPDATE SELECTED TEAMS
+    observeEvent(input$selected_teams_comp, {
+        team(input$selected_teams_comp)
+    })
+    
+    observeEvent(c(input$selected_red, input$selected_blue), {
+        red_alliance <- alliances[alliances$alliance == input$selected_red,]
+        blue_alliance <- alliances[alliances$alliance == input$selected_blue,]
+        red_alliance <- c(red_alliance$C, red_alliance$FP, red_alliance$SP)
+        blue_alliance <- c(blue_alliance$C, blue_alliance$FP, blue_alliance$SP)
+        team(c(red_alliance, blue_alliance))
+    })
+    
     #COMPARE POINT SUMMARY
     output$summary_point_comp <- renderPlot({
-        team <- input$selected_teams_comp
-        stacked_bar_chart(raw, schedule, pridge, FALSE, team, FALSE)
+        stacked_bar_chart(raw, schedule, pridge, FALSE, team(), FALSE)
     })
     
     #COMPARE ENDGAME BAR
     output$end_bar_comp <- renderPlot({
-        team <- input$selected_teams_comp
-        endgame_graph(raw, team)
+        endgame_graph(raw, team())
     })
     
     #COMPARE DRIVER RATING
     output$driver_rating_comp <- renderPlot({
-        team <- input$selected_teams_comp
-        plot_driver_rating_graph(raw, team)
+        plot_driver_rating_graph(raw, team())
     })
     
     # COMPARE INACTIVE STRATEGY
     output$inactive_strategy_comp <- renderPlot({
-        team <- input$selected_teams_comp
-        inactive_stategy_summary(raw, team, FALSE, FALSE)
+        inactive_stategy_summary(raw, team(), FALSE, FALSE)
     })
     
     #COMPARE TRENCH BUMP
     output$trench_bump_comp <- renderPlot({
-        team <- input$selected_teams_comp
-        bump_trench_boxplot(raw, team)
+        bump_trench_boxplot(raw, team())
     })
     
     # COMPARE AUTO TYPE
     output$auto_type_comp <- renderPlot({
-        team <- input$selected_teams_comp
-        auto_type_graph(raw, FALSE, team, FALSE)
+        auto_type_graph(raw, FALSE, team(), FALSE)
     })
     
     output$comments_df_comp <- renderDT({
-        team <- input$selected_teams_comp
-        comments_df(raw, team)
+        req(user_logged_in())
+        comments_df(raw, team())
     })
     
-    #SUMMARY POINT MATCH
-    output$summary_point_match <- renderPlot({
-        req(user_logged_in())
+    observeEvent(input$selected_match, {
         teams <- schedule |>
             filter(match == input$selected_match) |>
             pivot_longer(
@@ -172,13 +180,22 @@ server <- function(input, output, session) {
                 values_to = "tnum") |>
             pull(tnum)
         
-        stacked_bar_chart(raw, schedule, pridge, FALSE, teams, FALSE)
+        team(teams)
+    })
+    
+    #SUMMARY POINT MATCH
+    output$summary_point_match <- renderPlot({
+        stacked_bar_chart(raw, schedule, pridge, FALSE, team(), FALSE)
+    })
+    
+    output$summary_stats_comp <- renderDT({
+        summary_stats(raw, pridge, teams = team())
     })
     
     output$login_ui <- renderUI({
         if (!user_logged_in()) {
             tagList(
-                passwordInput("password", "Enter password to access comments: "),
+                passwordInput("password", "Enter password to access comments:"),
                 actionButton("login", "Login")
             )
         }
@@ -202,92 +219,32 @@ server <- function(input, output, session) {
     })
     
     output$end_bar_match <- renderPlot({
-        teams <- schedule |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3), 
-                names_to = "position", 
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        endgame_graph(raw, teams)
+        endgame_graph(raw, team())
     })
     
     output$trench_bump_match <- renderPlot({
-        teams <- schedule |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3), 
-                names_to = "position", 
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        bump_trench_boxplot(raw, teams)
+        bump_trench_boxplot(raw, team())
     })
     
     output$driver_rating_match <- renderPlot({
-        teams <- schedule |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3), 
-                names_to = "position", 
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        plot_driver_rating_graph(raw, teams)
+        plot_driver_rating_graph(raw, team())
     })
     
     output$inactive_strategy_match <- renderPlot({
-        teams <- schedule |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3), 
-                names_to = "position", 
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        inactive_stategy_summary(raw, teams, FALSE, teams, FALSE)
+        inactive_stategy_summary(raw, team(), FALSE, FALSE)
     })
     
     output$auto_type_match <- renderPlot({
-        teams <- schedule |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3), 
-                names_to = "position", 
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        auto_type_graph(raw, FALSE, teams, FALSE)
-    })
-    
-    output$summary_stats_comp <- renderDT({
-        summary_stats(raw, pridge, input$selected_teams_comp)
+        auto_type_graph(raw, FALSE, team(), FALSE)
     })
     
     output$summary_stats_match <- renderDT({
-        teams <- schedule |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3), 
-                names_to = "position", 
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        summary_stats(raw, pridge, teams)
+        summary_stats(raw, pridge, team())
     })
     
     output$comments_df_match <- renderDT({
         req(user_logged_in())
-        teams <- schedule |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3), 
-                names_to = "position", 
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        comments_df(raw, teams)
+        comments_df(raw, team())
     })
     
     output$matches_scouted <- renderPlotly({
@@ -303,16 +260,22 @@ server <- function(input, output, session) {
     })
     
     output$images_comp <- renderUI({
-        tags <- lapply(input$selected_teams_comp, function(teamnum) {
+        tags <- lapply(team(), function(teamnum) {
             img_src <- paste0("images_d/", teamnum,".png")
-            tag_temp <- tags$img(src = img_src, 
-                                 alt = paste("Robot Image for Team", teamnum), 
-                                 style = "height: 90%; width: auto; object-fit: cover;")
+            tag_temp <- tags$img(
+                src = img_src, 
+                alt = paste("Robot Image for Team", teamnum), 
+                style = "height: 90%; width: auto; object-fit: cover;")
             
-            cap_tag <- tags$p(paste("Team:", teamnum), style = "text-align: center;")
+            cap_tag <- tags$p(
+                paste("Team:", teamnum), 
+                style = "text-align: center;")
             
-            full <- tags$div(tag_temp, cap_tag, style = "display: flex; flex-direction: column; align-items: center; 
-               height: 300px; padding: 5px; border: 1px solid #555; overflow: hidden;")
+            full <- tags$div(
+            tag_temp, cap_tag, 
+            style = "display: flex; flex-direction: column; 
+            align-items: center; height: 300px; padding: 5px; 
+            border: 1px solid #555; overflow: hidden;")
             
             column(4, full, style = "padding: 5px;")
         })
@@ -320,24 +283,17 @@ server <- function(input, output, session) {
         fluidRow(tags)
     })
     
-    
     output$images_match <- renderUI({
-        teams <- schedule |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3), 
-                names_to = "position", 
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        tags_m <- lapply(teams, function(team) {
+        tags_m <- lapply(team(), function(team) {
             img_src_m <- paste0("images_d/", team,".png")
             tag_temp_m <- tags$img(
                 src = img_src_m, 
                 alt = paste("Robot Image for Team", team), 
                 style = "height: 90%; width: auto; object-fit: cover;")
             
-            cap_tag_m <- tags$p(paste("Team:", team), style = "text-align: center;")
+            cap_tag_m <- tags$p(
+                paste("Team:", team), 
+                style = "text-align: center;")
             
             full_m <- tags$div(
                 tag_temp_m, cap_tag_m, 
@@ -352,16 +308,22 @@ server <- function(input, output, session) {
     })
     
     output$auto_heatmap_comp <- renderUI({
-        tags <- lapply(input$selected_teams_comp, function(teamnum) {
+        tags <- lapply(team(), function(teamnum) {
             img_src <- paste0("heatmaps/", teamnum,".png")
-            tag_temp <- tags$img(src = img_src, 
-                                 alt = paste("Robot Auto Heatmap for Team", teamnum), 
-                                 style = "height: auto; width: 90%; object-fit: cover;")
+            tag_temp <- tags$img(
+                src = img_src, 
+                alt = paste("Robot Auto Heatmap for Team", teamnum), 
+                style = "height: auto; width: 90%; object-fit: cover;")
             
-            cap_tag <- tags$p(paste("Team:", teamnum), style = "text-align: center;")
+            cap_tag <- tags$p(
+                paste("Team:", teamnum), 
+                style = "text-align: center;")
             
-            full <- tags$div(tag_temp, cap_tag, style = "display: flex; flex-direction: column; align-items: center; 
-               height: 250px; padding: 5px; border: 1px solid #555; overflow: hidden;")
+            full <- tags$div(
+            tag_temp, cap_tag, 
+            style = "display: flex; flex-direction: column; 
+            align-items: center; height: 250px; padding: 5px; 
+            border: 1px solid #555; overflow: hidden;")
             
             column(6, full, style = "padding: 5px;")
         })
@@ -369,24 +331,17 @@ server <- function(input, output, session) {
         fluidRow(tags)
     })
     
-    
     output$auto_heatmap_match <- renderUI({
-        teams <- schedule |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3), 
-                names_to = "position", 
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        tags_m <- lapply(teams, function(team) {
+        tags_m <- lapply(team(), function(team) {
             img_src_m <- paste0("heatmaps/", team,".png")
             tag_temp_m <- tags$img(
                 src = img_src_m, 
                 alt = paste("Robot Auto Heatmap for Team", team), 
                 style = "height: auto; width: 90%; object-fit: cover;")
             
-            cap_tag_m <- tags$p(paste("Team:", team), style = "text-align: center;")
+            cap_tag_m <- tags$p(
+                paste("Team:", team), 
+                style = "text-align: center;")
             
             full_m <- tags$div(
                 tag_temp_m, cap_tag_m, 

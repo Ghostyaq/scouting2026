@@ -355,9 +355,7 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP) |>
         modify_if(~is.numeric(.), ~round(., 2))
     
-    if (!is.null(teams)){
-        result$Team <- result$Team[order(match(result$Team, teams))]
-    }
+    result <- result[order(match(result$Team, teams)), ]
     return(result)
 }
 
@@ -562,7 +560,7 @@ weights_modal <- function(weights) {
     )
 }
 
-inactive_stategy_summary <- function(raw, selected_teams, order, teams, flip) {
+inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
     comments <- raw |>
         group_by(team) |>
         filter(team %in% selected_teams) |>
@@ -611,11 +609,11 @@ inactive_stategy_summary <- function(raw, selected_teams, order, teams, flip) {
                        "b_herd_2" = "herd (2)",
                        "a_pass_1" = "pass (1)" )) +
         theme_bw() +
-        {if (length(teams) == 6)
+        {if (length(team_order) == 6)
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
-                        levels(comments$team) %in% teams[1:3],
+                        levels(comments$team) %in% team_order[1:3],
                         "red", 
                         "blue"), size = 15)
             )
