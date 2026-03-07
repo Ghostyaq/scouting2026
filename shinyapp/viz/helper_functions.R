@@ -160,12 +160,12 @@ pridge_calculation_offline <- function(event_key) {
         design, 
         response$score[
             (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
-        auto_lambda_opt, auto_priors), 2)
+        0, auto_priors), 2)
     tele_fuel <- round(scoutR:::prior_ridge(
         design, 
         response$score[
             response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
-        tele_lambda_opt, tele_priors), 2)
+        0, tele_priors), 2)
     
     priors_df <- data.frame(team = unique_teams, auto_fuel, tele_fuel)
     write.csv(
@@ -188,12 +188,12 @@ recent_team_epas <- function(schedule, matches, event_key) {
         mutate(
             last_match = max(long_schedule$match[long_schedule$team == team]),
             match_key = paste0("2026", event_key, "_qm", last_match),
-            #sb = list(team_sb(team, match = match_key))
-            #auto_fuel_epa = sb$epa$breakdown$auto_fuel,
-            #total_fuel_epa = sb$epa$breakdown$total_fuel,
-            #tele_fuel_epa = total_fuel_epa - auto_fuel_epa
-        ) #|>
-        #select(team, match_key, auto_fuel_epa, tele_fuel_epa)
+            sb = list(team_sb(team, match = match_key)),
+            auto_fuel_epa = sb$epa$breakdown$auto_fuel,
+            total_fuel_epa = sb$epa$breakdaown$total_fuel,
+            tele_fuel_epa = total_fuel_epa - auto_fuel_epa
+        ) |>
+        select(team, match_key, auto_fuel_epa, tele_fuel_epa)
     
     return(last_instance)
 }
@@ -236,9 +236,9 @@ pridge_calculation_online <- function(event_key){
     file_path_1 <- paste0("shinyapp/data/", event_key, "/tba_data.csv")
     write.csv(extracted_data, file_path_1, row.names = FALSE)
     
-    statbotics_data <- recent_team_epas(schedule, matches, event_key)
-    file_path_2 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
-    write.csv(statbotics_data, file_path_2, row.names = FALSE)
+    #statbotics_data <- recent_team_epas(schedule, matches, event_key)
+    #file_path_2 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
+    #write.csv(statbotics_data, file_path_2, row.names = FALSE)
     
     pridge_calculation_offline(event_key)
 }
