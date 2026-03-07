@@ -188,12 +188,12 @@ recent_team_epas <- function(schedule, matches, event_key) {
         mutate(
             last_match = max(long_schedule$match[long_schedule$team == team]),
             match_key = paste0("2026", event_key, "_qm", last_match),
-            sb = list(team_sb(team, match = match_key)),
-            auto_fuel_epa = sb$epa$breakdown$auto_fuel,
-            total_fuel_epa = sb$epa$breakdown$total_fuel,
-            tele_fuel_epa = total_fuel_epa - auto_fuel_epa
-        ) |>
-        select(team, match_key, auto_fuel_epa, tele_fuel_epa)
+            #sb = list(team_sb(team, match = match_key))
+            #auto_fuel_epa = sb$epa$breakdown$auto_fuel,
+            #total_fuel_epa = sb$epa$breakdown$total_fuel,
+            #tele_fuel_epa = total_fuel_epa - auto_fuel_epa
+        ) #|>
+        #select(team, match_key, auto_fuel_epa, tele_fuel_epa)
     
     return(last_instance)
 }

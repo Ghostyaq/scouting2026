@@ -27,11 +27,11 @@ default_linear_weights <- data.frame(
     `ACP` = 0
 ) #temp, remove later
 
-raw <- read.csv("data/week0/data.csv")
-pridge <- read.csv("data/week0/pridge.csv")
-tba_data <- read.csv("data/week0/tba_data.csv")
-schedule <- read.csv("data/week0/schedule.csv")
-alliances <- read.csv("data/week0/alliances.csv")
+raw <- read.csv("data/vaale/data.csv")
+pridge <- read.csv("data/vaale/pridge.csv")
+tba_data <- read.csv("data/vaale/tba_data.csv")
+schedule <- read.csv("data/vaale/schedule.csv")
+alliances <- read.csv("data/vaale/alliances.csv")
 weights <- reactiveVal(default_linear_weights)
 team <- reactiveVal(sort(unique(raw$team)))
 
