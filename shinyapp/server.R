@@ -183,6 +183,11 @@ server <- function(input, output, session) {
         team(teams)
     })
     
+    output$score_prediction <- renderText({
+        data <- summary_stats(raw, pridge)
+        score_pred(data, team()[1:3], team()[4:6])
+    })
+    
     #SUMMARY POINT MATCH
     output$summary_point_match <- renderPlot({
         stacked_bar_chart(raw, schedule, pridge, FALSE, team(), FALSE)

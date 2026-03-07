@@ -137,6 +137,7 @@ ui <- fluidPage(
                         "selected_match", 
                         label = "Select a Match", 
                         choices = NULL, selected = 1),
+                    uiOutput("score_prediction"),
                     height = "500px"
                 ),
                 layout_columns(

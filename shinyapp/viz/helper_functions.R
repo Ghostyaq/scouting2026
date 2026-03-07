@@ -667,6 +667,23 @@ auto_type_graph <- function(raw, order, teams, flip) {
         }
 }
 
+score_pred <- function(data, red, blue){
+    red_total_score <- sum(data[data$Team %in% red, ]$`Total Score`)
+    blue_total_score <- sum(data[data$Team %in% blue, ]$`Total Score`)
+    red_auto_score <- sum(data[data$Team %in% red, ]$`Auto Fuel`)
+    blue_auto_score <- sum(data[data$Team %in% blue, ]$`Auto Fuel`)
+    
+    paste0(
+        "Final Scores: ", 
+        "<span style='color:red;'>", round(red_total_score, digits = 0), 
+        "<span style='color:black;'>", " - ", 
+        "<span style='color:blue;'>", round(blue_total_score, digits = 0), 
+        "<span style='color:black;'>", "\nAuto Scores: ",
+        "<span style='color:red;'>", round(red_auto_score, digits = 0), 
+        "<span style='color:black;'>", " - ", 
+        "<span style='color:blue;'>", round(blue_auto_score, digits = 0))
+}
+
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
 #schedule <- read.csv('shinyapp/data/test_data/schedule.csv')
 #tba_data <- read.csv('shinyapp/data/test_data/tba_data.csv')
