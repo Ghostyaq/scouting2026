@@ -434,3 +434,42 @@ matches_interested <- 5:30
 a <- per_match_comparison(team_info, event_key, matches_interested)
 a
 ```
+
+```{r}
+library(tidyverse)
+predictions <- read.csv("../shinyapp/data/vaale/opr.csv")
+tba_data <- read.csv("../shinyapp/data/vaale/tba_data.csv")
+predictions$score <- predictions$auto_fuel + predictions$tele_fuel
+schedule <- read.csv("../shinyapp/data/vaale/schedule.csv")[1:max(tba_data$match),] |>
+    pivot_longer(
+        cols = c(R1, R2, R3, B1, B2, B3),
+        names_to = "robot",
+        values_to = "teams"
+    ) |>
+    rowwise() |>
+    mutate(
+        robot = ifelse(robot %in% c("R1", "R2", "R3"), "R", "B")
+    ) |>
+    group_by(match, robot) |>
+    summarise(
+        score = sum(predictions[predictions$team %in% teams,]$score)
+    ) 
+
+tba_data <- tba_data |>
+    rowwise() |>
+    mutate(
+        B = blue_auto_fuel + blue_tele_fuel,
+        R = red_auto_fuel + red_tele_fuel
+    ) |>
+    select(match, B, R) |>
+    pivot_longer(
+        cols = c(B, R),
+        names_to = "alliance",
+        values_to = "score"
+    )
+
+schedule$diff <- schedule$score - tba_data$score
+mse <- sum(schedule$diff^2)
+mse
+
+```
