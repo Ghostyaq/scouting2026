@@ -160,12 +160,12 @@ pridge_calculation_offline <- function(event_key) {
         design, 
         response$score[
             (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
-        0, auto_priors), 2)
+        auto_lambda_opt, auto_priors), 2)
     tele_fuel <- round(scoutR:::prior_ridge(
         design, 
         response$score[
             response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
-        0, tele_priors), 2)
+        tele_lambda_opt, tele_priors), 2)
     
     priors_df <- data.frame(team = unique_teams, auto_fuel, tele_fuel)
     write.csv(
