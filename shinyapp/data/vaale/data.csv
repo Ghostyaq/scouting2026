@@ -294,7 +294,7 @@ CC,49,B2,4638,F,FALSE,,FALSE,FALSE,2,8,0,2,2,No,FALSE,"2,3,4",4,FALSE,TRUE,No Ca
 GK,50,B3,2534,F,FALSE,,FALSE,FALSE,0,7,0,0,0,No,FALSE,"2,3",4,TRUE,FALSE,No Card,Lost bumper; disabled,,,,
 KO,50,R3,2377,M,FALSE,1,FALSE,FALSE,4,4,0,1,0,No,FALSE,2,3,FALSE,FALSE,No Card,"Turret, decent accuracy ig",,,,
 BP,50,B1,122,C,FALSE,,FALSE,FALSE,0,2,4,2,6,No,FALSE,,2,FALSE,TRUE,No Card,Inconsistent accuracy ,,,,
-CC,50,B2,", ",M,FALSE,,FALSE,FALSE,0,0,3,1,4,No,FALSE,,2,FALSE,TRUE,No Card,"Shot when not active, gets stuck",,,,
+CC,50,B2,512,M,FALSE,,FALSE,FALSE,0,0,3,1,4,No,FALSE,,2,FALSE,TRUE,No Card,"Shot when not active, gets stuck",,,,
 LJ,50,R1,611,C,FALSE,3,TRUE,FALSE,0,0,2,0,0,No,FALSE,"6,2",3,FALSE,FALSE,No Card,"Intake until 30% full, shooter didn41391t work, could only herd little clumps",,,,
 NS,50,R2,4099,F,FALSE,1,FALSE,FALSE,0,4,2,4,0,No,FALSE,6,5,FALSE,TRUE,No Card,,,,,
 KO,51,R3,2890,C,FALSE,2,FALSE,TRUE,3,0,4,1,7,No,FALSE,6,3,FALSE,FALSE,No Card,Mid accuracy,,,,
