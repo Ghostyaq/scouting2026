@@ -1,8 +1,13 @@
 # Computer Vision Scouting
 
-[View Most Recent Data](https://bit-turtle.tech:449/)
+## heatmap.png
+Grayscale heatmap of average fuel positions throughout all matches
 
-# robocv.csv
+## colormap.png
+Colorized version of heatmap.png
+
+## robocv.csv
+Robot scores in each match
 
 Robot IDs (From the perspective of the stream):
 * 0: Unknown
