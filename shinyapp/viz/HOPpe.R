@@ -1,9 +1,3 @@
----
-title: "HOPpeR"
-format: html
----
-
-```{r}
 pridge_hopper_offline <- function(event_key) {
     data_dir_path <- paste0("shinyapp/data/", event_key)
     schedule <- read.csv(paste0(data_dir_path, "/schedule.csv"))
@@ -80,4 +74,3 @@ pridge_hopper_offline <- function(event_key) {
         priors_df, 
         paste0("shinyapp/data/", event_key, "/HOPpeR.csv"), row.names = FALSE)
 }
-```
