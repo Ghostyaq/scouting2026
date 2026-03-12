@@ -115,6 +115,10 @@ ui <- fluidPage(
                     card_header("Summary Stats"), 
                     DTOutput("summary_stats_comp")
                 ),
+                card(
+                    card_header("Match History"),
+                    DTOutput("match_history")
+                ),
                 if (in_rstudio) {
                     card(
                         card_header("Comments Data"),
@@ -213,14 +217,21 @@ ui <- fluidPage(
         ),
         tabPanel(
             title = "Settings",
-            layout_columns(
-                card(
-                    card_header("Refresh Data"),
-                    actionButton("pridge_button", "Reload Data")
+            layout_sidebar(
+                sidebar = card(
+                    title = "Event Switching",
+                    actionButton("test_data", "Testing Data"),
+                    actionButton("vaale", "Vaale")
                 ),
-                card(
-                    card_header("Custom Theme Color"),
-                    ColorPicker("theme_color")
+                layout_columns(
+                    card(
+                        card_header("Refresh Data"),
+                        actionButton("pridge_button", "Reload Data")
+                    ),
+                    card(
+                        card_header("Custom Theme Color"),
+                        ColorPicker("theme_color")
+                    )
                 )
             )
         )
