@@ -1,7 +1,7 @@
 library(ggplot2)
 library(tidyverse)
 
-data <- read.csv("wpilogs/robot_data_qual70.csv")
+data <- read.csv("wpilogs/robot_data_elim9.csv")
 brownouts_only <- data[data$X.SystemStats.BrownedOut == 'true', ]
 data$left_shoot_vel <- as.numeric(data$X.Shooter.LeftLeaderVelocityRadPerSec)
 data$right_shoot_vel <- as.numeric(data$X.Shooter.RightLeaderVelocityRadPerSec)
@@ -17,8 +17,8 @@ shooting$left_z_scores = scale(shooting$left_shoot_vel)
 shooting$right_z_scores = scale(shooting$right_shoot_vel)
 
 ggplot(shooting, aes(x = Timestamp)) + 
-    geom_point(aes(y = left_z_scores), color = "#a7000a", size = 0.1) +
-    geom_point(aes(y = right_z_scores), color = "blue", size = 0.1) + 
+    geom_line(aes(y = left_shoot_vel), color = "#a7000a", size = 0.1) +
+    geom_line(aes(y = right_shoot_vel), color = "blue", size = 0.1) + 
     scale_y_continuous() + 
     #scale_y_continuous(breaks = seq(0, 300, by = 20)) +
     theme_bw()
