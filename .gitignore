@@ -6,3 +6,4 @@ shinyapp/rsconnect
 .DS_Store
 wpilogs/robot_data_elim9.csv
 wpilogs/robot_data_qual70.csv
+wpilogs/robot_data_elim12.csv
