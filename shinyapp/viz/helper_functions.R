@@ -173,29 +173,19 @@ pridge_calculation_offline <- function(event_key) {
         paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
 }
 
-recent_team_epas <- function(schedule, matches, event_key) {
-    schedule <- schedule[1:max(matches$match_number), ] # only matches played
+recent_team_epas <- function(event_key) {
+    sb_data <- team_events_sb(event = paste0(2026, event_key))
     
-    long_schedule <- schedule |>
-        pivot_longer(
-            cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
-            names_to = "robot",
-            values_to = "team"
-        )
-    
-    last_instance <- data.frame(team = sort(unique(long_schedule$team))) |>
-        rowwise() |>
-        mutate(
-            last_match = max(long_schedule$match[long_schedule$team == team]),
-            match_key = paste0("2026", event_key, "_qm", last_match),
-            sb = list(team_sb(team, match = match_key)),
-            auto_fuel_epa = sb$epa$breakdown$auto_fuel,
-            total_fuel_epa = sb$epa$breakdaown$total_fuel,
-            tele_fuel_epa = total_fuel_epa - auto_fuel_epa
-        ) |>
-        select(team, match_key, auto_fuel_epa, tele_fuel_epa)
-    
-    return(last_instance)
+    teams <- sapply(sb_data, function(tm){tm$team})
+    epa_fuel_auto <- sapply(sb_data, function(tm){tm$epa$breakdown$auto_fuel})
+    epa_fuel_tele <- sapply(sb_data, function(tm){
+        tm$epa$breakdown$teleop_fuel + tm$epa$breakdown$endgame_fuel})
+
+    epas <- data.frame(
+        team = teams, 
+        auto_fuel_epa = epa_fuel_auto,
+        tele_fuel_epa = epa_fuel_tele)
+    return(epas)
 }
 
 pridge_calculation_online <- function(event_key){
@@ -236,9 +226,9 @@ pridge_calculation_online <- function(event_key){
     file_path_1 <- paste0("shinyapp/data/", event_key, "/tba_data.csv")
     write.csv(extracted_data, file_path_1, row.names = FALSE)
     
-    #statbotics_data <- recent_team_epas(schedule, matches, event_key)
-    #file_path_2 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
-    #write.csv(statbotics_data, file_path_2, row.names = FALSE)
+    statbotics_data <- recent_team_epas(event_key)
+    file_path_2 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
+    write.csv(statbotics_data, file_path_2, row.names = FALSE)
     
     pridge_calculation_offline(event_key)
 }
