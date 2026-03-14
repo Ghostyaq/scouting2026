@@ -34,11 +34,13 @@ schedule <- reactiveVal(read.csv("data/vaale/schedule.csv"))
 alliances <- reactiveVal(read.csv("data/vaale/alliances.csv"))
 weights <- reactiveVal(default_linear_weights)
 teams_selected <- reactiveVal(NULL)
-
+summary_stat <- reactiveVal(NULL)
 
 addResourcePath("images_d", "data/test_data/images")
 addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
 in_rstudio <- rstudioapi::isAvailable()
+user_logged_in <- reactiveVal(in_rstudio)
+correct_password = "0322"
 
 load_event_data <- function(event) {
     raw(read.csv(file.path("data", event, "data.csv")))
@@ -50,9 +52,10 @@ load_event_data <- function(event) {
 
 server <- function(input, output, session) {
     #UPDATE PICKERS
-    observe({
+    observeEvent(raw(), {
         unique_teams <- sort(unique(raw()$team))
         teams_selected(unique_teams)
+        summary_stat(summary_stats(raw(), pridge(), teams = teams_selected()))
         updateVirtualSelect("selected_match", choices = schedule()$match)
         updateVirtualSelect("selected_teams_comp", choices = unique_teams)
         updateVirtualSelect("selected_red", choices = alliances()$alliance)
@@ -67,9 +70,9 @@ server <- function(input, output, session) {
         load_event_data("vaale")
     })
     
-    #Password logic
-    correct_password <- "0322"
-    user_logged_in <- reactiveVal(in_rstudio)
+    observeEvent(teams_selected, {
+        summary_stat(summary_stats(raw(), pridge(), teams = teams_selected()))
+    })
     
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
@@ -78,7 +81,7 @@ server <- function(input, output, session) {
     })
     
     output$summary_stats <- renderDT({
-        dataframe <- summary_stats(raw(), pridge())
+        dataframe <- summary_stat()
         datatable(
             dataframe,
             options = list(
@@ -149,8 +152,10 @@ server <- function(input, output, session) {
     
     observeEvent(c(input$selected_red, input$selected_blue), {
         req(input$selected_red, input$selected_blue)
-        red_alliance <- alliances()[alliances()$alliance == input$selected_red,]
-        blue_alliance <- alliances()[alliances()$alliance == input$selected_blue,]
+        red_alliance <- 
+            alliances()[alliances()$alliance == input$selected_red, ]
+        blue_alliance <- 
+            alliances()[alliances()$alliance == input$selected_blue, ]
         red_alliance <- c(red_alliance$C, red_alliance$FP, red_alliance$SP)
         blue_alliance <- c(blue_alliance$C, blue_alliance$FP, blue_alliance$SP)
         teams_selected(c(red_alliance, blue_alliance))
@@ -158,7 +163,8 @@ server <- function(input, output, session) {
     
     #COMPARE POINT SUMMARY
     output$summary_point_comp <- renderPlot({
-        stacked_bar_chart(raw(), schedule(), pridge(), FALSE, teams_selected(), FALSE)
+        stacked_bar_chart(
+            raw(), schedule(), pridge(), FALSE, teams_selected(), FALSE)
     })
     
     #COMPARE ENDGAME BAR
@@ -206,17 +212,18 @@ server <- function(input, output, session) {
     
     #SCORE PREDICTION
     output$score_prediction <- renderText({
-        data <- summary_stats(raw(), pridge())
+        data <- summary_stat()
         score_pred(data, teams_selected()[1:3], teams_selected()[4:6])
     })
     
     #SUMMARY POINT MATCH
     output$summary_point_match <- renderPlot({
-        stacked_bar_chart(raw(), schedule(), pridge(), FALSE, teams_selected(), FALSE)
+        stacked_bar_chart(
+            raw(), schedule(), pridge(), FALSE, teams_selected(), FALSE)
     })
     
     output$summary_stats_comp <- renderDT({
-        summary_stats(raw(), pridge(), teams = teams_selected())
+        summary_stat()
     })
     
     output$login_ui <- renderUI({
@@ -266,7 +273,7 @@ server <- function(input, output, session) {
     })
     
     output$summary_stats_match <- renderDT({
-        summary_stats(raw(), pridge(), teams_selected())
+        summary_stat()
     })
     
     output$comments_df_match <- renderDT({
