@@ -53,7 +53,10 @@ load_event_data <- function(event) {
 server <- function(input, output, session) {
     #UPDATE PICKERS
     observeEvent(raw(), {
-        unique_teams <- sort(unique(raw()$team))
+        unique_teams <- sort(unique(c(
+            schedule()$R1, schedule()$R2, schedule()$R3,
+            schedule()$B1, schedule()$B2, schedule()$B3
+            )))
         teams_selected(unique_teams)
         summary_stat(summary_stats(raw(), pridge(), teams = teams_selected()))
         updateVirtualSelect("selected_match", choices = schedule()$match)
@@ -62,12 +65,16 @@ server <- function(input, output, session) {
         updateVirtualSelect("selected_blue", choices = alliances()$alliance)
     })
     
-    observeEvent(input$test_data, {
-        load_event_data("test_data")
+    observeEvent(input$week0, {
+        load_event_data("week0")
     })
     
     observeEvent(input$vaale, {
         load_event_data("vaale")
+    })
+    
+    observeEvent(input$mdpas, {
+        load_event_data("mdpas")
     })
     
     observeEvent(teams_selected, {

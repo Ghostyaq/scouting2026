@@ -220,8 +220,9 @@ ui <- fluidPage(
             layout_sidebar(
                 sidebar = card(
                     title = "Event Switching",
-                    actionButton("test_data", "Testing Data"),
-                    actionButton("vaale", "Vaale")
+                    actionButton("week0", "Week0 Data (Test)"),
+                    actionButton("vaale", "Alexandria"),
+                    actionButton("mdpas", "Pasadena"),
                 ),
                 layout_columns(
                     card(
