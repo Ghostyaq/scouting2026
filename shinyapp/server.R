@@ -36,7 +36,6 @@ weights <- reactiveVal(default_linear_weights)
 teams_selected <- reactiveVal(NULL)
 summary_stat <- reactiveVal(NULL)
 
-addResourcePath("images_d", "data/test_data/images")
 addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
 in_rstudio <- rstudioapi::isAvailable()
 user_logged_in <- reactiveVal(in_rstudio)
@@ -48,6 +47,7 @@ load_event_data <- function(event) {
     tba_data(read.csv(file.path("data", event, "tba_data.csv")))
     pridge(read.csv(file.path("data", event, "pridge.csv")))
     alliances(read.csv(file.path("data", event, "alliances.csv")))
+    addResourcePath("images_d", file.path("data", event, "images"))
 }
 
 server <- function(input, output, session) {
