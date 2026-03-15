@@ -167,7 +167,23 @@ pridge_calculation_offline <- function(event_key) {
             response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
         tele_lambda_opt, tele_priors), 2)
     
-    priors_df <- data.frame(team = unique_teams, auto_fuel, tele_fuel)
+    auto_fuel_opr <- round(scoutR:::prior_ridge(
+        design, 
+        response$score[
+            (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
+        0, auto_priors), 2)
+    tele_fuel_opr <- round(scoutR:::prior_ridge(
+        design, 
+        response$score[
+            response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
+        0, tele_priors), 2)
+    
+    priors_df <- data.frame(
+        team = unique_teams, 
+        auto_fuel, tele_fuel, 
+        auto_fuel_opr, tele_fuel_opr,
+        auto_fuel_epa = statbotics_data$auto_fuel_epa,
+        tele_fuel_epa = statbotics_data$tele_fuel_epa)
     write.csv(
         priors_df, 
         paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
