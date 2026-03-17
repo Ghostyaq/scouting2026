@@ -140,7 +140,7 @@ ui <- fluidPage(
                     virtualSelectInput(
                         "selected_match", 
                         label = "Select a Match", 
-                        choices = NULL, selected = 1),
+                        choices = NULL, selected = 1, search = TRUE),
                     uiOutput("score_prediction"),
                     height = "500px"
                 ),
