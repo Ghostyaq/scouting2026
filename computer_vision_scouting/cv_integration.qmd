@@ -1,0 +1,39 @@
+```{r}
+rm(list = ls())
+
+library(ggplot2)
+library(tidyverse)
+
+cv_raw <- read_csv('./scouting2026/computer_vision_scouting/robocv.csv')
+
+comp_raw <- read_csv('./scouting2026/shinyapp/data/vaale/data.csv')
+
+# 0 unkown
+# 1 top left : blue close
+# 2 middle left : blue middle
+# 3 bottom left : blue far
+# 4 top right : red close
+# 5 middle right : red middle
+# 6 bottom right : red far
+
+blue_alliance = c("B1", "B2", "B3")
+red_alliance = c("R1", "R2", "R3")
+    
+comp_data <- comp_raw |>
+    mutate(robot = case_when(
+        robot %in% blue_alliance & start_pos == "C" ~ 1,
+        robot %in% blue_alliance & start_pos == "M" ~ 2, 
+        robot %in% blue_alliance & start_pos == "F" ~ 3, 
+        robot %in% red_alliance & start_pos == "C" ~ 4, 
+        robot %in% red_alliance & start_pos == "M" ~ 5, 
+        robot %in% red_alliance & start_pos == "F" ~ 6
+    ))
+
+combined <- comp_data |>
+    left_join(cv_raw, by = c("match", "robot"))
+
+view(combined)
+
+
+
+```
