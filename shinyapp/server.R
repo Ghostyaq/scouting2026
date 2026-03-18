@@ -33,16 +33,21 @@ tba_data <- reactiveVal(read.csv("data/vaale/tba_data.csv"))
 schedule <- reactiveVal(read.csv("data/vaale/schedule.csv"))
 alliances <- reactiveVal(read.csv("data/vaale/alliances.csv"))
 weights <- reactiveVal(default_linear_weights)
+teams_selected <- reactiveVal(NULL)
+summary_stat <- reactiveVal(NULL)
 
 addResourcePath("images_d", "data/test_data/images")
 addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
 in_rstudio <- rstudioapi::isAvailable()
+user_logged_in <- reactiveVal(in_rstudio)
+correct_password = "0322"
 
 load_event_data <- function(event) {
     raw(read.csv(file.path("data", event, "data.csv")))
     schedule(read.csv(file.path("data", event, "schedule.csv")))
     tba_data(read.csv(file.path("data", event, "tba_data.csv")))
     pridge(read.csv(file.path("data", event, "pridge.csv")))
+    alliances(read.csv(file.path("data", event, "alliances.csv")))
 }
 
 server <- function(input, output, session) {
@@ -55,17 +60,21 @@ server <- function(input, output, session) {
         updateVirtualSelect("selected_blue", choices = alliances()$alliance)
     })
     
-    observeEvent(input$test_data, {
-        load_event_data("test_data")
+    observeEvent(input$week0, {
+        load_event_data("week0")
     })
     
     observeEvent(input$vaale, {
         load_event_data("vaale")
     })
     
-    #Password logic
-    correct_password <- "0322"
-    user_logged_in <- reactiveVal(in_rstudio)
+    observeEvent(input$mdpas, {
+        load_event_data("mdpas")
+    })
+    
+    observeEvent(teams_selected, {
+        summary_stat(summary_stats(raw(), pridge(), teams = teams_selected()))
+    })
     
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
@@ -74,7 +83,7 @@ server <- function(input, output, session) {
     })
     
     output$summary_stats <- renderDT({
-        dataframe <- summary_stats(raw(), pridge())
+        dataframe <- summary_stat()
         datatable(
             dataframe,
             options = list(
@@ -139,7 +148,8 @@ server <- function(input, output, session) {
     
     # UPDATE SELECTED TEAMS
     observeEvent(input$selected_teams_comp, {
-        team(input$selected_teams_comp)
+        req(input$selected_teams_comp)
+        teams_selected(input$selected_teams_comp)
     })
     
     observeEvent(c(
@@ -151,7 +161,6 @@ server <- function(input, output, session) {
         blue_alliance <- alliances()[alliances()$alliance == input$selected_blue,]
         red_alliance <- c(red_alliance$C, red_alliance$FP, red_alliance$SP)
         blue_alliance <- c(blue_alliance$C, blue_alliance$FP, blue_alliance$SP)
-        team(c(red_alliance, blue_alliance, selected_team))
     })
     
     #COMPARE POINT SUMMARY
@@ -189,18 +198,6 @@ server <- function(input, output, session) {
     output$comments_df_comp <- renderDT({
         req(user_logged_in())
         comments_df(raw(), input$selected_teams_comp)
-    })
-    
-    observeEvent(input$selected_match, {
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        team(teams)
     })
     
     #SCORE PREDICTION
@@ -470,10 +467,10 @@ server <- function(input, output, session) {
         fluidRow(tags_m)
     })
     
-    output$match_history <- renderDT({
-        matches_hist <- raw()|>
-            filter(team == input$selected_teams_comp)|>
-            select(-scout, -comments)
-        datatable(matches_hist)
-    })
+    #output$match_history <- renderDT({
+    #    matches_hist <- raw()|>
+    #        filter(team %in% teams_selected())|>
+    #        select(-scout, -comments)
+    #    datatable(matches_hist)
+    #})
 }
