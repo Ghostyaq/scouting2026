@@ -30,6 +30,54 @@ ui <- fluidPage(
     navbarPage(
         title = "2026 REBUILT 449 Data",
         tabPanel(
+            title = "Introductory Page",
+            layout_columns(
+                card(
+                    card_header("Introduction"),
+                    textOutput("intro_paragraph")
+                )
+            ),
+            layout_columns(
+                card(
+                    card_header("Explore Data"),
+                    plotOutput("event_summary_display")
+                ),
+                card(
+                    card_header("Presented by FRC Team 449"),
+                    uiOutput("team_logo2")
+                ),
+            ),
+            card(),
+            layout_columns(
+                card(
+                    card_header("Event Summary"),
+                    textOutput("event_summary_summary")
+                ),
+                card(
+                    card_header("Auto Picklisting"),
+                    textOutput("auto_picklisting_summary")
+                ),
+                card(
+                    card_header("Compare Teams"),
+                    textOutput("compare_teams_summary")
+                )
+            ),
+            layout_columns(
+                card(
+                    card_header("Match"),
+                    textOutput("match_tab_summary")
+                ),
+                card(
+                    card_header("Scouts"),
+                    textOutput("scouts_tab_summary")
+                ),
+                card(
+                    card_header("Settings"),
+                    textOutput("settings_summary")
+                )
+            )
+        ),
+        tabPanel(
             title = "Event Summary",
             card(
                 card_header("Event Summary"),
@@ -59,6 +107,16 @@ ui <- fluidPage(
                         "selected_teams_comp", 
                         label = "Select Teams", 
                         choices = NULL, multiple = TRUE, search = TRUE
+                    ),
+                    virtualSelectInput(
+                        "selected_red", 
+                        label = "Select Red Alliance", 
+                        choices = NULL, multiple = FALSE, search = TRUE
+                    ),
+                    virtualSelectInput(
+                        "selected_blue", 
+                        label = "Select Blue Alliance", 
+                        choices = NULL, multiple = FALSE, search = TRUE
                     ),
                     height = "500px"
                 ),
@@ -122,16 +180,6 @@ ui <- fluidPage(
                         "selected_match", 
                         label = "Select a Match", 
                         choices = NULL, selected = 1, search = TRUE),
-                    virtualSelectInput(
-                        "selected_red", 
-                        label = "Select Red Alliance", 
-                        choices = NULL, multiple = FALSE, search = TRUE
-                    ),
-                    virtualSelectInput(
-                        "selected_blue", 
-                        label = "Select Blue Alliance", 
-                        choices = NULL, multiple = FALSE, search = TRUE
-                    ),
                     uiOutput("score_prediction"),
                     height = "500px"
                 ),
@@ -150,10 +198,10 @@ ui <- fluidPage(
                         card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_match")
                     ),
-                    #card(
-                    #    card_header("Driver Rating by Match"),
-                    #    plotOutput("driver_rating_match")
-                    #)
+                    card(
+                        card_header("Driver Rating by Match"),
+                        plotOutput("driver_rating_match")
+                    )
                 ),
                 layout_columns(
                     card(
