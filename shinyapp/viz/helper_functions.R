@@ -3,43 +3,28 @@ library(ggplot2)
 library(plotly)
 library(scoutR)
 
-bump_trench_boxplot <- function(raw, team_list){
-    filtered_df <- raw |> filter(team %in% team_list)
-    df_bump <- filtered_df |>
-        select(team, count = teleop_bump) |> 
-        mutate(obstacle = "Bump")
+
+bump_trench_ratioplot <- function(raw, team_list){
     
-    df_trench <- filtered_df |> 
-        select(team, count = teleop_trench) |> 
-        mutate(obstacle = "Trench")
+    filtered_df <- raw |>
+        filter(team %in% team_list) |>
+        group_by(team) |>
+        summarize(avg_trench = mean(teleop_trench), 
+                  avg_bump = mean(teleop_bump))
     
-    combined_df <- rbind(df_bump, df_trench)
-    combined_df$team <- 
-        factor(combined_df$team, levels = team_list, ordered = TRUE)
-    
-    ggplot(combined_df, aes(x = team, y = count, fill = obstacle)) + 
-        geom_boxplot(position = position_dodge(width = .75)) +
-        ggbeeswarm::geom_quasirandom(
-            shape = 21, color = "black", 
-            alpha = 0.8, size = 3,
-            aes(fill = obstacle),
-            dodge.width = 0.8
+    ggplot(filtered_df, aes(x = avg_trench, y = avg_bump)) +
+        geom_point() +
+        geom_label(
+            label = filtered_df$team,
+            nudge_x = 0.1, nudge_y = 0.1,
+            check_overlap = T
         ) +
+        scale_x_continuous(expand = c(0,0), limits = c(0, max(filtered_df$avg_trench + 1))) +
+        scale_y_continuous(expand = c(0,0), limits = c(0, max(filtered_df$avg_bump + 1))) +
         labs(title = "Mean Crossing Comparison",
-             x = "Team Number",
-             y = "Average Times Crossed",
-             fill = "Obstacle Type") + 
-        theme_bw() + 
-        {if (length(team_list) == 6)
-            theme(
-                axis.text.x = element_text(
-                    color = ifelse(
-                        levels(combined_df$team) %in% team_list[1:3],
-                        "red", 
-                        "blue"), size = 15)
-            )
-            else NULL
-        }
+             x = "Mean Trench",
+             y = "Mean Bump") + 
+        theme_bw()
 }
 
 plot_driver_rating_graph <- function(dataframe, team_id) {

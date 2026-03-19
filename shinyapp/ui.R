@@ -85,7 +85,7 @@ ui <- fluidPage(
                 ),
                 layout_columns(
                     card(
-                        card_header("Trench Bump Relationship Boxplot"),
+                        card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_comp")
                     ),
                     card(
@@ -156,7 +156,7 @@ ui <- fluidPage(
                 ),
                 layout_columns(
                     card(
-                        card_header("Trench Bump Relationship Boxplot"),
+                        card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_match")
                     ),
                     card(
