@@ -36,7 +36,7 @@ weights <- reactiveVal(default_linear_weights)
 teams_selected <- reactiveVal(NULL)
 summary_stat <- reactiveVal(NULL)
 
-addResourcePath("images_d", "../pit_scouting/robot_pics")
+addResourcePath("images_d", "data/mdbet/images")
 #addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
 in_rstudio <- rstudioapi::isAvailable()
 user_logged_in <- reactiveVal(in_rstudio)
