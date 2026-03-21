@@ -43,7 +43,7 @@ ui <- fluidPage(
             )
         ),
         tabPanel(
-            title = "Auto-Picklisting",
+            title = "Auto-Picklisting (WIP)",
             card(
                 card_header("Auto Picklisting"),
                 DTOutput("auto_picklist"),
@@ -223,6 +223,7 @@ ui <- fluidPage(
                     actionButton("week0", "Week0 Data (Test)"),
                     actionButton("vaale", "Alexandria"),
                     actionButton("mdpas", "Pasadena"),
+                    actionButton("mdbet", "Bethesda"),
                 ),
                 layout_columns(
                     card(

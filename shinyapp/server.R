@@ -27,17 +27,17 @@ default_linear_weights <- data.frame(
     `ACP` = 0
 ) #temp, remove later
 
-raw <- reactiveVal(read.csv("data/vaale/data.csv"))
-pridge <- reactiveVal(read.csv("data/vaale/pridge.csv"))
-tba_data <- reactiveVal(read.csv("data/vaale/tba_data.csv"))
-schedule <- reactiveVal(read.csv("data/vaale/schedule.csv"))
-alliances <- reactiveVal(read.csv("data/vaale/alliances.csv"))
+raw <- reactiveVal(read.csv("data/mdbet/data.csv"))
+pridge <- reactiveVal(read.csv("data/mdbet/pridge.csv"))
+tba_data <- reactiveVal(read.csv("data/mdbet/tba_data.csv"))
+schedule <- reactiveVal(read.csv("data/mdbet/schedule.csv"))
+alliances <- reactiveVal(read.csv("data/mdbet/alliances.csv"))
 weights <- reactiveVal(default_linear_weights)
 teams_selected <- reactiveVal(NULL)
 summary_stat <- reactiveVal(NULL)
 
-addResourcePath("images_d", "data/test_data/images")
-addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
+addResourcePath("images_d", "../pit_scouting/robot_pics")
+#addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
 in_rstudio <- rstudioapi::isAvailable()
 user_logged_in <- reactiveVal(in_rstudio)
 correct_password = "0322"
@@ -70,6 +70,10 @@ server <- function(input, output, session) {
     
     observeEvent(input$mdpas, {
         load_event_data("mdpas")
+    })
+    
+    observeEvent(input$mdbet, {
+        load_event_data("mdbet")
     })
     
     observeEvent(teams_selected, {
@@ -467,10 +471,10 @@ server <- function(input, output, session) {
         fluidRow(tags_m)
     })
     
-    #output$match_history <- renderDT({
-    #    matches_hist <- raw()|>
-    #        filter(team %in% teams_selected())|>
-    #        select(-scout, -comments)
-    #    datatable(matches_hist)
-    #})
+    output$match_history <- renderDT({
+        matches_hist <- raw()|>
+            filter(team %in% teams_selected())|>
+            select(-scout, -comments)
+        datatable(matches_hist)
+    })
 }
