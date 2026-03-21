@@ -5,7 +5,6 @@ library(scoutR)
 
 
 bump_trench_ratioplot <- function(raw, team_list){
-    
     filtered_df <- raw |>
         filter(team %in% team_list) |>
         group_by(team) |>
@@ -185,11 +184,11 @@ recent_team_epas <- function(event_key, schedule) {
             values_to = "team"
         )
     
-    most_recent <- data.frame(team = sort(unique(long_schedule$team))) |>
+    first_instance <- data.frame(team = sort(unique(long_schedule$team))) |>
         rowwise() |>
         mutate(
-            recent_match = max(long_schedule$match[long_schedule$team == team]),
-            match_key = paste0("2026", event_key, "_qm", recent_match),
+            first_match = min(long_schedule$match[long_schedule$team == team]),
+            match_key = paste0("2026", event_key, "_qm", first_match),
             sb = list(team_sb(team, match = match_key)),
             auto_fuel_epa = sb$epa$breakdown$auto_fuel,
             total_fuel_epa = sb$epa$breakdown$total_fuel,
@@ -197,7 +196,7 @@ recent_team_epas <- function(event_key, schedule) {
         ) |>
         select(team, match_key, auto_fuel_epa, tele_fuel_epa)
     
-    return(most_recent)
+    return(first_instance)
 }
 
 pridge_calculation_online <- function(event_key){
