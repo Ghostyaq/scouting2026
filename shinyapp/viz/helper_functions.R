@@ -185,11 +185,11 @@ recent_team_epas <- function(event_key, schedule) {
             values_to = "team"
         )
     
-    first_instance <- data.frame(team = sort(unique(long_schedule$team))) |>
+    most_recent <- data.frame(team = sort(unique(long_schedule$team))) |>
         rowwise() |>
         mutate(
-            first_match = min(long_schedule$match[long_schedule$team == team]),
-            match_key = paste0("2026", event_key, "_qm", first_match),
+            recent_match = max(long_schedule$match[long_schedule$team == team]),
+            match_key = paste0("2026", event_key, "_qm", recent_match),
             sb = list(team_sb(team, match = match_key)),
             auto_fuel_epa = sb$epa$breakdown$auto_fuel,
             total_fuel_epa = sb$epa$breakdown$total_fuel,
@@ -197,7 +197,7 @@ recent_team_epas <- function(event_key, schedule) {
         ) |>
         select(team, match_key, auto_fuel_epa, tele_fuel_epa)
     
-    return(first_instance)
+    return(most_recent)
 }
 
 pridge_calculation_online <- function(event_key){
@@ -241,6 +241,9 @@ pridge_calculation_online <- function(event_key){
     statbotics_data <- recent_team_epas(event_key, schedule)
     file_path_2 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
     write.csv(statbotics_data, file_path_2, row.names = FALSE)
+    
+    file_path_3 <- paste0("shinyapp/data/", event_key, "/schedule.csv")
+    write.csv(schedule, file_path_3, row.names = FALSE)
     
     pridge_calculation_offline(event_key)
 }
