@@ -18,9 +18,9 @@ bump_trench_ratioplot <- function(raw, team_list){
             nudge_x = 0.1, nudge_y = 0.1
         ) +
         scale_x_continuous(
-            expand = c(0,0), limits = c(0, max(filtered_df$avg_trench + 1))) +
+            expand = c(0,0), limits = c(-0.5, max(filtered_df$avg_trench + 1))) +
         scale_y_continuous(
-            expand = c(0,0), limits = c(0, max(filtered_df$avg_bump + 1))) +
+            expand = c(0,0), limits = c(-0.1, max(filtered_df$avg_bump + 1))) +
         labs(title = "Mean Crossing Comparison",
              x = "Mean Trench",
              y = "Mean Bump") + 
