@@ -27,30 +27,32 @@ default_linear_weights <- data.frame(
     `ACP` = 0
 ) #temp, remove later
 
-raw <- reactiveVal(read.csv("data/mdbet/data.csv"))
-pridge <- reactiveVal(read.csv("data/mdbet/pridge.csv"))
-tba_data <- reactiveVal(read.csv("data/mdbet/tba_data.csv"))
-schedule <- reactiveVal(read.csv("data/mdbet/schedule.csv"))
-alliances <- reactiveVal(read.csv("data/mdbet/alliances.csv"))
-weights <- reactiveVal(default_linear_weights)
-teams_selected <- reactiveVal(NULL)
-summary_stat <- reactiveVal(NULL)
-
 addResourcePath("images_d", "data/mdbet/images")
 #addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
-in_rstudio <- rstudioapi::isAvailable()
-user_logged_in <- reactiveVal(in_rstudio)
-correct_password = "0322"
-
-load_event_data <- function(event) {
-    raw(read.csv(file.path("data", event, "data.csv")))
-    schedule(read.csv(file.path("data", event, "schedule.csv")))
-    tba_data(read.csv(file.path("data", event, "tba_data.csv")))
-    pridge(read.csv(file.path("data", event, "pridge.csv")))
-    alliances(read.csv(file.path("data", event, "alliances.csv")))
-}
 
 server <- function(input, output, session) {
+    raw <- reactiveVal()
+    pridge <- reactiveVal()
+    tba_data <- reactiveVal()
+    schedule <- reactiveVal()
+    alliances <- reactiveVal()
+    weights <- reactiveVal(default_linear_weights)
+    teams_selected <- reactiveVal(NULL)
+    summary_stat <- reactiveVal(NULL)
+    
+    in_rstudio <- rstudioapi::isAvailable()
+    user_logged_in <- reactiveVal(in_rstudio)
+    correct_password = "0322"
+    
+    load_event_data <- function(event) {
+        raw(read.csv(file.path("data", event, "data.csv")))
+        schedule(read.csv(file.path("data", event, "schedule.csv")))
+        tba_data(read.csv(file.path("data", event, "tba_data.csv")))
+        pridge(read.csv(file.path("data", event, "pridge.csv")))
+        alliances(read.csv(file.path("data", event, "alliances.csv")))
+    }
+    load_event_data("mdbet")
+    
     #UPDATE PICKERS
     observe({
         unique_teams <- sort(unique(raw()$team))
@@ -76,8 +78,39 @@ server <- function(input, output, session) {
         load_event_data("mdbet")
     })
     
-    observeEvent(teams_selected, {
-        summary_stat(summary_stats(raw(), pridge(), teams = teams_selected()))
+    #UPDATE MATCH TEAMS SELECTED
+    observeEvent(input$selected_match, {
+        req(input$selected_match)
+        teams <- schedule() |>
+            filter(match == input$selected_match) |>
+            pivot_longer(
+                cols = c(R1, R2, R3, B1, B2, B3),
+                names_to = "position",
+                values_to = "tnum") |>
+            pull(tnum)
+        
+        teams_selected(teams)
+    })
+    
+    #UPDATE COMP TEAMS SELECTED
+    observeEvent(input$selected_teams_comp, {
+        teams_selected(input$selected_teams_comp)
+    })
+    
+    #UPDATE ALLIANCE TEAMS SELECTED
+    observeEvent(c( input$selected_red, input$selected_blue),{
+        red <- alliances()[alliances()$alliance == input$selected_red,]
+        blue <- alliances()[alliances()$alliance == input$selected_blue,]
+        red <- c(red$C, red$FP, red$SP)
+        blue <- c(blue$C, blue$FP, blue$SP)
+        teams <- c(red, blue)
+        
+        teams_selected(teams)
+    })
+    
+    #UPDATE SUMMARY STAT
+    observeEvent(input$teams_selected, {
+        summary_stat(summary_stats(raw(), pridge(), teams_selected()))
     })
     
     #EVENT SUMMARY
@@ -87,7 +120,7 @@ server <- function(input, output, session) {
     })
     
     output$summary_stats <- renderDT({
-        dataframe <- summary_stat()
+        dataframe <- summary_stats(raw(), pridge())
         datatable(
             dataframe,
             options = list(
@@ -150,89 +183,57 @@ server <- function(input, output, session) {
                         backgroundPosition = 'center')    
     }) 
     
-    # UPDATE SELECTED TEAMS
-    observeEvent(input$selected_teams_comp, {
-        req(input$selected_teams_comp)
-        teams_selected(input$selected_teams_comp)
-    })
-    
-    observeEvent(c(
-        input$selected_red, 
-        input$selected_blue, 
-        input$selected_teams_comp), {
-        selected_team <- input$selected_teams_comp
-        red_alliance <- alliances()[alliances()$alliance == input$selected_red,]
-        blue_alliance <- alliances()[alliances()$alliance == input$selected_blue,]
-        red_alliance <- c(red_alliance$C, red_alliance$FP, red_alliance$SP)
-        blue_alliance <- c(blue_alliance$C, blue_alliance$FP, blue_alliance$SP)
-    })
-    
     #COMPARE POINT SUMMARY
     output$summary_point_comp <- renderPlot({
         stacked_bar_chart(
             raw(), schedule(), pridge(), 
-            FALSE, input$selected_teams_comp, FALSE)
+            FALSE, teams_selected(), FALSE)
     })
     
     #COMPARE ENDGAME BAR
     output$end_bar_comp <- renderPlot({
-        endgame_graph(raw(), input$selected_teams_comp)
+        endgame_graph(raw(), teams_selected())
     })
     
     #COMPARE DRIVER RATING
     output$driver_rating_comp <- renderPlot({
-        plot_driver_rating_graph(raw(), input$selected_teams_comp)
+        plot_driver_rating_graph(raw(), teams_selected())
     })
     
     # COMPARE INACTIVE STRATEGY
     output$inactive_strategy_comp <- renderPlot({
-        inactive_stategy_summary(raw(), input$selected_teams_comp, FALSE, FALSE)
+        inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE)
     })
     
     #COMPARE TRENCH BUMP
     output$trench_bump_comp <- renderPlot({
-        bump_trench_ratioplot(raw(), input$selected_teams_comp)
+        bump_trench_ratioplot(raw(), teams_selected())
     })
     
     # COMPARE AUTO TYPE
     output$auto_type_comp <- renderPlot({
-        auto_type_graph(raw(), FALSE, input$selected_teams_comp, FALSE)
+        auto_type_graph(raw(), FALSE, teams_selected(), FALSE)
     })
     
     output$comments_df_comp <- renderDT({
         req(user_logged_in())
-        comments_df(raw(), input$selected_teams_comp)
+        comments_df(raw(), teams_selected())
     })
     
     #SCORE PREDICTION
     output$score_prediction <- renderText({
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        data <- summary_stats(raw(), pridge())
-        score_pred(data, teams[1:3], teams[4:6])
+        data <- summary_stat()
+        score_pred(data, teams_selected()[1:3], teams_selected()[4:6])
     })
     
     #SUMMARY POINT MATCH
     output$summary_point_match <- renderPlot({
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        stacked_bar_chart(raw(), schedule(), pridge(), FALSE, teams, FALSE)
+        stacked_bar_chart(
+            raw(), schedule(), pridge(), FALSE, teams_selected(), FALSE)
     })
     
     output$summary_stats_comp <- renderDT({
-        summary_stats(raw(), pridge(), teams = input$selected_teams_comp)
+        summary_stats(raw(), pridge(), teams = teams_selected())
     })
     
     output$login_ui <- renderUI({
@@ -262,88 +263,32 @@ server <- function(input, output, session) {
     })
     
     output$end_bar_match <- renderPlot({
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        endgame_graph(raw(), teams)
+        endgame_graph(raw(), teams_selected())
     })
     
     output$trench_bump_match <- renderPlot({
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        bump_trench_ratioplot(raw(), teams)
+        bump_trench_ratioplot(raw(), teams_selected())
     })
     
     output$driver_rating_match <- renderPlot({
-        teams <- schedule() |>
-        filter(match == input$selected_match) |>
-        pivot_longer(
-            cols = c(R1, R2, R3, B1, B2, B3),
-            names_to = "position",
-            values_to = "tnum") |>
-        pull(tnum)
-    
-        plot_driver_rating_graph(raw(), teams)
+        plot_driver_rating_graph(raw(), teams_selected())
     })
     
     output$inactive_strategy_match <- renderPlot({
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        inactive_stategy_summary(raw(), teams, FALSE, FALSE)
+        inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE)
     })
     
     output$auto_type_match <- renderPlot({
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        auto_type_graph(raw(), FALSE, teams, FALSE)
+        auto_type_graph(raw(), FALSE, teams_selected(), FALSE)
     })
     
     output$summary_stats_match <- renderDT({
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        summary_stats(raw(), pridge(), teams)
+        summary_stats(raw(), pridge(), teams_selected())
     })
     
     output$comments_df_match <- renderDT({
         req(user_logged_in())
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        comments_df(raw(), teams)
+        comments_df(raw(), teams_selected())
     })
     
     output$matches_scouted <- renderPlotly({
@@ -359,7 +304,7 @@ server <- function(input, output, session) {
     })
     
     output$images_comp <- renderUI({
-        tags <- lapply(input$selected_teams_comp, function(teamnum) {
+        tags <- lapply(teams_selected(), function(teamnum) {
             img_src <- paste0("images_d/", teamnum,".png")
             tag_temp <- tags$img(
                 src = img_src, 
@@ -383,15 +328,7 @@ server <- function(input, output, session) {
     })
     
     output$images_match <- renderUI({
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        tags_m <- lapply(teams, function(team) {
+        tags_m <- lapply(teams_selected(), function(team) {
             img_src_m <- paste0("images_d/", team,".png")
             tag_temp_m <- tags$img(
                 src = img_src_m, 
@@ -415,7 +352,7 @@ server <- function(input, output, session) {
     })
     
     output$auto_heatmap_comp <- renderUI({
-        tags <- lapply(input$selected_teams_comp, function(teamnum) {
+        tags <- lapply(teams_selected(), function(teamnum) {
             img_src <- paste0("heatmaps/", teamnum,".png")
             tag_temp <- tags$img(
                 src = img_src, 
@@ -439,16 +376,7 @@ server <- function(input, output, session) {
     })
     
     output$auto_heatmap_match <- renderUI({
-        teams <- schedule() |>
-            filter(match == input$selected_match) |>
-            pivot_longer(
-                cols = c(R1, R2, R3, B1, B2, B3),
-                names_to = "position",
-                values_to = "tnum") |>
-            pull(tnum)
-        
-        tags_m <- lapply(teams, function(team) {
-            
+        tags_m <- lapply(teams_selected(), function(team) {
             img_src_m <- paste0("heatmaps/", team,".png")
             tag_temp_m <- tags$img(
                 src = img_src_m, 
