@@ -187,7 +187,7 @@ server <- function(input, output, session) {
     
     #COMPARE TRENCH BUMP
     output$trench_bump_comp <- renderPlot({
-        bump_trench_boxplot(raw(), input$selected_teams_comp)
+        bump_trench_ratioplot(raw(), input$selected_teams_comp)
     })
     
     # COMPARE AUTO TYPE
@@ -278,7 +278,7 @@ server <- function(input, output, session) {
                 values_to = "tnum") |>
             pull(tnum)
         
-        bump_trench_boxplot(raw(), teams)
+        bump_trench_ratioplot(raw(), teams)
     })
     
     output$driver_rating_match <- renderPlot({
