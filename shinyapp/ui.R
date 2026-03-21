@@ -21,6 +21,7 @@ source("viz/helper_functions.R")
 source("server.R")
 
 options(sass.cache = FALSE)
+options(dplyr.summarise.inform = FALSE)
 in_rstudio <- rstudioapi::isAvailable()
 
 ui <- fluidPage(

@@ -16,11 +16,12 @@ bump_trench_ratioplot <- function(raw, team_list){
         geom_point() +
         geom_label(
             label = filtered_df$team,
-            nudge_x = 0.1, nudge_y = 0.1,
-            check_overlap = T
+            nudge_x = 0.1, nudge_y = 0.1
         ) +
-        scale_x_continuous(expand = c(0,0), limits = c(0, max(filtered_df$avg_trench + 1))) +
-        scale_y_continuous(expand = c(0,0), limits = c(0, max(filtered_df$avg_bump + 1))) +
+        scale_x_continuous(
+            expand = c(0,0), limits = c(0, max(filtered_df$avg_trench + 1))) +
+        scale_y_continuous(
+            expand = c(0,0), limits = c(0, max(filtered_df$avg_bump + 1))) +
         labs(title = "Mean Crossing Comparison",
              x = "Mean Trench",
              y = "Mean Bump") + 
@@ -31,8 +32,10 @@ plot_driver_rating_graph <- function(dataframe, team_id) {
     selected_team <- dataframe |>
         filter(team %in% c(team_id)) |>
         mutate(team = factor(team))
-    ggplot(selected_team, aes(x = match, y = driver_rating, 
-                              color = team, group = team)) + 
+    ggplot(
+        selected_team, 
+        aes(x = match, y = driver_rating, color = team, group = team)
+        ) + 
         geom_line() + 
         geom_point() +
         theme_bw() +
