@@ -43,7 +43,7 @@ ui <- fluidPage(
             )
         ),
         tabPanel(
-            title = "Auto-Picklisting",
+            title = "Auto-Picklisting (WIP)",
             card(
                 card_header("Auto Picklisting"),
                 DTOutput("auto_picklist"),
@@ -85,7 +85,7 @@ ui <- fluidPage(
                 ),
                 layout_columns(
                     card(
-                        card_header("Trench Bump Relationship Boxplot"),
+                        card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_comp")
                     ),
                     card(
@@ -140,7 +140,7 @@ ui <- fluidPage(
                     virtualSelectInput(
                         "selected_match", 
                         label = "Select a Match", 
-                        choices = NULL, selected = 1),
+                        choices = NULL, selected = 1, search = TRUE),
                     uiOutput("score_prediction"),
                     height = "500px"
                 ),
@@ -156,7 +156,7 @@ ui <- fluidPage(
                 ),
                 layout_columns(
                     card(
-                        card_header("Trench Bump Relationship Boxplot"),
+                        card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_match")
                     ),
                     card(
@@ -223,6 +223,7 @@ ui <- fluidPage(
                     actionButton("week0", "Week0 Data (Test)"),
                     actionButton("vaale", "Alexandria"),
                     actionButton("mdpas", "Pasadena"),
+                    actionButton("mdbet", "Bethesda"),
                 ),
                 layout_columns(
                     card(
