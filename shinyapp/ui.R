@@ -107,10 +107,10 @@ ui <- fluidPage(
                     card_header("Robot Images"),
                     uiOutput("images_comp")
                 ),
-                card(
-                    card_header("Auto Heatmaps"),
-                    uiOutput("auto_heatmap_comp")
-                ),
+                #card(
+                #    card_header("Auto Heatmaps"),
+                #    uiOutput("auto_heatmap_comp")
+                #),
                 card(
                     card_header("Summary Stats"), 
                     DTOutput("summary_stats_comp")
@@ -178,10 +178,10 @@ ui <- fluidPage(
                     card_header("Robot Images in Match"),
                     uiOutput("images_match")
                 ),
-                card(
-                    card_header("Auto Heatmaps"),
-                    uiOutput("auto_heatmap_match")
-                ),
+                #card(
+                #    card_header("Auto Heatmaps"),
+                #    uiOutput("auto_heatmap_match")
+                #),
                 card(
                     card_header("Summary Stats"),
                     DTOutput("summary_stats_match")
