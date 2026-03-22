@@ -237,12 +237,13 @@ pridge_calculation_online <- function(event_key){
     file_path_1 <- paste0("shinyapp/data/", event_key, "/tba_data.csv")
     write.csv(extracted_data, file_path_1, row.names = FALSE)
     
-    statbotics_data <- recent_team_epas(event_key, schedule)
-    file_path_2 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
-    write.csv(statbotics_data, file_path_2, row.names = FALSE)
+    file_path_2 <- paste0("shinyapp/data/", event_key, "/schedule.csv")
+    write.csv(schedule, file_path_2, row.names = FALSE)
     
-    file_path_3 <- paste0("shinyapp/data/", event_key, "/schedule.csv")
-    write.csv(schedule, file_path_3, row.names = FALSE)
+    statbotics_data <- recent_team_epas(event_key, schedule)
+    # @TODO take out teams not in the schedule
+    file_path_3 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
+    write.csv(statbotics_data, file_path_3, row.names = FALSE)
     
     pridge_calculation_offline(event_key)
 }
