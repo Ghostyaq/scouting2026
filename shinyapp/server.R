@@ -98,7 +98,7 @@ server <- function(input, output, session) {
     })
     
     #UPDATE ALLIANCE TEAMS SELECTED
-    observeEvent(c( input$selected_red, input$selected_blue),{
+    observeEvent(c(input$selected_red, input$selected_blue),{
         red <- alliances()[alliances()$alliance == input$selected_red,]
         blue <- alliances()[alliances()$alliance == input$selected_blue,]
         red <- c(red$C, red$FP, red$SP)
@@ -109,7 +109,7 @@ server <- function(input, output, session) {
     })
     
     #UPDATE SUMMARY STAT
-    observeEvent(input$teams_selected, {
+    observeEvent(teams_selected(), {
         summary_stat(summary_stats(raw(), pridge(), teams_selected()))
     })
     
@@ -283,7 +283,7 @@ server <- function(input, output, session) {
     })
     
     output$summary_stats_match <- renderDT({
-        summary_stats(raw(), pridge(), teams_selected())
+        summary_stat()
     })
     
     output$comments_df_match <- renderDT({
