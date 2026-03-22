@@ -16,7 +16,7 @@ take_first_link <- function(link) {
 }
 
 #Process images from imported dataset and convert them to pngs (all in vector_pics array)
-pit_data <- read.csv("~/Documents/R/scouting2026/pit_scouting/pit_scouting_beth_2026.csv")
+pit_data <- read.csv("pit_scouting_mdbet.csv")
 
 # with a function that takes the first link in each row of the column 
 # instead of just the first row
