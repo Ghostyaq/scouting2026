@@ -335,7 +335,7 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             `Auto Cycles` = mean(auto_cycles / 10, na.rm = TRUE),
             `Tele Cycles` = mean(num_cycles + num_cycles_tenths / 10, na.rm = TRUE),
             `Total Cycles` = `Auto Cycles` + `Tele Cycles`,
-            `Auto Bump` = sum(auto_bump, na.rm = TRUE),
+            `Auto Bump` = sum(as.logical(auto_bump), na.rm = TRUE),
             `Tele Trench` = mean(teleop_trench, na.rm = TRUE),
             `Tele Bump` = mean(teleop_bump, na.rm = TRUE),
             `Auto Climb` = sum(auto_climb, na.rm = TRUE),
