@@ -1,8 +1,6 @@
 # Computer Vision Scouting
 The most up to date files are available here: [bit-turtle.tech](https://bit-turtle.tech)
 
-The files here are currently from Alexandria. I’ll run the computer vision program and upload the data for day 1 quals tonight or tomorrow morning before the qualification matches resume.
-
 ## heatmap.png
 Grayscale heatmap of average fuel positions throughout all matches
 
