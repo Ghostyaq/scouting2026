@@ -268,33 +268,33 @@ AW,45,R2,3714,M,FALSE,,FALSE,FALSE,6,3,3,0,0,No,FALSE,4,3,FALSE,FALSE,No Card,"D
 BS,46,B1,7886,C,FALSE,,FALSE,FALSE,0,3,9,0,0,No,FALSE,"1,4,5",5,FALSE,FALSE,No Card,Driver played very good defense but not couldn»t shoot
 HR,46,R3,5549,C,FALSE,3,FALSE,FALSE,8,3,1,4,0,No,FALSE,"1,6",5,FALSE,FALSE,No Card,
 AW,46,R2,2988,M,FALSE,,FALSE,FALSE,8,1,3,1,0,No,FALSE,,2,FALSE,FALSE,No Card,Beached for the vast majority of the match
-Sorensflyisup(bp303),46,R1,2900,F,FALSE,3,FALSE,FALSE,10,5,0,0,1,No,FALSE,,1,FALSE,FALSE,No Card,
+BP,46,R1,2900,F,FALSE,3,FALSE,FALSE,10,5,0,0,1,No,FALSE,,1,FALSE,FALSE,No Card,
 AD,46,R1,4638,M,FALSE,,FALSE,TRUE,0,8,4,0,5,No,FALSE,,3,FALSE,FALSE,No Card,
-GOAT(SBS),46,R1,5338,F,FALSE,3,FALSE,FALSE,9,0,0,6,2,No,FALSE,"5,6",5,FALSE,FALSE,No Card,
+SBS,46,R1,5338,F,FALSE,3,FALSE,FALSE,9,0,0,6,2,No,FALSE,"5,6",5,FALSE,FALSE,No Card,
 HR,47,R3,6882,M,FALSE,,FALSE,FALSE,9,1,1,3,6,No,FALSE,"2,6",3,FALSE,FALSE,No Card,
 AD,47,R1,8590,M,FALSE,,FALSE,FALSE,4,6,0,0,1,No,FALSE,2,3,TRUE,FALSE,No Card,Died during the third tele op shift
-Sorensflyisup(bp303),47,R1,11318,F,FALSE,,FALSE,FALSE,8,3,2,5,6,No,FALSE,"2,6",3,FALSE,FALSE,No Card,
+BP,47,R1,11318,F,FALSE,,FALSE,FALSE,8,3,2,5,6,No,FALSE,"2,6",3,FALSE,FALSE,No Card,
 AW,47,R2,2186,F,FALSE,,FALSE,FALSE,5,8,0,1,0,L1,FALSE,2,4,FALSE,FALSE,No Card,
 BS,47,B1,2912,C,FALSE,,FALSE,FALSE,0,2,2,0,0,No,FALSE,4,4,FALSE,FALSE,No Card,Played decent defense and considering the fact that they didn»t shoot they actually contributed a good amount
-GOAT(SBS),47,R1,5353,C,FALSE,3,FALSE,FALSE,0,4,0,4,6,No,TRUE,"5,6",3,FALSE,FALSE,No Card,Turned around in auto 
-Romanstempitingtontinginginglonton(bp303),48,R1,1731,C,FALSE,3,FALSE,FALSE,0,1,0,7,8,No,FALSE,"2,6",5,FALSE,TRUE,No Card,Missed they whole auto
+SBS,47,R1,5353,C,FALSE,3,FALSE,FALSE,0,4,0,4,6,No,TRUE,"5,6",3,FALSE,FALSE,No Card,Turned around in auto 
+BP,48,R1,1731,C,FALSE,3,FALSE,FALSE,0,1,0,7,8,No,FALSE,"2,6",5,FALSE,TRUE,No Card,Missed they whole auto
 HR,48,R3,1389,M,FALSE,,FALSE,FALSE,6,0,4,2,8,No,FALSE,6,1,FALSE,TRUE,No Card,
 BS,48,B1,4464,M,FALSE,,FALSE,FALSE,5,0,0,0,0,No,FALSE,,3,FALSE,FALSE,No Card,Basically did nothing the whole game didn»t go under the trench or over the bump
-Ashwin hates IRI scouting,48,R1,5841,,TRUE,,FALSE,FALSE,0,0,0,0,0,No,FALSE,,1,FALSE,FALSE,No Card,Very skillful as you can see
+BP,48,R1,5841,,TRUE,,FALSE,FALSE,0,0,0,0,0,No,FALSE,,1,FALSE,FALSE,No Card,Very skillful as you can see
 KO,48,R1,449,F,FALSE,3,FALSE,FALSE,12,12,0,5,2,No,FALSE,"2,3,6,1",5,FALSE,FALSE,No Card,
 AW,48,R2,1446,,FALSE,,FALSE,FALSE,0,9,1,0,0,No,FALSE,2,3,FALSE,FALSE,No Card,"Couldn»t intake or shoot, got beached multiple times, herded/bulldozed the entire match"
 AD,49,R1,2537,C,FALSE,3,FALSE,FALSE,13,8,0,3,1,No,FALSE,"1,2,6",4,FALSE,FALSE,No Card,
-MitchellGEEHung(bp303),49,R1,2421,M,FALSE,,FALSE,FALSE,0,2,4,0,0,No,FALSE,"6,4",2,FALSE,FALSE,No Card,Played D all game 
-GOAT(SBS),49,B1,4479,F,FALSE,3,FALSE,FALSE,6,8,0,4,7,No,FALSE,6,4,FALSE,FALSE,No Card,Tuff▒ - Caves & Cliffs Update
+BP,49,R1,2421,M,FALSE,,FALSE,FALSE,0,2,4,0,0,No,FALSE,"6,4",2,FALSE,FALSE,No Card,Played D all game 
+SBS,49,B1,4479,F,FALSE,3,FALSE,FALSE,6,8,0,4,7,No,FALSE,6,4,FALSE,FALSE,No Card,Tuff▒ - Caves & Cliffs Update
 AW,49,R2,1727,C,FALSE,3,FALSE,FALSE,15,4,0,3,0,No,FALSE,"2,6",4,TRUE,FALSE,No Card,Died towards the end of the match
 HR,49,R3,4821,M,FALSE,,FALSE,FALSE,4,3,1,0,0,No,FALSE,"4,5",1,FALSE,FALSE,No Card,
-Ashwin hates IRI scouting,49,R1,4821,M,FALSE,,FALSE,FALSE,0,2,0,0,0,No,FALSE,3,2,FALSE,FALSE,No Card,Only played D 
+BP,49,R1,4821,M,FALSE,,FALSE,FALSE,0,2,0,0,0,No,FALSE,3,2,FALSE,FALSE,No Card,Only played D 
 HR,50,R3,6882,M,FALSE,,FALSE,FALSE,4,3,4,4,5,No,FALSE,6,3,FALSE,FALSE,No Card,
 AW,50,R2,5243,C,FALSE,,FALSE,FALSE,5,6,0,2,0,L1,FALSE,"2,6",3,FALSE,FALSE,No Card,Failed auto climb
-Garbelieto(bp303),50,R1,3373,M,FALSE,1,FALSE,FALSE,0,0,0,0,0,No,FALSE,,1,TRUE,FALSE,No Card,Insta death 
+BP,50,R1,3373,M,FALSE,1,FALSE,FALSE,0,0,0,0,0,No,FALSE,,1,TRUE,FALSE,No Card,Insta death 
 AD,50,R1,5338,C,FALSE,3,FALSE,FALSE,10,5,0,4,9,No,FALSE,"2,6,5",5,FALSE,TRUE,No Card,
 KO,50,R1,5587,F,FALSE,,FALSE,FALSE,6,0,4,1,0,No,FALSE,,2,FALSE,FALSE,No Card,They were stopped during the first 30s or so
-GOAT(SBS),50,B1,2914,M,FALSE,,FALSE,FALSE,0,2,0,0,0,F,FALSE,5,4,FALSE,FALSE,No Card,"Played mid defense, other than that did nothing "
+BP,50,B1,2914,M,FALSE,,FALSE,FALSE,0,2,0,0,0,F,FALSE,5,4,FALSE,FALSE,No Card,"Played mid defense, other than that did nothing "
 KO,51,B3,2988,M,FALSE,,FALSE,FALSE,4,5,3,1,6,No,FALSE,6,3,FALSE,FALSE,No Card,Struggled to get over the bump
 AZ,51,B1,4464,C,FALSE,,FALSE,FALSE,0,4,8,0,0,No,FALSE,2,1,FALSE,FALSE,No Card,Got stuck for half the match and could not intake
 BS,51,B2,2186,F,FALSE,,FALSE,FALSE,1,1,0,0,7,F,FALSE,6,3,FALSE,FALSE,No Card,"Pretty slow bot, basically did nothing for the first half of the match and when they did intake full they missed most the balls"
