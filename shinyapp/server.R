@@ -406,7 +406,8 @@ server <- function(input, output, session) {
         datatable(
             matches_hist,
             options = list(
-                pageLength = nrow(matches_hist)
+                pageLength = nrow(matches_hist),
+                height = 50
             )
         )
     })
