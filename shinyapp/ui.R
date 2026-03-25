@@ -122,13 +122,13 @@ ui <- fluidPage(
                 if (in_rstudio) {
                     card(
                         card_header("Comments Data"),
-                        DTOutput("comments_df_comp")
+                        DTOutput("comments_df_match")
                     )
                 } else {
                     card(
                         uiOutput("login_ui"),
                         uiOutput("login_status"),
-                        DTOutput("comments_df_comp")
+                        DTOutput("comments_df_match")
                     )
                 }
             )
