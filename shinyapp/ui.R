@@ -122,13 +122,7 @@ ui <- fluidPage(
                 if (in_rstudio) {
                     card(
                         card_header("Comments Data"),
-                        DTOutput("comments_df_match")
-                    )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_match")
+                        DTOutput("comments_df_comp")
                     )
                 }
             )
@@ -191,12 +185,6 @@ ui <- fluidPage(
                         card_header("Comments Data"),
                         DTOutput("comments_df_match")
                     )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_match")
-                    )
                 }
             )
         ),
@@ -219,21 +207,26 @@ ui <- fluidPage(
             title = "Settings",
             layout_sidebar(
                 sidebar = card(
-                    title = "Event Switching",
-                    actionButton("week0", "Week0 Data (Test)"),
+                    title = "Event Data Switching",
+                    actionButton("week0", "Week0 (Test)"),
                     actionButton("vaale", "Alexandria"),
-                    actionButton("mdpas", "Pasadena"),
+                    actionButton("mdpas", "Pasadena (Only pRidge)"),
                     actionButton("mdbet", "Bethesda"),
                 ),
                 layout_columns(
+                    #card(
+                    #    card_header("Refresh Data"),
+                    #    actionButton("pridge_button", "Reload Data")
+                    #),
                     card(
-                        card_header("Refresh Data"),
-                        actionButton("pridge_button", "Reload Data")
-                    ),
-                    card(
-                        card_header("Custom Theme Color"),
-                        ColorPicker("theme_color")
+                        card_header("Scout Comments Login"),
+                        uiOutput("login_ui"),
+                        uiOutput("login_status")
                     )
+                    #card(
+                    #    card_header("Custom Theme Color"),
+                    #    ColorPicker("theme_color")
+                    #)
                 )
             )
         )

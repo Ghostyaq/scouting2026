@@ -407,7 +407,7 @@ server <- function(input, output, session) {
             matches_hist,
             options = list(
                 pageLength = nrow(matches_hist),
-                height = 50
+                height = 1000
             )
         )
     })
