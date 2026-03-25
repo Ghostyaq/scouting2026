@@ -403,6 +403,11 @@ server <- function(input, output, session) {
         matches_hist <- raw()|>
             filter(team %in% teams_selected())|>
             select(-scout, -comments)
-        datatable(matches_hist)
+        datatable(
+            matches_hist,
+            options = list(
+                pageLength = nrow(matches_hist)
+            )
+        )
     })
 }
