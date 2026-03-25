@@ -40,8 +40,7 @@ server <- function(input, output, session) {
     teams_selected <- reactiveVal(NULL)
     summary_stat <- reactiveVal(NULL)
     
-    in_rstudio <- rstudioapi::isAvailable()
-    user_logged_in <- reactiveVal(in_rstudio)
+    user_logged_in <- reactiveVal(rstudioapi::isAvailable())
     correct_password = "0322"
     
     load_event_data <- function(event) {
@@ -168,19 +167,21 @@ server <- function(input, output, session) {
         team_scores <- team_scores[, c(cols_order, remaining_cols)]
         
         #datatable
-        datatable(team_scores, 
-                  options = list(
-                      pageLength = length(team_scores$Team),
-                      dom = 'ftip',
-                      scrollX = TRUE
-                  ),
-                  rownames = FALSE) |>
-            formatStyle('Team Score',
-                        background = styleColorBar(
-                            c(0, max(team_scores$`Team Score`)), 'lightblue'),
-                        backgroundSize = '100% 90%',
-                        backgroundRepeat = 'no-repeat',
-                        backgroundPosition = 'center')    
+        datatable(
+            team_scores, 
+            options = list(
+                pageLength = length(team_scores$Team),
+                dom = 'ftip',
+                scrollX = TRUE
+            ),
+            rownames = FALSE) |>
+        formatStyle(
+            'Team Score',
+            background = styleColorBar(
+                c(0, max(team_scores$`Team Score`)), 'lightblue'),
+            backgroundSize = '100% 90%',
+            backgroundRepeat = 'no-repeat',
+            backgroundPosition = 'center')    
     }) 
     
     #COMPARE POINT SUMMARY
