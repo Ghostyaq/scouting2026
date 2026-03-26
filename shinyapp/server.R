@@ -218,13 +218,21 @@ server <- function(input, output, session) {
     
     output$comments_df_comp <- renderDT({
         if (user_logged_in()){
-            comments_df(raw(), teams_selected())
+            df <- comments_df(raw(), teams_selected())
         } else {
-            data.frame(
+            df <- data.frame(
                 Message ="Please Login in the Settings Tab to access comments!"
             )
         }
-    }, options = list(dom = 't'))
+        
+        datatable(
+            df,
+            options = list(
+                dom = 't', 
+                pageLength = nrow(df)
+                )
+        )
+    })
     
     #SCORE PREDICTION
     output$score_prediction <- renderText({
@@ -292,16 +300,23 @@ server <- function(input, output, session) {
         summary_stat()
     })
     
-    output$comments_df_comp <- renderDT({
+    output$comments_df_match <- renderDT({
         if (user_logged_in()){
-            comments_df(raw(), teams_selected())
+            df <- comments_df(raw(), teams_selected())
         } else {
-            data.frame(
+            df <- data.frame(
                 Message ="Please Login in the Settings Tab to access comments!"
             )
         }
-    }, options = list(dom = 't'))
-    
+        
+        datatable(
+            df,
+            options = list(
+                dom = 't', 
+                pageLength = nrow(df)
+            )
+        )
+    })
     output$matches_scouted <- renderPlotly({
         plot_scouting_graph(raw())
     })
@@ -417,6 +432,7 @@ server <- function(input, output, session) {
         datatable(
             matches_hist,
             options = list(
+                dom = "t",
                 pageLength = nrow(matches_hist),
                 height = 1000
             )
