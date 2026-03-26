@@ -21,7 +21,6 @@ source("viz/helper_functions.R")
 source("server.R")
 
 options(sass.cache = FALSE)
-in_rstudio <- rstudioapi::isAvailable()
 
 ui <- fluidPage(
     theme = bs_theme(
@@ -43,7 +42,7 @@ ui <- fluidPage(
             )
         ),
         tabPanel(
-            title = "Auto-Picklisting",
+            title = "Auto-Picklisting (WIP)",
             card(
                 card_header("Auto Picklisting"),
                 DTOutput("auto_picklist"),
@@ -85,7 +84,7 @@ ui <- fluidPage(
                 ),
                 layout_columns(
                     card(
-                        card_header("Trench Bump Relationship Boxplot"),
+                        card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_comp")
                     ),
                     card(
@@ -107,26 +106,22 @@ ui <- fluidPage(
                     card_header("Robot Images"),
                     uiOutput("images_comp")
                 ),
-                card(
-                    card_header("Auto Heatmaps"),
-                    uiOutput("auto_heatmap_comp")
-                ),
+                #card(
+                #    card_header("Auto Heatmaps"),
+                #    uiOutput("auto_heatmap_comp")
+                #),
                 card(
                     card_header("Summary Stats"), 
                     DTOutput("summary_stats_comp")
                 ),
-                if (in_rstudio) {
-                    card(
-                        card_header("Comments Data"),
-                        DTOutput("comments_df_comp")
-                    )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_comp")
-                    )
-                }
+                card(
+                    card_header("Match History"),
+                    DTOutput("match_history")
+                ),
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_comp")
+                )
             )
         ),
         tabPanel(
@@ -136,7 +131,7 @@ ui <- fluidPage(
                     virtualSelectInput(
                         "selected_match", 
                         label = "Select a Match", 
-                        choices = NULL, selected = 1),
+                        choices = NULL, selected = 1, search = TRUE),
                     uiOutput("score_prediction"),
                     height = "500px"
                 ),
@@ -152,7 +147,7 @@ ui <- fluidPage(
                 ),
                 layout_columns(
                     card(
-                        card_header("Trench Bump Relationship Boxplot"),
+                        card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_match")
                     ),
                     card(
@@ -174,26 +169,18 @@ ui <- fluidPage(
                     card_header("Robot Images in Match"),
                     uiOutput("images_match")
                 ),
-                card(
-                    card_header("Auto Heatmaps"),
-                    uiOutput("auto_heatmap_match")
-                ),
+                #card(
+                #    card_header("Auto Heatmaps"),
+                #    uiOutput("auto_heatmap_match")
+                #),
                 card(
                     card_header("Summary Stats"),
                     DTOutput("summary_stats_match")
                 ),
-                if (in_rstudio) {
-                    card(
-                        card_header("Comments Data"),
-                        DTOutput("comments_df_match")
-                    )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_match")
-                    )
-                }
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_match")
+                )
             )
         ),
         tabPanel(
@@ -213,14 +200,28 @@ ui <- fluidPage(
         ),
         tabPanel(
             title = "Settings",
-            layout_columns(
-                card(
-                    card_header("Refresh Data"),
-                    actionButton("pridge_button", "Reload Data")
+            layout_sidebar(
+                sidebar = card(
+                    title = "Event Data Switching",
+                    actionButton("week0", "Week0 (Test)"),
+                    actionButton("vaale", "Alexandria"),
+                    actionButton("mdpas", "Pasadena (Only pRidge)"),
+                    actionButton("mdbet", "Bethesda"),
                 ),
-                card(
-                    card_header("Custom Theme Color"),
-                    ColorPicker("theme_color")
+                layout_columns(
+                    #card(
+                    #    card_header("Refresh Data"),
+                    #    actionButton("pridge_button", "Reload Data")
+                    #),
+                    card(
+                        card_header("Scout Comments Login"),
+                        uiOutput("login_ui"),
+                        uiOutput("login_status")
+                    )
+                    #card(
+                    #    card_header("Custom Theme Color"),
+                    #    ColorPicker("theme_color")
+                    #)
                 )
             )
         )

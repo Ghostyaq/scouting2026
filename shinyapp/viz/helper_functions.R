@@ -3,51 +3,38 @@ library(ggplot2)
 library(plotly)
 library(scoutR)
 
-bump_trench_boxplot <- function(raw, team_list){
-    filtered_df <- raw |> filter(team %in% team_list)
-    df_bump <- filtered_df |>
-        select(team, count = teleop_bump) |> 
-        mutate(obstacle = "Bump")
+
+bump_trench_ratioplot <- function(raw, team_list){
+    filtered_df <- raw |>
+        filter(team %in% team_list) |>
+        group_by(team) |>
+        summarize(avg_trench = mean(teleop_trench), 
+                  avg_bump = mean(teleop_bump))
     
-    df_trench <- filtered_df |> 
-        select(team, count = teleop_trench) |> 
-        mutate(obstacle = "Trench")
-    
-    combined_df <- rbind(df_bump, df_trench)
-    combined_df$team <- 
-        factor(combined_df$team, levels = team_list, ordered = TRUE)
-    
-    ggplot(combined_df, aes(x = team, y = count, fill = obstacle)) + 
-        geom_boxplot(position = position_dodge(width = .75)) +
-        ggbeeswarm::geom_quasirandom(
-            shape = 21, color = "black", 
-            alpha = 0.8, size = 3,
-            aes(fill = obstacle),
-            dodge.width = 0.8
+    ggplot(filtered_df, aes(x = avg_trench, y = avg_bump)) +
+        geom_point() +
+        geom_label(
+            label = filtered_df$team,
+            nudge_x = 0.1, nudge_y = 0.1
         ) +
+        scale_x_continuous(
+            expand = c(0,0), limits = c(-0.5, max(filtered_df$avg_trench + 1))) +
+        scale_y_continuous(
+            expand = c(0,0), limits = c(-0.1, max(filtered_df$avg_bump + 1))) +
         labs(title = "Mean Crossing Comparison",
-             x = "Team Number",
-             y = "Average Times Crossed",
-             fill = "Obstacle Type") + 
-        theme_bw() + 
-        {if (length(team_list) == 6)
-            theme(
-                axis.text.x = element_text(
-                    color = ifelse(
-                        levels(combined_df$team) %in% team_list[1:3],
-                        "red", 
-                        "blue"), size = 15)
-            )
-            else NULL
-        }
+             x = "Mean Trench",
+             y = "Mean Bump") + 
+        theme_bw()
 }
 
 plot_driver_rating_graph <- function(dataframe, team_id) {
     selected_team <- dataframe |>
         filter(team %in% c(team_id)) |>
         mutate(team = factor(team))
-    ggplot(selected_team, aes(x = match, y = driver_rating, 
-                              color = team, group = team)) + 
+    ggplot(
+        selected_team, 
+        aes(x = match, y = driver_rating, color = team, group = team)
+        ) + 
         geom_line() + 
         geom_point() +
         theme_bw() +
@@ -167,15 +154,29 @@ pridge_calculation_offline <- function(event_key) {
             response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
         tele_lambda_opt, tele_priors), 2)
     
-    priors_df <- data.frame(team = unique_teams, auto_fuel, tele_fuel)
+    auto_fuel_opr <- round(scoutR:::prior_ridge(
+        design, 
+        response$score[
+            (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
+        0, auto_priors), 2)
+    tele_fuel_opr <- round(scoutR:::prior_ridge(
+        design, 
+        response$score[
+            response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
+        0, tele_priors), 2)
+    
+    priors_df <- data.frame(
+        team = unique_teams, 
+        auto_fuel, tele_fuel, 
+        auto_fuel_opr, tele_fuel_opr,
+        auto_fuel_epa = statbotics_data$auto_fuel_epa,
+        tele_fuel_epa = statbotics_data$tele_fuel_epa)
     write.csv(
         priors_df, 
         paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
 }
 
-recent_team_epas <- function(schedule, matches, event_key) {
-    schedule <- schedule[1:max(matches$match_number), ] # only matches played
-    
+recent_team_epas <- function(event_key, schedule) {
     long_schedule <- schedule |>
         pivot_longer(
             cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
@@ -183,19 +184,19 @@ recent_team_epas <- function(schedule, matches, event_key) {
             values_to = "team"
         )
     
-    last_instance <- data.frame(team = sort(unique(long_schedule$team))) |>
+    first_instance <- data.frame(team = sort(unique(long_schedule$team))) |>
         rowwise() |>
         mutate(
-            last_match = max(long_schedule$match[long_schedule$team == team]),
-            match_key = paste0("2026", event_key, "_qm", last_match),
+            first_match = min(long_schedule$match[long_schedule$team == team]),
+            match_key = paste0("2026", event_key, "_qm", first_match),
             sb = list(team_sb(team, match = match_key)),
             auto_fuel_epa = sb$epa$breakdown$auto_fuel,
-            total_fuel_epa = sb$epa$breakdaown$total_fuel,
+            total_fuel_epa = sb$epa$breakdown$total_fuel,
             tele_fuel_epa = total_fuel_epa - auto_fuel_epa
         ) |>
         select(team, match_key, auto_fuel_epa, tele_fuel_epa)
     
-    return(last_instance)
+    return(first_instance)
 }
 
 pridge_calculation_online <- function(event_key){
@@ -236,9 +237,10 @@ pridge_calculation_online <- function(event_key){
     file_path_1 <- paste0("shinyapp/data/", event_key, "/tba_data.csv")
     write.csv(extracted_data, file_path_1, row.names = FALSE)
     
-    #statbotics_data <- recent_team_epas(schedule, matches, event_key)
-    #file_path_2 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
-    #write.csv(statbotics_data, file_path_2, row.names = FALSE)
+    statbotics_data <- recent_team_epas(event_key, schedule)
+    # @TODO take out teams not in the schedule
+    file_path_3 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
+    write.csv(statbotics_data, file_path_3, row.names = FALSE)
     
     pridge_calculation_offline(event_key)
 }
@@ -331,7 +333,7 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             `Auto Cycles` = mean(auto_cycles / 10, na.rm = TRUE),
             `Tele Cycles` = mean(num_cycles + num_cycles_tenths / 10, na.rm = TRUE),
             `Total Cycles` = `Auto Cycles` + `Tele Cycles`,
-            `Auto Bump` = sum(auto_bump, na.rm = TRUE),
+            `Auto Bump` = sum(as.logical(auto_bump), na.rm = TRUE),
             `Tele Trench` = mean(teleop_trench, na.rm = TRUE),
             `Tele Bump` = mean(teleop_bump, na.rm = TRUE),
             `Auto Climb` = sum(auto_climb, na.rm = TRUE),
@@ -653,6 +655,45 @@ score_pred <- function(data, red, blue){
         "<span style='color:red;'>", round(red_auto_score, digits = 0), 
         "<span style='color:black;'>", " - ", 
         "<span style='color:blue;'>", round(blue_auto_score, digits = 0))
+}
+
+data_validation <- function(event_key){
+    raw <- read.csv(paste0('shinyapp/data/', event_key, '/data.csv'))
+    schedule <- read.csv(paste0('shinyapp/data/', event_key, '/schedule.csv'))
+    
+    robot_order <- c("R1", "R2", "R3", "B1", "B2", "B3")
+    raw$robot <- factor(raw$robot, levels = robot_order, ordered = TRUE)
+    data <- raw |>
+        arrange(match, robot) |>
+        rowwise() |>
+        mutate(
+            scout_key = paste(match, robot, team)
+        )
+    
+    long_schedule <- schedule |>
+        pivot_longer(
+            cols = c(R1, R2, R3, B1, B2, B3),
+            names_to = "robot",
+            values_to = "team"
+        ) |>
+        rowwise() |>
+        mutate(
+            scout_key = paste(match, robot, team)
+        )
+    
+    missed_matches <- anti_join(long_schedule, data, by = "scout_key")
+    missed_matches$type <- "missed"
+    non_existent_matches <- anti_join(data, long_schedule, by = "scout_key") |>
+        select(match, robot, team, scout_key)
+    non_existent_matches$type <- "non-existent"
+    double_scouted <- data[(
+        duplicated(data[, "scout_key"]) | 
+            duplicated(data[, "scout_key"], 
+                       fromLast = TRUE)), ] |>
+        select(match, robot, team, scout_key)
+    double_scouted$type <- "double scout"
+    
+    rbind(missed_matches, non_existent_matches, double_scouted)
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
