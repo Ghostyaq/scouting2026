@@ -21,7 +21,6 @@ source("viz/helper_functions.R")
 source("server.R")
 
 options(sass.cache = FALSE)
-in_rstudio <- rstudioapi::isAvailable()
 
 ui <- fluidPage(
     theme = bs_theme(
@@ -119,18 +118,10 @@ ui <- fluidPage(
                     card_header("Match History"),
                     DTOutput("match_history")
                 ),
-                if (in_rstudio) {
-                    card(
-                        card_header("Comments Data"),
-                        DTOutput("comments_df_comp")
-                    )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_comp")
-                    )
-                }
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_comp")
+                )
             )
         ),
         tabPanel(
@@ -186,18 +177,10 @@ ui <- fluidPage(
                     card_header("Summary Stats"),
                     DTOutput("summary_stats_match")
                 ),
-                if (in_rstudio) {
-                    card(
-                        card_header("Comments Data"),
-                        DTOutput("comments_df_match")
-                    )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_match")
-                    )
-                }
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_match")
+                )
             )
         ),
         tabPanel(
@@ -219,21 +202,26 @@ ui <- fluidPage(
             title = "Settings",
             layout_sidebar(
                 sidebar = card(
-                    title = "Event Switching",
-                    actionButton("week0", "Week0 Data (Test)"),
+                    title = "Event Data Switching",
+                    actionButton("week0", "Week0 (Test)"),
                     actionButton("vaale", "Alexandria"),
-                    actionButton("mdpas", "Pasadena"),
+                    actionButton("mdpas", "Pasadena (Only pRidge)"),
                     actionButton("mdbet", "Bethesda"),
                 ),
                 layout_columns(
+                    #card(
+                    #    card_header("Refresh Data"),
+                    #    actionButton("pridge_button", "Reload Data")
+                    #),
                     card(
-                        card_header("Refresh Data"),
-                        actionButton("pridge_button", "Reload Data")
-                    ),
-                    card(
-                        card_header("Custom Theme Color"),
-                        ColorPicker("theme_color")
+                        card_header("Scout Comments Login"),
+                        uiOutput("login_ui"),
+                        uiOutput("login_status")
                     )
+                    #card(
+                    #    card_header("Custom Theme Color"),
+                    #    ColorPicker("theme_color")
+                    #)
                 )
             )
         )

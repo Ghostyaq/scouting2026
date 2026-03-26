@@ -40,8 +40,7 @@ server <- function(input, output, session) {
     teams_selected <- reactiveVal(NULL)
     summary_stat <- reactiveVal(NULL)
     
-    in_rstudio <- rstudioapi::isAvailable()
-    user_logged_in <- reactiveVal(in_rstudio)
+    user_logged_in <- reactiveVal(rstudioapi::isAvailable())
     correct_password = "0322"
     
     load_event_data <- function(event) {
@@ -168,19 +167,21 @@ server <- function(input, output, session) {
         team_scores <- team_scores[, c(cols_order, remaining_cols)]
         
         #datatable
-        datatable(team_scores, 
-                  options = list(
-                      pageLength = length(team_scores$Team),
-                      dom = 'ftip',
-                      scrollX = TRUE
-                  ),
-                  rownames = FALSE) |>
-            formatStyle('Team Score',
-                        background = styleColorBar(
-                            c(0, max(team_scores$`Team Score`)), 'lightblue'),
-                        backgroundSize = '100% 90%',
-                        backgroundRepeat = 'no-repeat',
-                        backgroundPosition = 'center')    
+        datatable(
+            team_scores, 
+            options = list(
+                pageLength = length(team_scores$Team),
+                dom = 'ftip',
+                scrollX = TRUE
+            ),
+            rownames = FALSE) |>
+        formatStyle(
+            'Team Score',
+            background = styleColorBar(
+                c(0, max(team_scores$`Team Score`)), 'lightblue'),
+            backgroundSize = '100% 90%',
+            backgroundRepeat = 'no-repeat',
+            backgroundPosition = 'center')    
     }) 
     
     #COMPARE POINT SUMMARY
@@ -216,8 +217,21 @@ server <- function(input, output, session) {
     })
     
     output$comments_df_comp <- renderDT({
-        req(user_logged_in())
-        comments_df(raw(), teams_selected())
+        if (user_logged_in()){
+            df <- comments_df(raw(), teams_selected())
+        } else {
+            df <- data.frame(
+                Message ="Please Login in the Settings Tab to access comments!"
+            )
+        }
+        
+        datatable(
+            df,
+            options = list(
+                dom = 't', 
+                pageLength = nrow(df)
+                )
+        )
     })
     
     #SCORE PREDICTION
@@ -287,10 +301,22 @@ server <- function(input, output, session) {
     })
     
     output$comments_df_match <- renderDT({
-        req(user_logged_in())
-        comments_df(raw(), teams_selected())
+        if (user_logged_in()){
+            df <- comments_df(raw(), teams_selected())
+        } else {
+            df <- data.frame(
+                Message ="Please Login in the Settings Tab to access comments!"
+            )
+        }
+        
+        datatable(
+            df,
+            options = list(
+                dom = 't', 
+                pageLength = nrow(df)
+            )
+        )
     })
-    
     output$matches_scouted <- renderPlotly({
         plot_scouting_graph(raw())
     })
@@ -403,6 +429,13 @@ server <- function(input, output, session) {
         matches_hist <- raw()|>
             filter(team %in% teams_selected())|>
             select(-scout, -comments)
-        datatable(matches_hist)
+        datatable(
+            matches_hist,
+            options = list(
+                dom = "t",
+                pageLength = nrow(matches_hist),
+                height = 1000
+            )
+        )
     })
 }
