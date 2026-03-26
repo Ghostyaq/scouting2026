@@ -3,19 +3,30 @@ library(ggplot2)
 library(plotly)
 library(scoutR)
 
-
 bump_trench_ratioplot <- function(raw, team_list){
     filtered_df <- raw |>
         filter(team %in% team_list) |>
         group_by(team) |>
-        summarize(avg_trench = mean(teleop_trench), 
-                  avg_bump = mean(teleop_bump))
+        summarize(
+            avg_trench = mean(teleop_trench), 
+            avg_bump = mean(teleop_bump))
+    
+    if (length(team_list) == 6) {
+        filtered_df <- filtered_df |>
+            rowwise() |>
+            mutate(
+                color = ifelse(team %in% team_list[1:3], "red", "blue")
+            )
+    } else {
+        filtered_df$color <- rep("black", length(team_list))
+    }
     
     ggplot(filtered_df, aes(x = avg_trench, y = avg_bump)) +
         geom_point() +
         geom_label(
             label = filtered_df$team,
-            nudge_x = 0.1, nudge_y = 0.1
+            nudge_x = 0.1, nudge_y = 0.1,
+            color = filtered_df$color
         ) +
         scale_x_continuous(
             expand = c(0,0), limits = c(-0.5, max(filtered_df$avg_trench + 1))) +
@@ -339,7 +350,6 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             `Auto Climb` = sum(auto_climb, na.rm = TRUE),
             Driver = mean(driver_rating, na.rm = TRUE),
             `Quick Climb` = sum(climb_less_than_5, na.rm = TRUE),
-            `Solo Shot` = sum(solo_shooting, na.rm = TRUE),
             Died = sum(died, na.rm = TRUE),
             Card = sum(card != 'No Card', na.rm = TRUE)
         ) |>
@@ -354,7 +364,7 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             Team = team, `Auto Fuel`, `Tele Fuel`, `Total Fuel`, `Total Score`,
             `Auto Cycles`, `Tele Cycles`, `Total Cycles`, `Auto Bump`,
             `Tele Bump`, `Tele Trench`, `Auto Climb`, Climb, `Quick Climb`, 
-            Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP) |>
+            Driver, Died, Card, `Matches Played`, ACP) |>
         modify_if(~is.numeric(.), ~round(., 2))
     
     result <- result[order(match(result$Team, teams)), ]

@@ -23,7 +23,7 @@ default_linear_weights <- data.frame(
     `Auto Cycles` = 0, `Tele Cycles` = 0, `Total Cycles` = 0,
     `Auto Bump` = 10, `Tele Bump` = 10, `Tele Trench` = 5, 
     `Auto Climb` = 15, Climb = 15, `Quick Climb` = 15,
-    Driver = 10, `Solo Shot` = 0, Died = 0, Card = -20, `Matches Played` = 0,
+    Driver = 10, Died = 0, Card = -20, `Matches Played` = 0,
     `ACP` = 0
 ) #temp, remove later
 

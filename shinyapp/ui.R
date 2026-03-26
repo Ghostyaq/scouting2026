@@ -150,10 +150,10 @@ ui <- fluidPage(
                         card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_match")
                     ),
-                    card(
-                        card_header("Driver Rating by Match"),
-                        plotOutput("driver_rating_match")
-                    )
+                    #card(
+                    #    card_header("Driver Rating by Match"),
+                    #    plotOutput("driver_rating_match")
+                    #)
                 ),
                 layout_columns(
                     card(
