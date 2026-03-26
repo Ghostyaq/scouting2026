@@ -657,7 +657,7 @@ score_pred <- function(data, red, blue){
         "<span style='color:blue;'>", round(blue_auto_score, digits = 0))
 }
 
-data_validation <- function(event_key){
+data_validation_offline <- function(event_key){
     raw <- read.csv(paste0('shinyapp/data/', event_key, '/data.csv'))
     schedule <- read.csv(paste0('shinyapp/data/', event_key, '/schedule.csv'))
     
@@ -694,6 +694,73 @@ data_validation <- function(event_key){
     double_scouted$type <- "double scout"
     
     rbind(missed_matches, non_existent_matches, double_scouted)
+}
+
+data_validation_online <- function(event_key, rewrite = FALSE){
+    offline <- data_validation_offline(event_key)
+    schedule <- read.csv(paste0("shinyapp/data/", event_key, "schedule.csv"))
+    tba_data <- event_matches(paste0("2026", event_key))
+    
+    # TO-DO — auto assign climbs from TBA into the data (rewrite = TRUE only)
+    temp <- tba_data |>
+        select(
+            match_number, red1, red2, red3, blue1, blue2, blue3,
+            red_autoTowerRobot1, red_autoTowerRobot2, red_autoTowerRobot3,
+            blue_autoTowerRobot1, blue_autoTowerRobot2, blue_autoTowerRobot3,
+            red_endGameTowerRobot1, red_endGameTowerRobot2, 
+            red_endGameTowerRobot3, blue_endGameTowerRobot1, 
+            blue_endGameTowerRobot2, blue_endGameTowerRobot3
+        ) |>
+        pivot_longer(
+            cols = c(red1, red2, red3, blue1, blue2, blue3),
+            names_to = "robot",
+            values_to = "team"
+        ) |>
+        rowwise() |>
+        mutate(
+            auto_climb = switch(robot,
+                red1 = red_autoTowerRobot1, 
+                red2 = red_autoTowerRobot2,
+                red3 = red_autoTowerRobot3,
+                blue1 = blue_autoTowerRobot1, 
+                blue2 = blue_autoTowerRobot2,
+                blue3 = blue_autoTowerRobot3,
+                stop("robot DNE (auto)")),
+            endgame_climb = switch(robot,
+                red1 = red_endGameTowerRobot1, 
+                red2 = red_endGameTowerRobot2,
+                red3 = red_endGameTowerRobot3,
+                blue1 = blue_endGameTowerRobot1, 
+                blue2 = blue_endGameTowerRobot2,
+                blue3 = blue_endGameTowerRobot3,
+                stop("robot DNE (endgame)")
+            )
+        ) |>
+        select(match = match_number, robot, team, auto_climb, endgame_climb) |>
+        mutate(
+            auto_climb = switch(auto_climb,
+                None = "No",
+                Level1 = "L1",
+                Level2 = "L2",
+                Level3 = "L3",
+                stop("auto climb DNE")
+                ),
+            endgame_climb = switch(endgame_climb,
+                None = "No",
+                Level1 = "L1",
+                Level2 = "L2",
+                Level3 = "L3",
+                stop("endgame climb DNE")
+            )
+        )
+    
+    
+    # TO-DO auto assign robot based on position in schedule, pre-req of being'
+    # the right team and match and stuff
+    
+    # TO-DO 
+    
+    
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
