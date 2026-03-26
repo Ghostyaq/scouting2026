@@ -339,7 +339,6 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             `Auto Climb` = sum(auto_climb, na.rm = TRUE),
             Driver = mean(driver_rating, na.rm = TRUE),
             `Quick Climb` = sum(climb_less_than_5, na.rm = TRUE),
-            `Solo Shot` = sum(solo_shooting, na.rm = TRUE),
             Died = sum(died, na.rm = TRUE),
             Card = sum(card != 'No Card', na.rm = TRUE)
         ) |>
@@ -354,7 +353,7 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             Team = team, `Auto Fuel`, `Tele Fuel`, `Total Fuel`, `Total Score`,
             `Auto Cycles`, `Tele Cycles`, `Total Cycles`, `Auto Bump`,
             `Tele Bump`, `Tele Trench`, `Auto Climb`, Climb, `Quick Climb`, 
-            Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP) |>
+            Driver, Died, Card, `Matches Played`, ACP) |>
         modify_if(~is.numeric(.), ~round(., 2))
     
     result <- result[order(match(result$Team, teams)), ]
