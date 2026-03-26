@@ -217,9 +217,14 @@ server <- function(input, output, session) {
     })
     
     output$comments_df_comp <- renderDT({
-        req(user_logged_in())
-        comments_df(raw(), teams_selected())
-    })
+        if (user_logged_in()){
+            comments_df(raw(), teams_selected())
+        } else {
+            data.frame(
+                Message ="Please Login in the Settings Tab to access comments!"
+            )
+        }
+    }, options = list(dom = 't'))
     
     #SCORE PREDICTION
     output$score_prediction <- renderText({
@@ -287,10 +292,15 @@ server <- function(input, output, session) {
         summary_stat()
     })
     
-    output$comments_df_match <- renderDT({
-        req(user_logged_in())
-        comments_df(raw(), teams_selected())
-    })
+    output$comments_df_comp <- renderDT({
+        if (user_logged_in()){
+            comments_df(raw(), teams_selected())
+        } else {
+            data.frame(
+                Message ="Please Login in the Settings Tab to access comments!"
+            )
+        }
+    }, options = list(dom = 't'))
     
     output$matches_scouted <- renderPlotly({
         plot_scouting_graph(raw())
