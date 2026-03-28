@@ -29,14 +29,20 @@ ui <- fluidPage(
     ),
     navbarPage(
         title = "2026 REBUILT 449 Data",
+        card(
+            card_header(h3("2026 REBUILT 449 Shinyapp", align = "center"))
+        ),
         tabPanel(
             title = "Introductory Page",
             layout_columns(
+                col_widths = c(3,9),
+                uiOutput("frc_logo"),
                 card(
                     card_header("Introduction"),
-                    textOutput("intro_paragraph")
+                    htmlOutput("intro_paragraph")
                 )
             ),
+            card(),
             layout_columns(
                 card(
                     card_header("Explore Data"),
@@ -44,10 +50,18 @@ ui <- fluidPage(
                 ),
                 card(
                     card_header("Presented by FRC Team 449"),
-                    uiOutput("team_logo2")
+                    uiOutput("team_logo")
                 ),
+                card(
+                    card_header("All data on FRC REBUILT"),
+                    uiOutput("rebuilt_logo")
+                )
             ),
             card(),
+            card(
+                card_header(h3("Tabs - Their respective descriptions included", 
+                               align = "center"))
+            ),
             layout_columns(
                 card(
                     card_header("Event Summary"),
@@ -74,6 +88,31 @@ ui <- fluidPage(
                 card(
                     card_header("Settings"),
                     textOutput("settings_summary")
+                )
+            ),
+            card(),
+            card(
+                card_header(h3("Features - Their respective descriptions", 
+                               align = "center"))
+            ),
+            layout_columns(
+                card(
+                    card_header("pRidge"),
+                    textOutput("pridge_summary")
+                ),
+                card(
+                    card_header("Metric Switcher"),
+                    textOutput("metric_swap_summary")
+                )
+            ),
+            layout_columns(
+                card(
+                    card_header("Event Switcher"),
+                    textOutput("event_swap_summary")
+                ),
+                card(
+                    card_header("Password Locked Features"),
+                    textOutput("password_summary")
                 )
             )
         ),
