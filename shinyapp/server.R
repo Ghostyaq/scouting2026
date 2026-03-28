@@ -445,96 +445,47 @@ server <- function(input, output, session) {
     })
     
     output$intro_paragraph <- renderUI({
-        HTML("This is the 449 Shinyapp for 2026 REBUILT. On this app we visualize 
-              data in order to strategize for matches, picklist, and appreciate
-              beautiful data :).<br><br><b>If you are reading this, and intend on 
-              using our app, or even just checking it out, please fill out this 
-              form linked here:</b><br>Form Link<br>It won't take longer than a 
-              minute of your time.<br><br>Remember that everything on this 
-              shinyapp is free for your benefit... Except for our password 
-              locked comments database ;).<br><br>Everything was developed by
-              the 449 data science subteam, including a brand new stat, PRidge,
-              see below for more detail.<br><br>Data is inputted with our amazing
-              scouts, and TBA data to get actual scores for pRidge")
+        intro_paragraph_text()
     })
     
-    output$event_summary_summary <- renderText({
-        paste("The event summary tab provides an overview of the selected event 
-              (see settings for how to switch events), showing a general event 
-              graph and a event datatable showing average event stats.")
+    output$event_summary_summary <- renderUI({
+        event_summary_summary_text()
     })
     
-    output$auto_picklisting_summary <- renderText({
-        paste("The auto picklisting tab automatically grades each team and sorts
-              them into a list based off default weights for each category,
-              also shown. There is a customization option at the bottom of the
-              page which allows you to change the weights, which is recommended
-              to prioritize your preferences.")
+    output$auto_picklisting_summary <- renderUI({
+        auto_picklisting_summary_text()
     })
     
-    output$compare_teams_summary <- renderText({
-        paste("The compare teams tab allows you to select any team from the
-              event, and the shinyapp will generate visualizations and fill out
-              dataframes for the selected teams, as many teams can be selected,
-              but more than 6 is not recommended. The tab includes: Trench vs.
-              Bump, robot images, auto heatmaps, auto tendencies, driver rating
-              trends, and overall summaries as graphs and tables. Once playoffs
-              start, alliances become available to compare.")
+    output$compare_teams_summary <- renderUI({
+        compare_teams_summary_text()
     })
     
-    output$match_tab_summary <- renderText({
-        paste("The match tab can select any match from the selected event, and 
-              much like the compare teams tab, the shinyapp will create graphs
-              and tables to describe the match, with all the same graphs as
-              compare teams, and scoring predictions found on the sidebar.")
+    output$match_tab_summary <- renderUI({
+        match_tab_summary_text()
     })
     
-    output$scouts_tab_summary <- renderText({
-        paste("The scouts tab displays all the people who have scouted for us
-              this year, and their amount of matches scouted, average characters
-              commented, and their streak of scouted matches. Thanks scouts!")
+    output$scouts_tab_summary <- renderUI({
+        scouts_tab_summary_text()
     })
     
-    output$settings_summary <- renderText({
-        paste("The settings control the shinyapp and add accesibilities,
-              including metric switching, event switching and passcode entry.
-              More info on the features in the settings can be found below.")
+    output$settings_summary <- renderUI({
+        settings_summary_text()
     })
     
-    output$pridge_summary <- renderText({
-        paste("PRigde is a debut advanced metric developed by team 449, used
-              this year in REBUILT to estimate the amount of fuel a team 
-              scores. It is especially important this year where a scout cannot
-              quantitatively count fuel real time, and pRidge very accurately 
-              does this. PRidge is essentially a cross between OPR and EPA.
-              PRidge creates a matrix and solves accurately after about 20 
-              matches, very similar to OPR, but biased toward EPA
-              rather than 0. A link to a team 449 whitepaper for PRidge can be
-              found here: Link here")
+    output$pridge_summary <- renderUI({
+        pridge_summary_text()
     })
     
-    output$metric_swap_summary <- renderText({
-        paste("In the settings tab, there is a section for metric swapping.
-              These metrics include OPR, EPA, pRidge, and hOPpeR. Switching 
-              between metrics only requires one click and will change the 
-              calculation method for estimated fuel scored per match.")
+    output$metric_swap_summary <- renderUI({
+        metric_swap_summary_text()
     })
     
-    output$event_swap_summary <- renderText({
-        paste("Located on the sidebar of the settings tab, there are event 
-              buttons, which when clicked, change the data that the shinyapp
-              uses to visualize and show. The only events showed are the ones
-              that 449 has participated in, plus extra test events. Once an 
-              event is chosen, all the inputs will switch to the proper matches 
-              and teams, and graphs and tables will be based off the chosen 
-              event.")
+    output$event_swap_summary <- renderUI({
+        event_swap_summary_text()
     })
     
-    output$password_summary <- renderText({
-        paste("Some features are password locked, namely the comments tables
-              in the compare teams tab and the matches tab. If you have the 
-              password, you can go to the settings tab, input it, unlock the 
-              password blocked features.")
+    output$password_summary <- renderUI({
+        password_summary_text()
     })
     
     output$team_logo <- renderUI({
@@ -543,18 +494,16 @@ server <- function(input, output, session) {
     })
     
     output$rebuilt_logo <- renderUI({
-        image_src <- "
-Zoom https---www.studica.ca-images-thumbs-0013543_first-robotics-competition-rebuilt-game-piece-kop-quantity_550.webp
-https://www.studica.ca/images/thumbs/0013543_first-robotics-competition-rebuilt-game-piece-kop-quantity_550.webp
-"
+        image_src <- paste0(
+            "https://www.studica.ca/images/thumbs/0013543_first-robotics-compe",
+            "tition-rebuilt-game-piece-kop-quantity_550.webp")
         tags$img(src = image_src, height = "100%px", width = "100%px")
     })
     
     output$frc_logo <- renderUI({
-        image_src <- "
-Zoom https---www.nicepng.com-png-full-44-442571_first-robotics-logo-first-robotics-logo-png.png
-https://www.nicepng.com/png/full/44-442571_first-robotics-logo-first-robotics-logo-png.png
-"
+        image_src <- paste0(
+            "https://www.nicepng.com/png/full/44-442571_first-robotics-logo-fi",
+            "rst-robotics-logo-png.png")
         tags$img(src = image_src, height = "100%px", width = "100%px")
     })
 }

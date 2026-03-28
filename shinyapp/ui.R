@@ -18,6 +18,7 @@ library(shiny.fluent)
 library(colourpicker)
 
 source("viz/helper_functions.R")
+source("viz/introduction_page_text.R")
 source("server.R")
 
 options(sass.cache = FALSE)
@@ -28,12 +29,15 @@ ui <- fluidPage(
         bootswatch = "flatly"
     ),
     navbarPage(
-        title = "2026 REBUILT 449 Data",
-        card(
-            card_header(h3("2026 REBUILT 449 Shinyapp", align = "center"))
-        ),
+        title = "2026 REBUILT 449 Shinyapp",
         tabPanel(
             title = "Introductory Page",
+            card(
+                card_header(h3(
+                    "2026 REBUILT 449 Shinyapp", 
+                    align = "center",
+                    style = "color: #a7000a; font-weight: bold;"))
+            ),
             layout_columns(
                 col_widths = c(3,9),
                 uiOutput("frc_logo"),
@@ -59,60 +63,64 @@ ui <- fluidPage(
             ),
             card(),
             card(
-                card_header(h3("Tabs - Their respective descriptions included", 
-                               align = "center"))
+                card_header(h3(
+                    "Description of Tabs", 
+                    align = "center",
+                    style = "color: #a7000a; font-weight: bold;"))
             ),
             layout_columns(
                 card(
                     card_header("Event Summary"),
-                    textOutput("event_summary_summary")
+                    htmlOutput("event_summary_summary")
                 ),
                 card(
-                    card_header("Auto Picklisting"),
-                    textOutput("auto_picklisting_summary")
+                    card_header("Auto Picklisting (WIP)"),
+                    htmlOutput("auto_picklisting_summary")
                 ),
                 card(
                     card_header("Compare Teams"),
-                    textOutput("compare_teams_summary")
+                    htmlOutput("compare_teams_summary")
                 )
             ),
             layout_columns(
                 card(
                     card_header("Match"),
-                    textOutput("match_tab_summary")
+                    htmlOutput("match_tab_summary")
                 ),
                 card(
                     card_header("Scouts"),
-                    textOutput("scouts_tab_summary")
+                    htmlOutput("scouts_tab_summary")
                 ),
                 card(
                     card_header("Settings"),
-                    textOutput("settings_summary")
+                    htmlOutput("settings_summary")
                 )
             ),
             card(),
             card(
-                card_header(h3("Features - Their respective descriptions", 
-                               align = "center"))
+                card_header(h3(
+                    "Description of Features", 
+                    align = "center",
+                    style = "color: #a7000a; font-weight: bold;"))
             ),
             layout_columns(
                 card(
                     card_header("pRidge"),
-                    textOutput("pridge_summary")
+                    htmlOutput("pridge_summary")
                 ),
                 card(
                     card_header("Metric Switcher"),
-                    textOutput("metric_swap_summary")
+                    htmlOutput("metric_swap_summary")
                 )
             ),
             layout_columns(
                 card(
                     card_header("Event Switcher"),
-                    textOutput("event_swap_summary")
+                    htmlOutput("event_swap_summary")
                 ),
                 card(
-                    card_header("Password Locked Features"),
-                    textOutput("password_summary")
+                    card_header("Password-Locked Features"),
+                    htmlOutput("password_summary")
                 )
             )
         ),
