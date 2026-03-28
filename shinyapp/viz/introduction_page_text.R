@@ -10,7 +10,8 @@ intro_paragraph_text <- function(){
         locked comments database ;)<br><br>Everything was developed by 
         the 449 Data Science 'Subteam', including a brand new stat, pRidge: 
         see below for more detail.<br><br>Data is inputted by our amazing 
-        scouts, with some assistance from TBA data (for pRidge).")
+        scouts, with some assistance from TBA data (for pRidge). Our code is 
+        available on the 449 Github: Link")
 }
 
 event_summary_summary_text <- function(){
