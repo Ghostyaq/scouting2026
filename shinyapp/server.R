@@ -23,7 +23,7 @@ default_linear_weights <- data.frame(
     `Auto Cycles` = 0, `Tele Cycles` = 0, `Total Cycles` = 0,
     `Auto Bump` = 10, `Tele Bump` = 10, `Tele Trench` = 5, 
     `Auto Climb` = 15, Climb = 15, `Quick Climb` = 15,
-    Driver = 10, Died = 0, Card = -20, `Matches Played` = 0,
+    Driver = 10, `Solo Shot` = 0, Died = 0, Card = -20, `Matches Played` = 0,
     `ACP` = 0
 ) #temp, remove later
 
@@ -118,6 +118,11 @@ server <- function(input, output, session) {
         stacked_bar_chart(raw(), schedule(), pridge(), TRUE, teams, TRUE)
     })
     
+    output$event_summary_display <- renderPlot({
+        teams <- unique(raw()$team)
+        stacked_bar_chart(raw(), schedule(), pridge(), TRUE, teams, TRUE)
+    })
+    
     output$summary_stats <- renderDT({
         dataframe <- summary_stats(raw(), pridge())
         datatable(
@@ -175,13 +180,13 @@ server <- function(input, output, session) {
                 scrollX = TRUE
             ),
             rownames = FALSE) |>
-        formatStyle(
-            'Team Score',
-            background = styleColorBar(
-                c(0, max(team_scores$`Team Score`)), 'lightblue'),
-            backgroundSize = '100% 90%',
-            backgroundRepeat = 'no-repeat',
-            backgroundPosition = 'center')    
+            formatStyle(
+                'Team Score',
+                background = styleColorBar(
+                    c(0, max(team_scores$`Team Score`)), 'lightblue'),
+                backgroundSize = '100% 90%',
+                backgroundRepeat = 'no-repeat',
+                backgroundPosition = 'center')    
     }) 
     
     #COMPARE POINT SUMMARY
@@ -230,7 +235,7 @@ server <- function(input, output, session) {
             options = list(
                 dom = 't', 
                 pageLength = nrow(df)
-                )
+            )
         )
     })
     
@@ -342,8 +347,8 @@ server <- function(input, output, session) {
                 style = "text-align: center;")
             
             full <- tags$div(
-            tag_temp, cap_tag, 
-            style = "display: flex; flex-direction: column; 
+                tag_temp, cap_tag, 
+                style = "display: flex; flex-direction: column; 
             align-items: center; height: 300px; padding: 5px; 
             border: 1px solid #555; overflow: hidden;")
             
@@ -390,8 +395,8 @@ server <- function(input, output, session) {
                 style = "text-align: center;")
             
             full <- tags$div(
-            tag_temp, cap_tag, 
-            style = "display: flex; flex-direction: column; 
+                tag_temp, cap_tag, 
+                style = "display: flex; flex-direction: column; 
             align-items: center; height: 250px; padding: 5px; 
             border: 1px solid #555; overflow: hidden;")
             
@@ -437,5 +442,68 @@ server <- function(input, output, session) {
                 height = 1000
             )
         )
+    })
+    
+    output$intro_paragraph <- renderUI({
+        intro_paragraph_text()
+    })
+    
+    output$event_summary_summary <- renderUI({
+        event_summary_summary_text()
+    })
+    
+    output$auto_picklisting_summary <- renderUI({
+        auto_picklisting_summary_text()
+    })
+    
+    output$compare_teams_summary <- renderUI({
+        compare_teams_summary_text()
+    })
+    
+    output$match_tab_summary <- renderUI({
+        match_tab_summary_text()
+    })
+    
+    output$scouts_tab_summary <- renderUI({
+        scouts_tab_summary_text()
+    })
+    
+    output$settings_summary <- renderUI({
+        settings_summary_text()
+    })
+    
+    output$pridge_summary <- renderUI({
+        pridge_summary_text()
+    })
+    
+    output$metric_swap_summary <- renderUI({
+        metric_swap_summary_text()
+    })
+    
+    output$event_swap_summary <- renderUI({
+        event_swap_summary_text()
+    })
+    
+    output$password_summary <- renderUI({
+        password_summary_text()
+    })
+    
+    output$team_logo <- renderUI({
+        image_src <- "https://avatars.githubusercontent.com/u/1393583?s=280&v=4"
+        tags$img(src = image_src, height = "100%px", width = "100%px")
+    })
+    
+    output$rebuilt_logo <- renderUI({
+        image_src <- paste0(
+            "https://www.studica.ca/images/thumbs/0013543_first-robotics-compe",
+            "tition-rebuilt-game-piece-kop-quantity_550.webp")
+        tags$img(src = image_src, height = "100%px", width = "100%px")
+    })
+    
+    output$frc_logo <- renderUI({
+        image_src <- paste0(
+            "https://www.nicepng.com/png/full/44-442571_first-robotics-logo-fi",
+            "rst-robotics-logo-png.png")
+        tags$img(src = image_src, height = "100%px", width = "100%px")
     })
 }

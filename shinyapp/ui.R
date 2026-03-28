@@ -18,6 +18,7 @@ library(shiny.fluent)
 library(colourpicker)
 
 source("viz/helper_functions.R")
+source("viz/introduction_page_text.R")
 source("server.R")
 
 options(sass.cache = FALSE)
@@ -28,7 +29,101 @@ ui <- fluidPage(
         bootswatch = "flatly"
     ),
     navbarPage(
-        title = "2026 REBUILT 449 Data",
+        title = "2026 REBUILT 449 Shinyapp",
+        tabPanel(
+            title = "Introductory Page",
+            card(
+                card_header(h3(
+                    "2026 REBUILT 449 Shinyapp", 
+                    align = "center",
+                    style = "color: #a7000a; font-weight: bold;"))
+            ),
+            layout_columns(
+                col_widths = c(3,9),
+                uiOutput("frc_logo"),
+                card(
+                    card_header("Introduction"),
+                    htmlOutput("intro_paragraph")
+                )
+            ),
+            card(),
+            layout_columns(
+                card(
+                    card_header("Explore Data"),
+                    plotOutput("event_summary_display")
+                ),
+                card(
+                    card_header("Presented by FRC Team 449"),
+                    uiOutput("team_logo")
+                ),
+                card(
+                    card_header("All data on FRC REBUILT"),
+                    uiOutput("rebuilt_logo")
+                )
+            ),
+            card(),
+            card(
+                card_header(h3(
+                    "Description of Tabs", 
+                    align = "center",
+                    style = "color: #a7000a; font-weight: bold;"))
+            ),
+            layout_columns(
+                card(
+                    card_header("Event Summary"),
+                    htmlOutput("event_summary_summary")
+                ),
+                card(
+                    card_header("Auto Picklisting (WIP)"),
+                    htmlOutput("auto_picklisting_summary")
+                ),
+                card(
+                    card_header("Compare Teams"),
+                    htmlOutput("compare_teams_summary")
+                )
+            ),
+            layout_columns(
+                card(
+                    card_header("Match"),
+                    htmlOutput("match_tab_summary")
+                ),
+                card(
+                    card_header("Scouts"),
+                    htmlOutput("scouts_tab_summary")
+                ),
+                card(
+                    card_header("Settings"),
+                    htmlOutput("settings_summary")
+                )
+            ),
+            card(),
+            card(
+                card_header(h3(
+                    "Description of Features", 
+                    align = "center",
+                    style = "color: #a7000a; font-weight: bold;"))
+            ),
+            layout_columns(
+                card(
+                    card_header("pRidge"),
+                    htmlOutput("pridge_summary")
+                ),
+                card(
+                    card_header("Metric Switcher"),
+                    htmlOutput("metric_swap_summary")
+                )
+            ),
+            layout_columns(
+                card(
+                    card_header("Event Switcher"),
+                    htmlOutput("event_swap_summary")
+                ),
+                card(
+                    card_header("Password-Locked Features"),
+                    htmlOutput("password_summary")
+                )
+            )
+        ),
         tabPanel(
             title = "Event Summary",
             card(
@@ -59,6 +154,16 @@ ui <- fluidPage(
                         "selected_teams_comp", 
                         label = "Select Teams", 
                         choices = NULL, multiple = TRUE, search = TRUE
+                    ),
+                    virtualSelectInput(
+                        "selected_red", 
+                        label = "Select Red Alliance", 
+                        choices = NULL, multiple = FALSE, search = TRUE
+                    ),
+                    virtualSelectInput(
+                        "selected_blue", 
+                        label = "Select Blue Alliance", 
+                        choices = NULL, multiple = FALSE, search = TRUE
                     ),
                     height = "500px"
                 ),
@@ -122,16 +227,6 @@ ui <- fluidPage(
                         "selected_match", 
                         label = "Select a Match", 
                         choices = NULL, selected = 1, search = TRUE),
-                    virtualSelectInput(
-                        "selected_red", 
-                        label = "Select Red Alliance", 
-                        choices = NULL, multiple = FALSE, search = TRUE
-                    ),
-                    virtualSelectInput(
-                        "selected_blue", 
-                        label = "Select Blue Alliance", 
-                        choices = NULL, multiple = FALSE, search = TRUE
-                    ),
                     uiOutput("score_prediction"),
                     height = "500px"
                 ),
@@ -150,10 +245,10 @@ ui <- fluidPage(
                         card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_match")
                     ),
-                    #card(
-                    #    card_header("Driver Rating by Match"),
-                    #    plotOutput("driver_rating_match")
-                    #)
+                    card(
+                        card_header("Driver Rating by Match"),
+                        plotOutput("driver_rating_match")
+                    )
                 ),
                 layout_columns(
                     card(
