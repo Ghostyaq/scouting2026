@@ -706,6 +706,101 @@ data_validation <- function(event_key){
     rbind(missed_matches, non_existent_matches, double_scouted)
 }
 
+prescout <- function(event_key, manual_teams = NULL){
+    scoutR_key <- paste0(2026, event_key)
+    if (!is.null(manual_teams)){
+        teams <- manual_teams
+    } else {
+        teams <- scoutR::event_teams(scoutR_key)$team_number
+    }
+    
+    scoutR_prescout <- scoutR::prescout(scoutR_key, manual_teams = teams) |>
+        unique()
+    
+    df <- data.frame(team_num = teams) |>
+        rowwise() |>
+        mutate(
+            temp = list(team_events(team_num, year = 2026) |> 
+                filter(event_code != event_key)),
+            temp2 = list(as.data.frame(temp) |>
+                filter(week == max(as.data.frame(temp)$week, na.rm = TRUE)) |>
+                select(first_event_code, week)),
+            last_event_code = as.data.frame(temp2)$first_event_code,
+            last_event_week = as.data.frame(temp2)$week + 1
+        ) |>
+        select(!c(temp, temp2))
+    
+    calc_pridge_fuel <- function(scoutR_key){
+        matches <- event_matches(scoutR_key, match_type = "qual")
+        
+        sb_data <- team_events_sb(event = scoutR_key)
+        epas <- sapply(sb_data, function(te){te$epa$stats$start})
+        names(epas) <- sapply(sb_data, function(te){te$team})
+        
+        design <- as.matrix(lineup_design_matrix(matches))
+        blue_fuel <- sapply(matches[['blue_hubScore']], \(x) x$totalCount)
+        red_fuel <- sapply(matches[['red_hubScore']], \(x) x$totalCount)
+        response <- c(blue_fuel, red_fuel)
+        
+        priors <- epas
+        grid = exp(seq(log(0.01), log(20), length.out = 100))
+        #names(priors) <- scoutR:::tf(names(priors))
+        #priors <- priors[match(colnames(design), names(priors))]
+        
+        mses <- pridge_lambda_cv(design, response, priors, grid,
+                                 plot_mses = FALSE)
+        lambda_opt <- grid[which.min(mses)]
+        result <- scoutR:::prior_ridge(design, response, lambda_opt, priors)
+        return(round(result, digits = 2))
+        }
+    
+    fuel_stats <- data.frame(event_key = unique(df$last_event_code)) |>
+        rowwise() |>
+        mutate(
+            scoutR_key = paste0(2026, event_key),
+            fuel_pridge = list(calc_pridge_fuel(scoutR_key)),
+            fuel_opr = list(event_oprs(scoutR_key)),
+            fuel_epa = list({
+                teams <- team_events_sb(event = scoutR_key)
+                setNames(
+                    sapply(teams, function(te){te$epa$stats$pre_elim}),
+                    sapply(teams, function(te){paste0("frc", te$team)})
+                    )
+            })
+        )
+    
+    df <- df |>
+        mutate(
+            stats = list(fuel_stats |>
+                filter(event_key == last_event_code)),
+            pridge = unlist(stats$fuel_pridge)[paste0("frc", team_num)],
+            opr = as.data.frame(stats[["fuel_opr"]]) |>
+                filter(team == team_num) |>
+                pull(opr) |>
+                round(digits = 2),
+            epa = unlist(stats$fuel_epa)[paste0("frc", team_num)]
+        )
+    
+    result <- scoutR_prescout |>
+        mutate(
+        `Team Number` = id,
+        `Team Name` = name,
+        `Record` = paste0(wins, "-", losses, "-", ties), 
+        `Climb` = n_matches_count - endGameTower_None,
+        `Auto Climb` = autoTower_Level1
+        )
+    
+    result$`pRidge (Fuel)` <- df$pridge
+    result$`EPA (Fuel)` <- df$epa
+    result$`OPR (Fuel)` <- df$opr
+    result <- result |>
+        select(
+            `Team Number`, `Team Name`, `Record`, `pRidge (Fuel)`, `EPA (Fuel)`,
+            `OPR (Fuel)`, `Climb`, `Auto Climb`
+            )
+    return(result)
+}
+
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
 #schedule <- read.csv('shinyapp/data/test_data/schedule.csv')
 #tba_data <- read.csv('shinyapp/data/test_data/tba_data.csv')
