@@ -293,17 +293,17 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
     data <- pivot_longer(
         data,
         cols = c('Auto Fuel', 'Tele Fuel', 'Auto Climb', 'Climb'),
-        names_to = 'type',
+        names_to = 'Score Type',
         values_to = 'score',
     )
     
     data$Team <- factor(data$Team, levels = team_order, ordered = TRUE)
-    data$type <- factor(
-        data$type, 
+    data$`Score Type` <- factor(
+        data$`Score Type`, 
         c("Auto Fuel", "Auto Climb", "Tele Fuel", "Climb"), 
         ordered = TRUE)
     
-    ggplot(data, aes(x = Team, y = score, fill = type)) +
+    ggplot(data, aes(x = Team, y = score, fill = `Score Type`)) +
         geom_bar(stat = "identity") + 
         labs(
             title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
