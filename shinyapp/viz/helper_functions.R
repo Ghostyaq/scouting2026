@@ -3,7 +3,6 @@ library(ggplot2)
 library(plotly)
 library(scoutR)
 
-
 bump_trench_ratioplot <- function(raw, team_list){
     filtered_df <- raw |>
         filter(team %in% team_list) |>
@@ -657,7 +656,7 @@ score_pred <- function(data, red, blue){
         "<span style='color:blue;'>", round(blue_auto_score, digits = 0))
 }
 
-data_validation_offline <- function(event_key){
+data_validation_online <- function(event_key, rewrite = FALSE){
     raw <- read.csv(paste0('shinyapp/data/', event_key, '/data.csv'))
     schedule <- read.csv(paste0('shinyapp/data/', event_key, '/schedule.csv'))
     
@@ -685,20 +684,32 @@ data_validation_offline <- function(event_key){
     missed_matches$type <- "missed"
     non_existent_matches <- anti_join(data, long_schedule, by = "scout_key") |>
         select(match, robot, team, scout_key)
-    non_existent_matches$type <- "non-existent"
+    wrong_team <- semi_join(non_existent_matches, missed_matches, by = c("match", "robot"))
+    
     double_scouted <- data[(
-        duplicated(data[, "scout_key"]) | 
-            duplicated(data[, "scout_key"], 
-                       fromLast = TRUE)), ] |>
+        duplicated(data[, "scout_key"]) | duplicated(data[, "scout_key"], 
+        fromLast = TRUE)), ] |>
         select(match, robot, team, scout_key)
     double_scouted$type <- "double scout"
     
-    rbind(missed_matches, non_existent_matches, double_scouted)
-}
+    offline <- rbind(missed_matches, non_existent_matches, double_scouted)
+    
+    tryCatch({
+        response <- httr::HEAD(url = "http://www.google.com", timeout = 5)
+        if (response$status_code >= 200 && response$status_code < 400){
+            message("Successfully Connected to Internet")
+        }
+    },
+    error = function(e){
+        message("No Internet 2")
+        return(offline)
+    },
+    warning = function(w){
+        message("Connection warning: ", w$message)
+        return(offline)
+    })
 
-data_validation_online <- function(event_key, rewrite = FALSE){
-    offline <- data_validation_offline(event_key)
-    schedule <- read.csv(paste0("shinyapp/data/", event_key, "schedule.csv"))
+    schedule <- read.csv(paste0("shinyapp/data/", event_key, "/schedule.csv"))
     tba_data <- event_matches(paste0("2026", event_key))
     
     # TO-DO — auto assign climbs from TBA into the data (rewrite = TRUE only)
@@ -738,11 +749,15 @@ data_validation_online <- function(event_key, rewrite = FALSE){
         ) |>
         select(match = match_number, robot, team, auto_climb, endgame_climb) |>
         mutate(
+            team = gsub("frc", "", team),
+            robot = paste0(
+                toupper(substr(robot, 1, 1)), 
+                substr(robot, nchar(robot), nchar(robot))),
             auto_climb = switch(auto_climb,
-                None = "No",
-                Level1 = "L1",
-                Level2 = "L2",
-                Level3 = "L3",
+                None = FALSE,
+                Level1 = TRUE,
+                Level2 = TRUE,
+                Level3 = TRUE,
                 stop("auto climb DNE")
                 ),
             endgame_climb = switch(endgame_climb,
@@ -754,6 +769,11 @@ data_validation_online <- function(event_key, rewrite = FALSE){
             )
         )
     
+    
+    
+    if (rewrite){
+        
+    }
     
     # TO-DO auto assign robot based on position in schedule, pre-req of being'
     # the right team and match and stuff
