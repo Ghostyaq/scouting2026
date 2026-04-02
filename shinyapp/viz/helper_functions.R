@@ -656,7 +656,7 @@ score_pred <- function(data, red, blue){
         "<span style='color:blue;'>", round(blue_auto_score, digits = 0))
 }
 
-data_validation_online <- function(event_key, rewrite = FALSE){
+data_validation <- function(event_key, rewrite = FALSE){
     raw <- read.csv(paste0('shinyapp/data/', event_key, '/data.csv'))
     schedule <- read.csv(paste0('shinyapp/data/', event_key, '/schedule.csv'))
     
@@ -666,6 +666,8 @@ data_validation_online <- function(event_key, rewrite = FALSE){
         arrange(match, robot) |>
         rowwise() |>
         mutate(
+            match_robot = paste(match, robot),
+            match_team = paste(match, team),
             scout_key = paste(match, robot, team)
         )
     
@@ -677,22 +679,36 @@ data_validation_online <- function(event_key, rewrite = FALSE){
         ) |>
         rowwise() |>
         mutate(
-            scout_key = paste(match, robot, team)
+            truth_key = paste(match, robot, team)
         )
     
-    missed_matches <- anti_join(long_schedule, data, by = "scout_key")
-    missed_matches$type <- "missed"
-    non_existent_matches <- anti_join(data, long_schedule, by = "scout_key") |>
-        select(match, robot, team, scout_key)
-    wrong_team <- semi_join(non_existent_matches, missed_matches, by = c("match", "robot"))
-    
-    double_scouted <- data[(
-        duplicated(data[, "scout_key"]) | duplicated(data[, "scout_key"], 
-        fromLast = TRUE)), ] |>
-        select(match, robot, team, scout_key)
-    double_scouted$type <- "double scout"
-    
-    offline <- rbind(missed_matches, non_existent_matches, double_scouted)
+    offline <- long_schedule |>
+        mutate(
+            scout_key = if (sum(data$scout_key == truth_key) >= 1) {
+                truth_key
+            } else if (paste(match, team) %in% data$match_team) {
+                paste(
+                    data[data$match_team == paste(match, team), ]$scout_key, 
+                    collapse = " || ")
+            } else if (paste(match, robot) %in% data$match_robot) {
+                paste(
+                    data[data$match_robot == paste(match, robot), ]$scout_key,
+                    collapse = " || ")
+            } else {
+                "DNE"
+            },
+            error = if (sum(data$scout_key == truth_key) == 1) {
+                "All Good"
+            } else if (sum(data$scout_key == truth_key) >= 1) {
+                "Double Scouted"
+            } else if (paste(match, team) %in% data$match_team) {
+                "Wrong Robot ID (R1, R2, R3, B1, B2, B3)"
+            } else if (paste(match, robot) %in% data$match_robot) {
+                "Wrong Team Scouted"
+            } else {
+                "Missed"
+            }
+        )
     
     tryCatch({
         response <- httr::HEAD(url = "http://www.google.com", timeout = 5)
@@ -753,6 +769,7 @@ data_validation_online <- function(event_key, rewrite = FALSE){
             robot = paste0(
                 toupper(substr(robot, 1, 1)), 
                 substr(robot, nchar(robot), nchar(robot))),
+            scout_key = paste(match, robot, team),
             auto_climb = switch(auto_climb,
                 None = FALSE,
                 Level1 = TRUE,
@@ -767,6 +784,27 @@ data_validation_online <- function(event_key, rewrite = FALSE){
                 Level3 = "L3",
                 stop("endgame climb DNE")
             )
+        )
+    
+    online <- offline |>
+        rowwise() |>
+        mutate(
+            error = 
+                ifelse(error == "All Good", 
+                    ifelse(
+                        data[data$scout_key == truth_key,]$auto_climb != 
+                            temp[temp$scout_key == truth_key,]$auto_climb, 
+                        paste(error, "&&", "Incorrect Auto Climb"),
+                        error), 
+                    error),
+            error = 
+                ifelse(error == "All Good", 
+                       ifelse(
+                           data[data$scout_key == truth_key,]$endgame_climb != 
+                               temp[temp$scout_key == truth_key,]$endgame_climb, 
+                           paste(error, "&&", "Incorrect Endgame Climb"),
+                           error), 
+                       error)
         )
     
     
