@@ -4,7 +4,8 @@ intro_paragraph_text <- function(){
         visualize to strategize for matches, picklist, and appreciate 
         beautiful graphs :)<br><br><b>If you are reading this, and intend on 
         using our app, or even just checking it out, please fill out this 
-        form linked here:</b> Form Link<br>It won't take longer than 
+        form linked here:</b> <a href='https://forms.gle/GLTHyD5tREEJ7tdn8' 
+            target='_blank'>Form Link</a><br>It won't take longer than 
         15 seconds of your time.<br><br>Remember that everything on the 
         shinyapp is free for your benefit... Except for our password 
         locked comments database ;)<br><br>Everything was developed by 
