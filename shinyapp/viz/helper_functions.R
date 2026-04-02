@@ -710,6 +710,26 @@ data_validation <- function(event_key, rewrite = FALSE){
             }
         )
     
+    if (rewrite) {
+        offline <- mutate(offline, match_team = paste(match, team))
+        data <- data |>
+            left_join(
+                offline |> select(match_team, error, robot_correct = robot),
+                by = "match_team"
+            ) |>
+            mutate(
+                robot = ifelse(
+                    error == "Wrong Robot ID (R1, R2, R3, B1, B2, B3)",
+                    as.character(robot_correct),
+                    as.character(robot)
+                )
+            ) |>
+            select(!c(robot_correct, error))
+        write.csv(data, 
+                  paste0('shinyapp/data/', event_key, '/data.csv'), 
+                  row.names = FALSE)
+    }
+    
     tryCatch({
         response <- httr::HEAD(url = "http://www.google.com", timeout = 5)
         if (response$status_code >= 200 && response$status_code < 400){
