@@ -293,17 +293,17 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
     data <- pivot_longer(
         data,
         cols = c('Auto Fuel', 'Tele Fuel', 'Auto Climb', 'Climb'),
-        names_to = 'type',
+        names_to = 'Score Type',
         values_to = 'score',
     )
     
     data$Team <- factor(data$Team, levels = team_order, ordered = TRUE)
-    data$type <- factor(
-        data$type, 
+    data$`Score Type` <- factor(
+        data$`Score Type`, 
         c("Auto Fuel", "Auto Climb", "Tele Fuel", "Climb"), 
         ordered = TRUE)
     
-    ggplot(data, aes(x = Team, y = score, fill = type)) +
+    ggplot(data, aes(x = Team, y = score, fill = `Score Type`)) +
         geom_bar(stat = "identity") + 
         labs(
             title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
@@ -551,14 +551,14 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
         summarise(
             a_pass_1 = length(grep("1", inactive_strat)),
             b_herd_2 = length(grep("2", inactive_strat)),
-            c_theif_3 = length(grep("3", inactive_strat)),
+            c_thief_3 = length(grep("3", inactive_strat)),
             d_defense_oz_4 = length(grep("4", inactive_strat)),
             e_defense_nz_5 = length(grep("5", inactive_strat)),
             f_intaked_full_6 = length(grep("6", inactive_strat))
         ) |>
         
         pivot_longer(
-            cols = c("a_pass_1", "b_herd_2", "c_theif_3", "d_defense_oz_4",
+            cols = c("a_pass_1", "b_herd_2", "c_thief_3", "d_defense_oz_4",
                      "e_defense_nz_5", "f_intaked_full_6"),
             names_to = "comment_type",
             values_to = "level")
@@ -568,7 +568,7 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
     comments$comment_type <- factor(
         comments$comment_type, 
         levels = c(
-            "a_pass_1", "b_herd_2", "c_theif_3", "d_defense_oz_4", 
+            "a_pass_1", "b_herd_2", "c_thief_3", "d_defense_oz_4", 
             "e_defense_nz_5", "f_intaked_full_6"), 
         ordered = TRUE
     )
@@ -582,13 +582,13 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
             values = c("f_intaked_full_6" = "#f2b5d4", 
                        "e_defense_nz_5" = "#f7d6e0",
                        "d_defense_oz_4" = "#eff7f6", 
-                       "c_theif_3" = "#b2f7ef", 
+                       "c_thief_3" = "#b2f7ef", 
                        "b_herd_2" = "#7bdff2",
                        "a_pass_1" = "#358c8f" ),
             labels = c("f_intaked_full_6" = "Intaked full (6)", 
                        "e_defense_nz_5" = "defense nz (5)", 
                        "d_defense_oz_4" = "defense oz (4)", 
-                       "c_theif_3" = "theif (3)",
+                       "c_thief_3" = "thief (3)",
                        "b_herd_2" = "herd (2)",
                        "a_pass_1" = "pass (1)" )) +
         theme_bw() +
