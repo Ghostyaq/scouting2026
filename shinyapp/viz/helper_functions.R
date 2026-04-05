@@ -826,19 +826,6 @@ data_validation <- function(event_key, rewrite = FALSE){
                            error), 
                        error)
         )
-    
-    
-    
-    if (rewrite){
-        
-    }
-    
-    # TO-DO auto assign robot based on position in schedule, pre-req of being'
-    # the right team and match and stuff
-    
-    # TO-DO 
-    
-    
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
