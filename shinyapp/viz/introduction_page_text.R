@@ -4,14 +4,17 @@ intro_paragraph_text <- function(){
         visualize to strategize for matches, picklist, and appreciate 
         beautiful graphs :)<br><br><b>If you are reading this, and intend on 
         using our app, or even just checking it out, please fill out this 
-        form linked here:</b> Form Link<br>It won't take longer than 
+        form linked here:</b> <a href='https://forms.gle/GLTHyD5tREEJ7tdn8' 
+        target='_blank'>Form Link</a><br>It won't take longer than 
         15 seconds of your time.<br><br>Remember that everything on the 
         shinyapp is free for your benefit... Except for our password 
         locked comments database ;)<br><br>Everything was developed by 
         the 449 Data Science 'Subteam', including a brand new stat, pRidge: 
         see below for more detail.<br><br>Data is inputted by our amazing 
         scouts, with some assistance from TBA data (for pRidge). Our code is 
-        available on the 449 Github: Link")
+        available on the 449 Github: 
+        <a href='https://github.com/blair-robot-project/scouting2026'
+        target='_blank'>Github Link</a>")
 }
 
 event_summary_summary_text <- function(){
