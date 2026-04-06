@@ -293,17 +293,17 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
     data <- pivot_longer(
         data,
         cols = c('Auto Fuel', 'Tele Fuel', 'Auto Climb', 'Climb'),
-        names_to = 'type',
+        names_to = 'Score Type',
         values_to = 'score',
     )
     
     data$Team <- factor(data$Team, levels = team_order, ordered = TRUE)
-    data$type <- factor(
-        data$type, 
+    data$`Score Type` <- factor(
+        data$`Score Type`, 
         c("Auto Fuel", "Auto Climb", "Tele Fuel", "Climb"), 
         ordered = TRUE)
     
-    ggplot(data, aes(x = Team, y = score, fill = type)) +
+    ggplot(data, aes(x = Team, y = score, fill = `Score Type`)) +
         geom_bar(stat = "identity") + 
         labs(
             title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
@@ -551,14 +551,14 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
         summarise(
             a_pass_1 = length(grep("1", inactive_strat)),
             b_herd_2 = length(grep("2", inactive_strat)),
-            c_theif_3 = length(grep("3", inactive_strat)),
+            c_thief_3 = length(grep("3", inactive_strat)),
             d_defense_oz_4 = length(grep("4", inactive_strat)),
             e_defense_nz_5 = length(grep("5", inactive_strat)),
             f_intaked_full_6 = length(grep("6", inactive_strat))
         ) |>
         
         pivot_longer(
-            cols = c("a_pass_1", "b_herd_2", "c_theif_3", "d_defense_oz_4",
+            cols = c("a_pass_1", "b_herd_2", "c_thief_3", "d_defense_oz_4",
                      "e_defense_nz_5", "f_intaked_full_6"),
             names_to = "comment_type",
             values_to = "level")
@@ -568,7 +568,7 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
     comments$comment_type <- factor(
         comments$comment_type, 
         levels = c(
-            "a_pass_1", "b_herd_2", "c_theif_3", "d_defense_oz_4", 
+            "a_pass_1", "b_herd_2", "c_thief_3", "d_defense_oz_4", 
             "e_defense_nz_5", "f_intaked_full_6"), 
         ordered = TRUE
     )
@@ -582,13 +582,13 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
             values = c("f_intaked_full_6" = "#f2b5d4", 
                        "e_defense_nz_5" = "#f7d6e0",
                        "d_defense_oz_4" = "#eff7f6", 
-                       "c_theif_3" = "#b2f7ef", 
+                       "c_thief_3" = "#b2f7ef", 
                        "b_herd_2" = "#7bdff2",
                        "a_pass_1" = "#358c8f" ),
             labels = c("f_intaked_full_6" = "Intaked full (6)", 
                        "e_defense_nz_5" = "defense nz (5)", 
                        "d_defense_oz_4" = "defense oz (4)", 
-                       "c_theif_3" = "theif (3)",
+                       "c_thief_3" = "thief (3)",
                        "b_herd_2" = "herd (2)",
                        "a_pass_1" = "pass (1)" )) +
         theme_bw() +
@@ -704,6 +704,101 @@ data_validation <- function(event_key){
     double_scouted$type <- "double scout"
     
     rbind(missed_matches, non_existent_matches, double_scouted)
+}
+
+prescout <- function(event_key, manual_teams = NULL){
+    scoutR_key <- paste0(2026, event_key)
+    if (!is.null(manual_teams)){
+        teams <- manual_teams
+    } else {
+        teams <- scoutR::event_teams(scoutR_key)$team_number
+    }
+    
+    scoutR_prescout <- scoutR::prescout(scoutR_key, manual_teams = teams) |>
+        unique()
+    
+    df <- data.frame(team_num = teams) |>
+        rowwise() |>
+        mutate(
+            temp = list(team_events(team_num, year = 2026) |> 
+                filter(event_code != event_key)),
+            temp2 = list(as.data.frame(temp) |>
+                filter(week == max(as.data.frame(temp)$week, na.rm = TRUE)) |>
+                select(first_event_code, week)),
+            last_event_code = as.data.frame(temp2)$first_event_code,
+            last_event_week = as.data.frame(temp2)$week + 1
+        ) |>
+        select(!c(temp, temp2))
+    
+    calc_pridge_fuel <- function(scoutR_key){
+        matches <- event_matches(scoutR_key, match_type = "qual")
+        
+        sb_data <- team_events_sb(event = scoutR_key)
+        epas <- sapply(sb_data, function(te){te$epa$stats$start})
+        names(epas) <- sapply(sb_data, function(te){te$team})
+        
+        design <- as.matrix(lineup_design_matrix(matches))
+        blue_fuel <- sapply(matches[['blue_hubScore']], \(x) x$totalCount)
+        red_fuel <- sapply(matches[['red_hubScore']], \(x) x$totalCount)
+        response <- c(blue_fuel, red_fuel)
+        
+        priors <- epas
+        grid = exp(seq(log(0.01), log(20), length.out = 100))
+        #names(priors) <- scoutR:::tf(names(priors))
+        #priors <- priors[match(colnames(design), names(priors))]
+        
+        mses <- pridge_lambda_cv(design, response, priors, grid,
+                                 plot_mses = FALSE)
+        lambda_opt <- grid[which.min(mses)]
+        result <- scoutR:::prior_ridge(design, response, lambda_opt, priors)
+        return(round(result, digits = 2))
+        }
+    
+    fuel_stats <- data.frame(event_key = unique(df$last_event_code)) |>
+        rowwise() |>
+        mutate(
+            scoutR_key = paste0(2026, event_key),
+            fuel_pridge = list(calc_pridge_fuel(scoutR_key)),
+            fuel_opr = list(event_oprs(scoutR_key)),
+            fuel_epa = list({
+                teams <- team_events_sb(event = scoutR_key)
+                setNames(
+                    sapply(teams, function(te){te$epa$stats$pre_elim}),
+                    sapply(teams, function(te){paste0("frc", te$team)})
+                    )
+            })
+        )
+    
+    df <- df |>
+        mutate(
+            stats = list(fuel_stats |>
+                filter(event_key == last_event_code)),
+            pridge = unlist(stats$fuel_pridge)[paste0("frc", team_num)],
+            opr = as.data.frame(stats[["fuel_opr"]]) |>
+                filter(team == team_num) |>
+                pull(opr) |>
+                round(digits = 2),
+            epa = unlist(stats$fuel_epa)[paste0("frc", team_num)]
+        )
+    
+    result <- scoutR_prescout |>
+        mutate(
+        `Team Number` = id,
+        `Team Name` = name,
+        `Record` = paste0(wins, "-", losses, "-", ties), 
+        `Climb` = n_matches_count - endGameTower_None,
+        `Auto Climb` = autoTower_Level1
+        )
+    
+    result$`pRidge (Fuel)` <- df$pridge
+    result$`EPA (Fuel)` <- df$epa
+    result$`OPR (Fuel)` <- df$opr
+    result <- result |>
+        select(
+            `Team Number`, `Team Name`, `Record`, `pRidge (Fuel)`, `EPA (Fuel)`,
+            `OPR (Fuel)`, `Climb`, `Auto Climb`
+            )
+    return(result)
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
