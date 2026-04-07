@@ -329,7 +329,8 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
         {if (flip) coord_flip() else NULL}
 }
 
-summary_stats <- function(raw, pridge, teams = NULL) {
+summary_stats <- function(raw, pridge, teams = NULL, metric = "pridge") {
+    
     if (is.null(teams)) teams <- sort(unique(pridge$team))
     result <- raw |>
         filter(team %in% teams) |>
@@ -353,19 +354,35 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             Died = sum(died, na.rm = TRUE),
             Card = sum(card != 'No Card', na.rm = TRUE)
         ) |>
-        left_join(pridge) |>
-        mutate(
-            `Auto Fuel` = auto_fuel,
-            `Tele Fuel` = tele_fuel,
-            `Total Fuel` = `Auto Fuel` + `Tele Fuel`,
-            `Total Score` = `Auto Fuel` + `Tele Fuel` + ACP + Climb
-        ) |>
+        left_join(pridge)
+    
+    if (metric == "pridge") {
+        auto = result$auto_fuel
+        tele = result$tele_fuel
+
+    } else if(metric == "EPA") {
+        auto = result$auto_fuel_epa
+        tele = result$tele_fuel_epa
+
+    } else if(metric == "OPR") {
+        auto = result$auto_fuel_opr
+        tele = result$tele_fuel_opr
+    }
+    
+    result$`Auto Fuel` <- auto
+    result$`Tele Fuel` <- tele
+    result$`Total Fuel` <- result$`Auto Fuel` + result$`Tele Fuel`
+    result$`Total Score` <- result$`Auto Fuel` + result$`Tele Fuel` + 
+                            result$ACP + result$Climb
+    
+    result <- result|>
         select(
             Team = team, `Auto Fuel`, `Tele Fuel`, `Total Fuel`, `Total Score`,
             `Auto Cycles`, `Tele Cycles`, `Total Cycles`, `Auto Bump`,
             `Tele Bump`, `Tele Trench`, `Auto Climb`, Climb, `Quick Climb`, 
             Driver, Died, Card, `Matches Played`, ACP) |>
         modify_if(~is.numeric(.), ~round(., 2))
+        
     
     result <- result[order(match(result$Team, teams)), ]
     return(result)

@@ -39,6 +39,7 @@ server <- function(input, output, session) {
     weights <- reactiveVal(default_linear_weights)
     teams_selected <- reactiveVal(NULL)
     summary_stat <- reactiveVal(NULL)
+    metric_selected <- reactiveVal("pridge")
     
     user_logged_in <- reactiveVal(rstudioapi::isAvailable())
     correct_password = "0322"
@@ -77,6 +78,18 @@ server <- function(input, output, session) {
         load_event_data("mdbet")
     })
     
+    observeEvent(input$pRidge, {
+        metric_selected("pridge")
+    })
+
+    observeEvent(input$EPA, {
+        metric_selected("EPA")
+    })
+
+    observeEvent(input$OPR, {
+        metric_selected("OPR")
+    })
+    
     #UPDATE MATCH TEAMS SELECTED
     observeEvent(input$selected_match, {
         req(input$selected_match)
@@ -109,7 +122,7 @@ server <- function(input, output, session) {
     
     #UPDATE SUMMARY STAT
     observeEvent(teams_selected(), {
-        summary_stat(summary_stats(raw(), pridge(), teams_selected()))
+        summary_stat(summary_stats(raw(), pridge(), teams_selected(), metric_selected()))
     })
     
     #EVENT SUMMARY
@@ -124,7 +137,7 @@ server <- function(input, output, session) {
     })
     
     output$summary_stats <- renderDT({
-        dataframe <- summary_stats(raw(), pridge())
+        dataframe <- summary_stats(raw(), pridge(), metric = metric_selected())
         datatable(
             dataframe,
             options = list(
@@ -162,7 +175,7 @@ server <- function(input, output, session) {
     })
     
     output$auto_picklist <- renderDT({
-        data <- summary_stats(raw(), pridge())
+        data <- summary_stats(raw(), pridge(), metric = metric_selected())
         team_scores <- calculate_team_scores(weights(), data)
         team_scores$Rank <- 1:nrow(team_scores)
         
@@ -252,7 +265,7 @@ server <- function(input, output, session) {
     })
     
     output$summary_stats_comp <- renderDT({
-        summary_stats(raw(), pridge(), teams = teams_selected())
+        summary_stats(raw(), pridge(), teams = teams_selected(), metric_selected())
     })
     
     output$login_ui <- renderUI({
