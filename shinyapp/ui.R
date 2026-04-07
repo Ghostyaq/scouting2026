@@ -18,10 +18,10 @@ library(shiny.fluent)
 library(colourpicker)
 
 source("viz/helper_functions.R")
+source("viz/introduction_page_text.R")
 source("server.R")
 
 options(sass.cache = FALSE)
-in_rstudio <- rstudioapi::isAvailable()
 
 ui <- fluidPage(
     theme = bs_theme(
@@ -29,7 +29,101 @@ ui <- fluidPage(
         bootswatch = "flatly"
     ),
     navbarPage(
-        title = "2026 REBUILT 449 Data",
+        title = "2026 REBUILT 449 Shinyapp",
+        tabPanel(
+            title = "Introductory Page",
+            card(
+                card_header(h3(
+                    "2026 REBUILT 449 Shinyapp", 
+                    align = "center",
+                    style = "color: #a7000a; font-weight: bold;"))
+            ),
+            layout_columns(
+                col_widths = c(3,9),
+                uiOutput("frc_logo"),
+                card(
+                    card_header("Introduction"),
+                    htmlOutput("intro_paragraph")
+                )
+            ),
+            card(),
+            layout_columns(
+                card(
+                    card_header("Explore Data"),
+                    plotOutput("event_summary_display")
+                ),
+                card(
+                    card_header("Presented by FRC Team 449"),
+                    uiOutput("team_logo")
+                ),
+                card(
+                    card_header("All data on FRC REBUILT"),
+                    uiOutput("rebuilt_logo")
+                )
+            ),
+            card(),
+            card(
+                card_header(h3(
+                    "Description of Tabs", 
+                    align = "center",
+                    style = "color: #a7000a; font-weight: bold;"))
+            ),
+            layout_columns(
+                card(
+                    card_header("Event Summary"),
+                    htmlOutput("event_summary_summary")
+                ),
+                card(
+                    card_header("Auto Picklisting (WIP)"),
+                    htmlOutput("auto_picklisting_summary")
+                ),
+                card(
+                    card_header("Compare Teams"),
+                    htmlOutput("compare_teams_summary")
+                )
+            ),
+            layout_columns(
+                card(
+                    card_header("Match"),
+                    htmlOutput("match_tab_summary")
+                ),
+                card(
+                    card_header("Scouts"),
+                    htmlOutput("scouts_tab_summary")
+                ),
+                card(
+                    card_header("Settings"),
+                    htmlOutput("settings_summary")
+                )
+            ),
+            card(),
+            card(
+                card_header(h3(
+                    "Description of Features", 
+                    align = "center",
+                    style = "color: #a7000a; font-weight: bold;"))
+            ),
+            layout_columns(
+                card(
+                    card_header("pRidge"),
+                    htmlOutput("pridge_summary")
+                ),
+                card(
+                    card_header("Metric Switcher"),
+                    htmlOutput("metric_swap_summary")
+                )
+            ),
+            layout_columns(
+                card(
+                    card_header("Event Switcher"),
+                    htmlOutput("event_swap_summary")
+                ),
+                card(
+                    card_header("Password-Locked Features"),
+                    htmlOutput("password_summary")
+                )
+            )
+        ),
         tabPanel(
             title = "Event Summary",
             card(
@@ -107,10 +201,10 @@ ui <- fluidPage(
                     card_header("Robot Images"),
                     uiOutput("images_comp")
                 ),
-                card(
-                    card_header("Auto Heatmaps"),
-                    uiOutput("auto_heatmap_comp")
-                ),
+                #card(
+                #    card_header("Auto Heatmaps"),
+                #    uiOutput("auto_heatmap_comp")
+                #),
                 card(
                     card_header("Summary Stats"), 
                     DTOutput("summary_stats_comp")
@@ -119,18 +213,10 @@ ui <- fluidPage(
                     card_header("Match History"),
                     DTOutput("match_history")
                 ),
-                if (in_rstudio) {
-                    card(
-                        card_header("Comments Data"),
-                        DTOutput("comments_df_comp")
-                    )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_comp")
-                    )
-                }
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_comp")
+                )
             )
         ),
         tabPanel(
@@ -178,26 +264,18 @@ ui <- fluidPage(
                     card_header("Robot Images in Match"),
                     uiOutput("images_match")
                 ),
-                card(
-                    card_header("Auto Heatmaps"),
-                    uiOutput("auto_heatmap_match")
-                ),
+                #card(
+                #    card_header("Auto Heatmaps"),
+                #    uiOutput("auto_heatmap_match")
+                #),
                 card(
                     card_header("Summary Stats"),
                     DTOutput("summary_stats_match")
                 ),
-                if (in_rstudio) {
-                    card(
-                        card_header("Comments Data"),
-                        DTOutput("comments_df_match")
-                    )
-                } else {
-                    card(
-                        uiOutput("login_ui"),
-                        uiOutput("login_status"),
-                        DTOutput("comments_df_match")
-                    )
-                }
+                card(
+                    card_header("Comments Data"),
+                    DTOutput("comments_df_match")
+                )
             )
         ),
         tabPanel(
@@ -219,21 +297,26 @@ ui <- fluidPage(
             title = "Settings",
             layout_sidebar(
                 sidebar = card(
-                    title = "Event Switching",
-                    actionButton("week0", "Week0 Data (Test)"),
+                    title = "Event Data Switching",
+                    actionButton("week0", "Week0 (Test)"),
                     actionButton("vaale", "Alexandria"),
-                    actionButton("mdpas", "Pasadena"),
+                    actionButton("mdpas", "Pasadena (Only pRidge)"),
                     actionButton("mdbet", "Bethesda"),
                 ),
                 layout_columns(
+                    #card(
+                    #    card_header("Refresh Data"),
+                    #    actionButton("pridge_button", "Reload Data")
+                    #),
                     card(
-                        card_header("Refresh Data"),
-                        actionButton("pridge_button", "Reload Data")
-                    ),
-                    card(
-                        card_header("Custom Theme Color"),
-                        ColorPicker("theme_color")
+                        card_header("Scout Comments Login"),
+                        uiOutput("login_ui"),
+                        uiOutput("login_status")
                     )
+                    #card(
+                    #    card_header("Custom Theme Color"),
+                    #    ColorPicker("theme_color")
+                    #)
                 )
             )
         )

@@ -178,15 +178,6 @@
             "M": "Middle",
             "F": "Far"
           }
-        },
-        {
-          "title": "No Show",
-          "description": "Check if the robot did not show up for the match.",
-          "type": "boolean",
-          "required": false,
-          "code": "noShow",
-          "formResetBehavior": "reset",
-          "defaultValue": false
         }
       ]
     },
@@ -353,21 +344,19 @@
           "step": 1
         },
         {
-          "title": "Died?",
-          "type": "boolean",
+          "title": "Problems?",
+          "description": "Please indicate whether the robot died, got beached (stuck on fuel), surfing (slid over fuel), got stuck on bump, or did not show up.",
+          "type": "multi-select",
           "required": false,
           "code": "died",
           "formResetBehavior": "reset",
-          "defaultValue": false
-        },
-        {
-          "title": "Solo Shooting",
-          "description": "Robot shot by itself for more than 3 seconds?",
-          "type": "boolean",
-          "required": false,
-          "code": "soloShooting",
-          "formResetBehavior": "reset",
-          "defaultValue": false
+          "choices": {
+            "1": "Died",
+            "2": "Beached",
+            "3": "Surfing",
+            "4": "Stuck on bump",
+            "5": "No show"
+          }
         },
         {
           "title": "Yellow/Red Card",
