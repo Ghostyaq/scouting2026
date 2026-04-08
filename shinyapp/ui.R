@@ -312,11 +312,19 @@ ui <- fluidPage(
                         card_header("Scout Comments Login"),
                         uiOutput("login_ui"),
                         uiOutput("login_status")
-                    )
+                    ),
                     #card(
                     #    card_header("Custom Theme Color"),
                     #    ColorPicker("theme_color")
-                    #)
+                    #),
+                    card(
+                        card_header("Metric Selection"),
+                        uiOutput("metric_current_selection"),
+                        actionButton("pRidge", "pRidge"),
+                        actionButton("EPA", "EPA"),
+                        actionButton("OPR", "OPR"),
+                        #actionButton("HOPpeR", "HOPpeR")
+                    )
                 )
             )
         )
