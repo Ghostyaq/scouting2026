@@ -39,7 +39,7 @@ server <- function(input, output, session) {
     weights <- reactiveVal(default_linear_weights)
     teams_selected <- reactiveVal(NULL)
     summary_stat <- reactiveVal(NULL)
-    metric_selected <- reactiveVal("pridge")
+    metric_selected <- reactiveVal("pRidge")
     
     user_logged_in <- reactiveVal(rstudioapi::isAvailable())
     correct_password = "0322"
@@ -79,7 +79,7 @@ server <- function(input, output, session) {
     })
     
     observeEvent(input$pRidge, {
-        metric_selected("pridge")
+        metric_selected("pRidge")
     })
 
     observeEvent(input$EPA, {
@@ -122,18 +122,20 @@ server <- function(input, output, session) {
     
     #UPDATE SUMMARY STAT
     observeEvent(teams_selected(), {
-        summary_stat(summary_stats(raw(), pridge(), teams_selected(), metric_selected()))
+        summary_stat(
+            summary_stats(raw(), pridge(), teams_selected(), metric_selected())
+        )
     })
     
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
         teams <- unique(raw()$team)
-        stacked_bar_chart(raw(), schedule(), pridge(), TRUE, teams, TRUE)
+        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected())
     })
     
     output$event_summary_display <- renderPlot({
         teams <- unique(raw()$team)
-        stacked_bar_chart(raw(), schedule(), pridge(), TRUE, teams, TRUE)
+        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected())
     })
     
     output$summary_stats <- renderDT({
@@ -205,8 +207,8 @@ server <- function(input, output, session) {
     #COMPARE POINT SUMMARY
     output$summary_point_comp <- renderPlot({
         stacked_bar_chart(
-            raw(), schedule(), pridge(), 
-            FALSE, teams_selected(), FALSE)
+            raw(), schedule(), pridge(), teams_selected(), metric_selected(), 
+            order = FALSE, flip = FALSE)
     })
     
     #COMPARE ENDGAME BAR
@@ -261,37 +263,12 @@ server <- function(input, output, session) {
     #SUMMARY POINT MATCH
     output$summary_point_match <- renderPlot({
         stacked_bar_chart(
-            raw(), schedule(), pridge(), FALSE, teams_selected(), FALSE)
+            raw(), schedule(), pridge(), teams_selected(), metric_selected(), 
+            order = FALSE, flip = FALSE)
     })
     
     output$summary_stats_comp <- renderDT({
-        summary_stats(raw(), pridge(), teams = teams_selected(), metric_selected())
-    })
-    
-    output$login_ui <- renderUI({
-        if (!user_logged_in()) {
-            tagList(
-                passwordInput("password", "Enter password to access comments:"),
-                actionButton("login", "Login")
-            )
-        }
-    })
-    
-    observeEvent(input$login, {
-        if (input$password == correct_password) {
-            user_logged_in(TRUE)
-        } else {
-            user_logged_in(FALSE)
-        }
-    })
-    
-    output$login_status <- renderUI({
-        req(input$login)
-        if (user_logged_in()) {
-            tags$p(style = "color: green;", "Access granted.")
-        } else {
-            tags$p(style = "color: red;", "Incorrect password.")
-        }
+        summary_stats(raw(), pridge(), teams_selected(), metric_selected())
     })
     
     output$end_bar_match <- renderPlot({
@@ -455,6 +432,37 @@ server <- function(input, output, session) {
                 height = 1000
             )
         )
+    })
+    
+    output$login_ui <- renderUI({
+        if (!user_logged_in()) {
+            tagList(
+                passwordInput("password", "Enter password to access comments:"),
+                actionButton("login", "Login")
+            )
+        }
+    })
+    
+    observeEvent(input$login, {
+        if (input$password == correct_password) {
+            user_logged_in(TRUE)
+        } else {
+            user_logged_in(FALSE)
+        }
+    })
+    
+    output$login_status <- renderUI({
+        req(input$login)
+        if (user_logged_in()) {
+            tags$p(style = "color: green;", "Access granted.")
+        } else {
+            tags$p(style = "color: red;", "Incorrect password.")
+        }
+    })
+    
+    output$metric_current_selection <- renderUI({
+        text <- paste("Currently Selected:", metric_selected())
+        HTML(text)
     })
     
     output$intro_paragraph <- renderUI({
