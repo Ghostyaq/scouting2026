@@ -135,8 +135,8 @@ pridge_calculation_offline <- function(event_key) {
             values_to = "score"
         )
     
-    auto_priors <- statbotics_data$auto_fuel_epa
-    tele_priors <- statbotics_data$tele_fuel_epa
+    auto_priors <- statbotics_data$auto_fuel_pre_epa
+    tele_priors <- statbotics_data$tele_fuel_pre_epa
     names(auto_priors) <- names(tele_priors) <- statbotics_data$team
     grid <- seq(0, 20, length.out = 1000)
     tele_fuel_columns <- c('red_tele_fuel', 'blue_tele_fuel') # 80 char limit
@@ -180,14 +180,16 @@ pridge_calculation_offline <- function(event_key) {
         team = unique_teams, 
         auto_fuel, tele_fuel, 
         auto_fuel_opr, tele_fuel_opr,
-        auto_fuel_epa = statbotics_data$auto_fuel_epa,
-        tele_fuel_epa = statbotics_data$tele_fuel_epa)
+        auto_fuel_pre_epa = statbotics_data$auto_fuel_pre_epa,
+        tele_fuel_pre_epa = statbotics_data$tele_fuel_pre_epa,
+        auto_fuel_recent_epa = statbotics_data$auto_fuel_recent_epa,
+        tele_fuel_recent_epa = statbotics_data$tele_fuel_recent_epa)
     write.csv(
         priors_df, 
         paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
 }
 
-recent_team_epas <- function(event_key, schedule) {
+pre_event_team_epas <- function(event_key, schedule) {
     long_schedule <- schedule |>
         pivot_longer(
             cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
@@ -201,16 +203,39 @@ recent_team_epas <- function(event_key, schedule) {
             first_match = min(long_schedule$match[long_schedule$team == team]),
             match_key = paste0("2026", event_key, "_qm", first_match),
             sb = list(team_sb(team, match = match_key)),
-            auto_fuel_epa = sb$epa$breakdown$auto_fuel,
-            total_fuel_epa = sb$epa$breakdown$total_fuel,
-            tele_fuel_epa = total_fuel_epa - auto_fuel_epa
+            auto_fuel_pre_epa = sb$epa$breakdown$auto_fuel,
+            total_fuel_pre_epa = sb$epa$breakdown$total_fuel,
+            tele_fuel_pre_epa = total_fuel_pre_epa - auto_fuel_pre_epa
         ) |>
-        select(team, match_key, auto_fuel_epa, tele_fuel_epa)
+        select(team, match_key, auto_fuel_pre_epa, tele_fuel_pre_epa)
     
     return(first_instance)
 }
 
-pridge_calculation_online <- function(event_key){
+recent_team_epas <- function(event_key, schedule) {
+    long_schedule <- schedule |>
+        pivot_longer(
+            cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
+            names_to = "robot",
+            values_to = "team"
+        )
+    
+    last_instance <- data.frame(team = sort(unique(long_schedule$team))) |>
+        rowwise() |>
+        mutate(
+            last_match = max(long_schedule$match[long_schedule$team == team]),
+            match_key = paste0("2026", event_key, "_qm", last_match),
+            sb = list(team_sb(team, match = match_key)),
+            auto_fuel_recent_epa = sb$epa$breakdown$auto_fuel,
+            total_fuel_recent_epa = sb$epa$breakdown$total_fuel,
+            tele_fuel_recent_epa = total_fuel_recent_epa - auto_fuel_recent_epa
+        ) |>
+        select(team, match_key, auto_fuel_recent_epa, tele_fuel_recent_epa)
+    
+    return(last_instance)
+}
+
+pridge_calculation_online <- function(event_key, recalc_pre_event_epa = FALSE){
     matches <- event_matches(paste0("2026", event_key), match_type = "quals")
     
     schedule <- data.frame(
@@ -245,14 +270,22 @@ pridge_calculation_online <- function(event_key){
         red_auto_fuel,
         red_tele_fuel)
     
-    file_path_1 <- paste0("shinyapp/data/", event_key, "/tba_data.csv")
+    dir_path <- "shinyapp/data/"
+    file_path_1 <- paste0(dir_path, event_key, "/tba_data.csv")
     write.csv(extracted_data, file_path_1, row.names = FALSE)
     
-    statbotics_data <- recent_team_epas(event_key, schedule)
-    # @TODO take out teams not in the schedule
-    file_path_3 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
-    write.csv(statbotics_data, file_path_3, row.names = FALSE)
+    file_path_2 <- paste0(dir_path, event_key, "/statbotics_data.csv")
+    if (recalc_pre_event_epa) {
+        statbotics_data <- pre_event_team_epas(event_key, schedule)
+        write.csv(statbotics_data, file_path_2, row.names = FALSE)
+    }
     
+    recent_epas <- recent_team_epas(event_key, schedule)
+    sb_data <- read.csv(paste0(dir_path, event_key, "/statbotics_data.csv"))
+    sb_data$auto_fuel_recent_epa <- recent_epas$auto_fuel_recent_epa
+    sb_data$tele_fuel_recent_epa <- recent_epas$tele_fuel_recent_epa
+    write.csv(sb_data, file_path_2, row.names = FALSE)
+
     pridge_calculation_offline(event_key)
 }
 
@@ -278,8 +311,10 @@ plot_scouting_graph <- function(raw) {
     ggplotly(still_graph, tooltip = "text")
 }
 
-stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
-    data <- summary_stats(raw, pridge, teams = NULL) |>
+stacked_bar_chart <- function(
+        raw, schedule, pridge, teams, metric, order = TRUE, flip = TRUE
+        ){
+    data <- summary_stats(raw, pridge, teams = NULL, metric = metric) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
         rename(`Auto Climb` = ACP) |>
         filter(Team %in% teams)
@@ -306,7 +341,7 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
     ggplot(data, aes(x = Team, y = score, fill = `Score Type`)) +
         geom_bar(stat = "identity") + 
         labs(
-            title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
+            title = "Stacked Bar Chart", x = "Team", y = "Climb + Metric Score"
         ) + 
         scale_fill_manual(
             values = c("Auto Fuel" ="#6B705C", 
@@ -329,7 +364,7 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
         {if (flip) coord_flip() else NULL}
 }
 
-summary_stats <- function(raw, pridge, teams = NULL) {
+summary_stats <- function(raw, pridge, teams = NULL, metric = "pridge") {
     if (is.null(teams)) teams <- sort(unique(pridge$team))
     result <- raw |>
         filter(team %in% teams) |>
@@ -342,7 +377,9 @@ summary_stats <- function(raw, pridge, teams = NULL) {
                               ifelse(endgame_climb == "L3", 30, 0)))),
             ACP = mean(auto_climb * 15, na.rm = TRUE),
             `Auto Cycles` = mean(auto_cycles / 10, na.rm = TRUE),
-            `Tele Cycles` = mean(num_cycles + num_cycles_tenths / 10, na.rm = TRUE),
+            `Tele Cycles` = mean(
+                num_cycles + num_cycles_tenths / 10, 
+                na.rm = TRUE),
             `Total Cycles` = `Auto Cycles` + `Tele Cycles`,
             `Auto Bump` = sum(as.logical(auto_bump), na.rm = TRUE),
             `Tele Trench` = mean(teleop_trench, na.rm = TRUE),
@@ -353,13 +390,29 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             Died = sum(died, na.rm = TRUE),
             Card = sum(card != 'No Card', na.rm = TRUE)
         ) |>
-        left_join(pridge) |>
+        left_join(pridge)
+    
+    if (metric == "pRidge") {
+        auto = result$auto_fuel
+        tele = result$tele_fuel
+    } else if(metric == "EPA") {
+        auto = result$auto_fuel_recent_epa
+        tele = result$tele_fuel_recent_epa
+    } else if(metric == "OPR") {
+        auto = result$auto_fuel_opr
+        tele = result$tele_fuel_opr
+    }
+    
+    result$`Auto Fuel` <- auto
+    result$`Tele Fuel` <- tele
+    
+    result <- result |>
         mutate(
-            `Auto Fuel` = auto_fuel,
-            `Tele Fuel` = tele_fuel,
             `Total Fuel` = `Auto Fuel` + `Tele Fuel`,
             `Total Score` = `Auto Fuel` + `Tele Fuel` + ACP + Climb
-        ) |>
+        )
+
+    result <- result|>
         select(
             Team = team, `Auto Fuel`, `Tele Fuel`, `Total Fuel`, `Total Score`,
             `Auto Cycles`, `Tele Cycles`, `Total Cycles`, `Auto Bump`,
@@ -855,6 +908,183 @@ prescout <- function(event_key, manual_teams = NULL){
             `OPR (Fuel)`, `Climb`, `Auto Climb`
             )
     return(result)
+}
+
+data_validation <- function(event_key, rewrite = FALSE){
+    raw <- read.csv(paste0('shinyapp/data/', event_key, '/data.csv'))
+    schedule <- read.csv(paste0('shinyapp/data/', event_key, '/schedule.csv'))
+    
+    robot_order <- c("R1", "R2", "R3", "B1", "B2", "B3")
+    raw$robot <- factor(raw$robot, levels = robot_order, ordered = TRUE)
+    data <- raw |>
+        arrange(match, robot) |>
+        rowwise() |>
+        mutate(
+            match_robot = paste(match, robot),
+            match_team = paste(match, team),
+            scout_key = paste(match, robot, team)
+        )
+    
+    long_schedule <- schedule |>
+        pivot_longer(
+            cols = c(R1, R2, R3, B1, B2, B3),
+            names_to = "robot",
+            values_to = "team"
+        ) |>
+        rowwise() |>
+        mutate(
+            truth_key = paste(match, robot, team)
+        )
+    
+    offline <- long_schedule |>
+        mutate(
+            scout_key = if (sum(data$scout_key == truth_key) >= 1) {
+                truth_key
+            } else if (paste(match, team) %in% data$match_team) {
+                paste(
+                    data[data$match_team == paste(match, team), ]$scout_key, 
+                    collapse = " || ")
+            } else if (paste(match, robot) %in% data$match_robot) {
+                paste(
+                    data[data$match_robot == paste(match, robot), ]$scout_key,
+                    collapse = " || ")
+            } else {
+                "DNE"
+            },
+            error = if (sum(data$scout_key == truth_key) == 1) {
+                "All Good"
+            } else if (sum(data$scout_key == truth_key) >= 1) {
+                "Double Scouted"
+            } else if (paste(match, team) %in% data$match_team) {
+                "Wrong Robot ID (R1, R2, R3, B1, B2, B3)"
+            } else if (paste(match, robot) %in% data$match_robot) {
+                "Wrong Team Scouted"
+            } else {
+                "Missed"
+            }
+        )
+    
+    if (rewrite) {
+        offline <- mutate(offline, match_team = paste(match, team))
+        data <- data |>
+            left_join(
+                offline |> select(match_team, error, robot_correct = robot),
+                by = "match_team"
+            ) |>
+            mutate(
+                robot = ifelse(
+                    error == "Wrong Robot ID (R1, R2, R3, B1, B2, B3)",
+                    as.character(robot_correct),
+                    as.character(robot)
+                ),
+                error = ifelse(
+                    error == "Wrong Robot ID (R1, R2, R3, B1, B2, B3)",
+                    "All Good",
+                    error
+                )
+            ) |>
+            select(!c(robot_correct, error))
+        write.csv(select(data, !c(match_robot, match_team, scout_key)), 
+                  paste0('shinyapp/data/', event_key, '/data.csv'), 
+                  row.names = FALSE)
+    }
+    
+    tryCatch({
+        response <- httr::HEAD(url = "http://www.google.com", timeout = 5)
+        if (response$status_code >= 200 && response$status_code < 400){
+            message("Successfully Connected to Internet")
+        }
+    },
+    error = function(e){
+        message("No Internet 2")
+        return(offline)
+    },
+    warning = function(w){
+        message("Connection warning: ", w$message)
+        return(offline)
+    })
+    
+    schedule <- read.csv(paste0("shinyapp/data/", event_key, "/schedule.csv"))
+    tba_data <- event_matches(paste0("2026", event_key))
+    
+    # TO-DO — auto assign climbs from TBA into the data (rewrite = TRUE only)
+    temp <- tba_data |>
+        select(
+            match_number, red1, red2, red3, blue1, blue2, blue3,
+            red_autoTowerRobot1, red_autoTowerRobot2, red_autoTowerRobot3,
+            blue_autoTowerRobot1, blue_autoTowerRobot2, blue_autoTowerRobot3,
+            red_endGameTowerRobot1, red_endGameTowerRobot2, 
+            red_endGameTowerRobot3, blue_endGameTowerRobot1, 
+            blue_endGameTowerRobot2, blue_endGameTowerRobot3
+        ) |>
+        pivot_longer(
+            cols = c(red1, red2, red3, blue1, blue2, blue3),
+            names_to = "robot",
+            values_to = "team"
+        ) |>
+        rowwise() |>
+        mutate(
+            auto_climb = switch(robot,
+                                red1 = red_autoTowerRobot1, 
+                                red2 = red_autoTowerRobot2,
+                                red3 = red_autoTowerRobot3,
+                                blue1 = blue_autoTowerRobot1, 
+                                blue2 = blue_autoTowerRobot2,
+                                blue3 = blue_autoTowerRobot3,
+                                stop("robot DNE (auto)")),
+            endgame_climb = switch(robot,
+                                   red1 = red_endGameTowerRobot1, 
+                                   red2 = red_endGameTowerRobot2,
+                                   red3 = red_endGameTowerRobot3,
+                                   blue1 = blue_endGameTowerRobot1, 
+                                   blue2 = blue_endGameTowerRobot2,
+                                   blue3 = blue_endGameTowerRobot3,
+                                   stop("robot DNE (endgame)")
+            )
+        ) |>
+        select(match = match_number, robot, team, auto_climb, endgame_climb) |>
+        mutate(
+            team = gsub("frc", "", team),
+            robot = paste0(
+                toupper(substr(robot, 1, 1)), 
+                substr(robot, nchar(robot), nchar(robot))),
+            scout_key = paste(match, robot, team),
+            auto_climb = switch(auto_climb,
+                                None = FALSE,
+                                Level1 = TRUE,
+                                Level2 = TRUE,
+                                Level3 = TRUE,
+                                stop("auto climb DNE")
+            ),
+            endgame_climb = switch(endgame_climb,
+                                   None = "No",
+                                   Level1 = "L1",
+                                   Level2 = "L2",
+                                   Level3 = "L3",
+                                   stop("endgame climb DNE")
+            )
+        )
+    
+    online <- offline |>
+        rowwise() |>
+        mutate(
+            error = 
+                ifelse(error == "All Good", 
+                       ifelse(
+                           data[data$scout_key == truth_key,]$auto_climb != 
+                               temp[temp$scout_key == truth_key,]$auto_climb, 
+                           paste(error, "&&", "Incorrect Auto Climb"),
+                           error), 
+                       error),
+            error = 
+                ifelse(error == "All Good", 
+                       ifelse(
+                           data[data$scout_key == truth_key,]$endgame_climb != 
+                               temp[temp$scout_key == truth_key,]$endgame_climb, 
+                           paste(error, "&&", "Incorrect Endgame Climb"),
+                           error), 
+                       error)
+        )
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
