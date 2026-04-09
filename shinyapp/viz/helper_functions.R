@@ -854,6 +854,183 @@ prescout <- function(event_key, manual_teams = NULL){
     return(result)
 }
 
+data_validation <- function(event_key, rewrite = FALSE){
+    raw <- read.csv(paste0('shinyapp/data/', event_key, '/data.csv'))
+    schedule <- read.csv(paste0('shinyapp/data/', event_key, '/schedule.csv'))
+    
+    robot_order <- c("R1", "R2", "R3", "B1", "B2", "B3")
+    raw$robot <- factor(raw$robot, levels = robot_order, ordered = TRUE)
+    data <- raw |>
+        arrange(match, robot) |>
+        rowwise() |>
+        mutate(
+            match_robot = paste(match, robot),
+            match_team = paste(match, team),
+            scout_key = paste(match, robot, team)
+        )
+    
+    long_schedule <- schedule |>
+        pivot_longer(
+            cols = c(R1, R2, R3, B1, B2, B3),
+            names_to = "robot",
+            values_to = "team"
+        ) |>
+        rowwise() |>
+        mutate(
+            truth_key = paste(match, robot, team)
+        )
+    
+    offline <- long_schedule |>
+        mutate(
+            scout_key = if (sum(data$scout_key == truth_key) >= 1) {
+                truth_key
+            } else if (paste(match, team) %in% data$match_team) {
+                paste(
+                    data[data$match_team == paste(match, team), ]$scout_key, 
+                    collapse = " || ")
+            } else if (paste(match, robot) %in% data$match_robot) {
+                paste(
+                    data[data$match_robot == paste(match, robot), ]$scout_key,
+                    collapse = " || ")
+            } else {
+                "DNE"
+            },
+            error = if (sum(data$scout_key == truth_key) == 1) {
+                "All Good"
+            } else if (sum(data$scout_key == truth_key) >= 1) {
+                "Double Scouted"
+            } else if (paste(match, team) %in% data$match_team) {
+                "Wrong Robot ID (R1, R2, R3, B1, B2, B3)"
+            } else if (paste(match, robot) %in% data$match_robot) {
+                "Wrong Team Scouted"
+            } else {
+                "Missed"
+            }
+        )
+    
+    if (rewrite) {
+        offline <- mutate(offline, match_team = paste(match, team))
+        data <- data |>
+            left_join(
+                offline |> select(match_team, error, robot_correct = robot),
+                by = "match_team"
+            ) |>
+            mutate(
+                robot = ifelse(
+                    error == "Wrong Robot ID (R1, R2, R3, B1, B2, B3)",
+                    as.character(robot_correct),
+                    as.character(robot)
+                ),
+                error = ifelse(
+                    error == "Wrong Robot ID (R1, R2, R3, B1, B2, B3)",
+                    "All Good",
+                    error
+                )
+            ) |>
+            select(!c(robot_correct, error))
+        write.csv(select(data, !c(match_robot, match_team, scout_key)), 
+                  paste0('shinyapp/data/', event_key, '/data.csv'), 
+                  row.names = FALSE)
+    }
+    
+    tryCatch({
+        response <- httr::HEAD(url = "http://www.google.com", timeout = 5)
+        if (response$status_code >= 200 && response$status_code < 400){
+            message("Successfully Connected to Internet")
+        }
+    },
+    error = function(e){
+        message("No Internet 2")
+        return(offline)
+    },
+    warning = function(w){
+        message("Connection warning: ", w$message)
+        return(offline)
+    })
+    
+    schedule <- read.csv(paste0("shinyapp/data/", event_key, "/schedule.csv"))
+    tba_data <- event_matches(paste0("2026", event_key))
+    
+    # TO-DO — auto assign climbs from TBA into the data (rewrite = TRUE only)
+    temp <- tba_data |>
+        select(
+            match_number, red1, red2, red3, blue1, blue2, blue3,
+            red_autoTowerRobot1, red_autoTowerRobot2, red_autoTowerRobot3,
+            blue_autoTowerRobot1, blue_autoTowerRobot2, blue_autoTowerRobot3,
+            red_endGameTowerRobot1, red_endGameTowerRobot2, 
+            red_endGameTowerRobot3, blue_endGameTowerRobot1, 
+            blue_endGameTowerRobot2, blue_endGameTowerRobot3
+        ) |>
+        pivot_longer(
+            cols = c(red1, red2, red3, blue1, blue2, blue3),
+            names_to = "robot",
+            values_to = "team"
+        ) |>
+        rowwise() |>
+        mutate(
+            auto_climb = switch(robot,
+                                red1 = red_autoTowerRobot1, 
+                                red2 = red_autoTowerRobot2,
+                                red3 = red_autoTowerRobot3,
+                                blue1 = blue_autoTowerRobot1, 
+                                blue2 = blue_autoTowerRobot2,
+                                blue3 = blue_autoTowerRobot3,
+                                stop("robot DNE (auto)")),
+            endgame_climb = switch(robot,
+                                   red1 = red_endGameTowerRobot1, 
+                                   red2 = red_endGameTowerRobot2,
+                                   red3 = red_endGameTowerRobot3,
+                                   blue1 = blue_endGameTowerRobot1, 
+                                   blue2 = blue_endGameTowerRobot2,
+                                   blue3 = blue_endGameTowerRobot3,
+                                   stop("robot DNE (endgame)")
+            )
+        ) |>
+        select(match = match_number, robot, team, auto_climb, endgame_climb) |>
+        mutate(
+            team = gsub("frc", "", team),
+            robot = paste0(
+                toupper(substr(robot, 1, 1)), 
+                substr(robot, nchar(robot), nchar(robot))),
+            scout_key = paste(match, robot, team),
+            auto_climb = switch(auto_climb,
+                                None = FALSE,
+                                Level1 = TRUE,
+                                Level2 = TRUE,
+                                Level3 = TRUE,
+                                stop("auto climb DNE")
+            ),
+            endgame_climb = switch(endgame_climb,
+                                   None = "No",
+                                   Level1 = "L1",
+                                   Level2 = "L2",
+                                   Level3 = "L3",
+                                   stop("endgame climb DNE")
+            )
+        )
+    
+    online <- offline |>
+        rowwise() |>
+        mutate(
+            error = 
+                ifelse(error == "All Good", 
+                       ifelse(
+                           data[data$scout_key == truth_key,]$auto_climb != 
+                               temp[temp$scout_key == truth_key,]$auto_climb, 
+                           paste(error, "&&", "Incorrect Auto Climb"),
+                           error), 
+                       error),
+            error = 
+                ifelse(error == "All Good", 
+                       ifelse(
+                           data[data$scout_key == truth_key,]$endgame_climb != 
+                               temp[temp$scout_key == truth_key,]$endgame_climb, 
+                           paste(error, "&&", "Incorrect Endgame Climb"),
+                           error), 
+                       error)
+        )
+}
+
 #raw <- read.csv('shinyapp/data/test_data/data.csv')
 #schedule <- read.csv('shinyapp/data/test_data/schedule.csv')
 #tba_data <- read.csv('shinyapp/data/test_data/tba_data.csv')
