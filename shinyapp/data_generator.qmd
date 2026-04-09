@@ -101,6 +101,7 @@ data <- data.frame(team, match, robot, start_pos) |>
         climb_less_than_5 = sample(c(TRUE, FALSE), size = 1),
         died = sample(c(TRUE, FALSE), size = 1, prob = c(75, 25)),
         inactive_strat = sample(c(1, 2, 3, 4, 5), size = 1),
+        problems = sample(c(1, 2, 3, 4, 5), size = 1),
         driver_rating = sample(0:5, size = 1),
         solo_shooting = sample(c(TRUE, FALSE), size = 1),
         card = sample(c("No Card", "Yellow", "Red"), size = 1, prob = c(95, 4, 1))
