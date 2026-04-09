@@ -44,7 +44,7 @@ server <- function(input, output, session) {
     correct_password = "0322"
     
     load_event_data <- function(event) {
-        raw(read.csv(file.path("data", event, "data.csv")))
+        raw(read.csv(file.path("data", event, "mdbeth_test_data.csv")))
         schedule(read.csv(file.path("data", event, "schedule.csv")))
         tba_data(read.csv(file.path("data", event, "tba_data.csv")))
         pridge(read.csv(file.path("data", event, "pridge.csv")))
@@ -221,6 +221,11 @@ server <- function(input, output, session) {
         auto_type_graph(raw(), FALSE, teams_selected(), FALSE)
     })
     
+    # COMPARE PROBLEM TYPE
+    output$problem_type_comp <- renderPlot({
+        problems_graph(raw(), teams_selected())
+    })
+    
     output$comments_df_comp <- renderDT({
         if (user_logged_in()){
             df <- comments_df(raw(), teams_selected())
@@ -303,6 +308,10 @@ server <- function(input, output, session) {
     
     output$summary_stats_match <- renderDT({
         summary_stat()
+    })
+    
+    output$problem_type_match <- renderPlot({
+        problems_graph(raw(), teams_selected())
     })
     
     output$comments_df_match <- renderDT({

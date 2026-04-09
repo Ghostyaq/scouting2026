@@ -1,0 +1,393 @@
+"scout","match","robot","team","start_pos","no_show","auto_type","auto_bump","auto_climb","auto_cycles","teleop_trench","teleop_bump","num_cycles","num_cycles_tenths","endgame_climb","climb_less_than_5","inactive_strat","driver_rating","died","solo_shooting","card","comments","problems"
+"BS",1,"R1",888,"C",FALSE,3,FALSE,FALSE,8,5,1,4,0,"No",FALSE,"1",4,FALSE,FALSE,"No Card","Very good passing and scored their full hopper every time","1"
+"AD",1,"R1",1389,"M",FALSE,NA,FALSE,FALSE,2,0,0,1,8,"No",FALSE,"5",3,FALSE,FALSE,"No Card",NA,"5"
+"AC",1,"R1",11318,"M",FALSE,2,FALSE,FALSE,0,4,0,0,0,"No",FALSE,"2",1,FALSE,FALSE,"No Card","I think it was trying to bulldoze? Very ineffective","2"
+"HR",1,"R2",7886,"F",FALSE,NA,FALSE,FALSE,0,8,0,0,0,"No",FALSE,"2,4,5",3,FALSE,FALSE,"No Card","No auto, Plow broke","2,4,5"
+"BP",1,"R1",1446,"C",TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"AZ",1,"B3",6882,"F",FALSE,NA,FALSE,FALSE,1,2,2,1,2,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Very small hopper, played defense pushed balls over bump and made sure other robots don»t enter their zone","2"
+"AC",2,"R1",3373,"F",FALSE,1,FALSE,FALSE,5,0,4,3,3,"No",FALSE,"6",3,FALSE,FALSE,"No Card","3373 very slow intake","6"
+"HR",2,"R1",2421,"M",FALSE,NA,FALSE,FALSE,0,3,3,1,7,"No",FALSE,"6",2,FALSE,FALSE,"No Card","No auto","6"
+"BS",2,"R1",4464,"C",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,3,TRUE,FALSE,"No Card",NA,NA
+"BP",2,"R1",2186,"C",FALSE,NA,FALSE,FALSE,2,6,0,1,0,"F",FALSE,"1",3,FALSE,FALSE,"No Card","Slow rate of fire and imtaking","1"
+"AZ",2,"B3",116,"F",FALSE,NA,FALSE,FALSE,0,0,6,0,4,"L1",TRUE,"2",2,FALSE,FALSE,"No Card","Robot swerve looked broken near the end","2"
+"AD",2,"R1",4821,"M",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"HR",3,"R1",4472,"F",FALSE,3,FALSE,FALSE,10,6,0,4,2,"No",FALSE,"1,6",4,FALSE,FALSE,"No Card","Some inaccuracy","1,6"
+"AZ",3,"B3",5243,"F",FALSE,NA,FALSE,TRUE,2,10,0,2,4,"L1",FALSE,"2",2,FALSE,FALSE,"No Card",NA,"2"
+"AC",3,"R1",5549,"C",FALSE,3,FALSE,FALSE,10,8,0,6,0,"No",FALSE,"2,6",4,FALSE,FALSE,"No Card","Poomfs kinda slow","2,6"
+"BP",3,"R1",3714,"M",FALSE,NA,FALSE,FALSE,0,2,2,0,0,"No",FALSE,"3",2,FALSE,FALSE,"No Card","Evidently tank, couldn»t shoot, got beached a couple of times","3"
+"BS",3,"R1",2537,"C",FALSE,3,FALSE,FALSE,0,6,0,2,3,"No",FALSE,"1",4,FALSE,FALSE,"No Card","Got caught under the trench during auto and had some trouble shooting in tele","1"
+"AD",3,"R1",2900,"M",FALSE,NA,FALSE,FALSE,2,10,0,0,0,"No",FALSE,"1",3,FALSE,FALSE,"No Card","Shooter jammed, made 0 balls in tele op, gave up on shooting and started passing","1"
+"HR",4,"R2",5841,"M",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,TRUE,FALSE,"No Card","No auto",NA
+"BP",4,"R1",1721,"C",FALSE,3,FALSE,FALSE,10,5,0,5,0,"No",FALSE,"3,5",4,FALSE,TRUE,"No Card","Good effectiveness in many things","3,5"
+"AW",4,"R1",1727,"F",FALSE,NA,FALSE,FALSE,0,6,4,3,5,"No",FALSE,"1,6",3,FALSE,FALSE,"No Card",NA,"1,6"
+"AD",4,"R1",4638,NA,FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"AZ",4,"B3",449,"F",FALSE,3,FALSE,FALSE,10,10,0,3,8,"No",FALSE,"2",5,FALSE,FALSE,"No Card","Shooter inertia decreases rapidly near the end of the match, shooter had trouble","2"
+"BS",4,"R1",4456,"M",FALSE,NA,FALSE,FALSE,3,4,0,0,1,"No",FALSE,"4",4,FALSE,FALSE,"No Card","They»re shooter wasn»t working so they played defense the whole match","4"
+"HR",5,"R2",2914,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"AW",5,"R1",5353,"C",FALSE,3,FALSE,FALSE,13,8,2,5,4,"No",FALSE,"1,6",3,FALSE,FALSE,"No Card","Bad piece security","1,6"
+"BP",5,"R1",2988,"M",FALSE,NA,FALSE,FALSE,6,11,0,0,7,"No",FALSE,"3,4,5",2,FALSE,FALSE,"No Card","Played defense almost the whole time","3,4,5"
+"BS",5,"R1",5338,"C",FALSE,3,FALSE,FALSE,0,5,2,5,0,"No",FALSE,"2,6",4,FALSE,FALSE,"No Card","Played a good game overall auto probably would»ve been good but crashed into trench on the way back","2,6"
+"AD",5,"R1",8590,"M",FALSE,NA,FALSE,FALSE,0,9,0,1,0,"No",FALSE,"3,4,5",5,FALSE,FALSE,"No Card","Intake broke and maybe shooter broke. But the driver figured things out and played really defense","3,4,5"
+"AZ",5,"B3",5587,"F",FALSE,NA,FALSE,FALSE,0,0,3,0,2,"No",FALSE,"6",1,FALSE,FALSE,"No Card","Only like a few balls shot most were stuck inside hopper, indexer didn»t work and made contact with alliance partner in auto","6"
+"AZ",6,"B3",4472,"F",FALSE,3,FALSE,FALSE,13,6,0,4,4,"No",FALSE,"1",3,FALSE,FALSE,"No Card",NA,"1"
+"BS",6,"R1",4821,"M",FALSE,NA,FALSE,FALSE,4,4,3,0,0,"No",FALSE,"3,4",4,FALSE,FALSE,"No Card","Very small hopper","3,4"
+"BP",6,"R1",2912,"M",FALSE,NA,FALSE,FALSE,0,0,5,0,0,"No",FALSE,"3",1,FALSE,FALSE,"No Card","Struggled to get over bump, didn»t shoot at all","3"
+"AD",6,"R1",11211,"C",FALSE,NA,FALSE,FALSE,0,0,1,0,1,"No",FALSE,NA,1,TRUE,FALSE,"No Card","Died before first inactive period, dangling wires, cardboard hopper held together with tape.",NA
+"AW",6,"R1",4464,"F",FALSE,NA,FALSE,FALSE,3,2,0,0,3,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Tried to intake during inactive, but mostly just slowly spun around",NA
+"HR",6,"R2",6239,"C",FALSE,3,FALSE,FALSE,5,6,0,0,5,"No",FALSE,"2,6",2,FALSE,FALSE,"No Card","Inaccurate auto, shooter malfunction","2,6"
+"AW",7,"R1",2537,"F",FALSE,31,FALSE,FALSE,15,6,0,5,3,"No",FALSE,"1,6",3,FALSE,FALSE,"No Card",NA,"1,6"
+"HR",7,"R2",888,"F",FALSE,NA,FALSE,FALSE,10,7,3,4,0,"No",FALSE,"1,6",4,FALSE,FALSE,"No Card","Inaccurate auto","1,6"
+"BP",7,"R1",5549,"M",FALSE,NA,FALSE,FALSE,4,2,1,3,6,"No",FALSE,"5,6",3,FALSE,TRUE,"No Card","Net makes trench slightly inconsistent","5,6"
+"AD",7,"R1",3373,"C",FALSE,1,FALSE,FALSE,7,0,6,4,4,"No",FALSE,"1,5",4,FALSE,FALSE,"No Card",NA,"1,5"
+"BS",7,"R1",6882,"M",FALSE,NA,FALSE,FALSE,0,4,2,2,2,"No",FALSE,"2",1,FALSE,FALSE,"No Card","Small hopper didn»t really score that much","2"
+"AZ",7,"R1",2900,"F",FALSE,NA,FALSE,FALSE,4,8,0,1,0,"No",FALSE,"6",1,FALSE,FALSE,"No Card","Unable to shot any balls, blocked their own teammate and had trouble moving around","6"
+"AZ",8,"R1",5841,"C",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Just driving no shooting, just drivetrain not even moving it didn»t connect so it didn»t do anything but block bump",NA
+"BS",8,"R1",2421,"F",FALSE,NA,FALSE,FALSE,0,3,0,1,3,"No",FALSE,NA,3,FALSE,FALSE,"No Card",NA,NA
+"HR",8,"R2",2186,"F",FALSE,NA,FALSE,FALSE,3,9,0,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Intake malfunction","2"
+"AD",8,"R1",2988,"M",FALSE,NA,FALSE,FALSE,7,8,0,2,0,"No",FALSE,NA,3,FALSE,FALSE,"No Card",NA,NA
+"BP",8,"R1",5243,"F",FALSE,NA,FALSE,FALSE,2,4,2,2,1,"L1",FALSE,"6,5",2,FALSE,TRUE,"No Card","Has some trouble intaking to capacity","6,5"
+"AW",8,"R1",3714,"M",FALSE,NA,FALSE,FALSE,5,7,1,0,5,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Shot some of the fuel it intaked as soon as it intaked it","2"
+"AW",9,"R1",1446,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"AZ",9,"R1",2912,"M",FALSE,NA,FALSE,FALSE,0,0,1,1,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","No strategy, swerve looked broken, no auto, Kitbot, very bad movement",NA
+"HR",9,"R2",4456,"C",FALSE,NA,FALSE,FALSE,5,7,2,0,2,"No",FALSE,"2,6",2,FALSE,FALSE,"No Card","Lost battery","2,6"
+"BP",9,"R1",8590,"F",FALSE,NA,FALSE,FALSE,0,0,0,0,8,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Didn»t leave AZ, very inconsistent shooting",NA
+"BS",9,"R1",1731,"F",FALSE,3,FALSE,FALSE,6,5,0,3,2,"No",FALSE,"1",4,FALSE,FALSE,"No Card","Passed to human player a lot, good passing, scored most of their hopper when they shot","1"
+"AD",9,"R1",5338,"C",FALSE,3,FALSE,FALSE,0,9,0,8,0,"No",FALSE,"1,5",5,FALSE,TRUE,"No Card",NA,"1,5"
+"HR",10,"R2",7886,"F",FALSE,NA,FALSE,FALSE,0,5,0,0,0,"No",FALSE,"2",1,FALSE,FALSE,"No Card","No auto, only bulldozing","2"
+"AD",10,"R1",4638,"C",FALSE,NA,FALSE,FALSE,0,3,6,0,0,"No",FALSE,"1,3",3,FALSE,FALSE,"No Card","A stop, no shoot","1,3"
+"AZ",10,"R1",1389,"M",FALSE,NA,FALSE,FALSE,2,0,4,1,5,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"BS",10,"R1",5353,"F",FALSE,3,FALSE,FALSE,3,4,0,3,0,"No",FALSE,"1",4,FALSE,FALSE,"No Card","Played a good game but teammates kinda sold","1"
+"BP",10,"R1",6239,"C",FALSE,3,FALSE,FALSE,4,4,0,1,7,"No",FALSE,"5",2,FALSE,TRUE,"No Card","Bps is low and shooting is inaccurate","5"
+"AW",10,"R3",2914,"M",FALSE,NA,FALSE,FALSE,3,0,0,0,0,"No",FALSE,NA,1,TRUE,FALSE,"No Card","Twitched a little bit at the beginning of teleop, but didn»t manage to really move away from their original spot. Couldn»t shoot or intake, the only balls they held were preloaded ones",NA
+"AZ",11,"R1",11211,"F",FALSE,NA,FALSE,FALSE,0,0,1,0,6,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Didn»t do anything but move into neutral zone",NA
+"BS",11,"R1",449,"F",FALSE,3,FALSE,FALSE,1,6,0,6,5,"No",FALSE,"1",5,FALSE,FALSE,"No Card","Very good driving if we get out auto to work better we»d be insane","1"
+"HR",11,"R2",116,"F",FALSE,NA,FALSE,FALSE,5,0,9,3,0,"L1",FALSE,"6",3,FALSE,FALSE,"No Card",NA,"6"
+"BP",11,"R1",11318,"M",FALSE,NA,FALSE,FALSE,4,12,0,3,2,"No",FALSE,"5,3",3,FALSE,TRUE,"No Card",NA,"5,3"
+"AW",11,"R3",1727,"C",FALSE,3,FALSE,FALSE,8,8,1,4,0,"No",FALSE,"6",4,TRUE,FALSE,"No Card","Died towards the very end of the match. Inaccurate auto, shot past the hub.","6"
+"AD",11,"R1",5587,"C",FALSE,NA,FALSE,FALSE,3,0,0,1,4,"No",FALSE,"5",2,FALSE,FALSE,"No Card","Shooter seemed to be malfunctioning in the early match, collected but didn»t shoot more than 2","5"
+"HR",12,"R2",5549,"F",FALSE,NA,FALSE,FALSE,10,5,1,3,5,"No",FALSE,"1,6,5",4,FALSE,FALSE,"No Card",NA,"1,6,5"
+"AD",12,"R1",6882,"M",FALSE,NA,FALSE,FALSE,5,2,8,0,7,"No",FALSE,"3,1",3,FALSE,FALSE,"No Card",NA,"3,1"
+"BS",12,"R1",1731,"F",FALSE,3,FALSE,FALSE,3,6,0,1,7,"No",FALSE,"1",4,FALSE,FALSE,"No Card","They played good but they got heavily defended mid match which affected them a lot","1"
+"SBS",12,"R1",8590,"C",FALSE,NA,FALSE,FALSE,0,5,0,0,0,"No",FALSE,"2",2,FALSE,FALSE,"No Card","No clue what they were even doing, seemed lost lwk","2"
+"BP",12,"R1",5243,"C",FALSE,NA,FALSE,TRUE,4,5,1,3,4,"No",FALSE,"5",3,FALSE,TRUE,"No Card","Seemed to be manually aligning even with turret, some inaccuracy","5"
+"AW",12,"R3",4821,"M",FALSE,NA,FALSE,FALSE,5,0,4,0,0,"No",FALSE,"4",4,FALSE,FALSE,"No Card","Couldn»t shoot, Played good defense the entire match, especially against 1731","4"
+"AW",13,"R3",5841,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"BS",13,"R1",1446,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"HR",13,"R2",2900,"F",FALSE,NA,FALSE,FALSE,5,11,0,1,3,"No",FALSE,"5,2,6",2,FALSE,FALSE,"No Card",NA,"5,2,6"
+"SBS",13,"R1",3373,"C",FALSE,1,FALSE,FALSE,6,1,3,3,0,"No",FALSE,"6,2",4,FALSE,FALSE,"No Card",NA,"6,2"
+"BP",13,"R1",5353,"C",FALSE,3,FALSE,FALSE,7,8,0,3,6,"No",FALSE,"6,5",3,FALSE,TRUE,"No Card","The start of each volley is far too low","6,5"
+"AD",13,"R1",6239,"F",FALSE,NA,FALSE,FALSE,0,8,0,3,9,"No",FALSE,"1,5",2,FALSE,FALSE,"No Card","Had big stockpile but didn»t intake from stock","1,5"
+"AW",14,"R3",7886,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"HR",14,"R1",2421,"M",FALSE,NA,FALSE,FALSE,0,3,0,1,1,"No",FALSE,"6",3,FALSE,FALSE,"No Card",NA,"6"
+"BP",14,"R1",449,"C",FALSE,3,FALSE,FALSE,0,7,0,0,0,"No",FALSE,"3",2,FALSE,FALSE,"No Card","Intake broke off","3"
+"AD",14,"B1",2186,"F",FALSE,NA,FALSE,FALSE,2,10,0,2,3,"L1",FALSE,"6,2",3,FALSE,FALSE,"No Card",NA,"6,2"
+"BS",14,"R1",888,"C",FALSE,3,FALSE,FALSE,0,4,0,3,5,"No",FALSE,"1",5,FALSE,FALSE,"No Card",NA,"1"
+"AD",15,"B1",116,"F",FALSE,NA,FALSE,FALSE,2,0,4,0,0,"No",FALSE,NA,1,TRUE,FALSE,"No Card",NA,NA
+"HR",15,"R2",4472,"C",FALSE,NA,FALSE,FALSE,7,3,1,3,0,"No",FALSE,"6,1",3,FALSE,FALSE,"No Card","Beached on fuel","6,1"
+"AW",15,"R3",2988,"M",FALSE,NA,FALSE,FALSE,5,4,0,1,4,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Slow robot, managed to get an alliance member unbeached, not very accurate shooter.","2"
+"BS",15,"R1",4456,"M",FALSE,NA,FALSE,FALSE,4,4,1,3,0,"No",FALSE,"1",1,FALSE,FALSE,"No Card",NA,"1"
+"AY",15,"R1",5338,"C",FALSE,3,FALSE,FALSE,0,8,3,7,3,"No",FALSE,"2,6",4,FALSE,FALSE,"No Card",NA,"2,6"
+"BS",16,"R1",3714,"F",FALSE,NA,FALSE,FALSE,0,0,2,0,0,"No",FALSE,NA,3,FALSE,FALSE,"No Card","Didn»t make a single fuel, slow",NA
+"HR",16,"R2",2912,"C",FALSE,NA,FALSE,FALSE,5,0,0,0,0,"No",FALSE,"2",1,FALSE,FALSE,"No Card","Shooter malfunction, possibly drivetrain malfunction","2"
+"AY",16,"R1",4464,"C",FALSE,NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,"2",1,FALSE,FALSE,"No Card","Moved very slowly","2"
+"AD",16,"B1",11318,"M",FALSE,NA,FALSE,FALSE,2,8,0,3,6,"No",FALSE,"6",3,FALSE,TRUE,"No Card",NA,"6"
+"RX",16,"R3",4638,"F",FALSE,NA,FALSE,TRUE,0,1,1,0,0,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Outake and intakes appeared broken","2"
+"BS",17,"R1",4821,"M",FALSE,NA,FALSE,FALSE,0,1,3,0,9,"No",FALSE,"4",3,FALSE,FALSE,"No Card","Shooter is very slow","4"
+"AY",17,"R1",2186,"F",FALSE,NA,FALSE,FALSE,5,4,0,0,2,"L1",FALSE,"2,6",3,FALSE,FALSE,"No Card","Fed to HP a lot","2,6"
+"HR",17,"R2",11211,"F",FALSE,NA,FALSE,FALSE,0,0,5,0,0,"No",FALSE,"4,5,2",3,FALSE,FALSE,"No Card",NA,"4,5,2"
+"AW",17,"R1",1727,"F",FALSE,3,FALSE,FALSE,10,5,0,4,0,"No",FALSE,"5",3,TRUE,FALSE,"No Card","Died in the last 30s or so, was susceptible to the defense being played 4821","5"
+"RX",17,"R3",5353,"C",FALSE,3,FALSE,FALSE,2,3,0,3,5,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card","Passed a lot to human player, very low hopper capacity","2,6"
+"AD",17,"B1",2537,"C",FALSE,31,FALSE,FALSE,13,11,0,0,5,"No",FALSE,"2,4,5,3",4,FALSE,FALSE,"No Card","Really good auto, I think their intake broke?","2,4,5,3"
+"AY",18,"R1",1731,"F",FALSE,3,FALSE,FALSE,7,4,1,3,2,"No",FALSE,"2,6",5,FALSE,FALSE,"No Card","449 played hard defense on them","2,6"
+"AD",18,"B1",6239,"M",FALSE,NA,FALSE,FALSE,4,8,0,0,1,"No",FALSE,"4",3,FALSE,FALSE,"No Card",NA,"4"
+"HR",18,"R2",5338,"M",FALSE,NA,FALSE,FALSE,3,5,1,2,6,"No",FALSE,"6,2",4,FALSE,FALSE,"No Card",NA,"6,2"
+"AW",18,"R1",449,"C",FALSE,3,FALSE,FALSE,10,6,0,1,0,"No",FALSE,"3",4,FALSE,FALSE,"No Card","Intake broke quickly, played defense on the blue alliance","3"
+"RX",18,"R3",4472,"F",FALSE,3,FALSE,FALSE,9,2,0,3,7,"No",FALSE,"6",4,TRUE,TRUE,"No Card","Disconnected mid match for like 10 seconds","6"
+"BS",18,"R1",5549,"C",FALSE,3,FALSE,FALSE,4,1,0,2,5,"No",FALSE,NA,4,FALSE,FALSE,"No Card",NA,NA
+"AY",19,"R1",3373,"C",FALSE,1,FALSE,FALSE,1,0,1,2,4,"No",FALSE,"2,6",2,FALSE,FALSE,"No Card",NA,"2,6"
+"BS",19,"R1",4464,"F",FALSE,NA,FALSE,FALSE,0,3,1,0,0,"No",FALSE,"1",3,FALSE,FALSE,"No Card",NA,"1"
+"AD",19,"B1",5841,"M",FALSE,NA,FALSE,FALSE,0,8,1,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Just a drive train","2"
+"HR",19,"R2",116,"F",FALSE,NA,FALSE,FALSE,4,0,6,1,4,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card","Attempted climb","2,6"
+"AW",19,"R1",1389,"M",FALSE,NA,FALSE,FALSE,3,0,3,0,5,"No",FALSE,"6",2,FALSE,FALSE,"No Card","Poor intake, not great herding","6"
+"RX",19,"R3",7886,"C",FALSE,NA,FALSE,FALSE,0,4,2,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Did not intake","2"
+"AZ",20,"R1",2914,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"AW",20,"R1",8590,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"BS",20,"R1",2537,"C",FALSE,3,FALSE,FALSE,8,3,0,3,4,"No",FALSE,"6",5,FALSE,FALSE,"No Card",NA,"6"
+"HR",20,"R2",2900,"C",FALSE,NA,FALSE,FALSE,0,9,1,1,0,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card","Indexer/shooter malfunction","2,6"
+"RX",20,"R3",2988,"M",FALSE,NA,FALSE,FALSE,6,6,2,2,7,"No",FALSE,"6",3,FALSE,FALSE,"No Card","Passed to human players, seems like tank drive, weird turns","6"
+"AW",21,"R1",1446,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"KO",21,"B1",888,"C",FALSE,3,FALSE,FALSE,9,8,2,3,3,"No",FALSE,"1",4,FALSE,FALSE,"No Card",NA,"1"
+"AZ",21,"R1",4456,"F",FALSE,NA,FALSE,FALSE,1,5,0,1,5,"No",FALSE,"6",1,FALSE,FALSE,"No Card","Shooter is broken","6"
+"BS",21,"R1",11318,"M",FALSE,NA,FALSE,FALSE,5,7,0,3,0,"No",FALSE,"1",4,FALSE,FALSE,"No Card",NA,"1"
+"HR",21,"R2",3714,"C",FALSE,NA,FALSE,FALSE,0,4,2,0,0,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Shooter malfunction","2"
+"RX",21,"R3",5587,"F",FALSE,1,FALSE,FALSE,3,4,2,2,7,"No",FALSE,"6",3,FALSE,FALSE,"No Card","Slow outake","6"
+"AZ",22,"R1",2421,"C",FALSE,NA,FALSE,FALSE,0,7,0,2,4,"No",FALSE,"2",3,FALSE,FALSE,"No Card",NA,"2"
+"AD",22,"B1",4638,"M",FALSE,NA,FALSE,TRUE,0,1,4,0,0,"L1",FALSE,"2,4",4,FALSE,FALSE,"No Card",NA,"2,4"
+"KO",22,"R1",5243,"F",FALSE,NA,FALSE,TRUE,4,0,4,1,3,"L1",FALSE,NA,3,FALSE,FALSE,"No Card","Slow shooter",NA
+"RX",22,"R3",11211,"C",FALSE,NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,"6",2,FALSE,FALSE,"No Card","No auto, tank drive","6"
+"HR",22,"R2",2912,"F",FALSE,NA,FALSE,FALSE,4,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Did not leave AZ",NA
+"AW",22,"R1",6882,"M",FALSE,NA,FALSE,FALSE,6,6,0,2,4,"No",FALSE,"6,5",3,FALSE,FALSE,"No Card","Got beached for a little while, not a very good shooter","6,5"
+"AZ",23,"R1",5338,"C",FALSE,3,FALSE,FALSE,0,6,0,3,7,"No",FALSE,"2",5,FALSE,FALSE,"No Card",NA,"2"
+"HR",23,"R2",7886,"M",FALSE,NA,FALSE,FALSE,0,8,0,0,0,"No",FALSE,"2,4,5",3,FALSE,FALSE,"No Card",NA,"2,4,5"
+"AC",23,"R1",6239,"M",FALSE,1,FALSE,FALSE,6,6,0,3,6,"No",FALSE,"6",3,FALSE,FALSE,"No Card","Stayed in front of hub auto","6"
+"RX",23,"R3",1727,"C",FALSE,3,FALSE,FALSE,4,4,2,1,3,"No",FALSE,NA,1,TRUE,FALSE,"No Card","Passed to human during inactive, stopped moving in last 30 seconds",NA
+"AD",23,"B1",5353,"F",FALSE,NA,FALSE,FALSE,0,14,1,0,3,"No",FALSE,"2,4",3,FALSE,FALSE,"No Card",NA,"2,4"
+"AW",23,"R1",4464,"F",FALSE,NA,FALSE,FALSE,0,3,0,0,2,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Actually moved for about half the match, for the other half kinda just rotated in one place",NA
+"AZ",24,"R1",11318,"M",FALSE,NA,FALSE,FALSE,5,18,0,8,2,"No",FALSE,"2",1,FALSE,FALSE,"No Card","Very small hopper capacity","2"
+"HR",24,"R2",5549,"C",FALSE,3,FALSE,FALSE,10,2,3,5,3,"No",FALSE,"2,1,6",5,FALSE,TRUE,"No Card",NA,"2,1,6"
+"RX",24,"R3",2900,"F",FALSE,NA,FALSE,FALSE,7,4,0,0,6,"No",FALSE,"6",3,FALSE,FALSE,"No Card",NA,"6"
+"AW",24,"R1",5587,"F",FALSE,1,FALSE,FALSE,20,0,4,4,0,"No",FALSE,"5",3,FALSE,FALSE,"No Card",NA,"5"
+"AD",24,"B1",4821,"F",FALSE,NA,FALSE,FALSE,0,0,2,0,0,"No",FALSE,"4",3,FALSE,FALSE,"No Card","Only played defense in oz","4"
+"AC",24,"R1",1389,"C",FALSE,1,FALSE,FALSE,2,0,2,2,6,"No",FALSE,"6",2,FALSE,FALSE,"No Card","Didn»t intake full for most of the match, stayed in AZ for most of the match, sometimes legit just intook three balls and shot them without getting more","6"
+"AZ",25,"R1",116,"C",FALSE,NA,FALSE,FALSE,2,0,4,1,3,"L1",FALSE,"6",2,FALSE,FALSE,"No Card","A ton of balls stuck between hopper wall and intake","6"
+"AD",25,"B1",5243,"F",FALSE,NA,FALSE,TRUE,5,2,2,2,9,"L1",FALSE,NA,4,FALSE,FALSE,"No Card",NA,NA
+"BS",25,"R1",2988,"M",FALSE,NA,FALSE,FALSE,0,3,1,0,0,"No",FALSE,"6",1,FALSE,FALSE,"No Card","Intake full during inactive but didn»t shoot","6"
+"RX",25,"R3",888,"F",FALSE,3,FALSE,FALSE,12,2,0,0,3,"No",FALSE,"2,6",4,FALSE,TRUE,"No Card","Outake got jammed very early on","2,6"
+"HR",25,"R2",1446,"C",FALSE,NA,FALSE,FALSE,0,0,1,0,0,"No",FALSE,NA,1,TRUE,FALSE,"No Card",NA,NA
+"AW",25,"R1",2912,"C",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Couldn»t intake, didn»t move a lot, got stuck on the depot",NA
+"AZ",26,"R1",3714,"F",FALSE,NA,FALSE,FALSE,0,4,2,0,0,"No",FALSE,"4",2,FALSE,FALSE,"No Card","Hopper broke","4"
+"BS",26,"R1",11211,"C",FALSE,NA,FALSE,FALSE,0,0,2,0,0,"No",FALSE,NA,3,FALSE,FALSE,"No Card",NA,NA
+"AD",26,"R2",2914,"M",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Did not die, but did nothing. Broken drive train?",NA
+"MNL",26,"B1",5841,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,9,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"RX",26,"R3",2186,"C",FALSE,NA,FALSE,FALSE,3,2,0,1,0,"No",FALSE,NA,3,FALSE,FALSE,"No Card",NA,NA
+"AW",26,"R1",4472,"F",FALSE,3,FALSE,FALSE,16,4,1,4,5,"No",FALSE,"1,5",4,FALSE,FALSE,"No Card","Not very accurate some of the time","1,5"
+"AZ",27,"R1",2537,"C",FALSE,3,FALSE,FALSE,0,10,0,4,2,"No",FALSE,NA,5,FALSE,FALSE,"No Card",NA,NA
+"BS",27,"R1",6882,"M",FALSE,NA,FALSE,FALSE,3,3,1,0,0,"No",FALSE,"4",3,FALSE,FALSE,"No Card","Barely scored played defense the whole time","4"
+"KO",27,"R2",4638,"M",FALSE,NA,FALSE,FALSE,1,0,8,0,2,"No",FALSE,"4",2,FALSE,FALSE,"No Card","Played defense all game","4"
+"AD",27,"B1",449,"F",FALSE,3,FALSE,FALSE,18,11,1,6,3,"No",FALSE,"2,6",5,FALSE,FALSE,"No Card",NA,"2,6"
+"AW",27,"R1",3373,"F",FALSE,1,FALSE,FALSE,9,0,4,3,0,"No",FALSE,"5",3,FALSE,FALSE,"No Card",NA,"5"
+"RX",27,"R3",1731,"C",FALSE,3,FALSE,FALSE,4,0,0,4,1,"No",FALSE,"1,2,6",4,FALSE,TRUE,"No Card","Missed a bunch of fuel in auto","1,2,6"
+"AC",28,"R2",8590,"F",FALSE,NA,FALSE,FALSE,0,2,0,1,0,"No",FALSE,"6",2,FALSE,FALSE,"No Card","Slow intake, didn»t seem to do anything auto","6"
+"RX",28,"R3",5549,"C",FALSE,3,FALSE,FALSE,0,5,1,4,0,"No",FALSE,"1,6",4,FALSE,FALSE,"No Card","Almost got beached in auto","1,6"
+"AD",28,"B1",4456,"M",FALSE,NA,FALSE,FALSE,2,5,0,3,8,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card",NA,"2,6"
+"BS",28,"R1",5587,"C",FALSE,1,FALSE,FALSE,6,1,2,3,0,"No",FALSE,"1,6",1,FALSE,FALSE,"No Card",NA,"1,6"
+"AW",28,"R1",2421,"M",FALSE,NA,FALSE,FALSE,5,5,5,1,0,"No",FALSE,NA,3,FALSE,FALSE,"No Card","Got stuck on the bump twice, slow shooting, slow/unreliable intake",NA
+"AZ",28,"R1",7886,"F",FALSE,NA,FALSE,FALSE,0,11,1,0,0,"No",FALSE,NA,4,FALSE,FALSE,"No Card","Just drive and no shooter",NA
+"KO",29,"R3",116,"C",FALSE,NA,FALSE,FALSE,2,0,4,0,4,"L1",FALSE,"2",2,FALSE,FALSE,"No Card","Mid accuracy because shooter too strong?","2"
+"AW",29,"R1",2186,"F",FALSE,NA,FALSE,FALSE,4,0,0,0,5,"F",FALSE,NA,2,FALSE,FALSE,"No Card","Slowwwww, couldn»t really move much",NA
+"AC",29,"R2",2912,"M",FALSE,NA,FALSE,FALSE,0,1,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","They just kinda jittered around NZ for the entirety of tele",NA
+"AZ",29,"R1",4472,"C",FALSE,3,FALSE,FALSE,1,6,0,2,8,"No",FALSE,"1",4,FALSE,FALSE,"No Card",NA,"1"
+"AD",29,"B1",1727,"F",FALSE,NA,FALSE,FALSE,0,6,2,4,3,"No",FALSE,"6,2",4,FALSE,FALSE,"No Card",NA,"6,2"
+"BS",29,"R1",6239,"M",FALSE,NA,FALSE,FALSE,2,6,0,2,0,"No",FALSE,"6",3,FALSE,FALSE,"No Card",NA,"6"
+"KO",30,"R3",1446,"M",FALSE,NA,FALSE,FALSE,0,5,4,0,0,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Beached",NA
+"AY",30,"R1",5841,"M",FALSE,NA,FALSE,FALSE,0,0,1,0,0,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Drivetrain","2"
+"BS",30,"R1",888,"C",FALSE,3,FALSE,FALSE,10,6,1,4,3,"No",FALSE,NA,5,FALSE,FALSE,"No Card",NA,NA
+"AC",30,"R2",11211,"C",FALSE,NA,FALSE,FALSE,0,0,1,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Stuck on balls half the match, played unsuccessful defense the rest",NA
+"AD",30,"B1",5338,"F",FALSE,3,FALSE,FALSE,0,4,0,0,0,"No",FALSE,NA,2,TRUE,FALSE,"No Card","Died at the very beginning of tele op, came back during endgame",NA
+"AW",30,"R1",2537,"F",FALSE,31,FALSE,FALSE,16,8,0,4,5,"No",FALSE,"1,6",4,FALSE,FALSE,"No Card","Kind of slow shooter, sometimes pretty inaccurate","1,6"
+"KO",31,"R3",2988,"M",FALSE,NA,FALSE,FALSE,2,1,0,0,0,"No",FALSE,NA,1,TRUE,FALSE,"No Card",NA,NA
+"AC",31,"R2",3373,"F",FALSE,1,FALSE,FALSE,0,0,3,2,8,"No",FALSE,"6",2,FALSE,FALSE,"No Card",NA,"6"
+"AY",31,"R1",5243,"M",FALSE,NA,FALSE,TRUE,5,5,1,2,0,"F",FALSE,"2,6",2,FALSE,FALSE,"No Card",NA,"2,6"
+"BS",31,"R1",1731,"C",FALSE,3,FALSE,FALSE,4,5,0,5,0,"No",FALSE,"1",5,FALSE,FALSE,"No Card",NA,"1"
+"AW",31,"R1",11318,"C",FALSE,NA,FALSE,FALSE,5,12,0,4,0,"No",FALSE,"5,6",4,FALSE,FALSE,"No Card","Was susceptible to the defense being played by 5353","5,6"
+"AD",31,"B1",5353,"F",FALSE,3,FALSE,FALSE,15,5,3,3,9,"No",FALSE,"2,6",4,FALSE,FALSE,"No Card","Should have climbed l1 with a few extra seconds","2,6"
+"KO",32,"R3",449,"C",FALSE,3,FALSE,FALSE,6,8,0,3,6,"No",FALSE,"1",5,FALSE,FALSE,"No Card",NA,"1"
+"AZ",32,"R1",4638,"M",FALSE,NA,FALSE,FALSE,1,4,0,0,7,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Had trouble moving around and shooting",NA
+"BS",32,"R1",3714,"F",FALSE,NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,NA,3,TRUE,FALSE,"No Card",NA,NA
+"AW",32,"R1",8590,"F",FALSE,NA,FALSE,FALSE,0,6,0,2,5,"No",FALSE,"5",3,FALSE,FALSE,"No Card","Wobbly intake, really bad piece security","5"
+"FL",32,"R2",1389,"M",FALSE,NA,FALSE,FALSE,0,0,4,1,4,"No",FALSE,"6",3,FALSE,TRUE,"No Card",NA,"6"
+"AD",32,"B1",3714,"F",FALSE,NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Spent whole game in oz",NA
+"HR",33,"R3",2900,"C",FALSE,NA,FALSE,FALSE,0,10,0,2,3,"No",FALSE,"2,6,4",3,FALSE,TRUE,"No Card","Bad indexer","2,6,4"
+"BS",33,"R1",6882,"M",FALSE,NA,FALSE,FALSE,4,2,2,1,0,"No",FALSE,"1",3,FALSE,FALSE,"No Card","Small hopper","1"
+"AZ",33,"R1",2914,"F",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Rookie team, no shooting or intaking action going on",NA
+"SBS",33,"R1",2421,"M",FALSE,NA,FALSE,FALSE,3,0,8,0,4,"No",FALSE,"3",3,FALSE,FALSE,"No Card","Bot was js cooked","3"
+"AD",33,"B1",4456,"C",FALSE,NA,FALSE,FALSE,0,2,0,2,6,"No",FALSE,"2,6",3,FALSE,TRUE,"No Card",NA,"2,6"
+"FL",33,"R2",4464,"F",FALSE,NA,FALSE,FALSE,0,3,1,0,0,"No",FALSE,"2,4",2,FALSE,FALSE,"No Card",NA,"2,4"
+"AZ",34,"R1",888,"F",FALSE,3,FALSE,FALSE,16,7,3,4,2,"No",FALSE,"2",5,FALSE,FALSE,"No Card",NA,"2"
+"Cc",34,"R1",2988,"M",FALSE,NA,FALSE,FALSE,0,3,1,3,0,"No",FALSE,"6",1,FALSE,FALSE,"No Card","Bad driver","6"
+"FL",34,"R2",5353,"C",FALSE,3,FALSE,FALSE,8,4,2,1,7,"No",FALSE,"4",3,FALSE,FALSE,"No Card",NA,"4"
+"HR",34,"R3",5587,"M",FALSE,NA,FALSE,FALSE,0,0,2,1,0,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card","Difficulty going over bump","2,6"
+"AD",34,"B1",1731,"C",FALSE,3,FALSE,FALSE,17,5,0,4,5,"No",FALSE,"2,6",4,FALSE,FALSE,"No Card",NA,"2,6"
+"SBS",34,"R1",116,"F",FALSE,NA,FALSE,FALSE,4,0,8,0,0,"L1",FALSE,"3",1,FALSE,FALSE,"No Card","Intake was broken or smth; bad game sense","3"
+"FL",35,"R2",5243,"C",FALSE,NA,FALSE,TRUE,2,2,1,2,5,"L1",TRUE,"2",3,FALSE,FALSE,"No Card",NA,"2"
+"HR",35,"R3",11318,"M",FALSE,NA,FALSE,FALSE,3,12,0,0,7,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card","Hopper broke","2,6"
+"AZ",35,"R1",2186,"C",FALSE,NA,FALSE,FALSE,0,8,0,0,5,"L1",FALSE,NA,2,FALSE,FALSE,"No Card",NA,NA
+"SBS",35,"R1",5338,"F",FALSE,3,FALSE,TRUE,8,6,0,5,0,"No",FALSE,"5,6",4,FALSE,FALSE,"No Card",NA,"5,6"
+"RL",35,"B1",2186,"C",FALSE,2,FALSE,FALSE,4,4,0,2,9,"L1",FALSE,"2",3,FALSE,FALSE,"No Card","Pretty slow, somewhat finicky","2"
+"GK",35,"R1",4638,"M",FALSE,NA,FALSE,FALSE,0,1,5,0,0,"F",TRUE,"5,2",2,FALSE,FALSE,"No Card","Struggles with bump crossing","5,2"
+"AZ",36,"R1",4456,"M",FALSE,NA,FALSE,FALSE,0,3,0,1,1,"No",FALSE,"6",2,FALSE,FALSE,"No Card",NA,"6"
+"HR",36,"R3",6882,"C",FALSE,NA,FALSE,FALSE,3,7,0,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","No intake","2"
+"FL",36,"R2",5841,"F",FALSE,NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Really good bulldozing for first 30 seconds, then they just sat in NZ for the rest of the match doing nothing","2"
+"KO",36,"B1",2912,"M",FALSE,NA,FALSE,FALSE,0,1,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Drive broke",NA
+"SBS",36,"R1",4821,"M",FALSE,NA,FALSE,FALSE,2,0,4,0,0,"No",FALSE,"3",3,FALSE,FALSE,"No Card",NA,"3"
+"GK",36,"R1",1727,"C",FALSE,NA,FALSE,FALSE,0,3,0,1,7,"No",FALSE,"6,2",4,TRUE,FALSE,"No Card","Died with ~45 sec left","6,2"
+"HR",37,"R3",8590,"M",FALSE,NA,FALSE,FALSE,0,3,0,2,2,"No",FALSE,"2,6,1",2,FALSE,FALSE,"No Card",NA,"2,6,1"
+"FL",37,"R2",4472,"C",FALSE,3,FALSE,FALSE,8,3,0,1,5,"No",FALSE,"1,6",3,FALSE,FALSE,"No Card","They kept doing 5 ball cycles from their AZ","1,6"
+"SBS",37,"R1",3373,"F",FALSE,1,FALSE,FALSE,5,0,4,3,2,"No",FALSE,"5,6",3,FALSE,FALSE,"No Card",NA,"5,6"
+"AZ",37,"R1",11211,"F",FALSE,NA,FALSE,FALSE,0,3,2,0,6,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Had trouble intaking and shooting",NA
+"KO",37,"B1",2421,"M",FALSE,NA,FALSE,FALSE,1,2,6,0,0,"No",FALSE,"4",3,FALSE,FALSE,"No Card","Struggled with getting over the bump, played defense","4"
+"SC",37,"R1",1389,"C",FALSE,NA,FALSE,FALSE,1,0,5,1,5,"No",FALSE,"6",2,FALSE,FALSE,"No Card","Got stuck on bump multiple times","6"
+"AZ",38,"R1",1446,"M",FALSE,NA,FALSE,FALSE,0,4,4,0,0,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Does not intake at all, played defense",NA
+"FL",38,"R1",3714,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"HR",38,"R3",6239,"M",FALSE,NA,FALSE,FALSE,3,10,0,2,8,"No",FALSE,"2,6",2,FALSE,FALSE,"No Card",NA,"2,6"
+"KO",38,"B1",4464,"C",FALSE,NA,FALSE,FALSE,0,4,0,0,4,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Had difficulty getting up the bump","2"
+"FL",38,"R2",2537,"F",FALSE,3,FALSE,FALSE,10,2,0,4,5,"No",FALSE,"1,6",4,FALSE,FALSE,"No Card",NA,"1,6"
+"MY",38,"R1",2914,"F",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Did not intake, shoot, or move out of alliance zone. Tried to feed hp a little bit, but we»re not effective. Moved really slowly in general",NA
+"KO",39,"B1",7886,"C",FALSE,NA,FALSE,FALSE,0,1,0,0,0,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Beached under trench rip","2"
+"HR",39,"R3",449,"C",FALSE,3,FALSE,FALSE,15,8,1,4,7,"No",FALSE,"6,2",5,FALSE,FALSE,"No Card",NA,"6,2"
+"AZ",39,"R1",5243,"F",FALSE,NA,FALSE,TRUE,3,4,0,2,3,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Bad bc it»s not 449 but seriously played good defense against us",NA
+"FL",39,"R2",116,"F",FALSE,NA,FALSE,FALSE,3,0,3,0,5,"L1",FALSE,"2",3,FALSE,FALSE,"No Card","Bulldozing rly well at start, then not so good","2"
+"LJ",39,"R1",2912,"M",FALSE,NA,FALSE,FALSE,2,1,1,0,0,"No",FALSE,"2",2,TRUE,FALSE,"No Card","Focused on herding towards HP, struggled to line up and drove slowly, could not un beach partners. Died with about 30 seconds left","2"
+"FL",39,"R1",2900,"M",FALSE,NA,FALSE,FALSE,5,8,0,0,1,"No",FALSE,"5",2,FALSE,FALSE,"No Card",NA,"5"
+"HR",40,"R3",2186,"C",FALSE,NA,FALSE,FALSE,3,6,0,0,7,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Jammed intake","2"
+"AY",40,"R1",1389,"M",FALSE,NA,FALSE,FALSE,2,0,4,1,3,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Shoot on the move is decent, Inaccurate, Struggled to intake",NA
+"FL",40,"R2",4456,"M",FALSE,NA,FALSE,FALSE,2,2,1,1,7,"No",FALSE,"6",3,FALSE,FALSE,"No Card","Died for 15 seconds a couple times throughout the match","6"
+"BS",40,"B1",3373,"C",FALSE,1,FALSE,FALSE,1,0,4,2,4,"No",FALSE,"6,2",4,FALSE,FALSE,"No Card","For the first half of the match didn»t go into neutral zone and just relied on balls from depot and teammates passing","6,2"
+"LJ",40,"R1",5587,"F",FALSE,NA,FALSE,FALSE,2,0,4,2,1,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card","Slow spin up time, took shoots pretty far from hub. Shots were a bit inaccurate","2,6"
+"FL",40,"R1",11211,"F",FALSE,NA,FALSE,FALSE,0,0,1,0,1,"No",FALSE,"6",1,FALSE,FALSE,"No Card","Stayed in middle whole time bulldozing","6"
+"HR",41,"R3",6239,"C",FALSE,3,FALSE,FALSE,0,3,1,1,4,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card","Inaccurate shooter","2,6"
+"AY",41,"R1",5549,"F",FALSE,3,FALSE,FALSE,5,3,1,5,3,"No",FALSE,"2,6,1",5,FALSE,FALSE,"No Card",NA,"2,6,1"
+"FL",41,"R1",4638,"F",FALSE,NA,FALSE,TRUE,0,3,3,0,7,"No",FALSE,"6",2,FALSE,FALSE,"No Card","Saved a friend and broke side panel","6"
+"AW",41,"R2",2988,"M",FALSE,NA,FALSE,FALSE,5,5,1,2,0,"No",FALSE,"6",3,FALSE,FALSE,"No Card","Was beached for about a third of the match before getting unteaches by a teammate","6"
+"FL",41,"R1",1727,"C",FALSE,3,FALSE,FALSE,5,2,3,2,7,"No",FALSE,"1,6",3,FALSE,FALSE,"No Card","Died during endgame","1,6"
+"BS",41,"B1",6882,"M",FALSE,NA,FALSE,FALSE,8,3,0,4,3,"No",FALSE,"2,6",4,FALSE,FALSE,"No Card","Although they emptied their hopper a lot their hopper is supper small so they weren»t actually scoring much if I could estimate they scored about 60-65 fuel","2,6"
+"HR",42,"R3",7886,"M",FALSE,NA,FALSE,FALSE,0,7,3,0,0,"No",FALSE,"2,5",4,FALSE,FALSE,"No Card",NA,"2,5"
+"BS",42,"B1",1446,"C",FALSE,NA,FALSE,FALSE,0,5,2,0,0,"No",FALSE,"2",1,FALSE,FALSE,"No Card","Passed to human player a lot and passing was actually very good but they didn»t shoot","2"
+"AY",42,"R1",4821,"M",FALSE,NA,FALSE,FALSE,0,0,1,0,0,"No",FALSE,"4",2,FALSE,FALSE,"No Card","Got beached on enemy bump; got stuck in enemy side","4"
+"FL",42,"R1",5353,"F",FALSE,3,FALSE,FALSE,7,4,0,4,5,"No",FALSE,"2",5,FALSE,FALSE,"No Card",NA,"2"
+"AW",42,"R2",5338,"F",FALSE,3,FALSE,FALSE,10,8,4,4,6,"No",FALSE,"6",4,FALSE,FALSE,"No Card","Very versatile driver, could go over bump or under trench when the other was blocked","6"
+"FL",42,"R1",3714,"C",FALSE,NA,FALSE,FALSE,0,4,2,0,0,"No",FALSE,"5,3",2,FALSE,FALSE,"No Card",NA,"5,3"
+"HR",43,"R3",2914,"M",FALSE,NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,"4",2,FALSE,FALSE,"No Card",NA,"4"
+"AW",43,"R2",5841,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"AY",43,"R1",4472,"F",FALSE,3,FALSE,FALSE,9,0,0,2,2,"No",FALSE,"1,6",4,FALSE,FALSE,"No Card",NA,"1,6"
+"BS",43,"B1",888,"C",FALSE,3,FALSE,FALSE,12,4,1,4,2,"No",FALSE,"6,1",5,FALSE,FALSE,"No Card",NA,"6,1"
+"FL",43,"R1",2900,"M",FALSE,NA,FALSE,FALSE,0,8,0,0,2,"No",FALSE,"2",1,FALSE,FALSE,"No Card","Buns","2"
+"FL",43,"R1",449,"C",FALSE,3,FALSE,FALSE,15,3,0,4,4,"No",FALSE,"1,5,6",5,FALSE,FALSE,"No Card",NA,"1,5,6"
+"HR",44,"R3",4464,"C",FALSE,3,FALSE,FALSE,0,10,4,0,0,"No",FALSE,"2,5,4",3,FALSE,FALSE,"No Card","No intake","2,5,4"
+"FL",44,"R1",2537,"F",FALSE,13,FALSE,FALSE,15,5,0,0,7,"No",FALSE,"3,4,6,5",4,FALSE,FALSE,"No Card","Intake broke after first cycle","3,4,6,5"
+"FL",44,"R1",11318,"C",FALSE,NA,FALSE,FALSE,10,4,0,3,1,"No",FALSE,"6,5",3,FALSE,FALSE,"No Card","They have a really teeny hopper tho","6,5"
+"AD",44,"R1",2421,"M",FALSE,NA,FALSE,FALSE,2,7,3,1,1,"No",FALSE,"6",3,FALSE,FALSE,"No Card",NA,"6"
+"BS",44,"B1",1731,"F",FALSE,3,FALSE,FALSE,7,5,0,3,7,"No",FALSE,"1,6",5,FALSE,FALSE,"No Card","Passing is probably the best out of all the teams also scored alot","1,6"
+"AW",44,"R2",8590,"M",FALSE,NA,FALSE,FALSE,5,4,0,0,4,"No",FALSE,"2",2,TRUE,FALSE,"No Card","Genuinely bad piece security. Intake didn»t appear to break, but it got rammed into the walls and was flopping around","2"
+"FL",45,"R1",4456,"C",FALSE,NA,FALSE,FALSE,2,8,0,1,6,"No",FALSE,"6,5",2,FALSE,FALSE,"No Card",NA,"6,5"
+"HR",45,"R3",3373,"F",FALSE,1,FALSE,FALSE,0,0,4,2,0,"No",FALSE,"2,6",2,FALSE,FALSE,"No Card",NA,"2,6"
+"BS",45,"B1",11211,"C",FALSE,NA,FALSE,FALSE,0,0,3,0,2,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Tried their best to pass and bulldoze but it just wasn»t working much, bot is slow","2"
+"AD",45,"R1",6239,"M",FALSE,NA,FALSE,FALSE,5,8,0,3,5,"No",FALSE,"6,2",3,FALSE,FALSE,"No Card",NA,"6,2"
+"FL",45,"R1",116,"F",FALSE,NA,FALSE,FALSE,2,0,6,1,2,"L1",FALSE,"6,2",3,FALSE,FALSE,"No Card","Shooting aim is dookie","6,2"
+"AW",45,"R2",3714,"M",FALSE,NA,FALSE,FALSE,6,3,3,0,0,"No",FALSE,"4",3,FALSE,FALSE,"No Card","Didn»t shoot, kept the preloaded fuel the entire match. For about half the match, the had a fuel stuck underneath them making movement weird. They played defense, but weren»t very good imo","4"
+"BS",46,"B1",7886,"C",FALSE,NA,FALSE,FALSE,0,3,9,0,0,"No",FALSE,"1,4,5",5,FALSE,FALSE,"No Card","Driver played very good defense but not couldn»t shoot","1,4,5"
+"HR",46,"R3",5549,"C",FALSE,3,FALSE,FALSE,8,3,1,4,0,"No",FALSE,"1,6",5,FALSE,FALSE,"No Card",NA,"1,6"
+"AW",46,"R2",2988,"M",FALSE,NA,FALSE,FALSE,8,1,3,1,0,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Beached for the vast majority of the match",NA
+"BP",46,"R1",2900,"F",FALSE,3,FALSE,FALSE,10,5,0,0,1,"No",FALSE,NA,1,FALSE,FALSE,"No Card",NA,NA
+"AD",46,"R1",4638,"M",FALSE,NA,FALSE,TRUE,0,8,4,0,5,"No",FALSE,NA,3,FALSE,FALSE,"No Card",NA,NA
+"SBS",46,"R1",5338,"F",FALSE,3,FALSE,FALSE,9,0,0,6,2,"No",FALSE,"5,6",5,FALSE,FALSE,"No Card",NA,"5,6"
+"HR",47,"R3",6882,"M",FALSE,NA,FALSE,FALSE,9,1,1,3,6,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card",NA,"2,6"
+"AD",47,"R1",8590,"M",FALSE,NA,FALSE,FALSE,4,6,0,0,1,"No",FALSE,"2",3,TRUE,FALSE,"No Card","Died during the third tele op shift","2"
+"BP",47,"R1",11318,"F",FALSE,NA,FALSE,FALSE,8,3,2,5,6,"No",FALSE,"2,6",3,FALSE,FALSE,"No Card",NA,"2,6"
+"AW",47,"R2",2186,"F",FALSE,NA,FALSE,FALSE,5,8,0,1,0,"L1",FALSE,"2",4,FALSE,FALSE,"No Card",NA,"2"
+"BS",47,"B1",2912,"C",FALSE,NA,FALSE,FALSE,0,2,2,0,0,"No",FALSE,"4",4,FALSE,FALSE,"No Card","Played decent defense and considering the fact that they didn»t shoot they actually contributed a good amount","4"
+"SBS",47,"R1",5353,"C",FALSE,3,FALSE,FALSE,0,4,0,4,6,"No",TRUE,"5,6",3,FALSE,FALSE,"No Card","Turned around in auto","5,6"
+"BP",48,"R1",1731,"C",FALSE,3,FALSE,FALSE,0,1,0,7,8,"No",FALSE,"2,6",5,FALSE,TRUE,"No Card","Missed they whole auto","2,6"
+"HR",48,"R3",1389,"M",FALSE,NA,FALSE,FALSE,6,0,4,2,8,"No",FALSE,"6",1,FALSE,TRUE,"No Card",NA,"6"
+"BS",48,"B1",4464,"M",FALSE,NA,FALSE,FALSE,5,0,0,0,0,"No",FALSE,NA,3,FALSE,FALSE,"No Card","Basically did nothing the whole game didn»t go under the trench or over the bump",NA
+"BP",48,"R1",5841,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Very skillful as you can see",NA
+"KO",48,"R1",449,"F",FALSE,3,FALSE,FALSE,12,12,0,5,2,"No",FALSE,"2,3,6,1",5,FALSE,FALSE,"No Card",NA,"2,3,6,1"
+"AW",48,"R2",1446,NA,FALSE,NA,FALSE,FALSE,0,9,1,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Couldn»t intake or shoot, got beached multiple times, herded/bulldozed the entire match","2"
+"AD",49,"R1",2537,"C",FALSE,3,FALSE,FALSE,13,8,0,3,1,"No",FALSE,"1,2,6",4,FALSE,FALSE,"No Card",NA,"1,2,6"
+"BP",49,"R1",2421,"M",FALSE,NA,FALSE,FALSE,0,2,4,0,0,"No",FALSE,"6,4",2,FALSE,FALSE,"No Card","Played D all game","6,4"
+"SBS",49,"B1",4479,"F",FALSE,3,FALSE,FALSE,6,8,0,4,7,"No",FALSE,"6",4,FALSE,FALSE,"No Card","Tuff▒ - Caves & Cliffs Update","6"
+"AW",49,"R2",1727,"C",FALSE,3,FALSE,FALSE,15,4,0,3,0,"No",FALSE,"2,6",4,TRUE,FALSE,"No Card","Died towards the end of the match","2,6"
+"HR",49,"R3",4821,"M",FALSE,NA,FALSE,FALSE,4,3,1,0,0,"No",FALSE,"4,5",1,FALSE,FALSE,"No Card",NA,"4,5"
+"BP",49,"R1",4821,"M",FALSE,NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,"3",2,FALSE,FALSE,"No Card","Only played D","3"
+"HR",50,"R3",6882,"M",FALSE,NA,FALSE,FALSE,4,3,4,4,5,"No",FALSE,"6",3,FALSE,FALSE,"No Card",NA,"6"
+"AW",50,"R2",5243,"C",FALSE,NA,FALSE,FALSE,5,6,0,2,0,"L1",FALSE,"2,6",3,FALSE,FALSE,"No Card","Failed auto climb","2,6"
+"BP",50,"R1",3373,"M",FALSE,1,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,TRUE,FALSE,"No Card","Insta death",NA
+"AD",50,"R1",5338,"C",FALSE,3,FALSE,FALSE,10,5,0,4,9,"No",FALSE,"2,6,5",5,FALSE,TRUE,"No Card",NA,"2,6,5"
+"KO",50,"R1",5587,"F",FALSE,NA,FALSE,FALSE,6,0,4,1,0,"No",FALSE,NA,2,FALSE,FALSE,"No Card","They were stopped during the first 30s or so",NA
+"BP",50,"B1",2914,"M",FALSE,NA,FALSE,FALSE,0,2,0,0,0,"F",FALSE,"5",4,FALSE,FALSE,"No Card","Played mid defense, other than that did nothing","5"
+"KO",51,"B3",2988,"M",FALSE,NA,FALSE,FALSE,4,5,3,1,6,"No",FALSE,"6",3,FALSE,FALSE,"No Card","Struggled to get over the bump","6"
+"AZ",51,"B1",4464,"C",FALSE,NA,FALSE,FALSE,0,4,8,0,0,"No",FALSE,"2",1,FALSE,FALSE,"No Card","Got stuck for half the match and could not intake","2"
+"BS",51,"B2",2186,"F",FALSE,NA,FALSE,FALSE,1,1,0,0,7,"F",FALSE,"6",3,FALSE,FALSE,"No Card","Pretty slow bot, basically did nothing for the first half of the match and when they did intake full they missed most the balls","6"
+"BP",51,"R2",11211,"M",FALSE,NA,FALSE,FALSE,0,6,1,0,2,"No",FALSE,"2",1,FALSE,FALSE,"No Card","Only shot preload, tried to bulldoze, didn41391t intake, got beached","2"
+"SC",51,"R1",1731,"C",FALSE,3,FALSE,FALSE,0,3,0,5,5,"No",FALSE,"5",5,FALSE,FALSE,"No Card","Auto shots seemed to missed the hub","5"
+"NS2",51,"R3",2900,"F",FALSE,NA,FALSE,FALSE,0,4,0,1,4,"No",FALSE,"6",1,FALSE,FALSE,"No Card","They tried shooting but completely missed","6"
+"KO",52,"B3",2912,"C",FALSE,NA,FALSE,FALSE,1,0,2,0,2,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Weak shooter, bad indexer, got stuck on OZ bump",NA
+"AZ",52,"B1",3714,"F",FALSE,NA,FALSE,FALSE,2,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Broken swerve, could not shoot either",NA
+"SC",52,"R1",4456,"C",FALSE,NA,FALSE,FALSE,0,5,1,0,5,"No",FALSE,"5",2,FALSE,FALSE,"No Card","Auto only scored preload and robot didn41391t move for endgame but was not disconnected","5"
+"BS",52,"B2",5353,"F",FALSE,3,FALSE,FALSE,0,7,1,3,0,"No",FALSE,"2,6",4,FALSE,FALSE,"No Card","Their auto is not accurate at all they probably missed 92% of balls shot in auto, small hopper, tried their best to bulldoze, passed to human player alot","2,6"
+"BP",52,"R1",2537,"F",FALSE,3,FALSE,FALSE,6,4,0,4,4,"No",FALSE,"6",4,FALSE,FALSE,"No Card","Mostly intaked from AZ when possible, stood cycles and ok shooting","6"
+"NS2",52,"R3",1389,"F",FALSE,NA,FALSE,FALSE,0,0,4,1,8,"No",FALSE,"2",2,FALSE,FALSE,"No Card","They did not go to neutral zone often during active period","2"
+"KO",53,"B3",5243,"F",FALSE,NA,FALSE,FALSE,3,3,3,1,0,"No",FALSE,NA,2,FALSE,FALSE,"No Card",NA,NA
+"AZ",53,"B1",1727,"C",FALSE,NA,FALSE,FALSE,4,10,0,3,8,"No",FALSE,NA,5,FALSE,FALSE,"No Card",NA,NA
+"BS",53,"R1",8590,"M",FALSE,NA,FALSE,FALSE,2,5,1,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Didn41391t score at all during tele, tried their best to bulldoze but overall didn41391t contribute much to their team","2"
+"BP",53,"R2",449,"C",FALSE,3,FALSE,FALSE,12,4,0,6,2,"No",FALSE,"2,6",4,FALSE,TRUE,"No Card","Good accuracy, bps, and quantity shot total","2,6"
+"NS2",52,"R3",888,"F",FALSE,3,FALSE,FALSE,18,4,2,5,0,"No",FALSE,"1,2",5,FALSE,FALSE,"No Card","They looked like they knew what they were doing","1,2"
+"BH",53,"R1",6239,"M",FALSE,NA,FALSE,FALSE,3,3,0,0,4,"No",FALSE,"6",2,FALSE,FALSE,"No Card","Shot from middle?","6"
+"BH",54,"R1",2914,"F",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,TRUE,FALSE,"No Card",NA,NA
+"AZ",54,"B1",1446,"M",FALSE,NA,FALSE,FALSE,7,3,0,0,0,"No",FALSE,"6",1,FALSE,FALSE,"No Card","Moved to neutral and didn41391t move, had trouble, potentially new driver","6"
+"BP",54,"R1",4821,"F",FALSE,NA,FALSE,FALSE,2,2,2,0,0,"No",FALSE,"4",2,TRUE,FALSE,"No Card","Played good defense, then got beached on bump and died","4"
+"MC",54,"B3",116,"F",FALSE,NA,FALSE,FALSE,0,0,6,3,6,"L1",TRUE,"6",4,FALSE,FALSE,"No Card","Has huge hopper triple shooter","6"
+"NS2",54,"R3",2421,"M",FALSE,NA,FALSE,FALSE,2,12,0,1,4,"No",FALSE,"2",1,FALSE,TRUE,"No Card","They didn41391t get many fuel and idled for periods of time","2"
+"BS",54,"R1",5549,"C",FALSE,3,FALSE,FALSE,0,3,0,2,2,"No",FALSE,"1,6",4,FALSE,FALSE,"No Card","5549 is pretty good, they passed well and intaked full but compared to teams like 1731 or 888 they didn41391t score as much","1,6"
+"MC",55,"B3",5841,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,3,FALSE,FALSE,"No Card",NA,NA
+"BH",55,"R1",11318,"C",FALSE,NA,FALSE,FALSE,3,6,0,5,2,"No",FALSE,"6",3,FALSE,FALSE,"No Card","Only got to bulldoze once do to defense","6"
+"BP",55,"R2",5587,"F",FALSE,1,FALSE,FALSE,4,6,0,2,8,"No",FALSE,"6",3,FALSE,TRUE,"No Card","Good auto for middle even though they didn41391t start there","6"
+"NS2",55,"R3",4638,"M",FALSE,NA,FALSE,TRUE,2,3,3,1,2,"L1",TRUE,"4",4,FALSE,FALSE,"No Card","They were up in their faces blocking them from scoring","4"
+"AZ",55,"B1",4472,"F",FALSE,3,FALSE,FALSE,15,12,0,4,7,"No",FALSE,NA,5,FALSE,TRUE,"No Card","If not for turret slight inaccuracies these robot has potential, they soloed nearly a win",NA
+"BS",55,"B2",7886,"C",FALSE,NA,FALSE,FALSE,0,8,2,0,0,"No",FALSE,"4,5",5,FALSE,FALSE,"No Card","They played good defense and they also bulldozed a bit, passed to human player. I know their in contention as a third pick but I think bulldozing has a be better","4,5"
+"MC",56,"B3",6239,"F",FALSE,3,FALSE,FALSE,7,4,0,1,3,"No",FALSE,"4,5",4,FALSE,FALSE,"No Card","Started browning out and then just went to play defense","4,5"
+"BH",56,"R1",5243,"C",FALSE,NA,FALSE,FALSE,3,2,1,2,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Tried to climb in auto",NA
+"BP",56,"R2",3373,"F",FALSE,1,FALSE,FALSE,6,0,6,2,8,"No",FALSE,"6",3,FALSE,FALSE,"No Card","Decent fire rate but intake speed and throughput are low","6"
+"BS",56,"R1",2186,"C",FALSE,NA,FALSE,FALSE,2,5,0,1,7,"L1",FALSE,"2",4,TRUE,FALSE,"No Card","Died once and came back to life, decent bulldozing, only made about 50 percent of their hopper each time they shot,climb when there was about 15 secs left","2"
+"AZ",56,"B1",1389,"C",FALSE,NA,TRUE,FALSE,2,0,6,4,5,"No",FALSE,"6",4,FALSE,FALSE,"No Card","Got stuck on bump during auto, fastest indexing I41391ve seen, low accuracy for turret, large hopper capacity but risk of beaching or getting stuck on the bump during crucial auto","6"
+"NS2",56,"R3",888,"F",FALSE,3,FALSE,FALSE,13,9,1,4,0,"No",FALSE,"6",3,FALSE,FALSE,"No Card","They shot while being pushed and mostly didn41391t get moved. They didn41391t do any defense.","6"
+"BH",57,"R1",11211,"F",TRUE,NA,FALSE,FALSE,0,1,0,0,0,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Defense and bot is super slow",NA
+"BS",57,"B2",449,"C",FALSE,3,FALSE,FALSE,12,3,0,4,5,"No",FALSE,"6",5,FALSE,FALSE,"No Card",NA,"6"
+"BP",57,"R2",4464,"M",FALSE,NA,FALSE,FALSE,0,3,5,0,6,"No",FALSE,"6,4,5",2,TRUE,FALSE,"No Card","Did a bit of everything, wasn41391t particularly effective","6,4,5"
+"NS2",57,"R3",5338,"C",FALSE,3,FALSE,FALSE,13,9,0,5,4,"No",FALSE,"2,6",4,FALSE,TRUE,"No Card","They41391re good on the offense and getting cycles in. Didn41391t focus on any defense only intaking and occasionally bulldozing.","2,6"
+"AZ",57,"B1",5549,"F",FALSE,3,FALSE,FALSE,11,10,0,4,6,"No",FALSE,"1",3,FALSE,FALSE,"No Card","Had a lot of trouble shooting, spent multiple seconds to shot out the hopper, movement is ok but not amazing, worried that it takes too long to get inertia","1"
+"MC",57,"B3",2912,NA,FALSE,2,FALSE,FALSE,2,2,2,0,5,"No",FALSE,"5",3,FALSE,FALSE,"No Card","Got stuck on the bump for more than half of the match","5"
+"AD",58,"B3",11318,"C",FALSE,1,FALSE,FALSE,14,12,0,5,8,"No",FALSE,"2,4,6",5,FALSE,FALSE,"No Card","Very good bulldozer, stockpiled lots of balls","2,4,6"
+"BS",58,"R1",2914,"F",FALSE,NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,NA,3,TRUE,FALSE,"No Card","Did nothing during auto, hopper is extremely small (could probably only fit 2-4 balls), did nothing during tele and then died.",NA
+"AZ",58,"B1",11318,"C",FALSE,1,FALSE,FALSE,8,12,0,5,7,"No",FALSE,"2,5",5,FALSE,FALSE,"No Card","Good mobility, small hopper, good driving","2,5"
+"BP",58,"R2",4821,"M",FALSE,NA,FALSE,FALSE,2,2,4,1,1,"No",FALSE,"4,6",3,FALSE,FALSE,"No Card","Mostly defensive, shots came up short, but defense was respectable","4,6"
+"EC",58,"R1",2988,"C",FALSE,NA,TRUE,FALSE,10,4,1,3,3,"No",FALSE,"6",2,FALSE,TRUE,"No Card","Intake slow and prone to temporary jams; inconsistent fire rate","6"
+"NS2",58,"R3",4456,"F",FALSE,NA,FALSE,FALSE,2,7,3,2,7,"No",FALSE,"2,6,4",2,FALSE,TRUE,"No Card","Big hopper. Most of their shoots didn41391t make it. Cleanly went over bumps","2,6,4"
+"EC",59,"R1",122,"M",FALSE,NA,FALSE,FALSE,7,0,2,0,0,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Just drove around never shot during teleop","2"
+"BP",59,"R2",1727,"F",FALSE,3,FALSE,FALSE,7,7,0,4,2,"No",FALSE,"6",4,FALSE,TRUE,"No Card","Good hopper capacity, inactive shifts aren41391t optimized","6"
+"NS2",59,"R3",5353,"C",FALSE,3,FALSE,FALSE,12,9,3,1,0,"No",FALSE,"2,4",4,FALSE,FALSE,"No Card","They maneuvered very cleanly  and they didn41391t shoot much. They focused heavily on defens.","2,4"
+"AD",59,"B3",1446,"F",FALSE,NA,FALSE,FALSE,0,10,3,0,0,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Had shooter, but didn41391t shoot. Prob broken. Tank drive","2"
+"AZ",59,"B1",4472,"C",FALSE,3,FALSE,FALSE,13,3,1,1,0,"No",FALSE,"1",4,FALSE,FALSE,"No Card","Intake is having issues, hopper plate broke off, tried to move balls to HP but was unsuccessful, big issues","1"
+"BS",59,"R1",4638,"M",FALSE,NA,FALSE,TRUE,0,3,4,0,1,"F",FALSE,"4",3,FALSE,FALSE,"No Card","Played decent defense towards the start of the match but overall didn41391t contribute much, only made like 2 balls the whole match. They41391re consistently climbing in auto but failing in end game","4"
+"EC",60,"R1",2537,"F",FALSE,3,FALSE,FALSE,10,6,0,6,0,"No",FALSE,"1",3,FALSE,FALSE,"No Card","Struggles under defensive pressure","1"
+"BS",60,"R1",6882,"F",FALSE,NA,FALSE,FALSE,4,4,3,1,4,"No",FALSE,"2",3,FALSE,FALSE,"No Card",NA,"2"
+"AZ",60,"B1",116,"C",FALSE,NA,FALSE,FALSE,1,0,6,3,7,"No",FALSE,NA,4,FALSE,FALSE,"No Card","Stuck balls between hopper wall and intake easy breaks the hopper is big and the shoot abilities are overall limited, triple shooter but not hooded so accuracy is not ideal",NA
+"BP",60,"R2",5587,"M",FALSE,NA,FALSE,FALSE,3,6,0,2,7,"No",FALSE,"6",3,FALSE,FALSE,"No Card","Sometimes inaccurate an imprecise","6"
+"NS2",60,"R3",1731,"C",FALSE,3,FALSE,FALSE,20,4,2,2,0,"No",FALSE,"6",4,FALSE,FALSE,"No Card","Seemed like swerve was browning out in endgame. They had good movement","6"
+"AD",60,"B3",3714,"M",FALSE,NA,FALSE,FALSE,5,0,2,0,0,"No",FALSE,"4",1,FALSE,FALSE,"No Card","Tilted upward a lot when accelerating or turning, made them beach on fuel when driving in straight line.","4"
+"EC",61,"R1",5841,"M",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Seems to be broken, minimal movement",NA
+"Bp",61,"R2",5243,"F",FALSE,NA,FALSE,FALSE,2,1,1,0,3,"No",FALSE,NA,1,TRUE,FALSE,"No Card","Battery fell out",NA
+"AZ",61,"B1",7886,"C",FALSE,NA,FALSE,FALSE,1,8,4,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Was blocking their oneness alliance, blocking opponents during their own active period, not enough weight to push others, got beached on fuel","2"
+"NS2",61,"R3",4456,"F",FALSE,NA,FALSE,FALSE,1,1,1,1,3,"No",FALSE,NA,2,TRUE,TRUE,"No Card","They preferred not going into. neutralzone",NA
+"AD",61,"B3",11211,"F",FALSE,NA,FALSE,FALSE,0,6,0,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Shoooter broken?","2"
+"BS",61,"R1",8590,"M",FALSE,NA,FALSE,FALSE,5,6,0,0,0,"No",FALSE,"2",4,FALSE,FALSE,"No Card","Pretty good bulldozing, no shooter, considering the fact that they couldnt shoot their defense and bulldozing should have been a lot better than it was.","2"
+"EC",62,"R1",888,"F",FALSE,3,FALSE,FALSE,20,6,7,4,5,"No",FALSE,NA,3,FALSE,TRUE,"No Card","Missed a surprising amount. Under severe defense pressure though",NA
+"BP",62,"R2",4638,"M",FALSE,NA,FALSE,FALSE,0,4,0,1,7,"L1",FALSE,"3,4",2,FALSE,FALSE,"No Card","Failed auto climb, successful in endgame","3,4"
+"NS2",62,"R3",4464,"M",FALSE,NA,FALSE,FALSE,1,3,1,0,7,"No",FALSE,"2",2,FALSE,FALSE,"No Card","Their swerve was broken at the endgame","2"
+"AD",62,"B3",4821,"M",FALSE,NA,FALSE,FALSE,5,8,1,1,0,"No",FALSE,NA,3,FALSE,FALSE,"No Card",NA,NA
+"AZ",62,"B1",2900,"F",FALSE,NA,FALSE,FALSE,3,9,0,1,6,"No",FALSE,NA,2,FALSE,FALSE,"No Card","Did not shoot or have good intake, it has open hopper but also blocked alliance members",NA
+"BS",62,"R1",5338,"C",FALSE,3,FALSE,FALSE,6,2,2,4,4,"No",FALSE,"2,6",5,FALSE,FALSE,"No Card","Scored basically all of their teams fuel, very good. bulldozing, overall areally impressive performance considering they were basically 1v3ing in terms of scoring","2,6"
+"AZ",63,"B1",2186,"C",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,TRUE,FALSE,"No Card","Robot barely moved",NA
+"EC",63,"R1",2914,"M",FALSE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Didn41391t move at all",NA
+"AD",63,"B3",1727,"F",FALSE,3,FALSE,FALSE,6,4,2,3,2,"No",FALSE,"6",4,TRUE,FALSE,"No Card","Died during the last teleop shift","6"
+"BP",63,"R2",1389,"F",FALSE,3,TRUE,FALSE,3,0,2,2,4,"No",FALSE,"6,2",3,FALSE,FALSE,"No Card","Indexing is inconsistent, jams frequently","6,2"
+"BS",63,"R1",1446,"M",FALSE,NA,FALSE,FALSE,0,2,2,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","No shooting, pretty bad bulldozing, both teammates died","2"
+"NS2",63,"R3",1731,"C",FALSE,3,FALSE,FALSE,20,9,1,7,5,"No",FALSE,"2,6,5",5,FALSE,FALSE,"No Card","Had clean maneuvers around the neutral zone. Good defense the neutral. They were able to get many cycles and had a high output.","2,6,5"
+"BP",64,"R2",6239,"C",FALSE,3,FALSE,FALSE,3,0,0,0,0,"No",FALSE,"TRUE",1,TRUE,FALSE,NA,NA,"TRUE"
+"NS2",64,"R3",2421,"F",FALSE,NA,FALSE,FALSE,2,4,0,2,0,"No",FALSE,"2,6",1,FALSE,FALSE,"No Card","They were moving very clumsy and swerve might have been bad","2,6"
+"EC",64,"R1",6882,"M",FALSE,NA,FALSE,FALSE,8,3,1,3,5,"No",FALSE,"2",3,FALSE,TRUE,"No Card","No functional intake? They ram against the wall to get fuel in hopper","2"
+"BS",64,"B2",449,NA,FALSE,NA,FALSE,FALSE,0,3,0,2,7,"No",FALSE,"2,6",5,FALSE,FALSE,"No Card","Our auto didn41391t worked this time and I think our intake came off. Still won tho","2,6"
+"AD",64,"B3",3714,"M",FALSE,NA,FALSE,FALSE,5,0,0,0,0,"No",FALSE,NA,1,TRUE,FALSE,"No Card","Died, came alive for a second, then got stuck on bump",NA
+"AZ",64,"B1",2988,NA,FALSE,NA,FALSE,FALSE,0,6,0,1,7,"No",FALSE,NA,3,FALSE,FALSE,"No Card",NA,NA
+"BS",65,"R1",5841,NA,TRUE,NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,FALSE,FALSE,"No Card","Was the only one consistently putting up fuel",NA
+"AZ",65,"B1",116,"C",FALSE,NA,FALSE,FALSE,0,0,6,4,7,"L1",TRUE,NA,3,FALSE,TRUE,"No Card","Was the only one consistently putting up fuel",NA
+"AD",65,"B3",8590,"M",FALSE,NA,FALSE,FALSE,4,11,0,0,0,"No",FALSE,"2,4,5",3,FALSE,FALSE,"No Card",NA,"2,4,5"
+"EC",65,"R1",5548,"F",FALSE,3,FALSE,FALSE,6,0,1,1,0,"No",FALSE,"2",4,TRUE,TRUE,"No Card","Stopped moving early on","2"
+"NS2",65,"R3",5353,"C",FALSE,3,FALSE,FALSE,20,4,0,5,4,"No",FALSE,"2",5,FALSE,FALSE,"No Card","They move quickly and they41391re able to get a lot of cycles. They have a small hopper.","2"
+"BP",65,"R2",11318,"M",FALSE,NA,FALSE,FALSE,3,8,0,3,5,"No",FALSE,"4,6,2",4,FALSE,TRUE,"Yellow Card","Launch angle for balls was too long","4,6,2"
+"EC",66,"R1",5587,"F",FALSE,NA,FALSE,FALSE,15,3,1,3,6,"No",FALSE,"2,6",3,FALSE,TRUE,"No Card","Visually wobbly","2,6"
+"BS",66,"B2",3373,"M",TRUE,NA,FALSE,FALSE,0,0,4,2,0,"No",FALSE,"6",4,FALSE,FALSE,"No Card",NA,"6"
+"AD",66,"B3",2537,"C",FALSE,13,FALSE,FALSE,15,10,0,5,3,"No",FALSE,"2,1,6",4,FALSE,TRUE,"No Card",NA,"2,1,6"
+"AZ",66,"B1",7886,"F",FALSE,NA,FALSE,FALSE,0,3,5,0,0,"No",FALSE,"2",3,FALSE,FALSE,"No Card","Beaching, no shooting, defensive bot HP feeding","2"
+"NS2",66,"R3",2912,"M",FALSE,NA,FALSE,FALSE,0,0,3,0,2,"No",FALSE,"4",1,FALSE,FALSE,"No Card","They were died for a minute. They don41391t move cleanly","4"
+"BP",66,"R2",4472,"C",FALSE,3,FALSE,FALSE,3,6,1,3,8,"No",FALSE,"4,6",3,FALSE,TRUE,"No Card","Some volleys were completely off, most were good","4,6"
