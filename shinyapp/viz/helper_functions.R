@@ -916,6 +916,7 @@ data_validation <- function(event_key, rewrite = FALSE){
                 by = "match_team"
             ) |>
             mutate(
+                match = as.integer(match),
                 robot = ifelse(
                     error == "Wrong Robot ID (R1, R2, R3, B1, B2, B3)",
                     as.character(robot_correct),
@@ -927,7 +928,8 @@ data_validation <- function(event_key, rewrite = FALSE){
                     error
                 )
             ) |>
-            select(!c(robot_correct, error))
+            select(!c(robot_correct, error)) |>
+            arrange(match, robot)
         write.csv(select(data, !c(match_robot, match_team, scout_key)), 
                   paste0('shinyapp/data/', event_key, '/data.csv'), 
                   row.names = FALSE)

@@ -395,4 +395,4 @@ AW,9,R3,1446,,TRUE,,FALSE,FALSE,0,0,0,0,0,No,FALSE,,1,FALSE,FALSE,No Card,
 AD,9,B1,5338,C,FALSE,3,FALSE,FALSE,0,9,0,8,0,No,FALSE,"1,5",5,FALSE,TRUE,No Card,
 BS,9,B2,1731,F,FALSE,3,FALSE,FALSE,6,5,0,3,2,No,FALSE,1,4,FALSE,FALSE,No Card,"Passed to human player a lot, good passing, scored most of their hopper when they shot"
 AZ,9,B3,2912,M,FALSE,,FALSE,FALSE,0,0,1,1,0,No,FALSE,,1,FALSE,FALSE,No Card,"No strategy, swerve looked broken, no auto, Kitbot, very bad movement"
-58,B3,NA,C,FALSE,1,FALSE,FALSE,14,12,0,5,8,No,FALSE,"2,4,6",5,FALSE,FALSE,No Card,"Very good bulldozer, stockpiled lots of balls",
+MH,58,B3,NA,C,FALSE,1,FALSE,FALSE,14,12,0,5,8,No,FALSE,"2,4,6",5,FALSE,FALSE,No Card,"Very good bulldozer, stockpiled lots of balls"
