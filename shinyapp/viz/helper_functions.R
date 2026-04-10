@@ -705,10 +705,9 @@ problems_graph <- function(raw, teams) {
         {if (length(teams) == 6)
             theme(
                 axis.text.x = element_text(
-                    color = ifelse(
-                        team %in% teams[1:3],
-                        "red", 
-                        "blue"), size = 15)
+                    # ASSUMPTION: teams in order R,R,R,B,B,B
+                    color = c(rep("red", 3), rep("blue", 3)), 
+                    size = 15)
             )
             else NULL
         }
