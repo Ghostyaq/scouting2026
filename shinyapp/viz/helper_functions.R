@@ -776,45 +776,6 @@ score_pred <- function(data, red, blue){
         "<span style='color:blue;'>", round(blue_auto_score, digits = 0))
 }
 
-data_validation <- function(event_key){
-    raw <- read.csv(paste0('shinyapp/data/', event_key, '/data.csv'))
-    schedule <- read.csv(paste0('shinyapp/data/', event_key, '/schedule.csv'))
-    
-    robot_order <- c("R1", "R2", "R3", "B1", "B2", "B3")
-    raw$robot <- factor(raw$robot, levels = robot_order, ordered = TRUE)
-    data <- raw |>
-        arrange(match, robot) |>
-        rowwise() |>
-        mutate(
-            scout_key = paste(match, robot, team)
-        )
-    
-    long_schedule <- schedule |>
-        pivot_longer(
-            cols = c(R1, R2, R3, B1, B2, B3),
-            names_to = "robot",
-            values_to = "team"
-        ) |>
-        rowwise() |>
-        mutate(
-            scout_key = paste(match, robot, team)
-        )
-    
-    missed_matches <- anti_join(long_schedule, data, by = "scout_key")
-    missed_matches$type <- "missed"
-    non_existent_matches <- anti_join(data, long_schedule, by = "scout_key") |>
-        select(match, robot, team, scout_key)
-    non_existent_matches$type <- "non-existent"
-    double_scouted <- data[(
-        duplicated(data[, "scout_key"]) | 
-            duplicated(data[, "scout_key"], 
-                       fromLast = TRUE)), ] |>
-        select(match, robot, team, scout_key)
-    double_scouted$type <- "double scout"
-    
-    rbind(missed_matches, non_existent_matches, double_scouted)
-}
-
 driver_rating_match <- function(dataframe, team_id){
     colors <- c("blue", "red")
     selected_team <- dataframe |>
