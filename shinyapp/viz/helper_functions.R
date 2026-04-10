@@ -626,9 +626,7 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
         ordered = TRUE
     )
     
-    ggplot(comments, aes(fill = comment_type, 
-                         x = team, 
-                         y = level)) +
+    ggplot(comments, aes(fill = comment_type, x = team, y = level)) +
         geom_bar(position = "stack", stat = "identity") +
         labs(title = "Comments Summary", x = "Teams", y = "# of comments") +
         scale_fill_manual(
