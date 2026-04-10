@@ -314,6 +314,7 @@ ui <- fluidPage(
                     actionButton("vaale", "Alexandria"),
                     actionButton("mdpas", "Pasadena (Only pRidge)"),
                     actionButton("mdbet", "Bethesda"),
+                    actionButton("chcmp", "DChamps"),
                 ),
                 layout_columns(
                     #card(

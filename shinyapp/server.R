@@ -27,7 +27,7 @@ default_linear_weights <- data.frame(
     `ACP` = 0
 ) #temp, remove later
 
-addResourcePath("images_d", "data/mdbet/images")
+addResourcePath("images_d", "data/chcmp/images")
 #addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
 
 server <- function(input, output, session) {
@@ -51,7 +51,7 @@ server <- function(input, output, session) {
         pridge(read.csv(file.path("data", event, "pridge.csv")))
         alliances(read.csv(file.path("data", event, "alliances.csv")))
     }
-    load_event_data("mdbet")
+    load_event_data("chcmp")
     
     #UPDATE PICKERS
     observe({
@@ -76,6 +76,10 @@ server <- function(input, output, session) {
     
     observeEvent(input$mdbet, {
         load_event_data("mdbet")
+    })
+    
+    observeEvent(input$chcmp, {
+        load_event_data("chcmp")
     })
     
     observeEvent(input$pRidge, {
