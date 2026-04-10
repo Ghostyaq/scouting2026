@@ -657,6 +657,62 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
         }
 }
 
+problems_graph <- function(raw, teams) {
+    data <- raw |>
+        group_by(team) |>
+        filter(team %in% teams) |>
+        mutate(
+            died = if_else(problems == "1", 1, 0), 
+            beached = if_else(problems == "2", 1, 0), 
+            surfing = if_else(problems == "3", 1, 0), 
+            stuck_on_bump = if_else(problems == "4", 1, 0), 
+            no_show = if_else(problems == "5", 1, 0)
+        )
+    
+    summary_per_team <- data |>
+        group_by(team) |>
+        summarise(
+            num_died = sum(died, na.rm = TRUE),
+            num_beached = sum(beached, na.rm = TRUE),
+            num_surfing = sum(surfing, na.rm = TRUE),
+            num_stuck_on_bump = sum(stuck_on_bump, na.rm = TRUE),
+            num_no_show = sum(no_show, na.rm = TRUE)
+        ) |>
+        pivot_longer(
+            cols = starts_with("num"), 
+            names_to = "type_of_problems", 
+            values_to = "times"
+        )
+    
+    ggplot(data = summary_per_team, 
+           aes(fill = type_of_problems, x = factor(team), y = times)) +
+        geom_bar(stat = "identity") + 
+        labs(fill = "Types of Problems", title = "Problems Encountered", 
+             x = "Teams", y = "Number of Problems") + 
+        scale_fill_manual(
+            values = c("num_died" = "#BDE0FE",
+                       "num_beached" = "#fde4f2",
+                       "num_surfing" = "#CDB4DB", 
+                       "num_stuck_on_bump" = "#eea1cd", 
+                       "num_no_show" = "#f4b8da"), 
+            labels = c("num_died" = "Died", 
+                       "num_beached" = "Beached", 
+                       "num_surfing" = "Surfing", 
+                       "num_stuck_on_bump" = "Stuck on Bump", 
+                       "num_no_show" = "No Show")) + 
+        theme_bw() +
+        {if (length(teams) == 6)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        team %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
+}
+
 auto_type_graph <- function(raw, order, teams, flip) {
     auto_type_data <- raw |>
         filter(team %in% teams) |>

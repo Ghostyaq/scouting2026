@@ -226,6 +226,11 @@ server <- function(input, output, session) {
         inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE)
     })
     
+    # COMPARE PROBLEM TYPE
+    output$problem_type_comp <- renderPlot({
+        problems_graph(raw(), teams_selected())
+    })
+    
     #COMPARE TRENCH BUMP
     output$trench_bump_comp <- renderPlot({
         bump_trench_ratioplot(raw(), teams_selected())
@@ -285,6 +290,10 @@ server <- function(input, output, session) {
     
     output$inactive_strategy_match <- renderPlot({
         inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE)
+    })
+    
+    output$problem_type_match <- renderPlot({
+        problems_graph(raw(), teams_selected())
     })
     
     output$auto_type_match <- renderPlot({

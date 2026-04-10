@@ -197,6 +197,12 @@ ui <- fluidPage(
                         plotOutput("auto_type_comp")
                     )
                 ),
+                layout_columns(
+                    card(
+                        card_header("Types of Problems Encountered"),
+                        plotOutput("problem_type_comp")
+                    )
+                ),
                 card(
                     card_header("Robot Images"),
                     uiOutput("images_comp")
@@ -259,6 +265,12 @@ ui <- fluidPage(
                         card_header("Auto Type"),
                         plotOutput("auto_type_match")
                     ),
+                ),
+                layout_columns(
+                    card(
+                        card_header("Types of Problems Encountered"),
+                        plotOutput("problem_type_match")
+                    )
                 ),
                 card(
                     card_header("Robot Images in Match"),
