@@ -816,6 +816,34 @@ data_validation <- function(event_key){
     rbind(missed_matches, non_existent_matches, double_scouted)
 }
 
+driver_rating_match <- function(dataframe, team_id){
+    colors <- c("blue", "red")
+    selected_team <- dataframe |>
+        filter(team %in% c(team_id)) |>
+        mutate(team = factor(team, levels = team_id),
+               alliance_color = ifelse(team %in% team_id[1:3], "red", "blue"))
+    
+    ggplot(
+        selected_team, 
+        aes(x = match, y = driver_rating, 
+            color = alliance_color, group = alliance_color
+            )
+    ) + 
+        scale_color_manual(values = colors) +
+        geom_line() + 
+        geom_point() +
+        theme(strip.text.x = element_blank()) +
+        ylim(0, 5) +
+        labs(
+            x = "Match",
+            y = "Driver Rating",
+            color = "Alliance color",
+            title = "Driver Rating") + 
+        theme_bw() +
+        facet_wrap(vars(team)) +
+        theme(legend.position = "none")
+}
+
 prescout <- function(event_key, manual_teams = NULL){
     scoutR_key <- paste0(2026, event_key)
     if (!is.null(manual_teams)){

@@ -289,7 +289,7 @@ server <- function(input, output, session) {
     })
     
     output$driver_rating_match <- renderPlot({
-        plot_driver_rating_graph(raw(), teams_selected())
+        driver_rating_match(raw(), teams_selected())
     })
     
     output$inactive_strategy_match <- renderPlot({
