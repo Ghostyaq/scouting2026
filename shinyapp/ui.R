@@ -136,16 +136,16 @@ ui <- fluidPage(
                 height = 1100
             )
         ),
-        tabPanel(
-            title = "Auto-Picklisting (WIP)",
-            card(
-                card_header("Auto Picklisting"),
-                DTOutput("auto_picklist"),
-                height = 1100
-            ),
-            actionButton(
-                "open_weights", "Adjust Weights", class = "btn btn-primary")
-        ),
+        #tabPanel(
+        #    title = "Auto-Picklisting (WIP)",
+        #    card(
+        #        card_header("Auto Picklisting"),
+        #        DTOutput("auto_picklist"),
+        #        height = 1100
+        #    ),
+        #    actionButton(
+        #        "open_weights", "Adjust Weights", class = "btn btn-primary")
+        #),
         tabPanel(
             title = "Compare Teams",
             layout_sidebar(
