@@ -172,25 +172,19 @@ ui <- fluidPage(
                         card_header("Summary Fuel Points"),
                         plotOutput("summary_point_comp")
                     ),
-                    card(
-                        card_header("Endgame Stacked Bar Chart"),
-                        plotOutput("end_bar_comp")
-                    )
-                ),
-                layout_columns(
+                    #card(
+                    #    card_header("Endgame Stacked Bar Chart"),
+                    #    plotOutput("end_bar_comp")
+                    #),
                     card(
                         card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_comp")
-                    ),
-                    card(
-                        card_header("Driver Rating by Match"),
-                        plotOutput("driver_rating_comp")
                     )
                 ),
                 layout_columns(
                     card(
-                        card_header("Inactive Strategy Summary"),
-                        plotOutput("inactive_strategy_comp")
+                        card_header("Driver Rating by Match"),
+                        plotOutput("driver_rating_comp")
                     ),
                     card(
                         card_header("Auto Type"),
@@ -198,6 +192,10 @@ ui <- fluidPage(
                     )
                 ),
                 layout_columns(
+                    card(
+                        card_header("Inactive Strategy Summary"),
+                        plotOutput("inactive_strategy_comp")
+                    ),
                     card(
                         card_header("Types of Problems Encountered"),
                         plotOutput("problem_type_comp")
@@ -241,19 +239,23 @@ ui <- fluidPage(
                         card_header("Summary Fuel Points"),
                         plotOutput("summary_point_match")
                     ),
-                    card(
-                        card_header("Endgame Stacked Bar Chart"),
-                        plotOutput("end_bar_match")
-                    )
-                ),
-                layout_columns(
+                    #card(
+                    #    card_header("Endgame Stacked Bar Chart"),
+                    #    plotOutput("end_bar_match")
+                    #),
                     card(
                         card_header("Trench Bump Relationship Ratioplot"),
                         plotOutput("trench_bump_match")
                     ),
+                ),
+                layout_columns(
                     card(
                         card_header("Driver Rating by Match"),
                         plotOutput("driver_rating_match")
+                    ),
+                    card(
+                        card_header("Auto Type"),
+                        plotOutput("auto_type_match")
                     )
                 ),
                 layout_columns(
@@ -262,8 +264,8 @@ ui <- fluidPage(
                         plotOutput("inactive_strategy_match")
                     ),
                     card(
-                        card_header("Auto Type"),
-                        plotOutput("auto_type_match")
+                        card_header("Types of Problems Encountered"),
+                        plotOutput("problem_type_match")
                     ),
                 ),
                 layout_columns(
