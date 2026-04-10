@@ -662,11 +662,12 @@ problems_graph <- function(raw, teams) {
         group_by(team) |>
         filter(team %in% teams) |>
         mutate(
-            died = if_else(problems == "1", 1, 0), 
-            beached = if_else(problems == "2", 1, 0), 
-            surfing = if_else(problems == "3", 1, 0), 
-            stuck_on_bump = if_else(problems == "4", 1, 0), 
-            no_show = if_else(problems == "5", 1, 0)
+            problems = as.character(problems),
+            died = if_else(grepl('1', problems), 1, 0), 
+            beached = if_else(grepl('2', problems), 1, 0), 
+            surfing = if_else(grepl('3', problems), 1, 0), 
+            stuck_on_bump = if_else(grepl('4', problems), 1, 0), 
+            no_show = if_else(grepl('5', problems), 1, 0)
         )
     
     summary_per_team <- data |>
