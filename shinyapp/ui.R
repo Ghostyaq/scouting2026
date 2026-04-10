@@ -155,16 +155,6 @@ ui <- fluidPage(
                         label = "Select Teams", 
                         choices = NULL, multiple = TRUE, search = TRUE
                     ),
-                    virtualSelectInput(
-                        "selected_red", 
-                        label = "Select Red Alliance", 
-                        choices = NULL, multiple = FALSE, search = TRUE
-                    ),
-                    virtualSelectInput(
-                        "selected_blue", 
-                        label = "Select Blue Alliance", 
-                        choices = NULL, multiple = FALSE, search = TRUE
-                    ),
                     height = "500px"
                 ),
                 layout_columns(
@@ -231,6 +221,16 @@ ui <- fluidPage(
                         "selected_match", 
                         label = "Select a Match", 
                         choices = NULL, selected = 1, search = TRUE),
+                    virtualSelectInput(
+                        "selected_red", 
+                        label = "Select Red Alliance", 
+                        choices = NULL, multiple = FALSE, search = TRUE
+                    ),
+                    virtualSelectInput(
+                        "selected_blue", 
+                        label = "Select Blue Alliance", 
+                        choices = NULL, multiple = FALSE, search = TRUE
+                    ),
                     uiOutput("score_prediction"),
                     height = "500px"
                 ),
