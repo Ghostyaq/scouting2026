@@ -387,7 +387,7 @@ summary_stats <- function(raw, pridge, teams = NULL, metric = "pridge") {
             `Auto Climb` = sum(auto_climb, na.rm = TRUE),
             Driver = mean(driver_rating, na.rm = TRUE),
             `Quick Climb` = sum(climb_less_than_5, na.rm = TRUE),
-            Died = sum(died, na.rm = TRUE),
+            Died = sum(grep("1", problems), na.rm = TRUE),
             Card = sum(card != 'No Card', na.rm = TRUE)
         ) |>
         left_join(pridge)
