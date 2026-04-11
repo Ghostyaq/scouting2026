@@ -16,7 +16,7 @@ take_first_link <- function(link) {
 }
 
 #Process images from imported dataset and convert them to pngs (all in vector_pics array)
-pit_data <- read.csv("pit_scouting_dchamps.csv")
+pit_data <- read.csv("pit_scouting_mdbet.csv")
 
 # with a function that takes the first link in each row of the column 
 # instead of just the first row
@@ -76,12 +76,12 @@ vector_pics <- lapply(pics_link, whomp_whomp)
 
 
 write_pit_pics <- function(pit_data) { 
-if (!dir.exists("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/mdbet/images")) dir.create("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/mdbet/images")
+if (!dir.exists("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/chcmp/images")) dir.create("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/chcmp/images")
 for (i in seq_along(vector_pics)) {
     if (is.null(vector_pics[[i]])) {
       next
     }
-  path = file.path("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/mdbet/images", paste0(pit_data$Team.number..for.the.team.you.re.scouting.[i], ".png"))
+  path = file.path("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/chcmp/images", paste0(pit_data$Team.number..for.the.team.you.re.scouting.[i], ".png"))
   if (path == "NA.png") { 
     path = paste0("default_image",".png")
     print(path)
