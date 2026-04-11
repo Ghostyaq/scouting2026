@@ -39,7 +39,7 @@ server <- function(input, output, session) {
     weights <- reactiveVal(default_linear_weights)
     teams_selected <- reactiveVal(NULL)
     summary_stat <- reactiveVal(NULL)
-    metric_selected <- reactiveVal("EPA")
+    metric_selected <- reactiveVal("pRidge")
     
     user_logged_in <- reactiveVal(rstudioapi::isAvailable())
     correct_password = "0322"
