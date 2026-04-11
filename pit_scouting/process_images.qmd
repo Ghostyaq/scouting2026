@@ -16,16 +16,16 @@ take_first_link <- function(link) {
 }
 
 #Process images from imported dataset and convert them to pngs (all in vector_pics array)
-pit_data <- read.csv("pit_scouting_mdbet.csv")
+pit_data <- read.csv("~/Documents/R/scouting2026/shinyapp/data/chcmp/pit_scouting_chcmp.csv")
 
 # with a function that takes the first link in each row of the column 
 # instead of just the first row
 pit_data <- pit_data |>
-    mutate(Upload.robot.photo = sapply(strsplit(Upload.one.ISOMETRIC.robot.photo, ', '), take_first_link))
+    mutate(Upload.robot.photo = sapply(strsplit(robot_photo, ', '), take_first_link))
 
 
 # taking links and converting them to images
-pic_link <- pit_data$Upload.one.ISOMETRIC.robot.photo
+pic_link <- pit_data$robot_photo
 # pics_link <- gsub("open\\?id=", "uc?export=download&id=", pic_link)
 pit_data$Timestamp <- NULL
 
