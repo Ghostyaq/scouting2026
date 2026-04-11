@@ -268,12 +268,6 @@ ui <- fluidPage(
                         plotOutput("problem_type_match")
                     ),
                 ),
-                layout_columns(
-                    card(
-                        card_header("Types of Problems Encountered"),
-                        plotOutput("problem_type_match")
-                    )
-                ),
                 card(
                     card_header("Robot Images in Match"),
                     uiOutput("images_match")
