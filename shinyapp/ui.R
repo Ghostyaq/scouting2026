@@ -128,7 +128,7 @@ ui <- fluidPage(
             title = "Event Summary",
             card(
                 card_header("Event Summary"),
-                plotOutput("event_summary")
+                plotOutput("event_summary", height = "600px")
             ),
             card(
                 card_header("Summary Stats"),
