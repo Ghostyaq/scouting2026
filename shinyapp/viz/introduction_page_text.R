@@ -66,13 +66,15 @@ settings_summary_text <- function(){
 
 pridge_summary_text <- function(){
     HTML(
-        "pRidge is a debut advanced metric developed by our team, used 
-        in REBUILT to estimate the amount of fuel a team scores. It is 
-        especially important this year, where a scout cannot realistically 
-        quantitatively count fuel in real time. pRidge is essentially a cross 
-        between OPR and EPA, creating a matrix and solving it with bias towards 
-        a team's EPA after (# of teams at the event / 2) matches. <br> 
-        An extended description for pRidge can be found here: Whitepaper")
+        "pRidge is a debut advanced metric developed by our team, used in 
+        REBUILT to estimate the amount of fuel a team scores. pRidge is 
+        essentially a cross between OPR and EPA, creating a matrix and solving 
+        it with bias towards a team's EPA. For proof of validity, 
+        running Leave-One-Out-Cross-Validation and then computing the Mean 
+        Squared Error for match score predictions of events between 2016-2025 
+        results in 16.2% improvement upon OPR, and 11.7% improvement upon EPA,
+        on average. A Whitepaper is in progress.
+")
 }
 
 metric_swap_summary_text <- function(){

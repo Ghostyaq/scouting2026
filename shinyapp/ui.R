@@ -73,10 +73,10 @@ ui <- fluidPage(
                     card_header("Event Summary"),
                     htmlOutput("event_summary_summary")
                 ),
-                card(
-                    card_header("Auto Picklisting (WIP)"),
-                    htmlOutput("auto_picklisting_summary")
-                ),
+                #card(
+                #    card_header("Auto Picklisting (WIP)"),
+                #    htmlOutput("auto_picklisting_summary")
+                #),
                 card(
                     card_header("Compare Teams"),
                     htmlOutput("compare_teams_summary")
