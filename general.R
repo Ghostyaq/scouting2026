@@ -2,7 +2,7 @@ library(tidyverse)
 library(scoutR)
 
 get_schedule <- function(event_key){
-    tba <- event_matches(event_key)
+    tba <- event_matches(event_key, match_type = c("quals"))
     schedule <- data.frame(
         match = tba$match_number,
         R1 = as.integer(gsub("frc", "", tba$red1)),
