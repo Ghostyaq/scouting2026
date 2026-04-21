@@ -63,29 +63,6 @@
   },
   "sections": [
     {
-      "name": "General",
-      "fields": [
-        {
-          "title": "Scouter Initials",
-          "description": "Enter the initials of the scouter.",
-          "type": "text",
-          "required": false,
-          "code": "scouter",
-          "formResetBehavior": "preserve",
-          "defaultValue": ""
-        },
-        {
-          "title": "Match Number",
-          "description": "Enter the match number.",
-          "type": "number",
-          "required": false,
-          "code": "matchNumber",
-          "formResetBehavior": "increment",
-          "defaultValue": 1
-        }
-      ]
-    },
-    {
       "name": "Robot 1",
       "fields": [
         {
@@ -586,6 +563,29 @@
           "min": 1,
           "max": 5,
           "step": 1
+        }
+      ]
+    },
+    {
+      "name": "General",
+      "fields": [
+        {
+          "title": "Scouter Initials",
+          "description": "Enter the initials of the scouter.",
+          "type": "text",
+          "required": false,
+          "code": "scouter",
+          "formResetBehavior": "preserve",
+          "defaultValue": ""
+        },
+        {
+          "title": "Match Number",
+          "description": "Enter the match number.",
+          "type": "number",
+          "required": false,
+          "code": "matchNumber",
+          "formResetBehavior": "increment",
+          "defaultValue": 1
         }
       ]
     }
