@@ -328,6 +328,7 @@ ui <- fluidPage(
                     #),
                     card(
                         card_header("Metric Selection"),
+                        uiOutput("data_up_till"),
                         uiOutput("metric_current_selection"),
                         actionButton("pRidge", "pRidge"),
                         actionButton("EPA", "EPA"),

@@ -473,6 +473,12 @@ server <- function(input, output, session) {
         }
     })
     
+    output$data_up_till <- renderUI({
+        browser()
+        text <- paste("Data Up until:", max(raw()$match))
+        HTML(text)
+    })
+    
     output$metric_current_selection <- renderUI({
         text <- paste("Currently Selected:", metric_selected())
         HTML(text)
