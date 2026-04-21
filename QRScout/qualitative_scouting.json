@@ -172,6 +172,84 @@
           "defaultValue": "",
           "min": 0,
           "max": 10000
+        },
+        {
+          "title": "Overall",
+          "description": "How well did the robot perform overall.",
+          "type": "range",
+          "required": false,
+          "code": "overall",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Passing",
+          "type": "range",
+          "required": false,
+          "code": "passing",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Smart",
+          "type": "range",
+          "required": false,
+          "code": "smart",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Purposeful",
+          "type": "range",
+          "required": false,
+          "code": "purposeful",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Defense",
+          "type": "range",
+          "required": false,
+          "code": "defense",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Robust",
+          "type": "range",
+          "required": false,
+          "code": "robust",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Stable",
+          "type": "range",
+          "required": false,
+          "code": "stable",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
         }
       ]
     },
@@ -262,6 +340,84 @@
           "defaultValue": "",
           "min": 0,
           "max": 10000
+        },
+        {
+          "title": "Overall",
+          "description": "How well did the robot perform overall.",
+          "type": "range",
+          "required": false,
+          "code": "overall",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Passing",
+          "type": "range",
+          "required": false,
+          "code": "passing",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Smart",
+          "type": "range",
+          "required": false,
+          "code": "smart",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Purposeful",
+          "type": "range",
+          "required": false,
+          "code": "purposeful",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Defense",
+          "type": "range",
+          "required": false,
+          "code": "defense",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Robust",
+          "type": "range",
+          "required": false,
+          "code": "robust",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Stable",
+          "type": "range",
+          "required": false,
+          "code": "stable",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
         }
       ]
     },
@@ -352,6 +508,84 @@
           "defaultValue": "",
           "min": 0,
           "max": 10000
+        },
+        {
+          "title": "Overall",
+          "description": "How well did the robot perform overall.",
+          "type": "range",
+          "required": false,
+          "code": "overall",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Passing",
+          "type": "range",
+          "required": false,
+          "code": "passing",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Smart",
+          "type": "range",
+          "required": false,
+          "code": "smart",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Purposeful",
+          "type": "range",
+          "required": false,
+          "code": "purposeful",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Defense",
+          "type": "range",
+          "required": false,
+          "code": "defense",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Robust",
+          "type": "range",
+          "required": false,
+          "code": "robust",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
+        },
+        {
+          "title": "Stable",
+          "type": "range",
+          "required": false,
+          "code": "stable",
+          "formResetBehavior": "reset",
+          "defaultValue": 3,
+          "min": 1,
+          "max": 5,
+          "step": 1
         }
       ]
     }
