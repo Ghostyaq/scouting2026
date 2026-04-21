@@ -194,7 +194,11 @@
           "choices": {
             "1": "Depot",
             "2": "Outpost/HP",
-            "3": "Neutral"
+            "3": "Neutral", 
+            "4": "Left Trench", 
+            "5": "Right Trench", 
+            "6": "Left Bump", 
+            "7": "Right Bump"
           }
         },
         {
@@ -203,15 +207,6 @@
           "type": "boolean",
           "required": false,
           "code": "bumpAuto",
-          "formResetBehavior": "reset",
-          "defaultValue": false
-        },
-        {
-          "title": "Climb",
-          "description": "Check if the robot climbed during auto.",
-          "type": "boolean",
-          "required": false,
-          "code": "climbAuto",
           "formResetBehavior": "reset",
           "defaultValue": false
         },
@@ -285,23 +280,7 @@
     {
       "name": "Endgame",
       "fields": [
-        {
-          "title": "Climbed Tower",
-          "description": "Check if the robot was able to climb and to which level.",
-          "type": "select",
-          "required": true,
-          "code": "climbLevel",
-          "formResetBehavior": "reset",
-          "defaultValue": "No",
-          "choices": {
-            "No": "Didn't Climb",
-            "L1": "Level 1",
-            "L2": "Level 2",
-            "L3": "Level 3",
-            "F": "Failed Climb"
-          }
-        },
-        {
+          {
           "title": "Climb <5 sec",
           "description": "Check if the robot climbed in less than five seconds.",
           "type": "boolean",
@@ -355,7 +334,10 @@
             "2": "Beached",
             "3": "Surfing",
             "4": "Stuck on bump",
-            "5": "No show"
+            "5": "No show", 
+            "6": "Brownout", 
+            "7": "A-Stop", 
+            "8": "E-Stop", 
           }
         },
         {
