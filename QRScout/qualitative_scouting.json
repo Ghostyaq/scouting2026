@@ -163,10 +163,10 @@
           "step": 1
         },
         {
-          "title": "Passing",
+          "title": "Smart",
           "type": "range",
           "required": false,
-          "code": "passing",
+          "code": "smart",
           "formResetBehavior": "reset",
           "defaultValue": 3,
           "min": 1,
@@ -174,10 +174,10 @@
           "step": 1
         },
         {
-          "title": "Smart",
+          "title": "Passing",
           "type": "range",
           "required": false,
-          "code": "smart",
+          "code": "passing",
           "formResetBehavior": "reset",
           "defaultValue": 3,
           "min": 1,
@@ -196,7 +196,7 @@
           "step": 1
         },
         {
-          "title": "Stable",
+          "title": "Robust",
           "type": "range",
           "required": false,
           "code": "stable",
@@ -309,10 +309,10 @@
           "step": 1
         },
         {
-          "title": "Passing",
+          "title": "Smart",
           "type": "range",
           "required": false,
-          "code": "passing",
+          "code": "smart",
           "formResetBehavior": "reset",
           "defaultValue": 3,
           "min": 1,
@@ -320,10 +320,10 @@
           "step": 1
         },
         {
-          "title": "Smart",
+          "title": "Passing",
           "type": "range",
           "required": false,
-          "code": "smart",
+          "code": "passing",
           "formResetBehavior": "reset",
           "defaultValue": 3,
           "min": 1,
@@ -455,10 +455,10 @@
           "step": 1
         },
         {
-          "title": "Passing",
+          "title": "Smart",
           "type": "range",
           "required": false,
-          "code": "passing",
+          "code": "smart",
           "formResetBehavior": "reset",
           "defaultValue": 3,
           "min": 1,
@@ -466,10 +466,10 @@
           "step": 1
         },
         {
-          "title": "Smart",
+          "title": "Passing",
           "type": "range",
           "required": false,
-          "code": "smart",
+          "code": "passing",
           "formResetBehavior": "reset",
           "defaultValue": 3,
           "min": 1,
