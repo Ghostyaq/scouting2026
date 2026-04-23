@@ -62,7 +62,7 @@ ui <- fluidPage(
     navbarPage(
         title = "2026 REBUILT 449 Shinyapp",
         collapsible = TRUE,
-        tabPanel(#--------------------------------------------------INTRODUCTION
+        tabPanel(#--------------------------INTRODUCTION------------------------
             title = "Introductory Page",
             card(
                 card_header(h3(
@@ -177,7 +177,7 @@ ui <- fluidPage(
                 )
             )
         ),
-        tabPanel(#--------------------------------------------------EVENTSUMMARY
+        tabPanel(#-----------------------EVENT SUMMARY--------------------------
             title = "Event Summary",
             card(
                 class = "graph-card",
@@ -186,7 +186,7 @@ ui <- fluidPage(
             ),
             DTOutput("summary_stats")
         ),
-        tabPanel(#--------------------------------------------------COMPARETEAMS
+        tabPanel(#------------------------COMPARE TEAMS-------------------------
             title = "Compare Teams",
             div(class = "container-fluid",
                 div(class = "row",
@@ -213,7 +213,7 @@ ui <- fluidPage(
                             div(class = "col-lg-6",
                                 card(
                                     class = "graph-card",
-                                    card_header("Trench Bump Relationship Ratioplot"),
+                                    card_header("Trench Bump Ratioplot"),
                                     plotOutput("trench_bump_comp")
                                 )
                             )
@@ -245,7 +245,7 @@ ui <- fluidPage(
                             div(class = "col-lg-6",
                                 card(
                                     class = "graph-card",
-                                    card_header("Types of Problems Encountered"),
+                                    card_header("Problems Encountered"),
                                     plotOutput("problem_type_comp")
                                 )
                             )
@@ -261,7 +261,7 @@ ui <- fluidPage(
                 )
             )
         ),
-        tabPanel(#---------------------------------------------------------MATCH
+        tabPanel(#---------------------------MATCH------------------------------
             title = "Match",
             div(class = "container-fluid",
                 div(class = "row",
@@ -298,7 +298,7 @@ ui <- fluidPage(
                             div(class = "col-lg-6",
                                 card(
                                     class = "graph-card",
-                                    card_header("Trench Bump Relationship Ratioplot"),
+                                    card_header("Trench Bump Ratioplot"),
                                     plotOutput("trench_bump_match")
                                 )
                             )
@@ -330,7 +330,7 @@ ui <- fluidPage(
                             div(class = "col-lg-6",
                                 card(
                                     class = "graph-card",
-                                    card_header("Types of Problems Encountered"),
+                                    card_header("Problems Encountered"),
                                     plotOutput("problem_type_match")
                                 )
                             )
@@ -345,7 +345,7 @@ ui <- fluidPage(
                 )
             )
         ),
-        tabPanel(#--------------------------------------------------------SCOUTS
+        tabPanel(#----------------------------SCOUTS----------------------------
             title = "Scouts",
             card(
                 class = "graph-card",
@@ -363,7 +363,7 @@ ui <- fluidPage(
                 plotlyOutput("scouter_streak")
             )
         ),
-        tabPanel(#------------------------------------------------------SETTINGS
+        tabPanel(#-------------------------SETTINGS-----------------------------
             title = "Settings",
             div(class = "row",
                 div(class = "col-lg-6",
