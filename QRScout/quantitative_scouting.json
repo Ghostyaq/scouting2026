@@ -194,7 +194,10 @@
           "choices": {
             "1": "Depot",
             "2": "Outpost/HP",
-            "3": "Neutral"
+            "3": "Left Trench",
+            "4": "Left Bump",
+            "5": "Right Trench",
+            "6": "Right Bump"
           }
         },
         {
