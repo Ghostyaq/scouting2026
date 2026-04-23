@@ -3,7 +3,7 @@ library(ggplot2)
 library(plotly)
 library(scoutR)
 
-bump_trench_ratioplot <- function(raw, team_list){
+bump_trench_ratioplot <- function(raw, team_list, alliance_color){
     filtered_df <- raw |>
         filter(team %in% team_list) |>
         group_by(team) |>
@@ -11,7 +11,7 @@ bump_trench_ratioplot <- function(raw, team_list){
             avg_trench = mean(teleop_trench), 
             avg_bump = mean(teleop_bump))
     
-    if (length(team_list) == 6) {
+    if (alliance_color == TRUE) {
         filtered_df <- filtered_df |>
             rowwise() |>
             mutate(
@@ -38,7 +38,7 @@ bump_trench_ratioplot <- function(raw, team_list){
         theme_bw()
 }
 
-plot_driver_rating_graph <- function(dataframe, team_id) {
+plot_driver_rating_graph <- function(dataframe, team_id, alliance_color) {
     selected_team <- dataframe |>
         filter(team %in% c(team_id)) |>
         mutate(team = factor(team))
@@ -56,10 +56,21 @@ plot_driver_rating_graph <- function(dataframe, team_id) {
             y = "Driver Rating",
             color = "Teams",
             title = "Driver Rating") + 
-        theme_bw()
+        theme_bw() + 
+        theme(legend.position = "bottom") +
+        {if (alliance_color == TRUE)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(data$team) %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
 }
 
-endgame_graph <- function(raw, teams) {
+endgame_graph <- function(raw, teams, alliance_color) {
     number_of_teams <- length(unique(raw$team))
     data <- raw |>
         filter(team %in% teams) |>
@@ -87,7 +98,8 @@ endgame_graph <- function(raw, teams) {
                        "L2" = "L2", "L3" = "L3")
         ) +
         theme_bw() + 
-        {if (length(teams) == 6)
+        theme(legend.position = "bottom") +
+        {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
@@ -306,13 +318,15 @@ plot_scouting_graph <- function(raw) {
         labs(
             x = "Scout Initials",
             y = "Number of Times Scouted",
-            title = "Scout and Their Number of Times Scouted")
+            title = "Scout and Their Number of Times Scouted") +
+        theme(legend.position = "none")
     
     ggplotly(still_graph, tooltip = "text")
 }
 
 stacked_bar_chart <- function(
-        raw, schedule, pridge, teams, metric, order = TRUE, flip = TRUE
+        raw, schedule, pridge, teams, metric, order = TRUE, flip = TRUE, 
+        alliance_color
         ){
     data <- summary_stats(raw, pridge, teams = NULL, metric = metric) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
@@ -351,7 +365,8 @@ stacked_bar_chart <- function(
             ) 
         ) +
         theme_bw() +
-        {if (length(teams) == 6)
+        theme(legend.position = "bottom") +
+        {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
@@ -460,7 +475,8 @@ yap_graph <- function(raw) {
         labs(title = "Comments Summary: Mean Yappage per Scout", 
              x = "Scouts", y = "Mean yappage") +
         scale_fill_gradient2(high = "forestgreen", mid = "grey90", low = "firebrick2", midpoint = 0.5) +
-        theme_bw()
+        theme_bw() +
+        theme(legend.position = "none")
     
     ggplotly(plot)
 }
@@ -483,15 +499,23 @@ high_streak <- function(raw){
             missed_matches = list(setdiff(all_matches, scouted_matches)),
             streak = current_match - max(missed_matches)
         ) |>
-        mutate(percentile = percent_rank(streak)) |>
-        filter(streak > 0)
+        ungroup() |>
+        filter(streak > 0) |>
+        mutate(percentile = (streak - min(streak)) / 
+                   (max(streak) - min(streak)))
     
-    ggplot(streak_df, aes(x = `scout`, streak, fill = percentile)) + 
-        geom_bar(position = "stack", stat = "identity") + 
+    p <- ggplot(streak_df, aes(x = reorder(scout, -streak), streak, fill = percentile)) +
+        geom_col(position = "stack", stat = "identity") + 
         labs(title = "Current Streak", 
              x = "Scouts", y = "Matches") +
-        scale_fill_gradient2(high = "firebrick2", mid = "grey90", low = "cornflowerblue", midpoint = 0.5) +
-        theme_bw()
+        scale_fill_gradient2(high = "firebrick2", 
+                             mid = "grey90", 
+                             low = "cornflowerblue", 
+                             midpoint = 0.5) +
+        theme_bw() +
+        theme(legend.position = "none")
+    
+    ggplotly(p)
 }
 
 normalize_column <- function(x) {
@@ -596,7 +620,7 @@ weights_modal <- function(weights) {
     )
 }
 
-inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
+inactive_stategy_summary <- function(raw, selected_teams, order, flip, alliance_color) {
     comments <- raw |>
         group_by(team) |>
         filter(team %in% selected_teams) |>
@@ -643,7 +667,8 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
                        "b_herd_2" = "herd (2)",
                        "a_pass_1" = "pass (1)" )) +
         theme_bw() +
-        {if (length(team_order) == 6)
+        theme(legend.position = "bottom") +
+        {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
@@ -655,7 +680,7 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
         }
 }
 
-problems_graph <- function(raw, teams) {
+problems_graph <- function(raw, teams, alliance_color) {
     data <- raw |>
         group_by(team) |>
         filter(team %in% teams) |>
@@ -712,7 +737,8 @@ problems_graph <- function(raw, teams) {
                        "num_a_stop" = "A Stop",
                        "num_e_stop" = "E Stop")) + 
         theme_bw() +
-        {if (length(teams) == 6)
+        theme(legend.position = "bottom") +
+        {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
                     # ASSUMPTION: teams in order R,R,R,B,B,B
@@ -723,7 +749,7 @@ problems_graph <- function(raw, teams) {
         }
 }
 
-auto_type_graph <- function(raw, order, teams, flip) {
+auto_type_graph <- function(raw, order, teams, flip, alliance_color) {
     auto_type_data <- raw |>
         filter(team %in% teams) |>
         mutate(
@@ -756,8 +782,9 @@ auto_type_graph <- function(raw, order, teams, flip) {
             labels = c("1" = "Depot", 
                        "2" = "Outpost/HP", "3" = "Neutral")
         ) +
-        theme_bw()  +
-        {if (length(teams) == 6)
+        theme_bw() +
+        theme(legend.position = "bottom") +
+        {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
