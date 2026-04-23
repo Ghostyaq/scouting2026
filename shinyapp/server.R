@@ -142,14 +142,12 @@ server <- function(input, output, session) {
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
         teams <- unique(raw()$team)
-        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected(),
-                          alliance_color = FALSE)
+        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected())
     })
     
     output$event_summary_display <- renderPlot({
         teams <- unique(raw()$team)
-        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected(),
-                          alliance_color = FALSE)
+        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected())
     })
     
     output$summary_stats <- renderDT({
@@ -223,43 +221,43 @@ server <- function(input, output, session) {
         req(input$selected_teams_comp)
         stacked_bar_chart(
             raw(), schedule(), pridge(), teams_selected(), metric_selected(), 
-            order = FALSE, flip = FALSE, FALSE)
+            order = FALSE, flip = FALSE)
     })
     
     #COMPARE ENDGAME BAR
     output$end_bar_comp <- renderPlot({
         req(input$selected_teams_comp)
-        endgame_graph(raw(), teams_selected(), FALSE)
+        endgame_graph(raw(), teams_selected())
     })
     
     #COMPARE DRIVER RATING
     output$driver_rating_comp <- renderPlot({
         req(input$selected_teams_comp)
-        plot_driver_rating_graph(raw(), teams_selected(), FALSE)
+        plot_driver_rating_graph(raw(), teams_selected())
     })
     
     # COMPARE INACTIVE STRATEGY
     output$inactive_strategy_comp <- renderPlot({
         req(input$selected_teams_comp)
-        inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE, FALSE)
+        inactive_stategy_summary(raw(), teams_selected())
     })
     
     # COMPARE PROBLEM TYPE
     output$problem_type_comp <- renderPlot({
         req(input$selected_teams_comp)
-        problems_graph(raw(), teams_selected(), FALSE)
+        problems_graph(raw(), teams_selected())
     })
     
     #COMPARE TRENCH BUMP
     output$trench_bump_comp <- renderPlot({
         req(input$selected_teams_comp)
-        bump_trench_ratioplot(raw(), teams_selected(), FALSE)
+        bump_trench_ratioplot(raw(), teams_selected())
     })
     
     # COMPARE AUTO TYPE
     output$auto_type_comp <- renderPlot({
         req(input$selected_teams_comp)
-        auto_type_graph(raw(), FALSE, teams_selected(), FALSE, FALSE)
+        auto_type_graph(raw(), FALSE, teams_selected())
     })
     
     output$comments_df_comp <- renderDT({
@@ -297,7 +295,7 @@ server <- function(input, output, session) {
                 isTruthy(input$selected_blue))
         stacked_bar_chart(
             raw(), schedule(), pridge(), teams_selected(), metric_selected(), 
-            order = FALSE, flip = FALSE, TRUE)
+            order = FALSE, flip = FALSE, alliance_color = TRUE)
     })
     
     output$summary_stats_comp <- renderDT({
@@ -309,14 +307,14 @@ server <- function(input, output, session) {
         req(isTruthy(input$selected_match) || 
                 isTruthy(input$selected_red) || 
                 isTruthy(input$selected_blue))
-        endgame_graph(raw(), teams_selected(), TRUE)
+        endgame_graph(raw(), teams_selected(), alliance_color = TRUE)
     })
     
     output$trench_bump_match <- renderPlot({
         req(isTruthy(input$selected_match) || 
                 isTruthy(input$selected_red) || 
                 isTruthy(input$selected_blue))
-        bump_trench_ratioplot(raw(), teams_selected(), TRUE)
+        bump_trench_ratioplot(raw(), teams_selected(), alliance_color = TRUE)
     })
     
     output$driver_rating_match <- renderPlot({
@@ -330,7 +328,7 @@ server <- function(input, output, session) {
         req(isTruthy(input$selected_match) || 
             isTruthy(input$selected_red) || 
             isTruthy(input$selected_blue))
-        inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE, TRUE)
+        inactive_stategy_summary(raw(), teams_selected(), alliance_color = TRUE)
     })
     
     output$problem_type_match <- renderPlot({
@@ -344,7 +342,9 @@ server <- function(input, output, session) {
         req(isTruthy(input$selected_match) || 
                 isTruthy(input$selected_red) || 
                 isTruthy(input$selected_blue))
-        auto_type_graph(raw(), FALSE, teams_selected(), FALSE, TRUE)
+        auto_type_graph(
+            raw(), teams_selected(), 
+            flip = FALSE, order = FALSE, alliance_color = TRUE)
     })
     
     output$summary_stats_match <- renderDT({

@@ -3,7 +3,7 @@ library(ggplot2)
 library(plotly)
 library(scoutR)
 
-bump_trench_ratioplot <- function(raw, team_list, alliance_color){
+bump_trench_ratioplot <- function(raw, team_list, alliance_color = FALSE){
     filtered_df <- raw |>
         filter(team %in% team_list) |>
         group_by(team) |>
@@ -29,16 +29,22 @@ bump_trench_ratioplot <- function(raw, team_list, alliance_color){
             color = filtered_df$color
         ) +
         scale_x_continuous(
-            expand = c(0,0), limits = c(-0.5, max(filtered_df$avg_trench + 1))) +
+            expand = c(0,0), 
+            limits = c(-0.5, max(filtered_df$avg_trench + 1))
+        ) +
         scale_y_continuous(
-            expand = c(0,0), limits = c(-0.1, max(filtered_df$avg_bump + 1))) +
+            expand = c(0,0), 
+            limits = c(-0.1, max(filtered_df$avg_bump + 1))
+        ) +
         labs(title = "Mean Crossing Comparison",
              x = "Mean Trench",
              y = "Mean Bump") + 
         theme_bw()
 }
 
-plot_driver_rating_graph <- function(dataframe, team_id, alliance_color) {
+plot_driver_rating_graph <- function(
+    dataframe, team_id, alliance_color = FALSE
+) {
     selected_team <- dataframe |>
         filter(team %in% c(team_id)) |>
         mutate(team = factor(team))
@@ -70,7 +76,7 @@ plot_driver_rating_graph <- function(dataframe, team_id, alliance_color) {
         }
 }
 
-endgame_graph <- function(raw, teams, alliance_color) {
+endgame_graph <- function(raw, teams, alliance_color = FALSE) {
     number_of_teams <- length(unique(raw$team))
     data <- raw |>
         filter(team %in% teams) |>
@@ -314,7 +320,11 @@ plot_scouting_graph <- function(raw) {
         geom_col() +
         theme_bw() +
         theme(legend.position = "none") + 
-        scale_fill_gradient2(high = "forestgreen", mid = "grey90", low = "firebrick2", midpoint = 0.5) +
+        scale_fill_gradient2(
+            high = "forestgreen", 
+            mid = "grey90", 
+            low = "firebrick2", 
+            midpoint = 0.5) +
         labs(
             x = "Scout Initials",
             y = "Number of Times Scouted",
@@ -325,9 +335,9 @@ plot_scouting_graph <- function(raw) {
 }
 
 stacked_bar_chart <- function(
-        raw, schedule, pridge, teams, metric, order = TRUE, flip = TRUE, 
-        alliance_color
-        ){
+    raw, schedule, pridge, teams, metric, 
+    order = TRUE, flip = TRUE, alliance_color = FALSE
+){
     data <- summary_stats(raw, pridge, teams = NULL, metric = metric) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
         rename(`Auto Climb` = ACP) |>
@@ -470,11 +480,18 @@ yap_graph <- function(raw) {
             scout_name = reorder(scout, mean_yaps, decreasing = TRUE)
         )
     
-    plot <- ggplot(scout_comments, aes(x = scout_name, y = mean_yaps, fill = percentile)) +
+    plot <- ggplot(
+        scout_comments, 
+        aes(x = scout_name, y = mean_yaps, fill = percentile)
+        ) +
         geom_bar(stat = "identity", position = position_dodge()) +
         labs(title = "Comments Summary: Mean Yappage per Scout", 
              x = "Scouts", y = "Mean yappage") +
-        scale_fill_gradient2(high = "forestgreen", mid = "grey90", low = "firebrick2", midpoint = 0.5) +
+        scale_fill_gradient2(
+            high = "forestgreen",
+            mid = "grey90", 
+            low = "firebrick2", 
+            midpoint = 0.5) +
         theme_bw() +
         theme(legend.position = "none")
     
@@ -504,7 +521,10 @@ high_streak <- function(raw){
         mutate(percentile = (streak - min(streak)) / 
                    (max(streak) - min(streak)))
     
-    p <- ggplot(streak_df, aes(x = reorder(scout, -streak), streak, fill = percentile)) +
+    p <- ggplot(
+        streak_df, 
+        aes(x = reorder(scout, -streak), streak, fill = percentile)
+        ) +
         geom_col(position = "stack", stat = "identity") + 
         labs(title = "Current Streak", 
              x = "Scouts", y = "Matches") +
@@ -523,7 +543,11 @@ normalize_column <- function(x) {
         return(rep(0, length(x)))
     }
     
-    normalized <- (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+    minx <- min(x, na.rm = TRUE)
+    maxx <- max(x, na.rm = TRUE)
+    
+    normalized <- 
+        (x - minx) / (maxx = max(x, na.rm = TRUE) - minx)
     normalized[is.nan(normalized)] <- 0
     return(normalized)
 }
@@ -614,13 +638,23 @@ weights_modal <- function(weights) {
         
         footer = tagList(
             modalButton("Cancel"),
-            actionButton("reset_weights", "Reset to Default", class = "btn-warning"),
-            actionButton("apply_weights", "Apply Weights", class = "btn-primary")
+            actionButton(
+                "reset_weights", 
+                "Reset to Default", 
+                class = "btn-warning"
+                ),
+            actionButton(
+                "apply_weights", 
+                "Apply Weights", 
+                class = "btn-primary"
+                )
         )
     )
 }
 
-inactive_stategy_summary <- function(raw, selected_teams, order, flip, alliance_color) {
+inactive_stategy_summary <- function(
+        raw, selected_teams, 
+        order = FALSE, flip = FALSE, alliance_color = FALSE) {
     comments <- raw |>
         group_by(team) |>
         filter(team %in% selected_teams) |>
@@ -680,7 +714,7 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip, alliance_
         }
 }
 
-problems_graph <- function(raw, teams, alliance_color) {
+problems_graph <- function(raw, teams, alliance_color = FALSE) {
     data <- raw |>
         group_by(team) |>
         filter(team %in% teams) |>
@@ -695,6 +729,8 @@ problems_graph <- function(raw, teams, alliance_color) {
             a_stop = if_else(grepl('7', problems), 1, 0),
             e_stop = if_else(grepl('8', problems), 1, 0)
         )
+    
+    data$team <- factor(data$team, levels = teams, ordered = TRUE)
     
     summary_per_team <- data |>
         group_by(team) |>
@@ -749,7 +785,7 @@ problems_graph <- function(raw, teams, alliance_color) {
         }
 }
 
-auto_type_graph <- function(raw, order, teams, flip, alliance_color) {
+auto_type_graph <- function(raw, order, teams, flip, alliance_color = FALSE) {
     auto_type_data <- raw |>
         filter(team %in% teams) |>
         mutate(
@@ -764,7 +800,10 @@ auto_type_graph <- function(raw, order, teams, flip, alliance_color) {
     
     team_order <- teams
     
-    auto_type_data$team <- factor(auto_type_data$team, levels = team_order, ordered = TRUE)
+    auto_type_data$team <- factor(
+        auto_type_data$team, 
+        levels = team_order, 
+        ordered = TRUE)
     auto_type_data$auto_type <- factor(
         auto_type_data$auto_type, 
         c("1", "2", "3"), 
