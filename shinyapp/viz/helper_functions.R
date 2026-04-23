@@ -665,7 +665,10 @@ problems_graph <- function(raw, teams) {
             beached = if_else(grepl('2', problems), 1, 0), 
             surfing = if_else(grepl('3', problems), 1, 0), 
             stuck_on_bump = if_else(grepl('4', problems), 1, 0), 
-            no_show = if_else(grepl('5', problems), 1, 0)
+            no_show = if_else(grepl('5', problems), 1, 0),
+            browned_out = if_else(grepl('6', problems), 1, 0),
+            a_stop = if_else(grepl('7', problems), 1, 0),
+            e_stop = if_else(grepl('8', problems), 1, 0)
         )
     
     summary_per_team <- data |>
@@ -675,7 +678,10 @@ problems_graph <- function(raw, teams) {
             num_beached = sum(beached, na.rm = TRUE),
             num_surfing = sum(surfing, na.rm = TRUE),
             num_stuck_on_bump = sum(stuck_on_bump, na.rm = TRUE),
-            num_no_show = sum(no_show, na.rm = TRUE)
+            num_no_show = sum(no_show, na.rm = TRUE),
+            num_browned_out = sum(browned_out, na.rm = TRUE),
+            num_a_stop = sum(a_stop, na.rm = TRUE),
+            num_e_stop = sum(e_stop, na.rm = TRUE)
         ) |>
         pivot_longer(
             cols = starts_with("num"), 
@@ -689,16 +695,22 @@ problems_graph <- function(raw, teams) {
         labs(fill = "Types of Problems", title = "Problems Encountered", 
              x = "Teams", y = "Number of Problems") + 
         scale_fill_manual(
-            values = c("num_died" = "#BDE0FE",
-                       "num_beached" = "#fde4f2",
-                       "num_surfing" = "#CDB4DB", 
-                       "num_stuck_on_bump" = "#eea1cd", 
-                       "num_no_show" = "#f4b8da"), 
+            values = c("num_died" = "#ffafad",
+                       "num_beached" = "#ffd6a5",
+                       "num_surfing" = "#fcfeb6", 
+                       "num_stuck_on_bump" = "#cafebf", 
+                       "num_no_show" = "#9df3fd",
+                       "num_browned_out" = "#a2c3fd",
+                       "num_a_stop" = "#bfb3fd",
+                       "num_e_stop" = "#ffc7fc"), 
             labels = c("num_died" = "Died", 
                        "num_beached" = "Beached", 
                        "num_surfing" = "Surfing", 
                        "num_stuck_on_bump" = "Stuck on Bump", 
-                       "num_no_show" = "No Show")) + 
+                       "num_no_show" = "No Show",
+                       "num_browned_out" = "Browned Out",
+                       "num_a_stop" = "A Stop",
+                       "num_e_stop" = "E Stop")) + 
         theme_bw() +
         {if (length(teams) == 6)
             theme(
