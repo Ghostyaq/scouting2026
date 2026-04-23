@@ -369,6 +369,7 @@ ui <- fluidPage(
                 div(class = "col-lg-6",
                     card(
                         card_header("Metric Selection"),
+                        uiOutput("data_up_till"),
                         uiOutput("metric_current_selection"),
                         actionBttn(
                             inputId = "pRidge",
