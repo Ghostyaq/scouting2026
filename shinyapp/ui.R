@@ -503,6 +503,15 @@ ui <- fluidPage(
                         card_header("Scout Comments Login"),
                         uiOutput("login_ui"),
                         uiOutput("login_status")
+                    ),
+                    card(
+                        card_header("Metric Selection"),
+                        uiOutput("data_up_till"),
+                        uiOutput("metric_current_selection"),
+                        actionButton("pRidge", "pRidge"),
+                        actionButton("EPA", "EPA"),
+                        actionButton("OPR", "OPR"),
+                        #actionButton("HOPpeR", "HOPpeR")
                     )
                 )
             )
