@@ -695,14 +695,14 @@ problems_graph <- function(raw, teams) {
         labs(fill = "Types of Problems", title = "Problems Encountered", 
              x = "Teams", y = "Number of Problems") + 
         scale_fill_manual(
-            values = c("num_died" = "#ffafad",
+            values = c("num_died" = "#cafebf",
                        "num_beached" = "#ffd6a5",
-                       "num_surfing" = "#fcfeb6", 
-                       "num_stuck_on_bump" = "#cafebf", 
-                       "num_no_show" = "#9df3fd",
-                       "num_browned_out" = "#a2c3fd",
-                       "num_a_stop" = "#bfb3fd",
-                       "num_e_stop" = "#ffc7fc"), 
+                       "num_surfing" = "#ffc7fc",
+                       "num_stuck_on_bump" = "#bfb3fd",
+                       "num_no_show" = "#a2c3fd",
+                       "num_browned_out" = "#fcfeb6",
+                       "num_a_stop" = "#ffafad",
+                       "num_e_stop" = "#9df3fd"),
             labels = c("num_died" = "Died", 
                        "num_beached" = "Beached", 
                        "num_surfing" = "Surfing", 
@@ -730,7 +730,7 @@ auto_type_graph <- function(raw, order, teams, flip) {
             auto_type = factor(
                 auto_type, 
                 ordered = TRUE, 
-                levels = c("1", "2", "3")))|>
+                levels = c("1", "2", "3", "4", "5", "6")))|>
         group_by(team, auto_type) |>
         summarise(
             auto_type_numbers = n()
@@ -741,7 +741,7 @@ auto_type_graph <- function(raw, order, teams, flip) {
     auto_type_data$team <- factor(auto_type_data$team, levels = team_order, ordered = TRUE)
     auto_type_data$auto_type <- factor(
         auto_type_data$auto_type, 
-        c("1", "2", "3"), 
+        c("1", "2", "3", "4", "5", "6"), 
         ordered = TRUE)
     
     ggplot(auto_type_data, 
@@ -751,10 +751,11 @@ auto_type_graph <- function(raw, order, teams, flip) {
              x = "Team",
              y = "Number of Different Auto Types") + 
         scale_fill_manual(
-            values = c("1" = "#996D99", 
-                       "2" = "#CC91CC", "3" = "#F7B5F7"),
-            labels = c("1" = "Depot", 
-                       "2" = "Outpost/HP", "3" = "Neutral")
+            values = c("1" = "#996D99", "2" = "#CC91CC", "3" = "#ffc8dd",
+                       "4" = "#faaac7", "5" = "#bee2ff", "6" = "#a2d2ff"),
+            labels = c("1" = "Depot", "2" = "Outpost/HP", "3" = "Left Trench",
+                       "4" = "Left Bump", "5" = "Right Trench", 
+                       "6" = "Right Bump")
         ) +
         theme_bw()  +
         {if (length(teams) == 6)
