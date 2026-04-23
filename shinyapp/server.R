@@ -40,6 +40,7 @@ server <- function(input, output, session) {
     teams_selected <- reactiveVal(NULL)
     summary_stat <- reactiveVal(NULL)
     metric_selected <- reactiveVal("pRidge")
+    event_selected <- reactiveVal("DChamps")
     
     user_logged_in <- reactiveVal(rstudioapi::isAvailable())
     correct_password = "0322"
@@ -64,22 +65,27 @@ server <- function(input, output, session) {
     
     observeEvent(input$week0, {
         load_event_data("week0")
+        event_selected("Week 0")
     })
     
     observeEvent(input$vaale, {
         load_event_data("vaale")
+        event_selected("Alexandria")
     })
     
     observeEvent(input$mdpas, {
         load_event_data("mdpas")
+        event_selected("Pasadena")
     })
     
     observeEvent(input$mdbet, {
         load_event_data("mdbet")
+        event_selected("Bethesda")
     })
     
     observeEvent(input$chcmp, {
         load_event_data("chcmp")
+        event_selected("Dchamps")
     })
     
     observeEvent(input$pRidge, {
@@ -96,7 +102,9 @@ server <- function(input, output, session) {
     
     #UPDATE MATCH TEAMS SELECTED
     observeEvent(input$selected_match, {
-        req(input$selected_match)
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
         teams <- schedule() |>
             filter(match == input$selected_match) |>
             pivot_longer(
@@ -134,12 +142,14 @@ server <- function(input, output, session) {
     #EVENT SUMMARY
     output$event_summary <- renderPlot({
         teams <- unique(raw()$team)
-        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected())
+        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected(),
+                          alliance_color = FALSE)
     })
     
     output$event_summary_display <- renderPlot({
         teams <- unique(raw()$team)
-        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected())
+        stacked_bar_chart(raw(), schedule(), pridge(), teams, metric_selected(),
+                          alliance_color = FALSE)
     })
     
     output$summary_stats <- renderDT({
@@ -210,42 +220,50 @@ server <- function(input, output, session) {
     
     #COMPARE POINT SUMMARY
     output$summary_point_comp <- renderPlot({
+        req(input$selected_teams_comp)
         stacked_bar_chart(
             raw(), schedule(), pridge(), teams_selected(), metric_selected(), 
-            order = FALSE, flip = FALSE)
+            order = FALSE, flip = FALSE, FALSE)
     })
     
     #COMPARE ENDGAME BAR
     output$end_bar_comp <- renderPlot({
-        endgame_graph(raw(), teams_selected())
+        req(input$selected_teams_comp)
+        endgame_graph(raw(), teams_selected(), FALSE)
     })
     
     #COMPARE DRIVER RATING
     output$driver_rating_comp <- renderPlot({
-        plot_driver_rating_graph(raw(), teams_selected())
+        req(input$selected_teams_comp)
+        plot_driver_rating_graph(raw(), teams_selected(), FALSE)
     })
     
     # COMPARE INACTIVE STRATEGY
     output$inactive_strategy_comp <- renderPlot({
-        inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE)
+        req(input$selected_teams_comp)
+        inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE, FALSE)
     })
     
     # COMPARE PROBLEM TYPE
     output$problem_type_comp <- renderPlot({
-        problems_graph(raw(), teams_selected())
+        req(input$selected_teams_comp)
+        problems_graph(raw(), teams_selected(), FALSE)
     })
     
     #COMPARE TRENCH BUMP
     output$trench_bump_comp <- renderPlot({
-        bump_trench_ratioplot(raw(), teams_selected())
+        req(input$selected_teams_comp)
+        bump_trench_ratioplot(raw(), teams_selected(), FALSE)
     })
     
     # COMPARE AUTO TYPE
     output$auto_type_comp <- renderPlot({
-        auto_type_graph(raw(), FALSE, teams_selected(), FALSE)
+        req(input$selected_teams_comp)
+        auto_type_graph(raw(), FALSE, teams_selected(), FALSE, FALSE)
     })
     
     output$comments_df_comp <- renderDT({
+        req(input$selected_teams_comp)
         if (user_logged_in()){
             df <- comments_df(raw(), teams_selected())
         } else {
@@ -265,50 +283,81 @@ server <- function(input, output, session) {
     
     #SCORE PREDICTION
     output$score_prediction <- renderText({
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
         data <- summary_stat()
         score_pred(data, teams_selected()[1:3], teams_selected()[4:6])
     })
     
     #SUMMARY POINT MATCH
     output$summary_point_match <- renderPlot({
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
         stacked_bar_chart(
             raw(), schedule(), pridge(), teams_selected(), metric_selected(), 
-            order = FALSE, flip = FALSE)
+            order = FALSE, flip = FALSE, TRUE)
     })
     
     output$summary_stats_comp <- renderDT({
+        req(input$selected_teams_comp)
         summary_stats(raw(), pridge(), teams_selected(), metric_selected())
     })
     
     output$end_bar_match <- renderPlot({
-        endgame_graph(raw(), teams_selected())
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
+        endgame_graph(raw(), teams_selected(), TRUE)
     })
     
     output$trench_bump_match <- renderPlot({
-        bump_trench_ratioplot(raw(), teams_selected())
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
+        bump_trench_ratioplot(raw(), teams_selected(), TRUE)
     })
     
     output$driver_rating_match <- renderPlot({
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
         driver_rating_match(raw(), teams_selected())
     })
     
     output$inactive_strategy_match <- renderPlot({
-        inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE)
+        req(isTruthy(input$selected_match) || 
+            isTruthy(input$selected_red) || 
+            isTruthy(input$selected_blue))
+        inactive_stategy_summary(raw(), teams_selected(), FALSE, FALSE, TRUE)
     })
     
     output$problem_type_match <- renderPlot({
-        problems_graph(raw(), teams_selected())
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
+        problems_graph(raw(), teams_selected(), TRUE)
     })
     
     output$auto_type_match <- renderPlot({
-        auto_type_graph(raw(), FALSE, teams_selected(), FALSE)
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
+        auto_type_graph(raw(), FALSE, teams_selected(), FALSE, TRUE)
     })
     
     output$summary_stats_match <- renderDT({
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
         summary_stat()
     })
     
     output$comments_df_match <- renderDT({
+        req(isTruthy(input$selected_match) || 
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
         if (user_logged_in()){
             df <- comments_df(raw(), teams_selected())
         } else {
@@ -333,7 +382,7 @@ server <- function(input, output, session) {
         yap_graph(raw())
     })
     
-    output$scouter_streak <- renderPlot({
+    output$scouter_streak <- renderPlotly({
         high_streak(raw())
     })
     
@@ -473,8 +522,18 @@ server <- function(input, output, session) {
         }
     })
     
+    output$data_up_till <- renderUI({
+        text <- paste("Data Up To: Match", max(raw()$match))
+        HTML(text)
+    })
+    
     output$metric_current_selection <- renderUI({
         text <- paste("Currently Selected:", metric_selected())
+        HTML(text)
+    })
+    
+    output$event_current_selection <- renderUI({
+        text <- paste("Currently Selected:", event_selected())
         HTML(text)
     })
     
@@ -536,8 +595,9 @@ server <- function(input, output, session) {
     
     output$frc_logo <- renderUI({
         image_src <- paste0(
-            "https://www.nicepng.com/png/full/44-442571_first-robotics-logo-fi",
-            "rst-robotics-logo-png.png")
+            "https://yt3.googleusercontent.com/yLQ-DmaEu2MHV5MRVFL3Qp7A61x8qRg6X8laL8XAG6a-ZpaaEps_0WwIxjtxoyoUDL2RBral7g=s900-c-k-c0x00ffffff-no-rj")
         tags$img(src = image_src, height = "100%px", width = "100%px")
     })
 }
+
+
