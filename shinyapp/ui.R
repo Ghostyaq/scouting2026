@@ -443,7 +443,7 @@ ui <- fluidPage(
                         ),
                         actionBttn(
                             inputId = "chcmp",
-                            label = "Dchamps",
+                            label = "DChamps",
                             style = "unite",
                             color = "success",
                             size = "md",
