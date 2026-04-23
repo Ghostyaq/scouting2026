@@ -71,7 +71,10 @@ ui <- fluidPage(
                     style = "color: #a7000a; font-weight: bold;"))
             ),
             div(class = "row",
-                div(class = "col-lg-12",
+                div(class = "col-lg-3",
+                    uiOutput("frc_logo")
+                ),
+                div(class = "col-lg-9",
                     card(
                         card_header("Introduction"),
                         htmlOutput("intro_paragraph")
@@ -184,7 +187,14 @@ ui <- fluidPage(
                 card_header("Event Summary"),
                 plotOutput("event_summary", height = "600px")
             ),
-            DTOutput("summary_stats")
+            card(
+                card_header("Event Summary Stats"),
+                fill = FALSE,
+                card_body(
+                    fillable = FALSE,
+                    DTOutput("summary_stats")
+                )
+            )
         ),
         tabPanel(#------------------------COMPARE TEAMS-------------------------
             title = "Compare Teams",
@@ -254,9 +264,30 @@ ui <- fluidPage(
                             card_header("Robot Images"),
                             uiOutput("images_comp")
                         ),
-                        DTOutput("summary_stats_comp"),
-                        DTOutput("match_history"),
-                        DTOutput("comments_df_comp")
+                        card(
+                            card_header("Stats"),
+                            fill = FALSE,
+                            card_body(
+                                fillable = FALSE,
+                                DTOutput("summary_stats_comp")
+                            )
+                        ),
+                        card(
+                            card_header("Match History"),
+                            fill = FALSE,
+                            card_body(
+                                fillable = FALSE,
+                                DTOutput("match_history")
+                            )
+                        ),
+                        card(
+                            card_header("Comments"),
+                            fill = FALSE,
+                            card_body(
+                                fillable = FALSE,
+                                DTOutput("comments_df_comp")
+                            )
+                        )
                     )
                 )
             )
@@ -339,8 +370,22 @@ ui <- fluidPage(
                             card_header("Robot Images in Match"),
                             uiOutput("images_match")
                         ),
-                        DTOutput("summary_stats_match"),
-                        DTOutput("comments_df_match")
+                        card(
+                            card_header("Stats"),
+                            fill = FALSE,
+                            card_body(
+                                fillable = FALSE,
+                                DTOutput("summary_stats_match")
+                            )
+                        ),
+                        card(
+                            card_header("Comments"),
+                            fill = FALSE,
+                            card_body(
+                                fillable = FALSE,
+                                DTOutput("comments_df_match")
+                            )
+                        )
                     )
                 )
             )
@@ -458,12 +503,6 @@ ui <- fluidPage(
                         card_header("Scout Comments Login"),
                         uiOutput("login_ui"),
                         uiOutput("login_status")
-                    )
-                ),
-                div(class = "col-lg-6",
-                    card(
-                        card_header("Dark Mode"),
-                        input_dark_mode(mode = "light", id = "dark_mode")
                     )
                 )
             )

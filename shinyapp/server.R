@@ -595,17 +595,9 @@ server <- function(input, output, session) {
     
     output$frc_logo <- renderUI({
         image_src <- paste0(
-            "https://www.nicepng.com/png/full/44-442571_first-robotics-logo-fi",
-            "rst-robotics-logo-png.png")
+            "https://yt3.googleusercontent.com/yLQ-DmaEu2MHV5MRVFL3Qp7A61x8qRg6X8laL8XAG6a-ZpaaEps_0WwIxjtxoyoUDL2RBral7g=s900-c-k-c0x00ffffff-no-rj")
         tags$img(src = image_src, height = "100%px", width = "100%px")
     })
-    
-    observeEvent(input$dark_mode, {
-        theme_preset <- if (input$dark_mode == "dark") "darkly" else "flatly"
-        new_theme <- bs_theme(version = 5, preset = theme_preset)
-        session$setCurrentTheme(new_theme)
-        
-    }, ignoreInit = TRUE)
 }
 
 
