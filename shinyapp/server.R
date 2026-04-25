@@ -421,12 +421,30 @@ server <- function(input, output, session) {
                 team <- teams[idx]
                 
                 output[[paste0("match_comments_qual_", idx)]] <- renderDT({
-                    data <- match_comments(qual_data(), team)
+                    if (user_logged_in()) {
+                        data <- match_comments(qual_data(), team)
+                    } else {
+                        data <- data.frame(
+                            Message = paste0(
+                                "Please Login in the Settings Tab to access ",
+                                "comments!"
+                                )
+                        ) 
+                    }
                     datatable(data, rownames = FALSE)
                 })
                 
                 output[[paste0("general_comments_qual_", idx)]] <- renderDT({
-                    data <- general_comments(qual_data(), team)
+                    if (user_logged_in()) {
+                        data <- general_comments(qual_data(), team)
+                    } else {
+                        data <- data.frame(
+                            Message = paste0(
+                                "Please Login in the Settings Tab to access ",
+                                "comments!"
+                            )
+                        ) 
+                    }
                     datatable(data, rownames = FALSE)
                 })
             })
