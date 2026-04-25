@@ -32,6 +32,7 @@ addResourcePath("images_d", "data/chcmp/images")
 
 server <- function(input, output, session) {
     raw <- reactiveVal()
+    qual_data <- reactiveVal()
     pridge <- reactiveVal()
     tba_data <- reactiveVal()
     schedule <- reactiveVal()
@@ -47,6 +48,7 @@ server <- function(input, output, session) {
     
     load_event_data <- function(event) {
         raw(read.csv(file.path("data", event, "data.csv")))
+        qual_data(read.csv(file.path("data", event, "qual_data.csv")))
         schedule(read.csv(file.path("data", event, "schedule.csv")))
         tba_data(read.csv(file.path("data", event, "tba_data.csv")))
         pridge(read.csv(file.path("data", event, "pridge.csv")))
@@ -61,6 +63,7 @@ server <- function(input, output, session) {
         updateVirtualSelect("selected_teams_comp", choices = unique_teams)
         updateVirtualSelect("selected_red", choices = alliances()$alliance)
         updateVirtualSelect("selected_blue", choices = alliances()$alliance)
+        updateVirtualSelect("selected_teams_qual", choices = unique_teams)
     })
     
     observeEvent(input$week0, {
@@ -85,7 +88,7 @@ server <- function(input, output, session) {
     
     observeEvent(input$chcmp, {
         load_event_data("chcmp")
-        event_selected("Dchamps")
+        event_selected("DChamps")
     })
     
     observeEvent(input$pRidge, {
@@ -374,6 +377,61 @@ server <- function(input, output, session) {
             )
         )
     })
+    
+    output$qual_radar_chart <- renderPlot({
+        req(isTruthy(input$selected_teams_qual))
+        radar_qual_graph(qual_data(), input$selected_teams_qual)
+    })
+    
+    output$qual_comments_ui <- renderUI({
+        req(isTruthy(input$selected_teams_qual))
+        teams <- input$selected_teams_qual
+        
+        tagList(
+            lapply(seq_along(teams), function(i) {
+                team <- teams[i]
+                div(class = "row",
+                    div(class = "col-lg-6",
+                        card(
+                            class = "graph-card",
+                            card_header(paste("Match Comments -", team)),
+                            DTOutput(paste0("match_comments_qual_", i))
+                        )
+                    ),
+                    div(class = "col-lg-6",
+                        card(
+                            class = "graph-card",
+                            card_header(paste("General Comments -", team)),
+                            DTOutput(paste0("general_comments_qual_", i))
+                        )
+                    )
+                )
+            })
+        )
+    })
+    
+    observe({
+        req(input$selected_teams_qual)
+        teams <- input$selected_teams_qual
+        
+        for (i in seq_along(teams)) {
+            local({
+                idx <- i
+                team <- teams[idx]
+                
+                output[[paste0("match_comments_qual_", idx)]] <- renderDT({
+                    data <- match_comments(qual_data(), team)
+                    datatable(data, rownames = FALSE)
+                })
+                
+                output[[paste0("general_comments_qual_", idx)]] <- renderDT({
+                    data <- general_comments(qual_data(), team)
+                    datatable(data, rownames = FALSE)
+                })
+            })
+        }
+    })
+    
     output$matches_scouted <- renderPlotly({
         plot_scouting_graph(raw())
     })
@@ -412,6 +470,31 @@ server <- function(input, output, session) {
     
     output$images_match <- renderUI({
         tags_m <- lapply(teams_selected(), function(team) {
+            img_src_m <- paste0("images_d/", team,".png")
+            tag_temp_m <- tags$img(
+                src = img_src_m, 
+                alt = paste("Robot Image for Team", team), 
+                style = "height: 90%; width: auto; object-fit: cover;")
+            
+            cap_tag_m <- tags$p(
+                paste("Team:", team), 
+                style = "text-align: center;")
+            
+            full_m <- tags$div(
+                tag_temp_m, cap_tag_m, 
+                style = "display: flex; flex-direction: column; 
+                align-items: center; height: 300px; padding: 5px; 
+                border: 1px solid #555; overflow: hidden;")
+            
+            column(4, full_m, style = "padding: 5px;")
+        })
+        
+        fluidRow(tags_m)
+    })
+    
+    output$images_qual <- renderUI({
+        req(isTruthy(input$selected_teams_qual))
+        tags_m <- lapply(input$selected_teams_qual, function(team) {
             img_src_m <- paste0("images_d/", team,".png")
             tag_temp_m <- tags$img(
                 src = img_src_m, 
@@ -595,7 +678,9 @@ server <- function(input, output, session) {
     
     output$frc_logo <- renderUI({
         image_src <- paste0(
-            "https://yt3.googleusercontent.com/yLQ-DmaEu2MHV5MRVFL3Qp7A61x8qRg6X8laL8XAG6a-ZpaaEps_0WwIxjtxoyoUDL2RBral7g=s900-c-k-c0x00ffffff-no-rj")
+            "https://yt3.googleusercontent.com/yLQ-DmaEu2MHV5MRVFL3Qp7A61x8qRg",
+            "6X8laL8XAG6a-ZpaaEps_0WwIxjtxoyoUDL2RBral7g=s900-c-k-c0x00ffffff-",
+            "no-rj")
         tags$img(src = image_src, height = "100%px", width = "100%px")
     })
 }

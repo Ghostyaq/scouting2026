@@ -117,6 +117,67 @@ endgame_graph <- function(raw, teams, alliance_color = FALSE) {
         }
 }
 
+radar_qual_graph <- function(raw, teams) {
+    data <- raw |>
+        pivot_longer(
+            cols = -c(match, scout),
+            names_to = c(".value", "set"),
+            names_sep = "_"
+        ) |> 
+        filter(team %in% teams) |>
+        select(-specific, -general)
+    
+    averages <- data |>
+        group_by(team) |>
+        summarise(
+            across(
+                c(speed, smart, passing, defense, stable), 
+                \(x) mean(x, na.rm = TRUE)
+            )
+        ) |>
+        column_to_rownames(var = "team")
+    
+    averages <- rbind(rep(5, 5), rep(0, 5), averages)
+    colors_border <- c("#a7000a", "#0066B3", "#00FF00")
+    colors_fill <- c("#a7000a33", "#0066B333", "#00FF0033")
+    
+    radarchart(
+        averages, axistype = 6, plwd = 4, plty = 1,
+        pcol = colors_border, pfcol = colors_fill,
+        cglcol = "#9A989A", cglty = 1, axislabcol = "#9A989A", 
+        cglwd = 1, vlcex = 0.8)
+    
+    legend(
+        x = 0.5, y = 1.35, 
+        legend = teams, bty = "n", pch = 20, col = colors_border, 
+        cex = 1.2, pt.cex = 1.2
+    )
+}
+
+match_comments <- function(raw, selected_team) {
+    data <- raw |>
+        pivot_longer(
+            cols = -c(match, scout),
+            names_to = c(".value", "set"),
+            names_sep = "_"
+        ) |> 
+        filter(team == selected_team) |>
+        arrange(match) |>
+        select(match, specific)
+}
+
+general_comments <- function(raw, selected_team) {
+    data <- raw |>
+        pivot_longer(
+            cols = -c(match, scout),
+            names_to = c(".value", "set"),
+            names_sep = "_"
+        ) |> 
+        filter(team == selected_team) |>
+        arrange(match) |> 
+        select(general)
+}
+
 # event_key needed to write pridge.csv to the right folder (switch to a .R?)
 pridge_calculation_offline <- function(event_key) {
     data_dir_path <- paste0("shinyapp/data/", event_key)
