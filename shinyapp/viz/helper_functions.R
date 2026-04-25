@@ -899,35 +899,45 @@ prescout <- function(event_key, manual_teams = NULL){
                 filter(event_code != event_key)),
             temp2 = list(as.data.frame(temp) |>
                 filter(week == max(as.data.frame(temp)$week, na.rm = TRUE)) |>
-                select(first_event_code, week)),
+                select(first_event_code, week) |>
+                filter(first_event_code != "necmp") |>
+                filter(first_event_code != "micmp") |>
+                filter(first_event_code != "txcmp")
+                ),
             last_event_code = as.data.frame(temp2)$first_event_code,
             last_event_week = as.data.frame(temp2)$week + 1
         ) |>
         select(!c(temp, temp2))
     
     calc_pridge_fuel <- function(scoutR_key){
-        matches <- event_matches(scoutR_key, match_type = "qual")
-        
-        sb_data <- team_events_sb(event = scoutR_key)
-        epas <- sapply(sb_data, function(te){te$epa$stats$start})
-        names(epas) <- sapply(sb_data, function(te){te$team})
-        
-        design <- as.matrix(lineup_design_matrix(matches))
-        blue_fuel <- sapply(matches[['blue_hubScore']], \(x) x$totalCount)
-        red_fuel <- sapply(matches[['red_hubScore']], \(x) x$totalCount)
-        response <- c(blue_fuel, red_fuel)
-        
-        priors <- epas
-        grid = exp(seq(log(0.01), log(20), length.out = 100))
-        #names(priors) <- scoutR:::tf(names(priors))
-        #priors <- priors[match(colnames(design), names(priors))]
-        
-        mses <- pridge_lambda_cv(design, response, priors, grid,
-                                 plot_mses = FALSE)
-        lambda_opt <- grid[which.min(mses)]
-        result <- scoutR:::prior_ridge(design, response, lambda_opt, priors)
-        return(round(result, digits = 2))
-        }
+        tryCatch({
+            matches <- event_matches(scoutR_key, match_type = "qual")
+            
+            sb_data <- team_events_sb(event = scoutR_key)
+            epas <- sapply(sb_data, function(te){te$epa$stats$start})
+            names(epas) <- sapply(sb_data, function(te){te$team})
+            
+            design <- as.matrix(lineup_design_matrix(matches))
+            blue_fuel <- sapply(matches[['blue_hubScore']], \(x) x$totalCount)
+            red_fuel <- sapply(matches[['red_hubScore']], \(x) x$totalCount)
+            response <- c(blue_fuel, red_fuel)
+            
+            priors <- epas
+            grid = exp(seq(log(0.01), log(20), length.out = 100))
+            #names(priors) <- scoutR:::tf(names(priors))
+            #priors <- priors[match(colnames(design), names(priors))]
+            
+            mses <- pridge_lambda_cv(design, response, priors, grid,
+                                     plot_mses = FALSE)
+            lambda_opt <- grid[which.min(mses)][1]
+            result <- scoutR:::prior_ridge(design, response, lambda_opt, priors)
+            return(round(result, digits = 2))
+        },
+        error = function(e) {
+            message("Ahh!!!", e$message)
+            message(scoutR_key)
+        })
+    }
     
     fuel_stats <- data.frame(event_key = unique(df$last_event_code)) |>
         rowwise() |>
@@ -946,15 +956,22 @@ prescout <- function(event_key, manual_teams = NULL){
     
     df <- df |>
         mutate(
-            stats = list(fuel_stats |>
-                filter(event_key == last_event_code)),
-            pridge = unlist(stats$fuel_pridge)[paste0("frc", team_num)],
-            opr = as.data.frame(stats[["fuel_opr"]]) |>
-                filter(team == team_num) |>
-                pull(opr) |>
-                round(digits = 2),
+            team = as.integer(team_num),
+            stats = list(filter(fuel_stats, event_key == last_event_code)),
+            pridge = ifelse(
+                is.null(unlist(stats$fuel_pridge)) != TRUE,
+                unlist(stats$fuel_pridge)[paste0("frc", team_num)],
+                0),
+            opr = ifelse(
+                is.null(unlist(stats$fuel_opr)) != TRUE,
+                as.data.frame(stats[["fuel_opr"]]) |>
+                    filter(team == team_num) |>
+                    pull(opr) |>
+                    round(digits = 2),
+                0),
             epa = unlist(stats$fuel_epa)[paste0("frc", team_num)]
-        )
+        ) |>
+        arrange(team)
     
     result <- scoutR_prescout |>
         mutate(
