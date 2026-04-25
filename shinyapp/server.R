@@ -380,6 +380,7 @@ server <- function(input, output, session) {
     
     output$qual_radar_chart <- renderPlot({
         req(isTruthy(input$selected_teams_qual))
+        par(mar = c(1, 1, 1, 1))
         radar_qual_graph(qual_data(), input$selected_teams_qual)
     })
     

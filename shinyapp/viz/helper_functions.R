@@ -145,7 +145,7 @@ radar_qual_graph <- function(raw, teams) {
         averages, axistype = 6, plwd = 4, plty = 1,
         pcol = colors_border, pfcol = colors_fill,
         cglcol = "#9A989A", cglty = 1, axislabcol = "#9A989A", 
-        cglwd = 1, vlcex = 0.8)
+        cglwd = 1, vlcex = 0.8, cex = 1.2)
     
     legend(
         x = 0.5, y = 1.35, 
