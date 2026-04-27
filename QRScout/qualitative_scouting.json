@@ -151,8 +151,8 @@
           "max": 10000
         },
         {
-          "title": "Overall",
-          "description": "How well did the robot perform overall.",
+          "title": "Speed",
+          "description": "",
           "type": "range",
           "required": false,
           "code": "overall",
@@ -297,8 +297,8 @@
           "max": 10000
         },
         {
-          "title": "Overall",
-          "description": "How well did the robot perform overall.",
+          "title": "Speed",
+          "description": "",
           "type": "range",
           "required": false,
           "code": "overall",
@@ -443,8 +443,8 @@
           "max": 10000
         },
         {
-          "title": "Overall",
-          "description": "How well did the robot perform overall.",
+          "title": "Speed",
+          "description": "",
           "type": "range",
           "required": false,
           "code": "overall",

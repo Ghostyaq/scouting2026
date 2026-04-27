@@ -390,6 +390,43 @@ ui <- fluidPage(
                 )
             )
         ),
+        tabPanel(#-----------------------QUALITATIVE----------------------------
+            title = "Qualitative",
+            div(class = "container-fluid",
+                div(class = "row",
+                    div(class = "col-12 col-lg-3",
+                        div(
+                            style = "background-color: #f8f9fa; padding: 15px; 
+                                    border-radius: 5px; min-height: 100%;",
+                            virtualSelectInput(
+                                "selected_teams_qual", 
+                                label = "Select Teams (max 3)", 
+                                choices = NULL, multiple = TRUE, search = TRUE
+                                )
+                            )
+                        ),
+                    div(class = "col-12 col-lg-9",
+                        div(class = "row",
+                            div(class = "col-lg-6",
+                                card(
+                                    class = "graph-card",
+                                    card_header("Radar Chart"),
+                                    plotOutput("qual_radar_chart")
+                                )
+                            ),
+                            div(class = "col-lg-6",
+                                card(
+                                    class = "graph-card",
+                                    card_header("Images"),
+                                    uiOutput("images_qual")
+                                )
+                            )
+                        ),
+                        uiOutput("qual_comments_ui")
+                    )
+                )
+            )
+        ),
         tabPanel(#----------------------------SCOUTS----------------------------
             title = "Scouts",
             card(
