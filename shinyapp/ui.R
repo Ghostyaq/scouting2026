@@ -24,493 +24,593 @@ source("server.R")
 
 options(sass.cache = FALSE)
 
-ui <- fluidPage(
+ui <-navbarPage(
+    title = "2026 REBUILT 449 Shinyapp",
     theme = bs_theme(
         version = 5,
         preset = "flatly"
     ),
-    tags$style(HTML("
+    collapsible = TRUE,
+    header = tagList(
+        tags$style(HTML("
     @media (max-width: 991px) {
-        body {
-            font-size: 20px !important;
+
+        /* ---- BODY & BASE TEXT ---- */
+        body { font-size: 15px !important; line-height: 1.5 !important; }
+        p, li, span, label { font-size: 20px !important; }
+
+        /* ---- NAVBAR ---- */
+        .navbar-brand { font-size: 24px !important; }
+        .navbar-nav .nav-link { font-size: 20px !important; padding: 12px 16px !important; }
+        .navbar-toggler { padding: 10px !important; }
+
+        /* ---- CARDS ---- */
+        .card-header { font-size: 26px !important; padding: 14px !important; }
+        .card-body { padding: 16px !important; }
+        .graph-card { height: 1000px; }
+        .card-body * { font-size: 25px !important; }
+        .card-header * { font-size: 25px !important; }
+        .shiny-html-output { font-size: 25px !important; }
+        #intro_paragraph, #event_summary_summary, #compare_teams_summary,
+        #match_tab_summary, #scouts_tab_summary, #settings_summary,
+        #pridge_summary, #metric_swap_summary, #event_swap_summary,
+        #password_summary { font-size: 25px !important; }
+
+#intro_paragraph *, #event_summary_summary *, #compare_teams_summary *,
+#match_tab_summary *, #scouts_tab_summary *, #settings_summary *,
+#pridge_summary *, #metric_swap_summary *, #event_swap_summary *,
+#password_summary * { font-size: 25px !important; }
+
+#intro_paragraph b, #event_summary_summary b, #compare_teams_summary b,
+#match_tab_summary b, #scouts_tab_summary b, #settings_summary b,
+#pridge_summary b, #metric_swap_summary b, #event_swap_summary b,
+#password_summary b { font-size: 25px !important; }
+
+#intro_paragraph a, #event_summary_summary a, #compare_teams_summary a,
+#match_tab_summary a, #scouts_tab_summary a, #settings_summary a,
+#pridge_summary a, #metric_swap_summary a, #event_swap_summary a,
+#password_summary a { font-size: 25px !important; }
+
+/* VIRTUAL SELECT PICKERS CSS */
+
+.vscomp-toggle-button {
+    font-size: 100px !important;
+    height: 100px !important;
+    padding: 25px !important;
+}
+.vscomp-option-text { 
+    font-size: 30px !important; 
+}
+.vscomp-option { 
+    font-size: 22px !important; 
+    padding: 14px !important; 
+    min-height: 50px !important; 
+    box-sizing: border-box !important;
+    height: auto !important; 
+    max-height: 55vh !important;
+}
+.vscomp-search-input { 
+    font-size: 20px !important; 
+    padding: 10px !important; 
+}
+.vscomp-no-options { 
+    font-size: 20px !important; 
+}
+.vscomp-value-tag { 
+    font-size: 18px !important; 
+    padding: 4px 8px !important; 
+}
+.vscomp-toggle-button .vscomp-value { 
+    font-size: 20px !important; 
+}
+.vscomp-dropbox-container-bottom {
+    display: none !important;
+}
+.vscomp-dropbox { 
+    height: 100%px !important;
+}
+
+/* SCORE PREDICTION CSS */
+
+#score_prediction { 
+    font-size: 30px !important; 
+}
+#score_prediction * { 
+    font-size: 30px !important; 
+}
+#score_prediction span { 
+    font-size: 30px !important; 
+}
+.shiny-spinner-output-container {
+    min-height: 875px !important;
+}
+
+.shiny-spinner-output-container .shiny-plot-output {
+    min-height: 875px !important;
+}
+")),tags$head(tags$script(HTML("
+    function resizeFrame() {
+        if (window.frameElement) {
+            var activeTab = document.querySelector('.tab-pane.active');
+            var navbar = document.querySelector('.navbar');
+            var navHeight = navbar ? navbar.offsetHeight : 0;
+            var h = activeTab ? activeTab.scrollHeight + navHeight + 20 : document.body.scrollHeight;
+            
+            window.frameElement.style.height = h + 'px';
+            window.frameElement.style.overflow = 'hidden';
         }
-        .card-header {
-            font-size: 30px !important;
-        }
-        .vscomp-toggle-button {
-            font-size: 22px !important;
-            height: 75px !important;
-            padding: 10px !important;
-        }
-        .vscomp-option {
-            font-size: 22px !important;
-            padding: 12px !important;
-        }
-        .btn {
-            font-size: 18px !important;
-            padding: 10px 16px !important;
-        }
-            .vscomp-dropbox {
-            top: 100% !important;
-            bottom: auto !important;
-        }
-            .graph-card {
-            height: 1000px;
-        }
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
     }
-")),
-    navbarPage(
-        title = "2026 REBUILT 449 Shinyapp",
-        collapsible = TRUE,
-        tabPanel(#--------------------------INTRODUCTION------------------------
-            title = "Introductory Page",
-            card(
-                card_header(h3(
-                    "2026 REBUILT 449 Shinyapp", 
-                    align = "center",
-                    style = "color: #a7000a; font-weight: bold;"))
-            ),
-            div(class = "row",
-                div(class = "col-lg-3",
-                    uiOutput("frc_logo")
-                ),
-                div(class = "col-lg-9",
-                    card(
-                        card_header("Introduction"),
-                        htmlOutput("intro_paragraph")
-                    )
-                )
-            ),
-            card(),
-            div(class = "row",
-                div(class = "col-12 col-lg-4",
-                    card(
-                        class = "graph-card",
-                        card_header("Explore Data"),
-                        plotOutput("event_summary_display")
-                    )
-                ),
-                div(class = "col-6 col-lg-4",
-                    card(
-                        card_header("Presented by FRC Team 449"),
-                        uiOutput("team_logo")
-                    )
-                ),
-                div(class = "col-6 col-lg-4",
-                    card(
-                        card_header("All data on FRC REBUILT"),
-                        uiOutput("rebuilt_logo")
-                    )
-                )
-            ),
-            card(),
-            card(
-                card_header(h3(
-                    "Description of Tabs", 
-                    align = "center",
-                    style = "color: #a7000a; font-weight: bold;"))
-            ),
-            div(class = "row",
-                div(class = "col-lg-6",
-                    card(
-                        card_header("Event Summary"),
-                        htmlOutput("event_summary_summary")
-                    )
-                ),
-                div(class = "col-lg-6",
-                    card(
-                        card_header("Compare Teams"),
-                        htmlOutput("compare_teams_summary")
-                    )
-                )
-            ),
-            div(class = "row",
-                div(class = "col-lg-4",
-                    card(
-                        card_header("Match"),
-                        htmlOutput("match_tab_summary")
-                    )
-                ),
-                div(class = "col-lg-4",
-                    card(
-                        card_header("Scouts"),
-                        htmlOutput("scouts_tab_summary")
-                    )
-                ),
-                div(class = "col-lg-4",
-                    card(
-                        card_header("Settings"),
-                        htmlOutput("settings_summary")
-                    )
-                )
-            ),
-            card(),
-            card(
-                card_header(h3(
-                    "Description of Features", 
-                    align = "center",
-                    style = "color: #a7000a; font-weight: bold;"))
-            ),
-            div(class = "row",
-                div(class = "col-lg-6",
-                    card(
-                        card_header("pRidge"),
-                        htmlOutput("pridge_summary")
-                    )
-                ),
-                div(class = "col-lg-6",
-                    card(
-                        card_header("Metric Switcher"),
-                        htmlOutput("metric_swap_summary")
-                    )
-                )
-            ),
-            div(class = "row",
-                div(class = "col-lg-6",
-                    card(
-                        card_header("Event Switcher"),
-                        htmlOutput("event_swap_summary")
-                    )
-                ),
-                div(class = "col-lg-6",
-                    card(
-                        card_header("Password-Locked Features"),
-                        htmlOutput("password_summary")
-                    )
-                )
-            )
-        ),
-        tabPanel(#-----------------------EVENT SUMMARY--------------------------
-            title = "Event Summary",
-            card(
-                class = "graph-card",
-                card_header("Event Summary"),
-                plotOutput("event_summary", height = "600px")
-            ),
-            card(
-                card_header("Event Summary Stats"),
-                fill = FALSE,
-                card_body(
-                    fillable = FALSE,
-                    DTOutput("summary_stats")
-                )
-            )
-        ),
-        tabPanel(#------------------------COMPARE TEAMS-------------------------
-            title = "Compare Teams",
-            div(class = "container-fluid",
-                div(class = "row",
-                    div(class = "col-12 col-lg-3",
-                        div(
-                            style = "background-color: #f8f9fa; padding: 15px; 
+    
+    // On tab click
+    document.addEventListener('click', function(e) {
+        var tab = e.target.closest('a[data-bs-toggle=\"tab\"], a[data-toggle=\"tab\"]');
+        if (tab) {
+            setTimeout(resizeFrame, 400);
+        }
+    });
+    
+    // When any Shiny output finishes rendering, resize
+    $(document).on('shiny:value shiny:outputinvalidated', function() {
+        setTimeout(resizeFrame, 300);
+    });
+    
+    // Watch for image/plot loads specifically
+    $(document).on('shiny:idle', function() {
+        setTimeout(resizeFrame, 300);
+    });
+    
+    setTimeout(resizeFrame, 2000);
+"))),
+    ),
+    tabPanel(#--------------------------INTRODUCTION------------------------
+             title = "Introductory Page",
+             card(
+                 card_header(h3(
+                     "2026 REBUILT 449 Shinyapp", 
+                     align = "center",
+                     style = "color: #a7000a; font-weight: bold;"))
+             ),
+             div(class = "row",
+                 div(class = "col-lg-3",
+                     uiOutput("frc_logo")
+                 ),
+                 div(class = "col-lg-9",
+                     card(
+                         card_header("Introduction"),
+                         htmlOutput("intro_paragraph")
+                     )
+                 )
+             ),
+             card(),
+             div(class = "row",
+                 div(class = "col-12 col-lg-4",
+                     card(
+                         class = "graph-card",
+                         card_header("Explore Data"),
+                         plotOutput("event_summary_display")
+                     )
+                 ),
+                 div(class = "col-6 col-lg-4",
+                     card(
+                         card_header("Presented by FRC Team 449"),
+                         uiOutput("team_logo")
+                     )
+                 ),
+                 div(class = "col-6 col-lg-4",
+                     card(
+                         card_header("All data on FRC REBUILT"),
+                         uiOutput("rebuilt_logo")
+                     )
+                 )
+             ),
+             card(),
+             card(
+                 card_header(h3(
+                     "Description of Tabs", 
+                     align = "center",
+                     style = "color: #a7000a; font-weight: bold;"))
+             ),
+             div(class = "row",
+                 div(class = "col-lg-6",
+                     card(
+                         card_header("Event Summary"),
+                         htmlOutput("event_summary_summary")
+                     )
+                 ),
+                 div(class = "col-lg-6",
+                     card(
+                         card_header("Compare Teams"),
+                         htmlOutput("compare_teams_summary")
+                     )
+                 )
+             ),
+             div(class = "row",
+                 div(class = "col-lg-4",
+                     card(
+                         card_header("Match"),
+                         htmlOutput("match_tab_summary")
+                     )
+                 ),
+                 div(class = "col-lg-4",
+                     card(
+                         card_header("Scouts"),
+                         htmlOutput("scouts_tab_summary")
+                     )
+                 ),
+                 div(class = "col-lg-4",
+                     card(
+                         card_header("Settings"),
+                         htmlOutput("settings_summary")
+                     )
+                 )
+             ),
+             card(),
+             card(
+                 card_header(h3(
+                     "Description of Features", 
+                     align = "center",
+                     style = "color: #a7000a; font-weight: bold;"))
+             ),
+             div(class = "row",
+                 div(class = "col-lg-6",
+                     card(
+                         card_header("pRidge"),
+                         htmlOutput("pridge_summary")
+                     )
+                 ),
+                 div(class = "col-lg-6",
+                     card(
+                         card_header("Metric Switcher"),
+                         htmlOutput("metric_swap_summary")
+                     )
+                 )
+             ),
+             div(class = "row",
+                 div(class = "col-lg-6",
+                     card(
+                         card_header("Event Switcher"),
+                         htmlOutput("event_swap_summary")
+                     )
+                 ),
+                 div(class = "col-lg-6",
+                     card(
+                         card_header("Password-Locked Features"),
+                         htmlOutput("password_summary")
+                     )
+                 )
+             )
+    ),
+    tabPanel(#-----------------------EVENT SUMMARY--------------------------
+             title = "Event Summary",
+             card(
+                 class = "graph-card",
+                 card_header("Event Summary"),
+                 plotOutput("event_summary", height = "600px")
+             ),
+             card(
+                 card_header("Event Summary Stats"),
+                 fill = FALSE,
+                 card_body(
+                     fillable = FALSE,
+                     DTOutput("summary_stats")
+                 )
+             )
+    ),
+    tabPanel(#------------------------COMPARE TEAMS-------------------------
+             title = "Compare Teams",
+             div(class = "container-fluid",
+                 div(class = "row",
+                     div(class = "col-12 col-lg-3",
+                         div(
+                             style = "background-color: #f8f9fa; padding: 15px; 
                             border-radius: 5px; min-height: 100%;",
-                            virtualSelectInput(
-                                "selected_teams_comp", 
-                                label = "Select Teams", 
-                                choices = NULL, multiple = TRUE, search = TRUE
-                            )
-                        )
-                    ),
-                    div(class = "col-12 col-lg-9",
-                        div(class = "row",
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Summary Fuel Points"),
-                                    plotOutput("summary_point_comp")
-                                )
-                            ),
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Trench Bump Ratioplot"),
-                                    plotOutput("trench_bump_comp")
-                                )
-                            )
-                        ),
-                        div(class = "row",
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Driver Rating by Match"),
-                                    plotOutput("driver_rating_comp")
-                                )
-                            ),
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Auto Type"),
-                                    plotOutput("auto_type_comp")
-                                )
-                            )
-                        ),
-                        div(class = "row",
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Inactive Strategy Summary"),
-                                    plotOutput("inactive_strategy_comp")
-                                )
-                            ),
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Problems Encountered"),
-                                    plotOutput("problem_type_comp")
-                                )
-                            )
-                        ),
-                        card(
-                            card_header("Robot Images"),
-                            uiOutput("images_comp")
-                        ),
-                        card(
-                            card_header("Stats"),
-                            fill = FALSE,
-                            card_body(
-                                fillable = FALSE,
-                                DTOutput("summary_stats_comp")
-                            )
-                        ),
-                        card(
-                            card_header("Match History"),
-                            fill = FALSE,
-                            card_body(
-                                fillable = FALSE,
-                                DTOutput("match_history")
-                            )
-                        ),
-                        card(
-                            card_header("Comments"),
-                            fill = FALSE,
-                            card_body(
-                                fillable = FALSE,
-                                DTOutput("comments_df_comp")
-                            )
-                        )
-                    )
-                )
-            )
-        ),
-        tabPanel(#---------------------------MATCH------------------------------
-            title = "Match",
-            div(class = "container-fluid",
-                div(class = "row",
-                    div(class = "col-12 col-lg-3",
-                        div(
-                            style = "background-color: #f8f9fa; padding: 15px; 
+                             virtualSelectInput(
+                                 "selected_teams_comp", 
+                                 label = "Select Teams", 
+                                 choices = NULL, multiple = TRUE, search = TRUE
+                             )
+                         )
+                     ),
+                     div(class = "col-12 col-lg-9",
+                         div(class = "row",
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Summary Fuel Points"),
+                                     plotOutput("summary_point_comp")|>withSpinner()
+                                 )
+                             ),
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Trench Bump Ratioplot"),
+                                     plotOutput("trench_bump_comp")|>withSpinner()
+                                 )
+                             )
+                         ),
+                         div(class = "row",
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Driver Rating by Match"),
+                                     plotOutput("driver_rating_comp")|>withSpinner()
+                                 )
+                             ),
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Auto Type"),
+                                     plotOutput("auto_type_comp")|>withSpinner()
+                                 )
+                             )
+                         ),
+                         div(class = "row",
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Inactive Strategy Summary"),
+                                     plotOutput("inactive_strategy_comp")|>withSpinner()
+                                 )
+                             ),
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Problems Encountered"),
+                                     plotOutput("problem_type_comp")|>withSpinner()
+                                 )
+                             )
+                         ),
+                         card(
+                             card_header("Robot Images"),
+                             uiOutput("images_comp")|>withSpinner()
+                         ),
+                         card(
+                             card_header("Stats"),
+                             fill = FALSE,
+                             card_body(
+                                 fillable = FALSE,
+                                 DTOutput("summary_stats_comp")|>withSpinner()
+                             )
+                         ),
+                         card(
+                             card_header("Match History"),
+                             fill = FALSE,
+                             card_body(
+                                 fillable = FALSE,
+                                 DTOutput("match_history")|>withSpinner()
+                             )
+                         ),
+                         card(
+                             card_header("Comments"),
+                             fill = FALSE,
+                             card_body(
+                                 fillable = FALSE,
+                                 DTOutput("comments_df_comp")|>withSpinner()
+                             )
+                         )
+                     )
+                 )
+             )
+    ),
+    tabPanel(#---------------------------MATCH------------------------------
+             title = "Match",
+             div(class = "container-fluid",
+                 div(class = "row",
+                     div(class = "col-12 col-lg-3",
+                         div(
+                             style = "background-color: #f8f9fa; padding: 15px; 
                             border-radius: 5px; min-height: 100%;",
-                            virtualSelectInput(
-                                "selected_match", 
-                                label = "Select a Match", 
-                                choices = NULL, selected = 1, search = TRUE),
-                            virtualSelectInput(
-                                "selected_red", 
-                                label = "Select Red Alliance", 
-                                choices = NULL, multiple = FALSE, search = TRUE
-                            ),
-                            virtualSelectInput(
-                                "selected_blue", 
-                                label = "Select Blue Alliance", 
-                                choices = NULL, multiple = FALSE, search = TRUE
-                            ),
-                            uiOutput("score_prediction")
-                        )
-                    ),
-                    div(class = "col-12 col-lg-9",
-                        div(class = "row",
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Summary Fuel Points"),
-                                    plotOutput("summary_point_match")
-                                )
-                            ),
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Trench Bump Ratioplot"),
-                                    plotOutput("trench_bump_match")
-                                )
-                            )
-                        ),
-                        div(class = "row",
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Driver Rating by Match"),
-                                    plotOutput("driver_rating_match")
-                                )
-                            ),
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Auto Type"),
-                                    plotOutput("auto_type_match")
-                                )
-                            )
-                        ),
-                        div(class = "row",
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Inactive Strategy Summary"),
-                                    plotOutput("inactive_strategy_match")
-                                )
-                            ),
-                            div(class = "col-lg-6",
-                                card(
-                                    class = "graph-card",
-                                    card_header("Problems Encountered"),
-                                    plotOutput("problem_type_match")
-                                )
-                            )
-                        ),
-                        card(
-                            card_header("Robot Images in Match"),
-                            uiOutput("images_match")
-                        ),
-                        card(
-                            card_header("Stats"),
-                            fill = FALSE,
-                            card_body(
-                                fillable = FALSE,
-                                DTOutput("summary_stats_match")
-                            )
-                        ),
-                        card(
-                            card_header("Comments"),
-                            fill = FALSE,
-                            card_body(
-                                fillable = FALSE,
-                                DTOutput("comments_df_match")
-                            )
-                        )
-                    )
-                )
-            )
-        ),
-        tabPanel(#----------------------------SCOUTS----------------------------
-            title = "Scouts",
-            card(
-                class = "graph-card",
-                card_header("Total Matches Scouted by Scout"),
-                plotlyOutput("matches_scouted")
-            ),
-            card(
-                class = "graph-card",
-                card_header("Average Yaps by Scout"),
-                plotlyOutput("scout_yaps")
-            ),
-            card(
-                class = "graph-card",
-                card_header("Scout Yap Streak"),
-                plotlyOutput("scouter_streak")
-            )
-        ),
-        tabPanel(#-------------------------SETTINGS-----------------------------
-            title = "Settings",
-            div(class = "row",
-                div(class = "col-lg-6",
-                    card(
-                        card_header("Metric Selection"),
-                        uiOutput("data_up_till"),
-                        uiOutput("metric_current_selection"),
-                        actionBttn(
-                            inputId = "pRidge",
-                            label = "pRidge",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
-                        actionBttn(
-                            inputId = "EPA",
-                            label = "EPA",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
-                        actionBttn(
-                            inputId = "OPR",
-                            label = "OPR",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
-                        actionBttn(
-                            inputId = "HOPpeR",
-                            label = "HOPpeR (Non-Functional)",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
-                    )
-                ),
-                div(class = "col-lg-6",
-                    card(
-                        card_header("Event Data Switching"),
-                        uiOutput("event_current_selection"),
-                        actionBttn(
-                            inputId = "week0",
-                            label = "Week 0 (Test)",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
-                        actionBttn(
-                            inputId = "vaale",
-                            label = "Alexandria",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
-                        actionBttn(
-                            inputId = "mdpas",
-                            label = "Pasadena (Only pRidge)",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
-                        actionBttn(
-                            inputId = "mdbet",
-                            label = "Bethesda",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
-                        actionBttn(
-                            inputId = "chcmp",
-                            label = "DChamps",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
-                    )
-                )
-            ),
-            div(class = "row",
-                div(class = "col-lg-6",
-                    card(
-                        card_header("Scout Comments Login"),
-                        uiOutput("login_ui"),
-                        uiOutput("login_status")
-                    )
-                )
-            )
-        )
+                             virtualSelectInput(
+                                 "selected_match", 
+                                 label = "Select a Match", 
+                                 choices = NULL, selected = 1, search = TRUE),
+                             virtualSelectInput(
+                                 "selected_red", 
+                                 label = "Select Red Alliance", 
+                                 choices = NULL, multiple = FALSE, search = TRUE
+                             ),
+                             virtualSelectInput(
+                                 "selected_blue", 
+                                 label = "Select Blue Alliance", 
+                                 choices = NULL, multiple = FALSE, search = TRUE
+                             ),
+                             uiOutput("score_prediction")
+                         )
+                     ),
+                     div(class = "col-12 col-lg-9",
+                         div(class = "row",
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Summary Fuel Points"),
+                                     plotOutput("summary_point_match")|>withSpinner()
+                                 )
+                             ),
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Trench Bump Ratioplot"),
+                                     plotOutput("trench_bump_match")|>withSpinner()
+                                 )
+                             )
+                         ),
+                         div(class = "row",
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Driver Rating by Match"),
+                                     plotOutput("driver_rating_match")|>withSpinner()
+                                 )
+                             ),
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Auto Type"),
+                                     plotOutput("auto_type_match")|>withSpinner()
+                                 )
+                             )
+                         ),
+                         div(class = "row",
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Inactive Strategy Summary"),
+                                     plotOutput("inactive_strategy_match")|>withSpinner()
+                                 )
+                             ),
+                             div(class = "col-lg-6",
+                                 card(
+                                     class = "graph-card",
+                                     card_header("Problems Encountered"),
+                                     plotOutput("problem_type_match")|>withSpinner()
+                                 )
+                             )
+                         ),
+                         card(
+                             card_header("Robot Images in Match"),
+                             uiOutput("images_match")|>withSpinner()
+                         ),
+                         card(
+                             card_header("Stats"),
+                             fill = FALSE,
+                             card_body(
+                                 fillable = FALSE,
+                                 DTOutput("summary_stats_match")|>withSpinner()
+                             )
+                         ),
+                         card(
+                             card_header("Comments"),
+                             fill = FALSE,
+                             card_body(
+                                 fillable = FALSE,
+                                 DTOutput("comments_df_match")|>withSpinner()
+                             )
+                         )
+                     )
+                 )
+             )
+    ),
+    tabPanel(#----------------------------SCOUTS----------------------------
+             title = "Scouts",
+             card(
+                 class = "graph-card",
+                 card_header("Total Matches Scouted by Scout"),
+                 plotlyOutput("matches_scouted")
+             ),
+             card(
+                 class = "graph-card",
+                 card_header("Average Yaps by Scout"),
+                 plotlyOutput("scout_yaps")
+             ),
+             card(
+                 class = "graph-card",
+                 card_header("Scout Yap Streak"),
+                 plotlyOutput("scouter_streak")
+             )
+    ),
+    tabPanel(#-------------------------SETTINGS-----------------------------
+             title = "Settings",
+             div(class = "row",
+                 div(class = "col-lg-6",
+                     card(
+                         card_header("Metric Selection"),
+                         uiOutput("data_up_till"),
+                         uiOutput("metric_current_selection"),
+                         actionBttn(
+                             inputId = "pRidge",
+                             label = "pRidge",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
+                         actionBttn(
+                             inputId = "EPA",
+                             label = "EPA",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
+                         actionBttn(
+                             inputId = "OPR",
+                             label = "OPR",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
+                         actionBttn(
+                             inputId = "HOPpeR",
+                             label = "HOPpeR (Non-Functional)",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
+                     )
+                 ),
+                 div(class = "col-lg-6",
+                     card(
+                         card_header("Event Data Switching"),
+                         uiOutput("event_current_selection"),
+                         actionBttn(
+                             inputId = "week0",
+                             label = "Week 0 (Test)",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
+                         actionBttn(
+                             inputId = "vaale",
+                             label = "Alexandria",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
+                         actionBttn(
+                             inputId = "mdpas",
+                             label = "Pasadena (Only pRidge)",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
+                         actionBttn(
+                             inputId = "mdbet",
+                             label = "Bethesda",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
+                         actionBttn(
+                             inputId = "chcmp",
+                             label = "DChamps",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
+                     )
+                 )
+             ),
+             div(class = "row",
+                 div(class = "col-lg-6",
+                     card(
+                         card_header("Scout Comments Login"),
+                         uiOutput("login_ui"),
+                         uiOutput("login_status")
+                     )
+                 )
+             )
     )
 )
 
 shinyApp(
     ui = ui, 
-    server = server, 
-    options = list(height = 2000))
+    server = server)

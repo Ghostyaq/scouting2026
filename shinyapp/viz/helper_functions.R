@@ -63,7 +63,15 @@ plot_driver_rating_graph <- function(
             color = "Teams",
             title = "Driver Rating") + 
         theme_bw() + 
-        theme(legend.position = "bottom") +
+        theme(
+            legend.position = "bottom",
+            plot.title = element_text(size = 18),
+            legend.text = element_text(size = 12),
+            legend.title = element_text(size = 14),
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            axis.text.y = element_text(size = 10),
+            axis.title = element_text(size = 15)
+        ) +
         {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
@@ -104,7 +112,15 @@ endgame_graph <- function(raw, teams, alliance_color = FALSE) {
                        "L2" = "L2", "L3" = "L3")
         ) +
         theme_bw() + 
-        theme(legend.position = "bottom") +
+        theme(
+            legend.position = "bottom",
+            plot.title = element_text(size = 18),
+            legend.text = element_text(size = 12),
+            legend.title = element_text(size = 14),
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            axis.text.y = element_text(size = 10),
+            axis.title = element_text(size = 15)
+        ) +
         {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
@@ -319,7 +335,9 @@ plot_scouting_graph <- function(raw) {
         fill = percentile)) +
         geom_col() +
         theme_bw() +
-        theme(legend.position = "none") + 
+        theme(legend.position = "none",
+              axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+              ) + 
         scale_fill_gradient2(
             high = "forestgreen", 
             mid = "grey90", 
@@ -328,8 +346,7 @@ plot_scouting_graph <- function(raw) {
         labs(
             x = "Scout Initials",
             y = "Number of Times Scouted",
-            title = "Scout and Their Number of Times Scouted") +
-        theme(legend.position = "none")
+            title = "Scout and Their Number of Times Scouted")
     
     ggplotly(still_graph, tooltip = "text")
 }
@@ -375,7 +392,15 @@ stacked_bar_chart <- function(
             ) 
         ) +
         theme_bw() +
-        theme(legend.position = "bottom") +
+        theme(
+            legend.position = "bottom",
+            plot.title = element_text(size = 18),
+            legend.text = element_text(size = 12),
+            legend.title = element_text(size = 14),
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            axis.text.y = element_text(size = 10),
+            axis.title = element_text(size = 15)
+        ) +
         {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
@@ -493,7 +518,9 @@ yap_graph <- function(raw) {
             low = "firebrick2", 
             midpoint = 0.5) +
         theme_bw() +
-        theme(legend.position = "none")
+        theme(legend.position = "none",
+              axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+              )
     
     ggplotly(plot)
 }
@@ -533,7 +560,9 @@ high_streak <- function(raw){
                              low = "cornflowerblue", 
                              midpoint = 0.5) +
         theme_bw() +
-        theme(legend.position = "none")
+        theme(legend.position = "none",
+              axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+        )
     
     ggplotly(p)
 }
@@ -701,7 +730,15 @@ inactive_stategy_summary <- function(
                        "b_herd_2" = "herd (2)",
                        "a_pass_1" = "pass (1)" )) +
         theme_bw() +
-        theme(legend.position = "bottom") +
+        theme(
+            legend.position = "bottom",
+            plot.title = element_text(size = 18),
+            legend.text = element_text(size = 12),
+            legend.title = element_text(size = 14),
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            axis.text.y = element_text(size = 10),
+            axis.title = element_text(size = 15)
+        ) +
         {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
@@ -773,7 +810,15 @@ problems_graph <- function(raw, teams, alliance_color = FALSE) {
                        "num_a_stop" = "A Stop",
                        "num_e_stop" = "E Stop")) + 
         theme_bw() +
-        theme(legend.position = "bottom") +
+        theme(
+            legend.position = "bottom",
+            plot.title = element_text(size = 18),
+            legend.text = element_text(size = 12),
+            legend.title = element_text(size = 14),
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            axis.text.y = element_text(size = 10),
+            axis.title = element_text(size = 15)
+        ) +
         {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
@@ -823,7 +868,15 @@ auto_type_graph <- function(raw, order, teams, flip, alliance_color = FALSE) {
                        "6" = "Right Bump")
         ) +
         theme_bw() +
-        theme(legend.position = "bottom") +
+        theme(
+            legend.position = "bottom",
+            plot.title = element_text(size = 18),
+            legend.text = element_text(size = 12),
+            legend.title = element_text(size = 14),
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            axis.text.y = element_text(size = 10),
+            axis.title = element_text(size = 15)
+        ) +
         {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
@@ -878,7 +931,9 @@ driver_rating_match <- function(dataframe, team_id){
             title = "Driver Rating") + 
         theme_bw() +
         facet_wrap(vars(team)) +
-        theme(legend.position = "none")
+        theme(legend.position = "none",
+              axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+              )
 }
 
 prescout <- function(event_key, manual_teams = NULL){
