@@ -54,7 +54,7 @@ server <- function(input, output, session) {
         pridge(read.csv(file.path("data", event, "pridge.csv")))
         alliances(read.csv(file.path("data", event, "alliances.csv")))
     }
-    load_event_data("gal")
+    load_event_data("chcmp")
     
     #UPDATE PICKERS
     observe({
