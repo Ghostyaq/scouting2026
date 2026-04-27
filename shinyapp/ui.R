@@ -476,21 +476,12 @@ ui <- fluidPage(
                             color = "success",
                             size = "md",
                             block = TRUE
-                        ),
-                        actionBttn(
-                            inputId = "HOPpeR",
-                            label = "HOPpeR (Non-Functional)",
-                            style = "unite",
-                            color = "success",
-                            size = "md",
-                            block = TRUE
-                        ),
+                        )
                     )
                 ),
                 div(class = "col-lg-6",
                     card(
-                        card_header("Event Data Switching"),
-                        uiOutput("event_current_selection"),
+                        card_header("Chesapeake Data Switching"),
                         actionBttn(
                             inputId = "week0",
                             label = "Week 0 (Test)",
@@ -535,6 +526,76 @@ ui <- fluidPage(
                 )
             ),
             div(class = "row",
+                div(class = "col-lg-6",
+                    card(
+                        card_header("Worlds Data Switching"),
+                        uiOutput("event_current_selection"),
+                        actionBttn(
+                            inputId = "arc",
+                            label = "Archimedes",
+                            style = "unite",
+                            color = "success",
+                            size = "md",
+                            block = TRUE
+                        ),
+                        actionBttn(
+                            inputId = "cur",
+                            label = "Curie",
+                            style = "unite",
+                            color = "success",
+                            size = "md",
+                            block = TRUE
+                        ),
+                        actionBttn(
+                            inputId = "dal",
+                            label = "Daly",
+                            style = "unite",
+                            color = "success",
+                            size = "md",
+                            block = TRUE
+                        ),
+                        actionBttn(
+                            inputId = "gal",
+                            label = "Galileo",
+                            style = "unite",
+                            color = "success",
+                            size = "md",
+                            block = TRUE
+                        ),
+                        actionBttn(
+                            inputId = "hop",
+                            label = "Hopper",
+                            style = "unite",
+                            color = "success",
+                            size = "md",
+                            block = TRUE
+                        ),
+                        actionBttn(
+                            inputId = "joh",
+                            label = "Johnson",
+                            style = "unite",
+                            color = "success",
+                            size = "md",
+                            block = TRUE
+                        ),
+                        actionBttn(
+                            inputId = "mil",
+                            label = "Milstein",
+                            style = "unite",
+                            color = "success",
+                            size = "md",
+                            block = TRUE
+                        ),
+                        actionBttn(
+                            inputId = "new",
+                            label = "Newton",
+                            style = "unite",
+                            color = "success",
+                            size = "md",
+                            block = TRUE
+                        )
+                    )
+                ),
                 div(class = "col-lg-6",
                     card(
                         card_header("Scout Comments Login"),

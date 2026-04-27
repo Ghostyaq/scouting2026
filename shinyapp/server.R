@@ -66,29 +66,27 @@ server <- function(input, output, session) {
         updateVirtualSelect("selected_teams_qual", choices = unique_teams)
     })
     
-    observeEvent(input$week0, {
-        load_event_data("week0")
-        event_selected("Week 0")
-    })
+    events <- list(
+        week0 = "Week 0",
+        vaale = "Alexandria",
+        mdpas = "Pasadena",
+        mdbet = "Bethesda",
+        chcmp = "DChamps",
+        arc = "Archimedes",
+        cur = "Curie",
+        dal = "Daly",
+        gal = "Galileo",
+        hop = "Hopper",
+        joh = "Johnson",
+        mil = "Milstein",
+        new = "Newton"
+    )
     
-    observeEvent(input$vaale, {
-        load_event_data("vaale")
-        event_selected("Alexandria")
-    })
-    
-    observeEvent(input$mdpas, {
-        load_event_data("mdpas")
-        event_selected("Pasadena")
-    })
-    
-    observeEvent(input$mdbet, {
-        load_event_data("mdbet")
-        event_selected("Bethesda")
-    })
-    
-    observeEvent(input$chcmp, {
-        load_event_data("chcmp")
-        event_selected("DChamps")
+    lapply(names(events), function(id) {
+        observeEvent(input[[id]], {
+            load_event_data(id)
+            event_selected(events[[id]])
+        })
     })
     
     observeEvent(input$pRidge, {
