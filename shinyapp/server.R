@@ -92,11 +92,11 @@ server <- function(input, output, session) {
     observeEvent(input$pRidge, {
         metric_selected("pRidge")
     })
-
+    
     observeEvent(input$EPA, {
         metric_selected("EPA")
     })
-
+    
     observeEvent(input$OPR, {
         metric_selected("OPR")
     })
@@ -327,8 +327,8 @@ server <- function(input, output, session) {
     
     output$inactive_strategy_match <- renderPlot({
         req(isTruthy(input$selected_match) || 
-            isTruthy(input$selected_red) || 
-            isTruthy(input$selected_blue))
+                isTruthy(input$selected_red) || 
+                isTruthy(input$selected_blue))
         inactive_stategy_summary(raw(), teams_selected(), alliance_color = TRUE)
     })
     
