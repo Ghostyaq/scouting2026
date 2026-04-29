@@ -383,8 +383,23 @@ server <- function(input, output, session) {
     })
     
     output$qual_comments_ui <- renderUI({
-        req(isTruthy(input$selected_teams_qual))
         teams <- input$selected_teams_qual
+        if (length(teams) == 0){
+            return(div(class = "row",
+                       div(class = "col-lg-6",
+                           card(
+                               class = "graph-card",
+                               card_header(paste("Placeholder"))
+                           )
+                       ),
+                       div(class = "col-lg-6",
+                           card(
+                               class = "graph-card",
+                               card_header(paste("Placeholder"))
+                           )
+                       )
+            ))
+        }
         
         tagList(
             lapply(seq_along(teams), function(i) {
