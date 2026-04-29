@@ -32,137 +32,43 @@ ui <-navbarPage(
     ),
     collapsible = TRUE,
     header = tagList(
-        tags$style(HTML("
-    @media (max-width: 991px) {
+        tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+        tags$head(tags$script(HTML("
+            function resizeFrame() {
+                if (window.frameElement) {
+                    var activeTab = document.querySelector('.tab-pane.active');
+                    var navbar = document.querySelector('.navbar');
+                    var navHeight = navbar ? navbar.offsetHeight : 0;
+                    var h = activeTab ? activeTab.scrollHeight + navHeight + 20
+                    : document.body.scrollHeight;
+                    
+                    window.frameElement.style.height = h + 'px';
+                    window.frameElement.style.overflow = 'hidden';
+                }
+                document.documentElement.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden';
+            }
 
-        /* ---- BODY & BASE TEXT ---- */
-        body { font-size: 15px !important; line-height: 1.5 !important; }
-        p, li, span, label { font-size: 20px !important; }
-
-        /* ---- NAVBAR ---- */
-        .navbar-brand { font-size: 24px !important; }
-        .navbar-nav .nav-link { font-size: 20px !important; padding: 12px 16px !important; }
-        .navbar-toggler { padding: 10px !important; }
-
-        /* ---- CARDS ---- */
-        .card-header { font-size: 26px !important; padding: 14px !important; }
-        .card-body { padding: 16px !important; }
-        .graph-card { height: 1000px; }
-        .card-body * { font-size: 25px !important; }
-        .card-header * { font-size: 25px !important; }
-        .shiny-html-output { font-size: 25px !important; }
-        #intro_paragraph, #event_summary_summary, #compare_teams_summary,
-        #match_tab_summary, #scouts_tab_summary, #settings_summary,
-        #pridge_summary, #metric_swap_summary, #event_swap_summary,
-        #password_summary { font-size: 25px !important; }
-
-#intro_paragraph *, #event_summary_summary *, #compare_teams_summary *,
-#match_tab_summary *, #scouts_tab_summary *, #settings_summary *,
-#pridge_summary *, #metric_swap_summary *, #event_swap_summary *,
-#password_summary * { font-size: 25px !important; }
-
-#intro_paragraph b, #event_summary_summary b, #compare_teams_summary b,
-#match_tab_summary b, #scouts_tab_summary b, #settings_summary b,
-#pridge_summary b, #metric_swap_summary b, #event_swap_summary b,
-#password_summary b { font-size: 25px !important; }
-
-#intro_paragraph a, #event_summary_summary a, #compare_teams_summary a,
-#match_tab_summary a, #scouts_tab_summary a, #settings_summary a,
-#pridge_summary a, #metric_swap_summary a, #event_swap_summary a,
-#password_summary a { font-size: 25px !important; }
-
-/* VIRTUAL SELECT PICKERS CSS */
-
-.vscomp-toggle-button {
-    font-size: 100px !important;
-    height: 100px !important;
-    padding: 25px !important;
-}
-.vscomp-option-text { 
-    font-size: 30px !important; 
-}
-.vscomp-option { 
-    font-size: 22px !important; 
-    padding: 14px !important; 
-    min-height: 50px !important; 
-    box-sizing: border-box !important;
-    height: auto !important; 
-    max-height: 55vh !important;
-}
-.vscomp-search-input { 
-    font-size: 20px !important; 
-    padding: 10px !important; 
-}
-.vscomp-no-options { 
-    font-size: 20px !important; 
-}
-.vscomp-value-tag { 
-    font-size: 18px !important; 
-    padding: 4px 8px !important; 
-}
-.vscomp-toggle-button .vscomp-value { 
-    font-size: 20px !important; 
-}
-.vscomp-dropbox-container-bottom {
-    display: none !important;
-}
-.vscomp-dropbox { 
-    height: 100%px !important;
-}
-
-/* SCORE PREDICTION CSS */
-
-#score_prediction { 
-    font-size: 30px !important; 
-}
-#score_prediction * { 
-    font-size: 30px !important; 
-}
-#score_prediction span { 
-    font-size: 30px !important; 
-}
-.shiny-spinner-output-container {
-    min-height: 875px !important;
-}
-
-.shiny-spinner-output-container .shiny-plot-output {
-    min-height: 875px !important;
-}
-")),tags$head(tags$script(HTML("
-    function resizeFrame() {
-        if (window.frameElement) {
-            var activeTab = document.querySelector('.tab-pane.active');
-            var navbar = document.querySelector('.navbar');
-            var navHeight = navbar ? navbar.offsetHeight : 0;
-            var h = activeTab ? activeTab.scrollHeight + navHeight + 20 : document.body.scrollHeight;
+            // On tab click
+            document.addEventListener('click', function(e) {
+                var tab = e.target.closest('a[data-bs-toggle=\"tab\"], a[data-toggle=\"tab\"]');
+                if (tab) {
+                    setTimeout(resizeFrame, 400);
+                }
+            });
             
-            window.frameElement.style.height = h + 'px';
-            window.frameElement.style.overflow = 'hidden';
-        }
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
-    }
-    
-    // On tab click
-    document.addEventListener('click', function(e) {
-        var tab = e.target.closest('a[data-bs-toggle=\"tab\"], a[data-toggle=\"tab\"]');
-        if (tab) {
-            setTimeout(resizeFrame, 400);
-        }
-    });
-    
-    // When any Shiny output finishes rendering, resize
-    $(document).on('shiny:value shiny:outputinvalidated', function() {
-        setTimeout(resizeFrame, 300);
-    });
-    
-    // Watch for image/plot loads specifically
-    $(document).on('shiny:idle', function() {
-        setTimeout(resizeFrame, 300);
-    });
-    
-    setTimeout(resizeFrame, 2000);
-"))),
+            // When any Shiny output finishes rendering, resize
+            $(document).on('shiny:value shiny:outputinvalidated', function() {
+                setTimeout(resizeFrame, 300);
+            });
+            
+            // Watch for image/plot loads specifically
+            $(document).on('shiny:idle', function() {
+                setTimeout(resizeFrame, 300);
+            });
+            
+            setTimeout(resizeFrame, 2000);"
+        ))),
     ),
     tabPanel(#--------------------------INTRODUCTION------------------------
              title = "Introductory Page",
@@ -174,7 +80,7 @@ ui <-navbarPage(
              ),
              div(class = "row",
                  div(class = "col-lg-3",
-                     uiOutput("frc_logo")
+                     card(uiOutput("frc_logo"))
                  ),
                  div(class = "col-lg-9",
                      card(
@@ -319,14 +225,16 @@ ui <-navbarPage(
                                  card(
                                      class = "graph-card",
                                      card_header("Summary Fuel Points"),
-                                     plotOutput("summary_point_comp")|>withSpinner()
+                                     plotOutput("summary_point_comp") |> 
+                                         withSpinner()
                                  )
                              ),
                              div(class = "col-lg-6",
                                  card(
                                      class = "graph-card",
                                      card_header("Trench Bump Ratioplot"),
-                                     plotOutput("trench_bump_comp")|>withSpinner()
+                                     plotOutput("trench_bump_comp") |> 
+                                         withSpinner()
                                  )
                              )
                          ),
@@ -335,14 +243,16 @@ ui <-navbarPage(
                                  card(
                                      class = "graph-card",
                                      card_header("Driver Rating by Match"),
-                                     plotOutput("driver_rating_comp")|>withSpinner()
+                                     plotOutput("driver_rating_comp") |> 
+                                         withSpinner()
                                  )
                              ),
                              div(class = "col-lg-6",
                                  card(
                                      class = "graph-card",
                                      card_header("Auto Type"),
-                                     plotOutput("auto_type_comp")|>withSpinner()
+                                     plotOutput("auto_type_comp") |> 
+                                         withSpinner()
                                  )
                              )
                          ),
@@ -364,14 +274,14 @@ ui <-navbarPage(
                          ),
                          card(
                              card_header("Robot Images"),
-                             uiOutput("images_comp")|>withSpinner()
+                             uiOutput("images_comp") |> withSpinner()
                          ),
                          card(
                              card_header("Stats"),
                              fill = FALSE,
                              card_body(
                                  fillable = FALSE,
-                                 DTOutput("summary_stats_comp")|>withSpinner()
+                                 DTOutput("summary_stats_comp") |> withSpinner()
                              )
                          ),
                          card(
@@ -379,7 +289,7 @@ ui <-navbarPage(
                              fill = FALSE,
                              card_body(
                                  fillable = FALSE,
-                                 DTOutput("match_history")|>withSpinner()
+                                 DTOutput("match_history") |> withSpinner()
                              )
                          ),
                          card(
@@ -387,7 +297,7 @@ ui <-navbarPage(
                              fill = FALSE,
                              card_body(
                                  fillable = FALSE,
-                                 DTOutput("comments_df_comp")|>withSpinner()
+                                 DTOutput("comments_df_comp") |> withSpinner()
                              )
                          )
                      )
@@ -425,14 +335,16 @@ ui <-navbarPage(
                                  card(
                                      class = "graph-card",
                                      card_header("Summary Fuel Points"),
-                                     plotOutput("summary_point_match")|>withSpinner()
+                                     plotOutput("summary_point_match") |> 
+                                         withSpinner()
                                  )
                              ),
                              div(class = "col-lg-6",
                                  card(
                                      class = "graph-card",
                                      card_header("Trench Bump Ratioplot"),
-                                     plotOutput("trench_bump_match")|>withSpinner()
+                                     plotOutput("trench_bump_match") |> 
+                                         withSpinner()
                                  )
                              )
                          ),
@@ -441,14 +353,16 @@ ui <-navbarPage(
                                  card(
                                      class = "graph-card",
                                      card_header("Driver Rating by Match"),
-                                     plotOutput("driver_rating_match")|>withSpinner()
+                                     plotOutput("driver_rating_match") |> 
+                                         withSpinner()
                                  )
                              ),
                              div(class = "col-lg-6",
                                  card(
                                      class = "graph-card",
                                      card_header("Auto Type"),
-                                     plotOutput("auto_type_match")|>withSpinner()
+                                     plotOutput("auto_type_match") |> 
+                                         withSpinner()
                                  )
                              )
                          ),
@@ -457,27 +371,30 @@ ui <-navbarPage(
                                  card(
                                      class = "graph-card",
                                      card_header("Inactive Strategy Summary"),
-                                     plotOutput("inactive_strategy_match")|>withSpinner()
+                                     plotOutput("inactive_strategy_match") |> 
+                                         withSpinner()
                                  )
                              ),
                              div(class = "col-lg-6",
                                  card(
                                      class = "graph-card",
                                      card_header("Problems Encountered"),
-                                     plotOutput("problem_type_match")|>withSpinner()
+                                     plotOutput("problem_type_match") |> 
+                                         withSpinner()
                                  )
                              )
                          ),
                          card(
                              card_header("Robot Images in Match"),
-                             uiOutput("images_match")|>withSpinner()
+                             uiOutput("images_match") |> withSpinner()
                          ),
                          card(
                              card_header("Stats"),
                              fill = FALSE,
                              card_body(
                                  fillable = FALSE,
-                                 DTOutput("summary_stats_match")|>withSpinner()
+                                 DTOutput("summary_stats_match") |> 
+                                     withSpinner()
                              )
                          ),
                          card(
@@ -485,7 +402,7 @@ ui <-navbarPage(
                              fill = FALSE,
                              card_body(
                                  fillable = FALSE,
-                                 DTOutput("comments_df_match")|>withSpinner()
+                                 DTOutput("comments_df_match") |> withSpinner()
                              )
                          )
                      )

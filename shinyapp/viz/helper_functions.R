@@ -65,12 +65,12 @@ plot_driver_rating_graph <- function(
         theme_bw() + 
         theme(
             legend.position = "bottom",
-            plot.title = element_text(size = 18),
-            legend.text = element_text(size = 12),
-            legend.title = element_text(size = 14),
-            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-            axis.text.y = element_text(size = 10),
-            axis.title = element_text(size = 15)
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
         ) +
         {if (alliance_color == TRUE)
             theme(
@@ -114,12 +114,12 @@ endgame_graph <- function(raw, teams, alliance_color = FALSE) {
         theme_bw() + 
         theme(
             legend.position = "bottom",
-            plot.title = element_text(size = 18),
-            legend.text = element_text(size = 12),
-            legend.title = element_text(size = 14),
-            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-            axis.text.y = element_text(size = 10),
-            axis.title = element_text(size = 15)
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
         ) +
         {if (alliance_color == TRUE)
             theme(
@@ -455,12 +455,12 @@ stacked_bar_chart <- function(
         theme_bw() +
         theme(
             legend.position = "bottom",
-            plot.title = element_text(size = 18),
-            legend.text = element_text(size = 12),
-            legend.title = element_text(size = 14),
-            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-            axis.text.y = element_text(size = 10),
-            axis.title = element_text(size = 15)
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
         ) +
         {if (alliance_color == TRUE)
             theme(
@@ -606,13 +606,11 @@ high_streak <- function(raw){
         ) |>
         ungroup() |>
         filter(streak > 0) |>
-        mutate(percentile = (streak - min(streak)) / 
-                   (max(streak) - min(streak)))
-    
-    p <- ggplot(
-        streak_df, 
-        aes(x = reorder(scout, -streak), streak, fill = percentile)
-        ) +
+        mutate(
+            percentile = (streak - min(streak)) / (max(streak) - min(streak))
+        )
+
+    p <- ggplot(streak_df, aes(x = scout, y = streak, fill = percentile)) +
         geom_col(position = "stack", stat = "identity") + 
         labs(title = "Current Streak", 
              x = "Scouts", y = "Matches") +
@@ -793,12 +791,12 @@ inactive_stategy_summary <- function(
         theme_bw() +
         theme(
             legend.position = "bottom",
-            plot.title = element_text(size = 18),
-            legend.text = element_text(size = 12),
-            legend.title = element_text(size = 14),
-            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-            axis.text.y = element_text(size = 10),
-            axis.title = element_text(size = 15)
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
         ) +
         {if (alliance_color == TRUE)
             theme(
@@ -873,12 +871,12 @@ problems_graph <- function(raw, teams, alliance_color = FALSE) {
         theme_bw() +
         theme(
             legend.position = "bottom",
-            plot.title = element_text(size = 18),
-            legend.text = element_text(size = 12),
-            legend.title = element_text(size = 14),
-            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-            axis.text.y = element_text(size = 10),
-            axis.title = element_text(size = 15)
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
         ) +
         {if (alliance_color == TRUE)
             theme(
@@ -931,12 +929,12 @@ auto_type_graph <- function(raw, order, teams, flip, alliance_color = FALSE) {
         theme_bw() +
         theme(
             legend.position = "bottom",
-            plot.title = element_text(size = 18),
-            legend.text = element_text(size = 12),
-            legend.title = element_text(size = 14),
-            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-            axis.text.y = element_text(size = 10),
-            axis.title = element_text(size = 15)
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
         ) +
         {if (alliance_color == TRUE)
             theme(
