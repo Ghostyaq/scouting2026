@@ -24,7 +24,7 @@ source("server.R")
 
 options(sass.cache = FALSE)
 
-ui <-navbarPage(
+ui <- navbarPage(
     title = "2026 REBUILT 449 Shinyapp",
     theme = bs_theme(
         version = 5,
