@@ -297,9 +297,12 @@ pre_event_team_epas <- function(event_key, schedule) {
         mutate(
             first_match = min(long_schedule$match[long_schedule$team == team]),
             match_key = paste0("2026", event_key, "_qm", first_match),
-            sb = list(team_sb(team, match = match_key)),
-            auto_fuel_pre_epa = sb$epa$breakdown$auto_fuel,
-            total_fuel_pre_epa = sb$epa$breakdown$total_fuel,
+            sb = list(tryCatch(
+                team_sb(team, match = match_key),
+                error = function(e) NULL
+            )),
+            auto_fuel_pre_epa = if(!is.null(sb)) sb$epa$breakdown$auto_fuel else NA,
+            total_fuel_pre_epa = if(!is.null(sb)) sb$epa$breakdown$total_fuel else NA,
             tele_fuel_pre_epa = total_fuel_pre_epa - auto_fuel_pre_epa
         ) |>
         select(team, match_key, auto_fuel_pre_epa, tele_fuel_pre_epa)
@@ -320,9 +323,12 @@ recent_team_epas <- function(event_key, schedule) {
         mutate(
             last_match = max(long_schedule$match[long_schedule$team == team]),
             match_key = paste0("2026", event_key, "_qm", last_match),
-            sb = list(team_sb(team, match = match_key)),
-            auto_fuel_recent_epa = sb$epa$breakdown$auto_fuel,
-            total_fuel_recent_epa = sb$epa$breakdown$total_fuel,
+            sb = list(tryCatch(
+                team_sb(team, match = match_key),
+                error = function(e) NULL
+            )),
+            auto_fuel_recent_epa = if(!is.null(sb)) sb$epa$breakdown$auto_fuel else NA,
+            total_fuel_recent_epa = if(!is.null(sb)) sb$epa$breakdown$total_fuel else NA,
             tele_fuel_recent_epa = total_fuel_recent_epa - auto_fuel_recent_epa
         ) |>
         select(team, match_key, auto_fuel_recent_epa, tele_fuel_recent_epa)
