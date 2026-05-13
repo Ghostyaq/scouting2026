@@ -392,7 +392,7 @@ pridge_calculation_online <- function(event_key, recalc_pre_event_epa = FALSE){
 
 plot_scouting_graph <- function(raw) {
     scout <- raw$scout
-    scout_count <- count(raw, scout, sort = TRUE, name = "number_of_times")|>
+    scout_count <- count(raw, scout, sort = TRUE, name = "number_of_times") |>
         mutate(percentile = percent_rank(number_of_times))
     
     still_graph <- ggplot(scout_count, aes(
