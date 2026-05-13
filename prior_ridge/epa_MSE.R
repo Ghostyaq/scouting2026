@@ -60,7 +60,7 @@ fit_event_pridge <- function(
 }
 
 calculate_all_team_epas <- function(){
-    lambda_opt <- read.csv("pridge_pct_improvement15-25.csv") |>
+    lambda_opt <- read.csv("prior_ridge/data/pridge_pct_improvement15-25.csv") |>
         filter(!is.na(lambda_opt)) 
     unique_teams <- lambda_opt |>
         rowwise() |>
