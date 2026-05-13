@@ -28,7 +28,6 @@ default_linear_weights <- data.frame(
 ) #temp, remove later
 
 addResourcePath("images_d", "data/gal/images")
-#addResourcePath("heatmaps", "../subjective_scouting/pathImages/finals")
 
 server <- function(input, output, session) {
     raw <- reactiveVal()
@@ -53,6 +52,8 @@ server <- function(input, output, session) {
         tba_data(read.csv(file.path("data", event, "tba_data.csv")))
         pridge(read.csv(file.path("data", event, "pridge.csv")))
         alliances(read.csv(file.path("data", event, "alliances.csv")))
+        removeResourcePath("images_d")
+        addResourcePath("images_d", paste0("data/", event, "/images"))
     }
     load_event_data("gal")
     
