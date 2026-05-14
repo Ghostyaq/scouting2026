@@ -10,7 +10,7 @@ Colorized version of heatmap.png
 ## robocv.csv
 Robot scores in each match
 
-Robot IDs for Bethesda (From the perspective of the scouters in the stands):
+Robot IDs (From the perspective of the scouters in the stands):
 * 0: Robot Unknown, possibly human player
 * 1: Close Blue Robot
 * 2: Center Blue Robot

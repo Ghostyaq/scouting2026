@@ -1,0 +1,94 @@
+@media (max-width: 991px) {
+
+    /* ---- BODY & BASE TEXT ---- */
+    body { font-size: 15px !important; line-height: 1.5 !important; }
+    p, li, span, label { font-size: 20px !important; }
+    
+    /* ---- NAVBAR ---- */
+    .navbar-brand { font-size: 24px !important; }
+    .navbar-nav .nav-link { font-size: 20px !important; padding: 12px 16px !important; }
+    .navbar-toggler { padding: 10px !important; }
+    
+    /* ---- CARDS ---- */
+    .card-header { font-size: 26px !important; padding: 14px !important; }
+    .card-body { padding: 16px !important; }
+    .graph-card { height: 1000px; }
+    .card-body * { font-size: 25px !important; }
+    .card-header * { font-size: 25px !important; }
+    .shiny-html-output { font-size: 25px !important; }
+    #intro_paragraph, #event_summary_summary, #compare_teams_summary,
+    #match_tab_summary, #scouts_tab_summary, #settings_summary,
+    #pridge_summary, #metric_swap_summary, #event_swap_summary,
+    #password_summary { font-size: 25px !important; }
+    
+    #intro_paragraph *, #event_summary_summary *, #compare_teams_summary *,
+    #match_tab_summary *, #scouts_tab_summary *, #settings_summary *,
+    #pridge_summary *, #metric_swap_summary *, #event_swap_summary *,
+    #password_summary * { font-size: 25px !important; }
+    
+    #intro_paragraph b, #event_summary_summary b, #compare_teams_summary b,
+    #match_tab_summary b, #scouts_tab_summary b, #settings_summary b,
+    #pridge_summary b, #metric_swap_summary b, #event_swap_summary b,
+    #password_summary b { font-size: 25px !important; }
+    
+    #intro_paragraph a, #event_summary_summary a, #compare_teams_summary a,
+    #match_tab_summary a, #scouts_tab_summary a, #settings_summary a,
+    #pridge_summary a, #metric_swap_summary a, #event_swap_summary a,
+    #password_summary a { font-size: 25px !important; }
+
+/* VIRTUAL SELECT PICKERS CSS */
+.vscomp-toggle-button {
+    font-size: 100px !important;
+    height: 100px !important;
+    padding: 25px !important;
+}
+.vscomp-option-text { 
+    font-size: 30px !important; 
+}
+.vscomp-option { 
+    font-size: 22px !important; 
+    padding: 14px !important; 
+    min-height: 50px !important; 
+    box-sizing: border-box !important;
+    height: auto !important; 
+    max-height: 55vh !important;
+}
+.vscomp-search-input { 
+    font-size: 20px !important; 
+    padding: 10px !important; 
+}
+.vscomp-no-options { 
+    font-size: 20px !important; 
+}
+.vscomp-value-tag { 
+    font-size: 18px !important; 
+    padding: 4px 8px !important; 
+}
+.vscomp-toggle-button .vscomp-value { 
+    font-size: 20px !important; 
+}
+.vscomp-dropbox-container-bottom {
+    display: none !important;
+}
+.vscomp-dropbox { 
+    height: 100%px !important;
+}
+
+/* SCORE PREDICTION CSS */
+
+#score_prediction { 
+    font-size: 30px !important; 
+}
+#score_prediction * { 
+    font-size: 30px !important; 
+}
+#score_prediction span { 
+    font-size: 30px !important; 
+}
+.shiny-spinner-output-container {
+    min-height: 875px !important;
+}
+
+.shiny-spinner-output-container .shiny-plot-output {
+    min-height: 875px !important;
+}

@@ -1,0 +1,59 @@
+Timestamp,Scout Initials (i.e Debbie Kebede -> D.K.),Team number (for the team you're scouting),Drive base ,"Upload one ISOMETRIC robot photo (Make sure to take it from the FRONT side where we can see the intake, hopper, and shooter) 
+
+leave as LITTLE as possible hidden
+
+EXAMPLE",Turret?,How many batteries do they have?,Build quality (1-5),Additional comments (optional)?
+4/10/2026 9:26:37,AM,122,Swerve,https://drive.google.com/open?id=1TYSM9WpfJDIHrnw-zPheHkFurPeCjA02,Yes,8,4,
+4/10/2026 9:26:37,AM,1389,Swerve,https://drive.google.com/open?id=1gxeJJQ7k6WqjXKFnaBliDzUfzW97gFD1,Yes,8,3,
+4/10/2026 9:27:23,AM,339,Swerve,https://drive.google.com/open?id=1TohdSMStaRynyuMw-1jS3-KDCR_n4FYi,No,15,4,
+4/10/2026 9:29:55,AM,346,Swerve,https://drive.google.com/open?id=1bUhKGGzcyOz_61nFZmlA7v3LxepY8RBc,No,10,5,
+4/10/2026 9:31:49,AM,401,Swerve,https://drive.google.com/open?id=1Xv93RRoHwhH65R83EGsM1ZY3tnpxzzQQ,Yes,9,5,
+4/10/2026 10:03:30,AM,422,Swerve,https://drive.google.com/open?id=1ga8Iv9l97S2w0HVSVf9VHbXmJ82Xiq2D,Yes,10,5,75 ball capacity
+4/10/2026 9:07:35,MC,449,Swerve,https://drive.google.com/open?id=1eEw3yDJ-Q-0aIxNabxhPcfU-lz78RtYf,No,10,5,
+4/10/2026 9:38:29,AM,540,Swerve,https://drive.google.com/open?id=1U3KFn6gosAnnzry9WLetp2ZMdJoMmoPe,Yes,11,3,Auto aim
+4/10/2026 9:40:08,AM,614,Swerve,https://drive.google.com/open?id=1birv28GhZWSwMZ99eGGZ-D35gZtrqN5w,No,8,4,
+4/10/2026 9:34:28,AM,619,Swerve,https://drive.google.com/open?id=1BomnPtZjeOWKrVSaiKo4Gxw1iQ_XSffB,No,6,4,
+4/10/2026 9:35:25,AM,620,Swerve,https://drive.google.com/open?id=1BsayJ-cGTZaFlRjys-cu4Pmy2YuWexnl,No,9,3,
+4/10/2026 11:37:42,AZ,686,Swerve,https://drive.google.com/open?id=1yVc01iUvpSFNOyhtCXThgF77Iq94q9-q,No,1,4,"55 ball hopper, dumper, limited auto, belt indexer, slap down deploy,  8-10 bps, only 2 operational camera for vision,"
+4/10/2026 11:44:05,AZ,836,Swerve,https://drive.google.com/open?id=1ghj1UYV3sXjSh9ZUf9kbP1bKl9ywmONX,Yes,1,5,"12bps, 60 hopper capacity, multiple auto options"
+4/10/2026 11:25:20,AZ,1262,Swerve,https://drive.google.com/open?id=1EpIKqbdfkF-1EvcRBl2kqbb6yfWXIyyj,No,1,3,"Single fixed shooter, 4bps, new net barely tested, spindexer"
+4/10/2026 11:29:41,AZ,1629,Swerve,https://drive.google.com/open?id=1mf7CIKZXBHjwhur4dDePI3haPFJiCckx,Yes,1,5,"5bps, 26.5 * 27*22.5, 103 lbs without bumpers, around,60 ball hopper capacity, rack and pinion intake"
+4/10/2026 9:50:25,NS,1727,Swerve,https://drive.google.com/open?id=1Nw5g6VzxPW1rloNidCzC6mt0EW_Wq5WP,No,11,4,Single fixed shooter
+4/10/2026 10:23:43,AD,1731,Swerve,https://drive.google.com/open?id=1iILnhz-xdzB3kHc1WtDW18CGv3DZgGVB,Yes,12,5,Double turret
+4/10/2026 9:55:19,NS,1895,Swerve,https://drive.google.com/open?id=1r-uHxygtYkKZECuim6g09EjX197p93v2,No,8,3,Organized pit
+4/10/2026 9:52:06,NS,1908,Swerve,https://drive.google.com/open?id=1IJ0bVZjp-ZgdNzv-xF3Vu7w05ovEhSR1,No,7,5,Small understaffed pit
+4/10/2026 10:29:23,NS,2068,Swerve,https://drive.google.com/open?id=1SZ-KxkXLT3n1J85CytzppdcXbFwW4QcL,No,10,3,Super cramped pit
+4/10/2026 10:10:19,NS,2106,Swerve,https://drive.google.com/open?id=1KLrj3HoDxUs22G5x7nuxtp0Ld_gRJ2lW,Yes,10,4,Pit is kitted out
+4/10/2026 10:04:38,NS,2199,Swerve,https://drive.google.com/open?id=1sZC7R1IN9RXW2OdQH4-6o7aEUG5osRGc,Yes,10,2,"Cluttered small pit, no drum shooter"
+4/10/2026 10:01:15,NS,2377,Swerve,https://drive.google.com/open?id=14Pj-aeZilB1cOnJN25RqvXXS5YQ9vHlz,Yes,12,4,"Decked out pit, 5 batteries are for testing"
+4/10/2026 9:59:02,NS,2421,Swerve,https://drive.google.com/open?id=19y0lb41yNwyQXASRv3HiIPCi3q4TX5z1,No,5,3,Lots of people in the pit
+4/10/2026 9:38:47,BP,2537,Swerve,https://drive.google.com/open?id=1J3o4ksuGlQvjH7xbqDXy1LDmxhK0hkQK,No,9,4,Wiring is well organized 
+4/10/2026 9:41:22,BP,2890,Swerve,https://drive.google.com/open?id=1nxjrFWMdnFNbey4izg_3OtCwgpaKs5ps,No,6,3,"3 lane, slightly hodgepodge"
+4/10/2026 9:44:42,BP,3136,Swerve,https://drive.google.com/open?id=1fXfCLKv1DuMmI-7vNH1ap1Pf3BF17BIl,No,6,3,Some loose-ish wires
+4/10/2026 9:49:06,BP,3258,Swerve,https://drive.google.com/open?id=1ErtzrVSdoiMEWE2EM6_sCVoecmzDZsJI,No,5,2,Looks good at first but some belts are diagonal and pulleys and spacers seem to be placed slightly offset. Nothing fatal though
+4/10/2026 9:51:04,BP,3361,Swerve,https://drive.google.com/open?id=1fLPgvHgVC9DG66DK-8Dp78uhtdYli85y,No,3,1,Net and wires look chaotic and easy to jam
+4/10/2026 9:53:51,BP,3748,Swerve,https://drive.google.com/open?id=1bn46bCR8uIVCzSwHHsVjT6vPAFp-odJB,No,12,2,"Have a turret but fixed it in place, just single lane now. Wiring slightly disorganized"
+4/10/2026 9:55:52,BP,3939,Swerve,https://drive.google.com/open?id=1tcRhx8IBul6L_SCnogDWnlBoOzzfmBP4,No,8,3,"It was hard to get a good photo, I assume they don’t leave the duct tape on top"
+4/10/2026 9:58:17,BP,4099,Swerve,https://drive.google.com/open?id=1dRBaIT1SwIk56JJflyKkAbvm6wQ7kec8,No,14,4,"Mechanically good, wiring is ok"
+4/10/2026 9:09:53,HR,4472,Swerve,https://drive.google.com/open?id=1Oy5vUdcpMel2mEbTjRe3FSYQAFAbJ8Iq,Yes,10,4,"One turret, spindexer"
+4/10/2026 9:22:34,HR,4541,Swerve,https://drive.google.com/open?id=1wON774IprALFUJ6XiJCKjJ2LgFrRROD_,Yes,4,4,Not as much capacity as some other teams
+4/10/2026 9:29:48,HR,5243,Mecanum,https://drive.google.com/open?id=1psPx-uEOt4SGXIJMdMTZT2bL_lf42zEA,Yes,8,3,Uses a bumper hole for intake
+4/10/2026 9:48:14,HR,5338,Swerve,https://drive.google.com/open?id=1r4QHjvH5RjEIi4GlZQUJVDQB0ZZkE3WR,No,12,5,Double cycle auto
+4/10/2026 9:54:36,HR,5549,Swerve,https://drive.google.com/open?id=1xZIu5KRuypu2CpgZihSMHnrHKv8kaYvU,No,6,5,"Vertical extension, 65 ball auto"
+4/10/2026 10:08:54,HR,5587,Swerve,https://drive.google.com/open?id=1Lj7PuHJ494cJqxmKjJGHB192lcslAZ5I,No,4,3,"They really have 8 batteries, but they said they have “4 good batteries, 4 meh batteries”"
+4/10/2026 10:00:55,HR,5804,Swerve,https://drive.google.com/open?id=163oTqw5U1x9gq98phLc2Mots638HWpan,Yes,8,3,"Bumper hole for intake, no trench"
+4/10/2026 9:43:08,HR,5724,Swerve,https://drive.google.com/open?id=1_t6BVfzJuHI9nhwgtqItrkdUNZlz3auA,No,3,4,
+4/10/2026 10:18:07,HR,8590,Swerve,https://drive.google.com/open?id=1_UkTCEy5YaJoiaxEXAzpQIXABWNL46gr,No,8,4,"Consistent center auto, they are working on others"
+4/10/2026 9:51:43,AD,8592,Swerve,https://drive.google.com/open?id=1Khuzxo1RE7eFnD7i3h_tYF4oyAtO31sj,Yes,6,4,Di-rotor with central intake
+4/10/2026 10:21:26,AD,9033,Swerve,https://drive.google.com/open?id=1t7Dg2fqdoDxAo1PTYd_ifIb0rrqYjo0s,No,10,4,Good defense bc low to the ground plus strong motors in swerve
+4/10/2026 9:56:52,AD,9072,Swerve,https://drive.google.com/open?id=1Rx40TCw43PwLj9wNgZZYHpFiHFDMDISM,No,8,4,
+4/10/2026 9:54:30,AD,10004,Swerve,https://drive.google.com/open?id=12HaYzpUXxQVdAn6hwYnXDmWYESZxga-x,Yes,8,4,Smallish hopper capacity
+4/10/2026 10:02:20,AD,10224,Swerve,https://drive.google.com/open?id=1V8jf_KPejITQZmXTDAieKMych5GUpUsL,Yes,6,3,
+4/10/2026 10:06:36,AD,10679,Swerve,https://drive.google.com/open?id=11LaIfdsbu46-xSgaKFiWXrdXiDKe-Kwf,No,5,2,"Really can only play defense, 5 ball capacity"
+4/10/2026 10:09:39,AD,11318,Swerve,https://drive.google.com/open?id=16wwl8rCM63uYQiRhzG35LZpyjExCyDcx,No,8,3,Multiple nz autos (left and right trench) allegedly 20-30 pts
+4/10/2026 10:14:24,AD,11415,Swerve,https://drive.google.com/open?id=1eIBoM3-iSQL2xU7LnjFMs-8DTavmNzeC,No,6,4,Very very durable design but only single wide shooter and they apparently dont plan on playin defense
+4/10/2026 10:18:39,AD,11425,Tank,https://drive.google.com/open?id=1JzxbE1HLoQLBdS30pW17q9CZZuij37BW,No,2,1,Mainly defensive strategy
+4/10/2026 12:09:01,AZ,1086,Swerve,https://drive.google.com/open?id=1FJNdpqoYZ9iMZQPiCmxdR04mia2zyORp,No,1,4,"13 bps(the said it), 50 hopper, belt indexer, 5 different autos, "
+4/10/2026 12:12:10,AZ,1719,Swerve,https://drive.google.com/open?id=1VLR4AOXDzEXum8_gyRKYH9atisCLOD_9,No,1,2,"1.5 bps, 15 hopper"
+4/10/2026 12:14:17,AZ,1111,Swerve,https://drive.google.com/open?id=1K19fbQBFp7J84CxFmSlKBRYrvrIb6HRC,No,1,3,"3-4bps, lime under a part thingy, the net is not in the pic"
+4/10/2026 12:19:23,AZ,888,Swerve,https://drive.google.com/open?id=1rSr8dUgpGNcAxnymOBCjCYkYH_3Rr1Ol,No,1,4,"Wood belly pan lol! 8bps, 50 balls hopper"

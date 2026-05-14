@@ -3,31 +3,48 @@ library(ggplot2)
 library(plotly)
 library(scoutR)
 
-
-bump_trench_ratioplot <- function(raw, team_list){
+bump_trench_ratioplot <- function(raw, team_list, alliance_color = FALSE){
     filtered_df <- raw |>
         filter(team %in% team_list) |>
         group_by(team) |>
-        summarize(avg_trench = mean(teleop_trench), 
-                  avg_bump = mean(teleop_bump))
+        summarize(
+            avg_trench = mean(teleop_trench), 
+            avg_bump = mean(teleop_bump))
+    
+    if (alliance_color == TRUE) {
+        filtered_df <- filtered_df |>
+            rowwise() |>
+            mutate(
+                color = ifelse(team %in% team_list[1:3], "red", "blue")
+            )
+    } else {
+        filtered_df$color <- rep("black", length(team_list))
+    }
     
     ggplot(filtered_df, aes(x = avg_trench, y = avg_bump)) +
         geom_point() +
         geom_label(
             label = filtered_df$team,
-            nudge_x = 0.1, nudge_y = 0.1
+            nudge_x = 0.1, nudge_y = 0.1,
+            color = filtered_df$color
         ) +
         scale_x_continuous(
-            expand = c(0,0), limits = c(-0.5, max(filtered_df$avg_trench + 1))) +
+            expand = c(0,0), 
+            limits = c(-0.5, max(filtered_df$avg_trench + 1))
+        ) +
         scale_y_continuous(
-            expand = c(0,0), limits = c(-0.1, max(filtered_df$avg_bump + 1))) +
+            expand = c(0,0), 
+            limits = c(-0.1, max(filtered_df$avg_bump + 1))
+        ) +
         labs(title = "Mean Crossing Comparison",
              x = "Mean Trench",
              y = "Mean Bump") + 
         theme_bw()
 }
 
-plot_driver_rating_graph <- function(dataframe, team_id) {
+plot_driver_rating_graph <- function(
+    dataframe, team_id, alliance_color = FALSE
+) {
     selected_team <- dataframe |>
         filter(team %in% c(team_id)) |>
         mutate(team = factor(team))
@@ -45,10 +62,29 @@ plot_driver_rating_graph <- function(dataframe, team_id) {
             y = "Driver Rating",
             color = "Teams",
             title = "Driver Rating") + 
-        theme_bw()
+        theme_bw() + 
+        theme(
+            legend.position = "bottom",
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
+        ) +
+        {if (alliance_color == TRUE)
+            theme(
+                axis.text.x = element_text(
+                    color = ifelse(
+                        levels(data$team) %in% teams[1:3],
+                        "red", 
+                        "blue"), size = 15)
+            )
+            else NULL
+        }
 }
 
-endgame_graph <- function(raw, teams) {
+endgame_graph <- function(raw, teams, alliance_color = FALSE) {
     number_of_teams <- length(unique(raw$team))
     data <- raw |>
         filter(team %in% teams) |>
@@ -76,7 +112,16 @@ endgame_graph <- function(raw, teams) {
                        "L2" = "L2", "L3" = "L3")
         ) +
         theme_bw() + 
-        {if (length(teams) == 6)
+        theme(
+            legend.position = "bottom",
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
+        ) +
+        {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
@@ -86,6 +131,67 @@ endgame_graph <- function(raw, teams) {
             )
             else NULL
         }
+}
+
+radar_qual_graph <- function(raw, teams) {
+    data <- raw |>
+        pivot_longer(
+            cols = -c(match, scout),
+            names_to = c(".value", "set"),
+            names_sep = "_"
+        ) |> 
+        filter(team %in% teams) |>
+        select(-specific, -general)
+    
+    averages <- data |>
+        group_by(team) |>
+        summarise(
+            across(
+                c(speed, smart, passing, defense, stable), 
+                \(x) mean(x, na.rm = TRUE)
+            )
+        ) |>
+        column_to_rownames(var = "team")
+    
+    averages <- rbind(rep(5, 5), rep(0, 5), averages)
+    colors_border <- c("#a7000a", "#0066B3", "#00FF00")
+    colors_fill <- c("#a7000a33", "#0066B333", "#00FF0033")
+    
+    radarchart(
+        averages, axistype = 6, plwd = 4, plty = 1,
+        pcol = colors_border, pfcol = colors_fill,
+        cglcol = "#9A989A", cglty = 1, axislabcol = "#9A989A", 
+        cglwd = 1, vlcex = 0.8, cex = 1.2)
+    
+    legend(
+        x = 0.5, y = 1.35, 
+        legend = teams, bty = "n", pch = 20, col = colors_border, 
+        cex = 1.2, pt.cex = 1.2
+    )
+}
+
+match_comments <- function(raw, selected_team) {
+    data <- raw |>
+        pivot_longer(
+            cols = -c(match, scout),
+            names_to = c(".value", "set"),
+            names_sep = "_"
+        ) |> 
+        filter(team == selected_team) |>
+        arrange(match) |>
+        select(match, specific)
+}
+
+general_comments <- function(raw, selected_team) {
+    data <- raw |>
+        pivot_longer(
+            cols = -c(match, scout),
+            names_to = c(".value", "set"),
+            names_sep = "_"
+        ) |> 
+        filter(team == selected_team) |>
+        arrange(match) |> 
+        select(general)
 }
 
 # event_key needed to write pridge.csv to the right folder (switch to a .R?)
@@ -124,8 +230,8 @@ pridge_calculation_offline <- function(event_key) {
             values_to = "score"
         )
     
-    auto_priors <- statbotics_data$auto_fuel_epa
-    tele_priors <- statbotics_data$tele_fuel_epa
+    auto_priors <- statbotics_data$auto_fuel_pre_epa
+    tele_priors <- statbotics_data$tele_fuel_pre_epa
     names(auto_priors) <- names(tele_priors) <- statbotics_data$team
     grid <- seq(0, 20, length.out = 1000)
     tele_fuel_columns <- c('red_tele_fuel', 'blue_tele_fuel') # 80 char limit
@@ -169,14 +275,16 @@ pridge_calculation_offline <- function(event_key) {
         team = unique_teams, 
         auto_fuel, tele_fuel, 
         auto_fuel_opr, tele_fuel_opr,
-        auto_fuel_epa = statbotics_data$auto_fuel_epa,
-        tele_fuel_epa = statbotics_data$tele_fuel_epa)
+        auto_fuel_pre_epa = statbotics_data$auto_fuel_pre_epa,
+        tele_fuel_pre_epa = statbotics_data$tele_fuel_pre_epa,
+        auto_fuel_recent_epa = statbotics_data$auto_fuel_recent_epa,
+        tele_fuel_recent_epa = statbotics_data$tele_fuel_recent_epa)
     write.csv(
         priors_df, 
         paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
 }
 
-recent_team_epas <- function(event_key, schedule) {
+pre_event_team_epas <- function(event_key, schedule) {
     long_schedule <- schedule |>
         pivot_longer(
             cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
@@ -189,17 +297,46 @@ recent_team_epas <- function(event_key, schedule) {
         mutate(
             first_match = min(long_schedule$match[long_schedule$team == team]),
             match_key = paste0("2026", event_key, "_qm", first_match),
-            sb = list(team_sb(team, match = match_key)),
-            auto_fuel_epa = sb$epa$breakdown$auto_fuel,
-            total_fuel_epa = sb$epa$breakdown$total_fuel,
-            tele_fuel_epa = total_fuel_epa - auto_fuel_epa
+            sb = list(tryCatch(
+                team_sb(team, match = match_key),
+                error = function(e) NULL
+            )),
+            auto_fuel_pre_epa = if(!is.null(sb)) sb$epa$breakdown$auto_fuel else NA,
+            total_fuel_pre_epa = if(!is.null(sb)) sb$epa$breakdown$total_fuel else NA,
+            tele_fuel_pre_epa = total_fuel_pre_epa - auto_fuel_pre_epa
         ) |>
-        select(team, match_key, auto_fuel_epa, tele_fuel_epa)
+        select(team, match_key, auto_fuel_pre_epa, tele_fuel_pre_epa)
     
     return(first_instance)
 }
 
-pridge_calculation_online <- function(event_key){
+recent_team_epas <- function(event_key, schedule) {
+    long_schedule <- schedule |>
+        pivot_longer(
+            cols = c("R1", "R2", "R3", "B1", "B2", "B3"),
+            names_to = "robot",
+            values_to = "team"
+        )
+    
+    last_instance <- data.frame(team = sort(unique(long_schedule$team))) |>
+        rowwise() |>
+        mutate(
+            last_match = max(long_schedule$match[long_schedule$team == team]),
+            match_key = paste0("2026", event_key, "_qm", last_match),
+            sb = list(tryCatch(
+                team_sb(team, match = match_key),
+                error = function(e) NULL
+            )),
+            auto_fuel_recent_epa = if(!is.null(sb)) sb$epa$breakdown$auto_fuel else NA,
+            total_fuel_recent_epa = if(!is.null(sb)) sb$epa$breakdown$total_fuel else NA,
+            tele_fuel_recent_epa = total_fuel_recent_epa - auto_fuel_recent_epa
+        ) |>
+        select(team, match_key, auto_fuel_recent_epa, tele_fuel_recent_epa)
+    
+    return(last_instance)
+}
+
+pridge_calculation_online <- function(event_key, recalc_pre_event_epa = FALSE){
     matches <- event_matches(paste0("2026", event_key), match_type = "quals")
     
     schedule <- data.frame(
@@ -234,14 +371,22 @@ pridge_calculation_online <- function(event_key){
         red_auto_fuel,
         red_tele_fuel)
     
-    file_path_1 <- paste0("shinyapp/data/", event_key, "/tba_data.csv")
+    dir_path <- "shinyapp/data/"
+    file_path_1 <- paste0(dir_path, event_key, "/tba_data.csv")
     write.csv(extracted_data, file_path_1, row.names = FALSE)
     
-    statbotics_data <- recent_team_epas(event_key, schedule)
-    # @TODO take out teams not in the schedule
-    file_path_3 <- paste0("shinyapp/data/", event_key, "/statbotics_data.csv")
-    write.csv(statbotics_data, file_path_3, row.names = FALSE)
+    file_path_2 <- paste0(dir_path, event_key, "/statbotics_data.csv")
+    if (recalc_pre_event_epa) {
+        statbotics_data <- pre_event_team_epas(event_key, schedule)
+        write.csv(statbotics_data, file_path_2, row.names = FALSE)
+    }
     
+    recent_epas <- recent_team_epas(event_key, schedule)
+    sb_data <- read.csv(paste0(dir_path, event_key, "/statbotics_data.csv"))
+    sb_data$auto_fuel_recent_epa <- recent_epas$auto_fuel_recent_epa
+    sb_data$tele_fuel_recent_epa <- recent_epas$tele_fuel_recent_epa
+    write.csv(sb_data, file_path_2, row.names = FALSE)
+
     pridge_calculation_offline(event_key)
 }
 
@@ -257,8 +402,14 @@ plot_scouting_graph <- function(raw) {
         fill = percentile)) +
         geom_col() +
         theme_bw() +
-        theme(legend.position = "none") + 
-        scale_fill_gradient2(high = "forestgreen", mid = "grey90", low = "firebrick2", midpoint = 0.5) +
+        theme(legend.position = "none",
+              axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+              ) + 
+        scale_fill_gradient2(
+            high = "forestgreen", 
+            mid = "grey90", 
+            low = "firebrick2", 
+            midpoint = 0.5) +
         labs(
             x = "Scout Initials",
             y = "Number of Times Scouted",
@@ -267,8 +418,11 @@ plot_scouting_graph <- function(raw) {
     ggplotly(still_graph, tooltip = "text")
 }
 
-stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
-    data <- summary_stats(raw, pridge, teams = NULL) |>
+stacked_bar_chart <- function(
+    raw, schedule, pridge, teams, metric, 
+    order = TRUE, flip = TRUE, alliance_color = FALSE
+){
+    data <- summary_stats(raw, pridge, teams = NULL, metric = metric) |>
         select(Team, `Auto Fuel`, `Tele Fuel`, `ACP`, Climb, `Total Score`) |>
         rename(`Auto Climb` = ACP) |>
         filter(Team %in% teams)
@@ -282,20 +436,20 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
     data <- pivot_longer(
         data,
         cols = c('Auto Fuel', 'Tele Fuel', 'Auto Climb', 'Climb'),
-        names_to = 'type',
+        names_to = 'Score Type',
         values_to = 'score',
     )
     
     data$Team <- factor(data$Team, levels = team_order, ordered = TRUE)
-    data$type <- factor(
-        data$type, 
+    data$`Score Type` <- factor(
+        data$`Score Type`, 
         c("Auto Fuel", "Auto Climb", "Tele Fuel", "Climb"), 
         ordered = TRUE)
     
-    ggplot(data, aes(x = Team, y = score, fill = type)) +
+    ggplot(data, aes(x = Team, y = score, fill = `Score Type`)) +
         geom_bar(stat = "identity") + 
         labs(
-            title = "Stacked Bar Chart", x = "Team", y = "Climb + PRidge Score"
+            title = "Stacked Bar Chart", x = "Team", y = "Climb + Metric Score"
         ) + 
         scale_fill_manual(
             values = c("Auto Fuel" ="#6B705C", 
@@ -305,7 +459,16 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
             ) 
         ) +
         theme_bw() +
-        {if (length(teams) == 6)
+        theme(
+            legend.position = "bottom",
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
+        ) +
+        {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
@@ -318,7 +481,7 @@ stacked_bar_chart <- function(raw, schedule, pridge, order, teams, flip){
         {if (flip) coord_flip() else NULL}
 }
 
-summary_stats <- function(raw, pridge, teams = NULL) {
+summary_stats <- function(raw, pridge, teams = NULL, metric = "pridge") {
     if (is.null(teams)) teams <- sort(unique(pridge$team))
     result <- raw |>
         filter(team %in% teams) |>
@@ -331,7 +494,9 @@ summary_stats <- function(raw, pridge, teams = NULL) {
                               ifelse(endgame_climb == "L3", 30, 0)))),
             ACP = mean(auto_climb * 15, na.rm = TRUE),
             `Auto Cycles` = mean(auto_cycles / 10, na.rm = TRUE),
-            `Tele Cycles` = mean(num_cycles + num_cycles_tenths / 10, na.rm = TRUE),
+            `Tele Cycles` = mean(
+                num_cycles + num_cycles_tenths / 10, 
+                na.rm = TRUE),
             `Total Cycles` = `Auto Cycles` + `Tele Cycles`,
             `Auto Bump` = sum(as.logical(auto_bump), na.rm = TRUE),
             `Tele Trench` = mean(teleop_trench, na.rm = TRUE),
@@ -339,22 +504,37 @@ summary_stats <- function(raw, pridge, teams = NULL) {
             `Auto Climb` = sum(auto_climb, na.rm = TRUE),
             Driver = mean(driver_rating, na.rm = TRUE),
             `Quick Climb` = sum(climb_less_than_5, na.rm = TRUE),
-            `Solo Shot` = sum(solo_shooting, na.rm = TRUE),
-            Died = sum(died, na.rm = TRUE),
+            Died = sum(grep("1", problems), na.rm = TRUE),
             Card = sum(card != 'No Card', na.rm = TRUE)
         ) |>
-        left_join(pridge) |>
+        left_join(pridge)
+    
+    if (metric == "pRidge") {
+        auto = result$auto_fuel
+        tele = result$tele_fuel
+    } else if(metric == "EPA") {
+        auto = result$auto_fuel_recent_epa
+        tele = result$tele_fuel_recent_epa
+    } else if(metric == "OPR") {
+        auto = result$auto_fuel_opr
+        tele = result$tele_fuel_opr
+    }
+    
+    result$`Auto Fuel` <- auto
+    result$`Tele Fuel` <- tele
+    
+    result <- result |>
         mutate(
-            `Auto Fuel` = auto_fuel,
-            `Tele Fuel` = tele_fuel,
             `Total Fuel` = `Auto Fuel` + `Tele Fuel`,
             `Total Score` = `Auto Fuel` + `Tele Fuel` + ACP + Climb
-        ) |>
+        )
+
+    result <- result|>
         select(
             Team = team, `Auto Fuel`, `Tele Fuel`, `Total Fuel`, `Total Score`,
             `Auto Cycles`, `Tele Cycles`, `Total Cycles`, `Auto Bump`,
             `Tele Bump`, `Tele Trench`, `Auto Climb`, Climb, `Quick Climb`, 
-            Driver, `Solo Shot`, Died, Card, `Matches Played`, ACP) |>
+            Driver, Died, Card, `Matches Played`, ACP) |>
         modify_if(~is.numeric(.), ~round(., 2))
     
     result <- result[order(match(result$Team, teams)), ]
@@ -392,12 +572,22 @@ yap_graph <- function(raw) {
             scout_name = reorder(scout, mean_yaps, decreasing = TRUE)
         )
     
-    plot <- ggplot(scout_comments, aes(x = scout_name, y = mean_yaps, fill = percentile)) +
+    plot <- ggplot(
+        scout_comments, 
+        aes(x = scout_name, y = mean_yaps, fill = percentile)
+        ) +
         geom_bar(stat = "identity", position = position_dodge()) +
         labs(title = "Comments Summary: Mean Yappage per Scout", 
              x = "Scouts", y = "Mean yappage") +
-        scale_fill_gradient2(high = "forestgreen", mid = "grey90", low = "firebrick2", midpoint = 0.5) +
-        theme_bw()
+        scale_fill_gradient2(
+            high = "forestgreen",
+            mid = "grey90", 
+            low = "firebrick2", 
+            midpoint = 0.5) +
+        theme_bw() +
+        theme(legend.position = "none",
+              axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+              )
     
     ggplotly(plot)
 }
@@ -420,15 +610,26 @@ high_streak <- function(raw){
             missed_matches = list(setdiff(all_matches, scouted_matches)),
             streak = current_match - max(missed_matches)
         ) |>
-        mutate(percentile = percent_rank(streak)) |>
-        filter(streak > 0)
-    
-    ggplot(streak_df, aes(x = `scout`, streak, fill = percentile)) + 
-        geom_bar(position = "stack", stat = "identity") + 
+        ungroup() |>
+        filter(streak > 0) |>
+        mutate(
+            percentile = (streak - min(streak)) / (max(streak) - min(streak))
+        )
+
+    p <- ggplot(streak_df, aes(x = scout, y = streak, fill = percentile)) +
+        geom_col(position = "stack", stat = "identity") + 
         labs(title = "Current Streak", 
              x = "Scouts", y = "Matches") +
-        scale_fill_gradient2(high = "firebrick2", mid = "grey90", low = "cornflowerblue", midpoint = 0.5) +
-        theme_bw()
+        scale_fill_gradient2(high = "firebrick2", 
+                             mid = "grey90", 
+                             low = "cornflowerblue", 
+                             midpoint = 0.5) +
+        theme_bw() +
+        theme(legend.position = "none",
+              axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+        )
+    
+    ggplotly(p)
 }
 
 normalize_column <- function(x) {
@@ -436,7 +637,11 @@ normalize_column <- function(x) {
         return(rep(0, length(x)))
     }
     
-    normalized <- (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+    minx <- min(x, na.rm = TRUE)
+    maxx <- max(x, na.rm = TRUE)
+    
+    normalized <- 
+        (x - minx) / (maxx = max(x, na.rm = TRUE) - minx)
     normalized[is.nan(normalized)] <- 0
     return(normalized)
 }
@@ -527,13 +732,23 @@ weights_modal <- function(weights) {
         
         footer = tagList(
             modalButton("Cancel"),
-            actionButton("reset_weights", "Reset to Default", class = "btn-warning"),
-            actionButton("apply_weights", "Apply Weights", class = "btn-primary")
+            actionButton(
+                "reset_weights", 
+                "Reset to Default", 
+                class = "btn-warning"
+                ),
+            actionButton(
+                "apply_weights", 
+                "Apply Weights", 
+                class = "btn-primary"
+                )
         )
     )
 }
 
-inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
+inactive_stategy_summary <- function(
+        raw, selected_teams, 
+        order = FALSE, flip = FALSE, alliance_color = FALSE) {
     comments <- raw |>
         group_by(team) |>
         filter(team %in% selected_teams) |>
@@ -541,14 +756,14 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
         summarise(
             a_pass_1 = length(grep("1", inactive_strat)),
             b_herd_2 = length(grep("2", inactive_strat)),
-            c_theif_3 = length(grep("3", inactive_strat)),
+            c_thief_3 = length(grep("3", inactive_strat)),
             d_defense_oz_4 = length(grep("4", inactive_strat)),
             e_defense_nz_5 = length(grep("5", inactive_strat)),
             f_intaked_full_6 = length(grep("6", inactive_strat))
         ) |>
         
         pivot_longer(
-            cols = c("a_pass_1", "b_herd_2", "c_theif_3", "d_defense_oz_4",
+            cols = c("a_pass_1", "b_herd_2", "c_thief_3", "d_defense_oz_4",
                      "e_defense_nz_5", "f_intaked_full_6"),
             names_to = "comment_type",
             values_to = "level")
@@ -558,31 +773,38 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
     comments$comment_type <- factor(
         comments$comment_type, 
         levels = c(
-            "a_pass_1", "b_herd_2", "c_theif_3", "d_defense_oz_4", 
+            "a_pass_1", "b_herd_2", "c_thief_3", "d_defense_oz_4", 
             "e_defense_nz_5", "f_intaked_full_6"), 
         ordered = TRUE
     )
     
-    ggplot(comments, aes(fill = comment_type, 
-                         x = team, 
-                         y = level)) +
+    ggplot(comments, aes(fill = comment_type, x = team, y = level)) +
         geom_bar(position = "stack", stat = "identity") +
         labs(title = "Comments Summary", x = "Teams", y = "# of comments") +
         scale_fill_manual(
             values = c("f_intaked_full_6" = "#f2b5d4", 
                        "e_defense_nz_5" = "#f7d6e0",
                        "d_defense_oz_4" = "#eff7f6", 
-                       "c_theif_3" = "#b2f7ef", 
+                       "c_thief_3" = "#b2f7ef", 
                        "b_herd_2" = "#7bdff2",
                        "a_pass_1" = "#358c8f" ),
             labels = c("f_intaked_full_6" = "Intaked full (6)", 
                        "e_defense_nz_5" = "defense nz (5)", 
                        "d_defense_oz_4" = "defense oz (4)", 
-                       "c_theif_3" = "theif (3)",
+                       "c_thief_3" = "thief (3)",
                        "b_herd_2" = "herd (2)",
                        "a_pass_1" = "pass (1)" )) +
         theme_bw() +
-        {if (length(team_order) == 6)
+        theme(
+            legend.position = "bottom",
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
+        ) +
+        {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
@@ -594,14 +816,93 @@ inactive_stategy_summary <- function(raw, selected_teams, order, flip) {
         }
 }
 
-auto_type_graph <- function(raw, order, teams, flip) {
+problems_graph <- function(raw, teams, alliance_color = FALSE) {
+    data <- raw |>
+        group_by(team) |>
+        filter(team %in% teams) |>
+        mutate(
+            problems = as.character(problems),
+            died = if_else(grepl('1', problems), 1, 0), 
+            beached = if_else(grepl('2', problems), 1, 0), 
+            surfing = if_else(grepl('3', problems), 1, 0), 
+            stuck_on_bump = if_else(grepl('4', problems), 1, 0), 
+            no_show = if_else(grepl('5', problems), 1, 0),
+            browned_out = if_else(grepl('6', problems), 1, 0),
+            a_stop = if_else(grepl('7', problems), 1, 0),
+            e_stop = if_else(grepl('8', problems), 1, 0)
+        )
+    
+    data$team <- factor(data$team, levels = teams, ordered = TRUE)
+    
+    summary_per_team <- data |>
+        group_by(team) |>
+        summarise(
+            num_died = sum(died, na.rm = TRUE),
+            num_beached = sum(beached, na.rm = TRUE),
+            num_surfing = sum(surfing, na.rm = TRUE),
+            num_stuck_on_bump = sum(stuck_on_bump, na.rm = TRUE),
+            num_no_show = sum(no_show, na.rm = TRUE),
+            num_browned_out = sum(browned_out, na.rm = TRUE),
+            num_a_stop = sum(a_stop, na.rm = TRUE),
+            num_e_stop = sum(e_stop, na.rm = TRUE)
+        ) |>
+        pivot_longer(
+            cols = starts_with("num"), 
+            names_to = "type_of_problems", 
+            values_to = "times"
+        )
+    
+    ggplot(data = summary_per_team, 
+           aes(fill = type_of_problems, x = factor(team), y = times)) +
+        geom_bar(stat = "identity") + 
+        labs(fill = "Types of Problems", title = "Problems Encountered", 
+             x = "Teams", y = "Number of Problems") + 
+        scale_fill_manual(
+            values = c("num_died" = "#cafebf",
+                       "num_beached" = "#ffd6a5",
+                       "num_surfing" = "#ffc7fc",
+                       "num_stuck_on_bump" = "#bfb3fd",
+                       "num_no_show" = "#a2c3fd",
+                       "num_browned_out" = "#fcfeb6",
+                       "num_a_stop" = "#ffafad",
+                       "num_e_stop" = "#9df3fd"),
+            labels = c("num_died" = "Died", 
+                       "num_beached" = "Beached", 
+                       "num_surfing" = "Surfing", 
+                       "num_stuck_on_bump" = "Stuck on Bump", 
+                       "num_no_show" = "No Show",
+                       "num_browned_out" = "Browned Out",
+                       "num_a_stop" = "A Stop",
+                       "num_e_stop" = "E Stop")) + 
+        theme_bw() +
+        theme(
+            legend.position = "bottom",
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
+        ) +
+        {if (alliance_color == TRUE)
+            theme(
+                axis.text.x = element_text(
+                    # ASSUMPTION: teams in order R,R,R,B,B,B
+                    color = c(rep("red", 3), rep("blue", 3)), 
+                    size = 15)
+            )
+            else NULL
+        }
+}
+
+auto_type_graph <- function(raw, order, teams, flip, alliance_color = FALSE) {
     auto_type_data <- raw |>
         filter(team %in% teams) |>
         mutate(
             auto_type = factor(
                 auto_type, 
                 ordered = TRUE, 
-                levels = c("1", "2", "3")))|>
+                levels = c("1", "2", "3", "4", "5", "6")))|>
         group_by(team, auto_type) |>
         summarise(
             auto_type_numbers = n()
@@ -609,10 +910,13 @@ auto_type_graph <- function(raw, order, teams, flip) {
     
     team_order <- teams
     
-    auto_type_data$team <- factor(auto_type_data$team, levels = team_order, ordered = TRUE)
+    auto_type_data$team <- factor(
+        auto_type_data$team, 
+        levels = team_order, 
+        ordered = TRUE)
     auto_type_data$auto_type <- factor(
         auto_type_data$auto_type, 
-        c("1", "2", "3"), 
+        c("1", "2", "3", "4", "5", "6"), 
         ordered = TRUE)
     
     ggplot(auto_type_data, 
@@ -622,13 +926,23 @@ auto_type_graph <- function(raw, order, teams, flip) {
              x = "Team",
              y = "Number of Different Auto Types") + 
         scale_fill_manual(
-            values = c("1" = "#996D99", 
-                       "2" = "#CC91CC", "3" = "#F7B5F7"),
-            labels = c("1" = "Depot", 
-                       "2" = "Outpost/HP", "3" = "Neutral")
+            values = c("1" = "#996D99", "2" = "#CC91CC", "3" = "#ffc8dd",
+                       "4" = "#faaac7", "5" = "#bee2ff", "6" = "#a2d2ff"),
+            labels = c("1" = "Depot", "2" = "Outpost/HP", "3" = "Left Trench",
+                       "4" = "Left Bump", "5" = "Right Trench", 
+                       "6" = "Right Bump")
         ) +
-        theme_bw()  +
-        {if (length(teams) == 6)
+        theme_bw() +
+        theme(
+            legend.position = "bottom",
+            #plot.title = element_text(size = 18),
+            #legend.text = element_text(size = 12),
+            #legend.title = element_text(size = 14),
+            #axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
+            #axis.text.y = element_text(size = 10),
+            #axis.title = element_text(size = 15)
+        ) +
+        {if (alliance_color == TRUE)
             theme(
                 axis.text.x = element_text(
                     color = ifelse(
@@ -657,7 +971,149 @@ score_pred <- function(data, red, blue){
         "<span style='color:blue;'>", round(blue_auto_score, digits = 0))
 }
 
-data_validation <- function(event_key){
+driver_rating_match <- function(dataframe, team_id){
+    colors <- c("blue", "red")
+    selected_team <- dataframe |>
+        filter(team %in% c(team_id)) |>
+        mutate(team = factor(team, levels = team_id),
+               alliance_color = ifelse(team %in% team_id[1:3], "red", "blue"))
+    
+    ggplot(
+        selected_team, 
+        aes(x = match, y = driver_rating, 
+            color = alliance_color, group = alliance_color
+            )
+    ) + 
+        scale_color_manual(values = colors) +
+        geom_line() + 
+        geom_point() +
+        theme(strip.text.x = element_blank()) +
+        ylim(0, 5) +
+        labs(
+            x = "Match",
+            y = "Driver Rating",
+            color = "Alliance color",
+            title = "Driver Rating") + 
+        theme_bw() +
+        facet_wrap(vars(team)) +
+        theme(legend.position = "none",
+              axis.text.x = element_text(angle = 45, hjust = 1, size = 9)
+              )
+}
+
+prescout <- function(event_key, manual_teams = NULL){
+    scoutR_key <- paste0(2026, event_key)
+    if (!is.null(manual_teams)){
+        teams <- manual_teams
+    } else {
+        teams <- scoutR::event_teams(scoutR_key)$team_number
+    }
+    
+    scoutR_prescout <- scoutR::prescout(scoutR_key, manual_teams = teams) |>
+        unique()
+    
+    df <- data.frame(team_num = teams) |>
+        rowwise() |>
+        mutate(
+            temp = list(team_events(team_num, year = 2026) |> 
+                filter(event_code != event_key)),
+            temp2 = list(as.data.frame(temp) |>
+                filter(week == max(as.data.frame(temp)$week, na.rm = TRUE)) |>
+                select(first_event_code, week) |>
+                filter(first_event_code != "necmp") |>
+                filter(first_event_code != "micmp") |>
+                filter(first_event_code != "txcmp")
+                ),
+            last_event_code = as.data.frame(temp2)$first_event_code,
+            last_event_week = as.data.frame(temp2)$week + 1
+        ) |>
+        select(!c(temp, temp2))
+    
+    calc_pridge_fuel <- function(scoutR_key){
+        tryCatch({
+            matches <- event_matches(scoutR_key, match_type = "qual")
+            
+            sb_data <- team_events_sb(event = scoutR_key)
+            epas <- sapply(sb_data, function(te){te$epa$stats$start})
+            names(epas) <- sapply(sb_data, function(te){te$team})
+            
+            design <- as.matrix(lineup_design_matrix(matches))
+            blue_fuel <- sapply(matches[['blue_hubScore']], \(x) x$totalCount)
+            red_fuel <- sapply(matches[['red_hubScore']], \(x) x$totalCount)
+            response <- c(blue_fuel, red_fuel)
+            
+            priors <- epas
+            grid = exp(seq(log(0.01), log(20), length.out = 100))
+            #names(priors) <- scoutR:::tf(names(priors))
+            #priors <- priors[match(colnames(design), names(priors))]
+            
+            mses <- pridge_lambda_cv(design, response, priors, grid,
+                                     plot_mses = FALSE)
+            lambda_opt <- grid[which.min(mses)][1]
+            result <- scoutR:::prior_ridge(design, response, lambda_opt, priors)
+            return(round(result, digits = 2))
+        },
+        error = function(e) {
+            message("Ahh!!!", e$message)
+            message(scoutR_key)
+        })
+    }
+    
+    fuel_stats <- data.frame(event_key = unique(df$last_event_code)) |>
+        rowwise() |>
+        mutate(
+            scoutR_key = paste0(2026, event_key),
+            fuel_pridge = list(calc_pridge_fuel(scoutR_key)),
+            fuel_opr = list(event_oprs(scoutR_key)),
+            fuel_epa = list({
+                teams <- team_events_sb(event = scoutR_key)
+                setNames(
+                    sapply(teams, function(te){te$epa$stats$pre_elim}),
+                    sapply(teams, function(te){paste0("frc", te$team)})
+                    )
+            })
+        )
+    
+    df <- df |>
+        mutate(
+            team = as.integer(team_num),
+            stats = list(filter(fuel_stats, event_key == last_event_code)),
+            pridge = ifelse(
+                is.null(unlist(stats$fuel_pridge)) != TRUE,
+                unlist(stats$fuel_pridge)[paste0("frc", team_num)],
+                0),
+            opr = ifelse(
+                is.null(unlist(stats$fuel_opr)) != TRUE,
+                as.data.frame(stats[["fuel_opr"]]) |>
+                    filter(team == team_num) |>
+                    pull(opr) |>
+                    round(digits = 2),
+                0),
+            epa = unlist(stats$fuel_epa)[paste0("frc", team_num)]
+        ) |>
+        arrange(team)
+    
+    result <- scoutR_prescout |>
+        mutate(
+        `Team Number` = id,
+        `Team Name` = name,
+        `Record` = paste0(wins, "-", losses, "-", ties), 
+        `Climb` = n_matches_count - endGameTower_None,
+        `Auto Climb` = autoTower_Level1
+        )
+    
+    result$`pRidge (Fuel)` <- df$pridge
+    result$`EPA (Fuel)` <- df$epa
+    result$`OPR (Fuel)` <- df$opr
+    result <- result |>
+        select(
+            `Team Number`, `Team Name`, `Record`, `pRidge (Fuel)`, `EPA (Fuel)`,
+            `OPR (Fuel)`, `Climb`, `Auto Climb`
+            )
+    return(result)
+}
+
+data_validation <- function(event_key, rewrite = FALSE){
     raw <- read.csv(paste0('shinyapp/data/', event_key, '/data.csv'))
     schedule <- read.csv(paste0('shinyapp/data/', event_key, '/schedule.csv'))
     
@@ -667,6 +1123,8 @@ data_validation <- function(event_key){
         arrange(match, robot) |>
         rowwise() |>
         mutate(
+            match_robot = paste(match, robot),
+            match_team = paste(match, team),
             scout_key = paste(match, robot, team)
         )
     
@@ -678,22 +1136,160 @@ data_validation <- function(event_key){
         ) |>
         rowwise() |>
         mutate(
-            scout_key = paste(match, robot, team)
+            truth_key = paste(match, robot, team)
         )
     
-    missed_matches <- anti_join(long_schedule, data, by = "scout_key")
-    missed_matches$type <- "missed"
-    non_existent_matches <- anti_join(data, long_schedule, by = "scout_key") |>
-        select(match, robot, team, scout_key)
-    non_existent_matches$type <- "non-existent"
-    double_scouted <- data[(
-        duplicated(data[, "scout_key"]) | 
-            duplicated(data[, "scout_key"], 
-                       fromLast = TRUE)), ] |>
-        select(match, robot, team, scout_key)
-    double_scouted$type <- "double scout"
+    offline <- long_schedule |>
+        mutate(
+            scout_key = if (sum(data$scout_key == truth_key) >= 1) {
+                truth_key
+            } else if (paste(match, team) %in% data$match_team) {
+                paste(
+                    data[data$match_team == paste(match, team), ]$scout_key, 
+                    collapse = " || ")
+            } else if (paste(match, robot) %in% data$match_robot) {
+                paste(
+                    data[data$match_robot == paste(match, robot), ]$scout_key,
+                    collapse = " || ")
+            } else {
+                "DNE"
+            },
+            error = if (sum(data$scout_key == truth_key) == 1) {
+                "All Good"
+            } else if (sum(data$scout_key == truth_key) >= 1) {
+                "Double Scouted"
+            } else if (paste(match, team) %in% data$match_team) {
+                "Wrong Robot ID (R1, R2, R3, B1, B2, B3)"
+            } else if (paste(match, robot) %in% data$match_robot) {
+                "Wrong Team Scouted"
+            } else {
+                "Missed"
+            }
+        )
     
-    rbind(missed_matches, non_existent_matches, double_scouted)
+    if (rewrite) {
+        offline <- mutate(offline, match_team = paste(match, team))
+        data <- data |>
+            left_join(
+                offline |> select(match_team, error, robot_correct = robot),
+                by = "match_team"
+            ) |>
+            mutate(
+                match = as.integer(match),
+                robot = ifelse(
+                    error == "Wrong Robot ID (R1, R2, R3, B1, B2, B3)",
+                    as.character(robot_correct),
+                    as.character(robot)
+                ),
+                error = ifelse(
+                    error == "Wrong Robot ID (R1, R2, R3, B1, B2, B3)",
+                    "All Good",
+                    error
+                )
+            ) |>
+            select(!c(robot_correct, error)) |>
+            arrange(match, robot)
+        write.csv(select(data, !c(match_robot, match_team, scout_key)), 
+                  paste0('shinyapp/data/', event_key, '/data.csv'), 
+                  row.names = FALSE)
+    }
+    
+    tryCatch({
+        response <- httr::HEAD(url = "http://www.google.com", timeout = 5)
+        if (response$status_code >= 200 && response$status_code < 400){
+            message("Successfully Connected to Internet")
+        }
+    },
+    error = function(e){
+        message("No Internet 2")
+        return(offline)
+    },
+    warning = function(w){
+        message("Connection warning: ", w$message)
+        return(offline)
+    })
+    
+    schedule <- read.csv(paste0("shinyapp/data/", event_key, "/schedule.csv"))
+    tba_data <- event_matches(paste0("2026", event_key))
+    
+    # TO-DO — auto assign climbs from TBA into the data (rewrite = TRUE only)
+    temp <- tba_data |>
+        select(
+            match_number, red1, red2, red3, blue1, blue2, blue3,
+            red_autoTowerRobot1, red_autoTowerRobot2, red_autoTowerRobot3,
+            blue_autoTowerRobot1, blue_autoTowerRobot2, blue_autoTowerRobot3,
+            red_endGameTowerRobot1, red_endGameTowerRobot2, 
+            red_endGameTowerRobot3, blue_endGameTowerRobot1, 
+            blue_endGameTowerRobot2, blue_endGameTowerRobot3
+        ) |>
+        pivot_longer(
+            cols = c(red1, red2, red3, blue1, blue2, blue3),
+            names_to = "robot",
+            values_to = "team"
+        ) |>
+        rowwise() |>
+        mutate(
+            auto_climb = switch(robot,
+                                red1 = red_autoTowerRobot1, 
+                                red2 = red_autoTowerRobot2,
+                                red3 = red_autoTowerRobot3,
+                                blue1 = blue_autoTowerRobot1, 
+                                blue2 = blue_autoTowerRobot2,
+                                blue3 = blue_autoTowerRobot3,
+                                stop("robot DNE (auto)")),
+            endgame_climb = switch(robot,
+                                   red1 = red_endGameTowerRobot1, 
+                                   red2 = red_endGameTowerRobot2,
+                                   red3 = red_endGameTowerRobot3,
+                                   blue1 = blue_endGameTowerRobot1, 
+                                   blue2 = blue_endGameTowerRobot2,
+                                   blue3 = blue_endGameTowerRobot3,
+                                   stop("robot DNE (endgame)")
+            )
+        ) |>
+        select(match = match_number, robot, team, auto_climb, endgame_climb) |>
+        mutate(
+            team = gsub("frc", "", team),
+            robot = paste0(
+                toupper(substr(robot, 1, 1)), 
+                substr(robot, nchar(robot), nchar(robot))),
+            scout_key = paste(match, robot, team),
+            auto_climb = switch(auto_climb,
+                                None = FALSE,
+                                Level1 = TRUE,
+                                Level2 = TRUE,
+                                Level3 = TRUE,
+                                stop("auto climb DNE")
+            ),
+            endgame_climb = switch(endgame_climb,
+                                   None = "No",
+                                   Level1 = "L1",
+                                   Level2 = "L2",
+                                   Level3 = "L3",
+                                   stop("endgame climb DNE")
+            )
+        )
+    
+    online <- offline |>
+        rowwise() |>
+        mutate(
+            error = 
+                ifelse(error == "All Good", 
+                       ifelse(
+                           data[data$scout_key == truth_key,]$auto_climb != 
+                               temp[temp$scout_key == truth_key,]$auto_climb, 
+                           paste(error, "&&", "Incorrect Auto Climb"),
+                           error), 
+                       error),
+            error = 
+                ifelse(error == "All Good", 
+                       ifelse(
+                           data[data$scout_key == truth_key,]$endgame_climb != 
+                               temp[temp$scout_key == truth_key,]$endgame_climb, 
+                           paste(error, "&&", "Incorrect Endgame Climb"),
+                           error), 
+                       error)
+        )
 }
 
 #raw <- read.csv('shinyapp/data/test_data/data.csv')

@@ -1,0 +1,17 @@
+```{r}
+
+raw <- read_csv("~/Documents/R/scouting2026/shinyapp/data/mdbet/data.csv")
+
+data <- raw |>
+    mutate(scout_key = paste(match, robot, team))
+
+data <- data |>
+    mutate(auto_climb = ifelse(
+        data$scout_key %in% temp$scout_key, 
+        temp[temp$scout_key == scout_key, ]$auto_climb, "No")) |>
+    mutate(endgame_climb = ifelse(
+        data$scout_key %in% temp$scout_key, 
+        temp[temp$scout_key == scout_key, ]$endgame_climb, "No"))
+
+view(data)
+```

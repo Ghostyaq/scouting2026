@@ -1,0 +1,529 @@
+"scout","match","robot","team","start_pos","auto_type","auto_bump","auto_climb","auto_cycles","teleop_trench","teleop_bump","num_cycles","num_cycles_tenths","endgame_climb","climb_less_than_5","inactive_strat","driver_rating","problems","card","comments","auto_climb.1","endgame_climb.1"
+"NS",1,"B1",2491,"F",4,TRUE,FALSE,14,0,7,3,0,"No",FALSE,6,2,"43","No Card","Got slimed by c otters out of transitional period scoring, big hopper = full hopper more meaningful, kinda just wandered NZ during inactive without purpose, something broke during endgame that took them out of scoring.",NA,NA
+"NS",1,"B2",4450,"C",NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,3,"1","No Card","They died on right trench and no move anymore.",NA,NA
+"LJ",1,"B3",10991,"M",1,FALSE,FALSE,3,1,0,0,1,"No",FALSE,2,3,NA,"No Card","Scored like one ball in endgame, focused primarily on counter defense on 6665. Slower over the bump and struggled to stop ramming. Only herded once at the start, drove slowly",NA,NA
+"NS",1,"R1",8069,"M",NA,FALSE,FALSE,5,5,2,2,4,"No",FALSE,26,2,NA,"No Card","BPS low, so much shooting but not many full hoppers.",NA,NA
+"NS",1,"R2",6665,"C",NA,FALSE,FALSE,0,4,2,0,0,"No",FALSE,452,4,NA,"No Card","Auto was just to get into NZ, defense only bot, somewhat lockdown D, cant prevent shots once the robot is in position",NA,NA
+"NS",1,"R3",11214,"F",NA,FALSE,FALSE,0,3,0,0,7,"No",FALSE,52,2,NA,"No Card","shouldnt shovel cus they are kitbot, slow movement",NA,NA
+"NS",2,"B1",5895,"C",5,TRUE,FALSE,10,5,4,3,7,"No",FALSE,31645,5,"3","No Card","Auto got slimed by teammate, very aggressive/thoughtful driver; likes the bump, however, didnt go under trench because bulging hopper. Passing from OZ. Intake broke after 50 seconds and played defense to end match.",NA,NA
+"BP",2,"B2",2813,"C",3,FALSE,FALSE,0,5,2,3,5,"No",FALSE,16,2,"7","No Card","Almost always had to adjust each volley, as it was over or undershot",NA,NA
+"LJ",2,"B3",7915,"M",NA,FALSE,FALSE,1,7,2,3,7,"No",FALSE,316,4,NA,"No Card","Whiffed preloaded in auto. Very high arc and kinda wide and inaccurate spray. struggled to intake more than half way. Mainly passed from OZ to NZ during inactive, pretty robust when they drove under another robot",NA,NA
+"NS",2,"R1",9572,"C",3,TRUE,FALSE,20,4,5,5,0,"No",FALSE,16,4,"2","No Card","Aggressive driving, unintook as a form of passing. Quick cycling which was allowed by a full AZ. Good ball control and control of the NZ.",NA,NA
+"NS",2,"R2",2582,"F",5,TRUE,FALSE,10,4,5,4,0,"No",FALSE,6,1,NA,"No Card","Not much action during inactive, attempted climb in endgame, aggressive game overall by them.",NA,NA
+"CR",2,"R3",11242,"M",NA,FALSE,FALSE,5,0,6,0,2,"No",FALSE,23,4,NA,"No Card","Very susceptible to ramming, was never able to intake full",NA,NA
+"AZ",3,"B1",7769,"C",3,FALSE,FALSE,16,12,0,5,7,"No",FALSE,13,5,NA,"No Card",NA,NA,NA
+"BP",3,"B2",449,"F",5,FALSE,FALSE,0,4,3,5,5,"No",FALSE,216,3,"76","No Card","Started browning out early",NA,NA
+"LJ",3,"B3",6429,"M",NA,FALSE,FALSE,0,1,0,0,0,"No",FALSE,NA,1,"21","No Card","Didn41391t shoot preload, basically stopped moving. immediatelyafter match started",NA,NA
+"FL",3,"R1",2635,"M",1,FALSE,FALSE,5,0,6,0,0,"No",FALSE,12,1,NA,"No Card","If you can call that passing :/",NA,NA
+"HR",3,"R2",16,"F",3,FALSE,FALSE,0,2,5,2,2,"No",FALSE,164,3,NA,"No Card","Crossed the line during auto",NA,NA
+"CR",3,"R3",6487,"C",56,TRUE,FALSE,10,5,3,3,3,"No",FALSE,21,3,"4","No Card","Got stuck on the bump in auto",NA,NA
+"AZ",4,"B1",8858,"C",5,FALSE,FALSE,3,8,0,2,7,"No",FALSE,6,4,NA,"No Card","Low auto bps, single shooter turret",NA,NA
+"BP",4,"B2",6528,"M",1,FALSE,FALSE,7,5,1,2,4,"No",FALSE,16,2,NA,"No Card","Used one corner of back wall primarily",NA,NA
+"LJ",4,"B3",7183,"F",56,TRUE,FALSE,10,8,4,5,1,"No",FALSE,314,5,NA,"No Card","Single swipe trench bump auto, overshot most in auto. Very fast driving, played opportunistic defense pushing opponent through trench while stealing. Mid far shooter, liked to back up while shooting. Easily pushed around by ramming defense",NA,NA
+"FL",4,"R1",1756,"M",31,FALSE,FALSE,0,4,6,5,5,"No",FALSE,236,4,"6","No Card","Might41391ve missed auto? I swear they did left trench tho",NA,NA
+"HR",4,"R2",3931,"F",3,TRUE,FALSE,8,5,2,3,0,"No",FALSE,316,3,NA,"No Card","Auto got stuck on its second pass, They were defended, and had some trouble going under the tower.",NA,NA
+"CR",4,"R3",1816,"C",5,FALSE,FALSE,10,5,3,4,0,"No",FALSE,6,3,NA,"No Card",NA,NA,NA
+"AZ",5,"B1",4607,"C",3,FALSE,FALSE,4,8,0,4,0,"No",FALSE,1,5,NA,"No Card","Double turret,",NA,NA
+"BP",5,"B2",8119,"F",5,FALSE,FALSE,8,7,3,4,8,"No",FALSE,NA,3,NA,"No Card",NA,NA,NA
+"LJ",5,"B3",4125,"M",NA,FALSE,FALSE,0,5,1,0,1,"No",FALSE,134,4,NA,"No Card","Had some good blocks. stopping opponents from going from NZ toOZ, filled hopper in OZ and has almost full field passing from edge of NZ. Shooter seemed to jam a bit for last cycle in end game",NA,NA
+"FL",5,"R1",2556,"M",1,FALSE,FALSE,7,3,1,1,5,"No",FALSE,61,3,"32","No Card","Completely shutdown by 4125 def",NA,NA
+"HR",5,"R2",364,"C",5,FALSE,FALSE,0,2,1,2,0,"No",FALSE,61,3,"17","No Card","Turret did not turn, so they a stopped, eventually died in neutral zone",NA,NA
+"CR",5,"R3",2468,"F",34,TRUE,FALSE,15,6,5,9,0,"No",FALSE,13,5,NA,"No Card","Passed over bump",NA,NA
+"AZ",6,"B1",3937,"C",3,TRUE,FALSE,0,8,4,5,6,"No",FALSE,134,4,NA,"No Card","Turret robot  insufficient defense but good attempt",NA,NA
+"BP",6,"B2",6985,"F",6,TRUE,FALSE,10,0,16,4,3,"No",FALSE,246,2,"3","No Card","A lot of unnecessary crossings, big hopper but only single stream",NA,NA
+"LJ",6,"B3",10034,"M",1,FALSE,FALSE,1,0,6,0,0,"No",FALSE,216,3,NA,"No Card","Did not actually intake anything from depot, but moved towards it. Intake is really really slow, struggled to fill at all. Very mobile, did many small herds through trench and over bump. Passing was high arc and very close to AZ",NA,NA
+"FL",6,"R1",2393,"M",NA,FALSE,FALSE,8,6,0,4,7,"No",FALSE,16,4,NA,"No Card","Good",NA,NA
+"HR",6,"R2",3501,"C",6,TRUE,FALSE,15,0,8,5,4,"No",FALSE,16,4,NA,"No Card","High throuput",NA,NA
+"CR",6,"R3",4655,"F",34,TRUE,FALSE,13,12,0,2,0,"No",FALSE,1346,5,NA,"No Card","Passed from OZ, driver immediately noticed when intake broke",NA,NA
+"AZ",7,"B1",5913,"C",3,TRUE,FALSE,14,8,2,3,6,"No",FALSE,16,4,NA,"No Card","Really fast bps heavy throughput, opponents paled strong defense and driver couldn41391t get around for a bit",NA,NA
+"BP",7,"B2",484,"F",5,TRUE,FALSE,17,5,1,4,7,"No",FALSE,126,4,NA,"No Card","Good fast empty in auto",NA,NA
+"LJ",7,"B3",4020,"M",21,FALSE,FALSE,8,3,2,4,1,"No",FALSE,1326,4,NA,"No Card","Had minor drive issues with about a minute left. Likes far arc corner and trench shot, near full field passing from edge of NZ",NA,NA
+"FL",7,"R1",5705,"M",NA,FALSE,FALSE,0,6,0,0,0,"No",FALSE,45,1,NA,"No Card","Super slow",NA,NA
+"HR",7,"R2",3753,"F",3,FALSE,FALSE,10,8,0,6,6,"No",FALSE,126,3,NA,"No Card","Solo shooter",NA,NA
+"CR",7,"R3",3082,"C",5,FALSE,FALSE,10,4,1,1,0,"No",FALSE,45,4,NA,"No Card","Started defending bump immediately after auto",NA,NA
+"AZ",8,"B1",1391,"C",3,TRUE,FALSE,0,12,4,6,3,"No",FALSE,213,5,NA,"No Card","3 ball wide fixed hooded shooter, solid bps, can outtake balls onto the bump",NA,NA
+"BP",8,"B2",5181,"M",1,FALSE,FALSE,8,6,0,0,5,"No",FALSE,1364,1,NA,"No Card","Not great defense",NA,NA
+"LJ",8,"B3",1023,"F",5,FALSE,FALSE,13,10,4,3,1,"No",FALSE,362,4,NA,"No Card","Intake broke with like 5 seconds left. Cleaned up along DS wall, lots of aggressive stealing on their side of the field. SOTM worked for slow movement but jammed a bit at first",NA,NA
+"FL",8,"R1",5577,"M",NA,FALSE,FALSE,3,14,0,2,4,"No",FALSE,13,3,NA,"No Card","Slow shooter",NA,NA
+"HR",8,"R2",1506,"C",56,TRUE,FALSE,20,8,4,7,4,"No",FALSE,136,5,NA,"No Card","Good throughput and capcity",NA,NA
+"CR",8,"R3",51,"F",3,FALSE,FALSE,12,7,1,4,0,"No",FALSE,6,3,NA,"No Card","Hopper broke during endgame",NA,NA
+"AZ",9,"B1",3243,"C",3,FALSE,FALSE,16,18,0,5,7,"No",FALSE,31,4,NA,"No Card","Multiple sweeps, 2 ball wide shooter",NA,NA
+"BP",9,"B2",2231,"F",5,TRUE,FALSE,18,5,3,5,9,"No",FALSE,16,4,"6","No Card","Good sotm",NA,NA
+"LJ",9,"B3",11417,"M",NA,FALSE,FALSE,0,0,2,0,0,"No",FALSE,4,2,NA,"No Card","Tank drive. Played. defense in OZ th.  entire match, could not budge 9496 while they wereshooting.Had a singular questionable block on 9496 when 9496 got stuck on top of them going over the bump, was a long stop with no pin call.",NA,NA
+"FL",9,"R1",1533,"M",1,FALSE,FALSE,4,1,3,0,8,"No",FALSE,15,3,NA,"No Card","Possibly a minor dunno why, Def on 2231, lil slow",NA,NA
+"HR",9,"R2",10980,"F",34,TRUE,FALSE,10,3,3,3,0,"No",FALSE,16,4,NA,"No Card","Missed some shots when shooting on the move",NA,NA
+"CR",9,"R3",9496,"C",56,FALSE,FALSE,18,6,6,6,0,"No",FALSE,32,5,"4","No Card","Pinned on bump",NA,NA
+"AZ",10,"B1",7415,"C",4,TRUE,FALSE,11,0,8,5,6,"No",FALSE,46,4,NA,"No Card","It can over do bump and begins to tip over",NA,NA
+"BP",10,"B2",6201,"M",NA,FALSE,FALSE,2,6,2,0,0,"No",FALSE,4,1,NA,"No Card","Doing nothing sometimes when opponents were shooting",NA,NA
+"LJ",10,"B3",5653,"F",5,FALSE,FALSE,6,14,0,3,7,"No",FALSE,136,3,NA,"No Card","Far passing, at least from edge of NZ. Tried some full field passing but robot didn41391t. shoot. Likes far shots near trench andtheir DS. Occasional inaccurate spray when shooting.",NA,NA
+"FL",10,"R1",614,"M",NA,FALSE,FALSE,2,0,9,4,4,"No",FALSE,6,4,NA,"No Card","Pretty good",NA,NA
+"HR",10,"R2",2590,"F",3,FALSE,FALSE,0,5,0,4,5,"No",FALSE,16,3,NA,"No Card","Passed line in auto",NA,NA
+"CR",10,"R3",4469,"C",56,TRUE,FALSE,0,5,1,3,0,"No",FALSE,43,2,NA,"No Card","Unable to get to their AZ until endgame",NA,NA
+"AZ",11,"B1",11244,"F",NA,FALSE,FALSE,0,1,1,0,4,"No",FALSE,NA,1,NA,"No Card","Shooter broke, no indexing no auto",NA,NA
+"BP",11,"B2",1768,"F",5,TRUE,FALSE,10,10,4,8,7,"No",FALSE,4621,5,NA,"No Card","Insanely fast hopper empty and fill",NA,NA
+"LJ",11,"B3",6911,"C",3,TRUE,FALSE,0,5,0,1,6,"No",FALSE,16,3,NA,"No Card","Intake did not deploy in auto. Pass on the fly from NZ. to AZ. SOTM worked well in first half of match, butthen shooter jammed with about a minute left. Spent a lot of time doing nothing, only outtaked full hopper for partner in last 5 seconds.",NA,NA
+"FL",11,"R1",8229,"F",3,FALSE,FALSE,5,16,7,4,5,"No",FALSE,36,5,NA,"No Card","I don41391t think I counted the trench bump well",NA,NA
+"HR",11,"R2",111,"F",41,TRUE,FALSE,4,0,10,6,0,"No",FALSE,16,5,"3","No Card","Has a theoretically compatible with teammates auto, but it did not work and. messed up teamates. They had alittle trouble with surfing, but high throughput and capacity",NA,NA
+"CR",11,"R3",2054,"C",6,TRUE,FALSE,0,0,5,5,0,"No",FALSE,6,3,"4","No Card","Bump only",NA,NA
+"AZ",12,"B1",4087,"F",5,FALSE,FALSE,5,6,0,2,5,"No",FALSE,NA,3,NA,"No Card","Small hopper, poor intaking, not the best driving",NA,NA
+"BP",12,"B2",3544,"C",3,FALSE,FALSE,0,8,0,0,5,"No",FALSE,42,1,NA,"No Card","Kinda mediocre",NA,NA
+"LJ",12,"B3",7840,"F",5,FALSE,FALSE,9,3,3,2,4,"No",FALSE,16,3,NA,"No Card","Passed from very close to their. AZ. Struggled a little bit under1690 defense, but could comfortably take corner shots. Not much SOTM but pretty accurate, BPS saw occasional drops",NA,NA
+"FL",12,"R1",1403,"C",5,FALSE,FALSE,0,6,3,4,2,"No",FALSE,26,3,NA,"No Card","Auto got blocked by trench bar but woulda been good imo",NA,NA
+"HR",12,"R2",1690,"F",NA,FALSE,FALSE,0,9,1,0,0,"No",FALSE,2345,5,NA,"No Card","Shooter/index malfunctioned, did no auto,played pretty good defense",NA,NA
+"CR",12,"R3",4766,"M",21,FALSE,FALSE,10,4,0,2,0,"No",FALSE,26,4,NA,"No Card",NA,NA,NA
+"AZ",13,"B1",931,"M",NA,FALSE,FALSE,0,0,6,4,0,"No",FALSE,1,3,NA,"No Card","Moving out of the way in auto,  basically only passing",NA,NA
+"BP",13,"B2",4322,"C",3,TRUE,FALSE,12,7,3,2,8,"No",FALSE,63,3,NA,"No Card","Good back wall sweep",NA,NA
+"LJ",13,"B3",2813,"F",5,TRUE,FALSE,19,9,5,6,3,"No",FALSE,631,4,NA,"No Card","When shooting at hub, first bunch consistently undershot and they had to realign. Passing was also a little screwy, sometimes coming short or spraying everywhere. Consistent mid range trench cycles, net expands to no longer go under trench",NA,NA
+"FL",13,"R1",2491,"C",6,TRUE,FALSE,2,0,12,5,6,"No",FALSE,6,3,NA,"No Card","Really big hopper but a lot of standing around wasting time before hub turns on but i think they missed a lot of. their auto",NA,NA
+"HR",13,"R2",8159,"F",3,FALSE,FALSE,16,7,1,8,0,"No",FALSE,16,5,NA,"No Card","Good shooting on the move",NA,NA
+"CR",13,"R3",8119,"M",NA,FALSE,FALSE,2,4,0,5,7,"No",FALSE,13,4,NA,"No Card","Passed from oz",NA,NA
+"AZ",14,"B1",3501,"M",NA,TRUE,FALSE,0,0,6,7,6,"No",FALSE,16,4,NA,"No Card","A lot of passing",NA,NA
+"BP",14,"B2",6487,"C",3,TRUE,FALSE,10,6,4,5,2,"No",FALSE,62,3,NA,"No Card","Pretty good shooting ig",NA,NA
+"LJ",14,"B3",4450,"F",5,FALSE,FALSE,0,3,3,1,3,"No",FALSE,6,2,NA,"No Card","Got stuck under trench, couldn41391t start auto routine. Intake struggled a bit, spent a lot. of time meandering i.  NZ. Overshotmany times,shot very slowly. Tower shot. from midfar range, mostly intook from AZ",NA,NA
+"FL",14,"R1",8858,"F",3,FALSE,FALSE,8,14,0,3,5,"No",FALSE,63,3,NA,"No Card","slow shooting that isn41391t really accurate",NA,NA
+"HR",14,"R2",2556,"F",41,TRUE,FALSE,8,3,1,3,0,"No",FALSE,26,4,NA,"No Card","Got. stuck in neutral zone for a bit, teammate helped them. Somewhat inconsistentaccuracy",NA,NA
+"CR",14,"R3",9572,"C",56,TRUE,FALSE,15,8,8,8,0,"No",FALSE,1346,5,NA,"No Card","Very short cycle time",NA,NA
+"AZ",15,"B1",4607,"C",3,FALSE,FALSE,14,10,0,4,7,"No",FALSE,NA,4,NA,"No Card","slow shooting that isn41391t really accurate",NA,NA
+"BP",15,"B2",8069,"C",NA,FALSE,FALSE,2,7,5,1,8,"No",FALSE,64,2,NA,"No Card","Where is their hopper? Also low bps",NA,NA
+"LJ",15,"B3",2582,"F",5,TRUE,FALSE,3,2,1,0,8,"No",FALSE,16,3,"1","No Card","Spent more than half the match dead, revived a little after halfway through. Passed a lot of fuel under trench by reversing intake, was a very yoinkable cache. Died again in last 30 seconds, but intook a lot while they were moving and fairly accurate",NA,NA
+"FL",15,"R1",1756,"M",31,TRUE,FALSE,9,9,3,4,9,"No",FALSE,316,5,NA,"No Card","Good auto can pass from OZ shoots while moving very goood",NA,NA
+"HR",15,"R2",449,"F",34,TRUE,FALSE,20,10,8,9,0,"No",FALSE,126,5,NA,"No Card","Bum ahh robot",NA,NA
+"CR",15,"R3",484,"C",56,TRUE,FALSE,2,10,2,5,0,"No",FALSE,136,4,NA,"No Card","Their net sometimes gets caught on trench",NA,NA
+"AD",16,"B1",6665,"M",NA,FALSE,FALSE,1,2,0,0,0,"No",FALSE,4,3,NA,"No Card","Intake broken? Didn41391t intake or shoot",NA,NA
+"BP",16,"B2",7183,"C",3,TRUE,FALSE,10,9,5,5,7,"No",FALSE,163,5,NA,"No Card","Driver seemed to always have an optimal path, unexpected unload speed from a double lane",NA,NA
+"KO",16,"B3",1391,"F",6,TRUE,FALSE,15,6,2,4,2,"No",FALSE,6,3,"6","No Card",NA,NA,NA
+"FL",16,"R1",364,"M",2,FALSE,FALSE,1,3,0,1,1,"No",FALSE,2,1,"1","No Card","Died halfway",NA,NA
+"HR",16,"R2",1023,"F",3,FALSE,FALSE,11,9,5,5,0,"No",FALSE,1236,4,NA,"No Card","Their auto does not shoot all the balls in their hopper",NA,NA
+"CR",16,"R3",6985,"C",6,TRUE,FALSE,10,0,12,3,0,"No",FALSE,423,2,NA,"No Card","N/A",NA,NA
+"AD",17,"B1",5705,"C",NA,FALSE,FALSE,0,11,0,0,0,"No",FALSE,2,1,"6","No Card","Did it do anything, no intake working",NA,NA
+"BP",17,"B2",11214,"M",NA,FALSE,FALSE,2,7,3,0,8,"No",FALSE,6,1,NA,"No Card","Why are we. cycling with Kitbot? Low bps and capacity,not even driver diffing",NA,NA
+"KO",17,"B3",16,"F",NA,FALSE,FALSE,0,1,8,1,0,"No",FALSE,6,2,NA,"No Card","Intake roller fell off early match, did not have an auto",NA,NA
+"MC",17,"R1",3082,"M",1,FALSE,FALSE,0,1,1,0,0,"No",FALSE,41,4,NA,"No Card","Got stuck on depot I think for first minute got pushed off the depot by teammate then did pretty good Oz defense and. passing from theOz to the other Oz",NA,NA
+"HR",17,"R2",9496,"F",34,FALSE,FALSE,20,5,8,5,3,"No",FALSE,16,4,NA,"No Card","Intake got rammed",NA,NA
+"CR",17,"R3",2468,"C",56,TRUE,FALSE,20,8,0,7,0,"No",FALSE,NA,4,NA,"No Card","Passing over bump is very inaccurate",NA,NA
+"AD",18,"B1",7915,"C",3,TRUE,FALSE,15,12,6,6,0,"No",FALSE,26,3,NA,"No Card","Very very slow, but didn41391t look like they were browning",NA,NA
+"BP",18,"B2",2231,"F",5,TRUE,FALSE,20,5,7,6,5,"No",FALSE,163,5,NA,"No Card","Good scoring and passing overall",NA,NA
+"KO",18,"B3",6429,"M",NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,"1","No Card",NA,NA,NA
+"MC",18,"R1",3937,"F",2,FALSE,FALSE,9,8,0,5,3,"No",FALSE,156,4,NA,"No Card","Good turret",NA,NA
+"HR",18,"R2",5653,"C",5,FALSE,FALSE,0,9,0,6,0,"No",FALSE,126,3,"7","No Card","Auto attempted to go from trench to neutral zone to bump, but got stuck in neutral zone",NA,NA
+"CR",18,"R3",3243,"C",5,FALSE,FALSE,10,5,1,2,3,"No",FALSE,4326,4,NA,"No Card","N/A",NA,NA
+"AD",19,"B1",6528,"M",1,FALSE,FALSE,7,7,3,5,2,"No",FALSE,NA,3,NA,"No Card","Weak drive. train, got pushed around really easily and",NA,NA
+"BP",19,"B2",614,"F",6,TRUE,FALSE,10,0,10,1,8,"No",FALSE,452,3,"3","No Card","Intake broke",NA,NA
+"SBS",19,"B3",51,"C",3,FALSE,FALSE,15,4,0,6,3,"No",FALSE,216,4,NA,"No Card",NA,NA,NA
+"MC",19,"R1",3753,"F",3,FALSE,FALSE,6,8,0,6,7,"No",FALSE,236,4,NA,"No Card",NA,NA,NA
+"HR",19,"R2",2054,"C",62,TRUE,FALSE,16,0,6,4,4,"No",FALSE,16,3,NA,"No Card","Slow bps",NA,NA
+"CR",19,"R3",11417,"M",NA,FALSE,FALSE,0,8,0,0,3,"No",FALSE,4,4,NA,"No Card","Full defense the whole time",NA,NA
+"AD",20,"B1",1816,"F",5,FALSE,FALSE,15,6,2,3,5,"No",FALSE,61,2,NA,"No Card","Shooter motors weak/maybe browning, very poor accuracy",NA,NA
+"AW",20,"B2",6201,"M",NA,FALSE,FALSE,2,5,5,0,0,"No",FALSE,45,3,NA,"No Card","Played some pretty okay defense. There was awhile where it looked like they weren41391t doing much, but they had a few. goodmoments",NA,NA
+"SBS",20,"B3",4655,"C",34,FALSE,FALSE,17,13,0,5,9,"No",FALSE,136,4,NA,"No Card",NA,NA,NA
+"AZ",20,"R1",4766,"C",5,FALSE,FALSE,6,8,4,4,5,"No",FALSE,2,4,NA,"No Card","Attempted climb both times was unsuccessful in both",NA,NA
+"HR",20,"R2",1768,"F",34,TRUE,FALSE,20,6,4,7,0,"No",FALSE,61,5,NA,"No Card","Very good bps, their auto is basically just. ours, theywere defended for a bit",NA,NA
+"CR",20,"R3",2635,"M",NA,FALSE,FALSE,0,0,1,0,0,"No",FALSE,1,2,NA,"No Card","Bulldozed the entire time",NA,NA
+"AD",21,"B1",3931,"C",56,TRUE,FALSE,10,8,2,6,4,"No",FALSE,1263,4,NA,"No Card","Got stuck on bump",NA,NA
+"AW",21,"B2",7769,"F",5,FALSE,FALSE,10,4,7,5,5,"No",FALSE,16,4,NA,"No Card","Really fast shooting",NA,NA
+"SBS",21,"B3",1506,"M",1,FALSE,FALSE,4,6,6,7,2,"No",FALSE,136,5,NA,"No Card",NA,NA,NA
+"AZ",21,"R1",8159,"M",1,FALSE,FALSE,3,12,0,3,0,"No",FALSE,465,4,NA,"No Card","Not orbit",NA,NA
+"HR",21,"R2",5895,"C",56,FALSE,FALSE,20,5,5,6,0,"No",FALSE,61,4,NA,"No Card",NA,NA,NA
+"CR",21,"R3",1690,"F",34,TRUE,FALSE,20,12,5,11,0,"No",FALSE,316,5,NA,"No Card","Lots of cycles",NA,NA
+"AD",22,"B1",4125,"M",NA,FALSE,FALSE,0,0,6,0,0,"No",FALSE,4,3,"2","No Card","Shooter not working, tried to pass. and shooter failed toengage",NA,NA
+"AW",22,"B2",1403,"C",3,FALSE,FALSE,15,6,2,5,0,"No",FALSE,613,3,NA,"No Card","Accuracy isn41391t very good, and their shooting isn41391t very fast either",NA,NA
+"SBS",22,"B3",8229,"F",56,FALSE,FALSE,10,6,4,7,6,"No",FALSE,31,4,NA,"No Card","High bps",NA,NA
+"AZ",22,"R1",4020,"C",52,FALSE,FALSE,11,10,0,4,6,"No",FALSE,1,3,NA,"No Card","Had trouble intaking",NA,NA
+"HR",22,"R2",7415,"F",4,TRUE,FALSE,13,0,12,5,5,"No",FALSE,236,5,NA,"No Card","They were defended, which got them stuck on bump, teammate helped them",NA,NA
+"CR",22,"R3",2393,"M",NA,FALSE,FALSE,1,3,0,1,0,"No",FALSE,6,4,NA,"No Card","They were very slow and shaky",NA,NA
+"AD",23,"B1",10034,"M",1,FALSE,FALSE,3,0,9,3,5,"No",FALSE,62,3,NA,"No Card","Got rammed pretty hard, broke their intake off",NA,NA
+"AW",23,"B2",2590,"C",34,TRUE,FALSE,2,2,6,2,0,"No",FALSE,12,3,"6","No Card","Browning out the last ~20 seconds of the match, slowww intake",NA,NA
+"SBS",23,"B3",5913,"F",56,FALSE,FALSE,20,6,6,7,3,"No",FALSE,16,4,NA,"No Card",":checkmark:",NA,NA
+"AZ",23,"R1",1533,"F",NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,"1","No Card","No auto no movement",NA,NA
+"HR",23,"R2",7840,"C",5,FALSE,FALSE,0,7,3,1,3,"No",FALSE,45,4,NA,"No Card","Did good defense, auto got caught on trench",NA,NA
+"CR",23,"R3",11242,NA,NA,FALSE,FALSE,2,0,8,0,1,"No",TRUE,24,4,NA,"No Card","Flip climb, effective at bulldozing",NA,NA
+"AD",24,"B1",10980,"C",34,TRUE,FALSE,10,3,3,7,0,"No",FALSE,26,4,NA,"No Card","Vertical extension dumper, always fills hopper to full in neutral zone and dumps them at trench",NA,NA
+"AW",24,"B2",4469,"F",5,FALSE,FALSE,7,6,5,2,0,"No",FALSE,61,3,NA,"No Card","Hopper looks fragile(kept getting twisted up when hit) very susceptible to defense",NA,NA
+"SBS",24,"B3",4087,"C",6,FALSE,FALSE,10,5,3,4,5,"No",FALSE,61,2,NA,"No Card","Turret w shoot on the move",NA,NA
+"AZ",24,"R1",111,"F",NA,FALSE,FALSE,4,0,8,4,5,"No",FALSE,61,4,NA,"No Card","Low bps",NA,NA
+"HR",24,"R2",5181,"C",56,TRUE,FALSE,15,6,2,2,0,"No",FALSE,46,3,NA,"No Card","Played okay defense",NA,NA
+"CR",24,"R3",10991,"F",3,FALSE,FALSE,5,6,0,3,0,"No",FALSE,26,4,NA,"No Card","Very small hopper",NA,NA
+"AD",25,"B1",931,"M",NA,FALSE,FALSE,3,0,2,0,5,"No",FALSE,5,1,"24","No Card","Climbed in auto, went over bump and couldn41391t build enough speed to get back over",NA,NA
+"AW",25,"B2",11244,"C",3,FALSE,FALSE,0,2,3,0,0,"No",FALSE,6,2,"7","No Card","Shooter broken, foul during auto, bad piece. security, passed .  couple tim. s through outtaking, kept trying toshooteventhough shooter wasn41391t working",NA,NA
+"SBS",25,"B3",3544,NA,5,FALSE,FALSE,5,12,0,1,0,"No",FALSE,13,1,NA,"No Card","Lots of passing and something was wrong with shooting but general poor driving",NA,NA
+"AZ",25,"R1",4322,"C",5,FALSE,FALSE,13,3,7,5,4,"No",FALSE,13,5,NA,"No Card","Good but low bps",NA,NA
+"HR",25,"R2",6911,"F",3,FALSE,FALSE,10,10,0,4,7,"No",FALSE,16,3,NA,"No Card","Kinda mid",NA,NA
+"CR",25,"R3",5577,"M",NA,FALSE,FALSE,2,9,0,3,0,"No",FALSE,123,4,NA,"No Card","Repeatedly got stuck on trench",NA,NA
+"AD",26,"B1",5705,"C",NA,FALSE,FALSE,0,8,0,0,0,"No",FALSE,542,3,NA,"No Card","Intake broken, did not shoot",NA,NA
+"AW",26,"B2",3501,"M",4,TRUE,FALSE,10,0,6,4,0,"No",FALSE,16,3,"3","No Card","Didn41391t move for the first ~30 seconds in teleop",NA,NA
+"SBS",26,"B3",1023,"M",5,FALSE,FALSE,9,6,4,7,2,"No",FALSE,16,5,NA,"No Card","OoO",NA,NA
+"AZ",26,"R1",6429,"M",NA,FALSE,FALSE,0,5,1,1,5,"No",FALSE,5,1,NA,"No Card","Missed the bump bad driving also blocked own teammate41391s",NA,NA
+"HR",26,"R2",5653,"F",3,FALSE,FALSE,10,10,0,6,0,"No",FALSE,63,2,NA,"No Card",NA,NA,NA
+"CR",26,"R3",1756,"C",5,FALSE,FALSE,15,6,7,5,0,"No",FALSE,31,1,"1","No Card","Died during endgame",NA,NA
+"AD",27,"B1",11417,"M",NA,FALSE,FALSE,0,3,1,0,3,"No",FALSE,14,2,NA,"No Card","Kitbot",NA,NA
+"AW",27,"B2",16,"F",5,FALSE,FALSE,0,2,5,3,0,"No",FALSE,26,3,"7","No Card","Slowwwww shooter",NA,NA
+"SBS",27,"B3",614,"C",4,TRUE,FALSE,10,0,8,4,0,"No",FALSE,3,3,NA,"No Card",NA,NA,NA
+"AZ",27,"R1",2556,"F",3,FALSE,FALSE,10,10,0,3,6,"No",FALSE,63,3,NA,"No Card","Fixed. shooter so driving has issues bc shooteris fixed",NA,NA
+"HR",27,"R2",8069,"M",NA,FALSE,FALSE,2,7,2,0,4,"No",FALSE,426,2,NA,"No Card","Their index prolly broke and their auto wiggles the robot a little",NA,NA
+"CR",27,"R3",3243,"C",5,FALSE,FALSE,6,8,1,3,0,"No",FALSE,6,3,NA,"No Card","Their swerve broke partway through, but fixed itself 30s later",NA,NA
+"AD",28,"B1",9496,"C",34,TRUE,FALSE,15,8,4,7,4,"No",FALSE,16,4,NA,"No Card","Broke intake slamming into hub, quickly fixed",NA,NA
+"AW",28,"B2",6985,"F",6,TRUE,FALSE,8,0,12,1,5,"No",FALSE,4,4,NA,"No Card","Played a lot of pretty solid defense",NA,NA
+"SBS",28,"B3",8119,"M",NA,FALSE,FALSE,1,4,6,4,6,"No",FALSE,1346,4,NA,"No Card","Qwertyuiop",NA,NA
+"HR",28,"R2",4450,"C",5,FALSE,FALSE,10,4,2,3,4,"No",FALSE,16,3,NA,"No Card","They were defended",NA,NA
+"CR",28,"R3",6528,"M",1,FALSE,FALSE,5,10,0,3,0,"No",FALSE,6,4,NA,"No Card","N/A",NA,NA
+"JJ",29,"B1",5895,"F",65,TRUE,FALSE,13,0,0,3,5,"No",FALSE,16,2,NA,"No Card","Really bad indexing",NA,NA
+"CC",29,"B2",3082,"M",NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,3,1,"1","No Card","Ded",NA,NA
+"FL",29,"B3",1816,"C",3,FALSE,FALSE,9,10,0,2,4,"No",FALSE,36,3,NA,"No Card",NA,NA,NA
+"MF",29,"R1",2231,"F",3,TRUE,FALSE,10,2,4,8,3,"No",FALSE,16,3,NA,"No Card",NA,NA,NA
+"HR",29,"R2",2054,"M",1,FALSE,FALSE,5,0,10,0,0,"No",FALSE,13,3,NA,"No Card","Slow bump, passed the entire time from both the neutral and opposite alliance zone",NA,NA
+"missing",29,NA,NA,NA,NA,NA,FALSE,NA,NA,NA,NA,NA,"No",NA,NA,NA,NA,NA,NA,NA,NA
+"JJ",30,"B1",1391,"M",1,FALSE,FALSE,5,8,3,5,4,"No",FALSE,16,3,NA,"No Card","Performed decently against defense",NA,NA
+"CC",30,"B2",364,"F",5,FALSE,FALSE,14,5,1,4,0,"No",FALSE,61,3,NA,"No Card","Fish",NA,NA
+"FL",30,"B3",1506,"C",3,TRUE,FALSE,12,7,5,6,7,"No",FALSE,163,5,NA,"No Card","Super Good but small hopper makes them run many cycles",NA,NA
+"AD",30,"R1",4020,"C",52,FALSE,FALSE,10,9,3,7,7,"No",FALSE,16,3,NA,"No Card","uwu",NA,NA
+"CR",30,"R2",1403,"F",3,FALSE,FALSE,15,5,2,4,0,"No",FALSE,61,4,NA,"No Card","Hopper was decapitated during shift 3",NA,NA
+"Rs",30,"R3",2635,"M",NA,FALSE,FALSE,2,0,3,0,0,"No",FALSE,4,2,"2","No Card","Hub auto. 1 tower foul while defending.",NA,NA
+"JJ",31,"B1",7769,"F",56,TRUE,FALSE,14,8,2,6,9,"No",FALSE,16,3,"6","No Card","CA1 ggs",NA,NA
+"FL",31,"B3",3937,"M",1,FALSE,FALSE,8,10,0,4,4,"No",FALSE,634,4,NA,"No Card","I kinda lost its position multiple times mb",NA,NA
+"AD",31,"R1",11242,"M",NA,FALSE,FALSE,0,0,4,0,0,"No",FALSE,4,2,NA,"No Card","Climbed in auto",NA,NA
+"CR",31,"R2",51,"F",3,FALSE,FALSE,5,7,0,6,0,"No",FALSE,163,1,NA,"No Card","They don41391t seem to be able to shoot on move while intaking",NA,NA
+"Rs",31,"R3",2491,"C",6,TRUE,FALSE,13,0,9,5,2,"No",FALSE,3,4,NA,"No Card",NA,NA,NA
+"JJ",32,"B1",2393,"C",34,TRUE,FALSE,10,5,1,2,8,"No",FALSE,NA,2,"6","No Card","accuracy affected by browniuts",NA,NA
+"CC",32,"B2",7840,"M",NA,FALSE,FALSE,0,0,4,4,0,"No",FALSE,2,3,NA,"No Card","Fish",NA,NA
+"Rs",32,"B3",6487,"F",56,TRUE,FALSE,1,6,3,3,5,"No",FALSE,1,4,NA,"No Card","Intake didn41391t deploy during auto. Got defended hard.",NA,NA
+"AD",32,"R1",6665,"M",NA,FALSE,FALSE,0,3,0,0,0,"No",FALSE,4,4,NA,"No Card","Really good defense, did not intake or shoot",NA,NA
+"CR",32,"R2",4469,"F",3,FALSE,FALSE,10,4,10,5,7,"No",FALSE,6134,2,NA,"No Card","N/A",NA,NA
+"aaFL",32,"R3",1533,"C",NA,FALSE,FALSE,0,12,0,0,0,"No",FALSE,2,2,NA,"No Card","Didn41391t shoot at all no auto and just bulldoze entire time can41391t get over bump easily",NA,NA
+"JB",33,"B1",11244,"M",2,FALSE,FALSE,7,2,7,0,0,"No",FALSE,4,2,"1","No Card","Shooter broke like first thing",NA,NA
+"FeeSH-E",33,"B2",9572,"F",5,FALSE,FALSE,10,3,2,2,7,"No",FALSE,16,2,NA,"No Card","Fish",NA,NA
+"Rs",33,"B3",3931,"C",34,TRUE,FALSE,9,0,2,4,1,"No",FALSE,13,3,"2","No Card","Auto got stuck on trench",NA,NA
+"AD",33,"R1",6201,"M",1,FALSE,FALSE,6,2,0,0,0,"No",FALSE,4,3,NA,"No Card","Climbed in auto",NA,NA
+"CR",33,"R2",4125,"F",3,FALSE,FALSE,5,9,3,3,0,"No",FALSE,31,4,NA,"No Card","Intake seemed to have broken during endgame",NA,NA
+"FL",33,"R3",10991,"C",5,FALSE,FALSE,4,6,0,1,5,"No",FALSE,6,3,"1","No Card","Died after halfway",NA,NA
+"LJ",34,"B1",5577,"F",5,FALSE,FALSE,1,8,0,2,4,"No",FALSE,2361,3,NA,"No Card","Hood of shooter. clips trench. Very slow shooter from mid far range.Lots of fuel stockpiling, maybe had. anoutpost auto but didn41391t collect any balls.",NA,NA
+"FeeSH-E",34,"B2",11214,"M",NA,FALSE,FALSE,0,6,0,1,3,"No",FALSE,2,1,NA,"No Card","Not fish",NA,NA
+"Rs",34,"B3",4087,"C",3,FALSE,FALSE,0,5,1,1,4,"No",FALSE,4,3,NA,"No Card","Two tower fouls. Mostly def.",NA,NA
+"AD",34,"R1",449,"F",34,TRUE,FALSE,20,8,2,2,0,"No",FALSE,61,4,NA,"No Card","Ball got stuck, cooked shooter and hopper",NA,NA
+"CR",34,"R2",7915,"C",56,TRUE,FALSE,4,7,3,5,0,"No",FALSE,61,3,NA,"No Card","Beached during auto",NA,NA
+"FL",34,"R3",8858,"M",12,FALSE,FALSE,9,10,1,5,6,"No",FALSE,316,4,NA,"No Card","Pretty good",NA,NA
+"Rs",35,"B3",484,"F",5,FALSE,FALSE,0,4,2,4,2,"No",FALSE,13,4,NA,"No Card","Auto collision with partner.",NA,NA
+"AD",35,"R1",4322,"F",5,FALSE,FALSE,12,14,2,5,0,"No",FALSE,316,3,"1","No Card","Died mid match, can back to life partway through",NA,NA
+"FL",35,"R3",3544,"C",5,FALSE,FALSE,0,4,0,0,0,"No",FALSE,1,2,"1","No Card","Shooter not facing right on auto and died after collison woke up and just passed",NA,NA
+NA,35,NA,NA,NA,NA,NA,FALSE,NA,NA,NA,NA,NA,"No",NA,NA,NA,NA,NA,NA,NA,NA
+NA,35,NA,NA,NA,NA,NA,FALSE,NA,NA,NA,NA,NA,"No",NA,NA,NA,NA,NA,NA,NA,NA
+NA,35,NA,NA,NA,NA,NA,FALSE,NA,NA,NA,NA,NA,"No",NA,NA,NA,NA,NA,NA,NA,NA
+"JB",36,"B1",7183,"M",NA,FALSE,FALSE,2,9,1,5,8,"No",FALSE,34,4,NA,"No Card",NA,NA,NA
+"ADK",36,"B2",2468,"F",56,TRUE,FALSE,4,2,5,7,6,"No",FALSE,NA,3,NA,"No Card",NA,NA,NA
+"ADK",36,"B3",2590,"C",34,TRUE,FALSE,20,0,6,3,4,"No",FALSE,16,3,NA,"No Card",NA,NA,NA
+"Rs",36,"R1",8229,"C",56,TRUE,FALSE,6,6,7,5,0,"No",FALSE,13,4,NA,"No Card","Mid accuracy",NA,NA
+"LJ",36,"R2",931,"M",NA,FALSE,FALSE,1,0,2,0,0,"No",FALSE,42,2,NA,"No Card","Fast auto climb and fairly fast dismount. Intake didn41391t deploy until 50 seconds left and it was quickly retracted. Spent a lot of time meandering in NZ, had an ok block to slightly slow opponent returning to OZ and herded a little under the trench",NA,NA
+"FL",36,"R3",1690,"F",3,TRUE,FALSE,19,9,6,8,2,"No",FALSE,136,5,NA,"No Card","Y41391all I really don41391t know how to count orbit shots but I hope this was close",NA,NA
+"JB",37,"B1",10980,"C",3,TRUE,FALSE,0,2,4,5,7,"No",FALSE,16,3,NA,"No Card","Didn41391t do a ton during. inactive,but did some passing",NA,NA
+"ADK",37,"B2",7415,"M",4,FALSE,FALSE,13,0,10,4,6,"No",FALSE,NA,2,NA,"No Card",NA,NA,NA
+"ADK",37,"B3",5913,"F",56,TRUE,FALSE,18,6,4,1,0,"No",FALSE,4216,4,NA,"No Card","I think the shooter broke during a collision bc after that they stopped shooting and started feeding hp",NA,NA
+"Rs",37,"R1",7415,NA,6,FALSE,FALSE,10,0,10,4,0,"No",FALSE,3,3,NA,"No Card","Bes||no",NA,NA
+"LJ",37,"R2",6911,"M",1,FALSE,FALSE,1,10,0,3,2,"No",FALSE,316,3,NA,"No Card","Fairly fast pass. on the move, many passes were blocked by the hub net.Very minimal SOTM, liked sittting in DS corner and between depot and tower and just unloading that fuel cache from afar. Was blocked solidly by 5813 from leaving AZ once",NA,NA
+"GK",37,"R3",8159,NA,3,FALSE,FALSE,13,1,1,3,4,"No",FALSE,1,3,NA,"No Card",NA,NA,NA
+"JB",38,"B1",10034,"M",1,FALSE,FALSE,4,0,6,4,6,"No",FALSE,1,3,NA,"No Card","Passing was pretty good but their movements were low-key slow",NA,NA
+"ADK",38,"B2",1506,"M",5,FALSE,FALSE,10,4,5,5,5,"No",FALSE,NA,1,"42","No Card","Decent passing",NA,NA
+"ADK",38,"B3",16,"F",NA,FALSE,FALSE,0,4,6,3,0,"No",FALSE,62,3,"27","No Card",NA,NA,NA
+"FeeSH-E",38,"R1",1506,"C",3,FALSE,FALSE,10,2,5,4,0,"No",FALSE,NA,2,NA,"No Card","Fish",NA,NA
+"LJ",38,"R2",2813,"F",3,TRUE,FALSE,19,12,10,6,1,"No",FALSE,316,5,NA,"No Card","Very aggressive consistent. cycler during active. Net extends like 3 ball.  above hopper wh. n full. Shotfrom midrange andcouldpass from edge of NZ",NA,NA
+"KO",38,"R3",4766,"C",6,TRUE,FALSE,0,7,2,1,0,"No",FALSE,NA,2,NA,"No Card","Played defense, they have a climber but they didn41391t extend it properly",NA,NA
+"JB",39,"B1",5653,"F",5,FALSE,FALSE,1,4,3,4,7,"No",FALSE,3,3,"1","No Card","Reconnected after like 40 seconds",NA,NA
+"AW",39,"B2",5895,"C",34,TRUE,FALSE,6,4,8,5,0,"No",FALSE,16,4,NA,"No Card","Shooting while moving accuracy is iffy",NA,NA
+"Big AD",39,"B3",1403,"M",34,FALSE,FALSE,13,11,3,6,0,"No",FALSE,126,4,NA,"No Card","(o v o)",NA,NA
+"FeeSH-E",39,"R1",5895,"C",3,FALSE,FALSE,2,5,5,0,0,"No",FALSE,136,3,NA,"No Card","Fish",NA,NA
+"LJ",39,"R2",8069,"M",NA,FALSE,FALSE,1,0,3,0,8,"No",FALSE,NA,1,"1","No Card","Died after going over bump for the third time with about 1:50 left.",NA,NA
+"KO",39,"R3",3937,"C",56,TRUE,FALSE,9,6,5,5,3,"No",FALSE,14,3,NA,"No Card",NA,NA,NA
+"JB",40,"B1",6985,"C",4,TRUE,FALSE,5,0,8,3,8,"No",FALSE,4,3,NA,"No Card","Played defense but defense was kind bad",NA,NA
+"ADK",40,"B2",1533,"C",1,FALSE,FALSE,7,2,2,0,3,"No",FALSE,15,2,NA,"No Card","Jammed early on and didn41391t provide much support after",NA,NA
+"the real bAD man.",40,"B3",2054,"F",6,TRUE,FALSE,10,0,6,5,1,"No",FALSE,16,3,NA,"No Card",NA,NA,NA
+"FeeSH-E",40,"R1",4020,"F",34,TRUE,FALSE,20,8,0,3,2,"No",FALSE,NA,1,NA,"No Card","Fish",NA,NA
+"LJ",40,"R2",1756,"M",41,FALSE,FALSE,2,6,10,4,4,"No",FALSE,136,4,NA,"No Card","Full field passing, robot clipped blue trench once but forced way through. Pass on the move but no good SOTM.",NA,NA
+"KO",40,"R3",7769,"C",56,TRUE,FALSE,17,6,3,7,7,"No",FALSE,1,4,NA,"No Card",NA,NA,NA
+"JB",41,"B1",6487,"M",NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,"5","No Card",".",NA,NA
+"ADK",41,"B2",11244,"F",5,FALSE,FALSE,1,0,2,0,0,"No",FALSE,NA,1,NA,"No Card","Could not shoot, slow adaptation, ok defense",NA,NA
+"the real bAD man.",41,"B3",1391,"C",34,TRUE,FALSE,20,4,2,7,0,"No",FALSE,126,4,NA,"No Card","UwU",NA,NA
+"FeeSH-E",41,"R1",3243,"F",NA,FALSE,FALSE,0,8,0,2,3,"No",FALSE,16,2,NA,"No Card","Fish",NA,NA
+"LJ",41,"R2",3501,"M",4,TRUE,FALSE,11,0,8,5,1,"No",FALSE,16,4,NA,"No Card","Steady cycler from mid to far range. Spent most of active period cleaning up AZ, a lot of passing was from close to AZ.",NA,NA
+"RY",41,"R3",1768,"C",5,TRUE,FALSE,20,9,3,12,0,"No",FALSE,16,4,NA,"No Card","Got defended but worked around it. Really good dumper, fast bps. Constantly passing during inactive",NA,NA
+"JB",42,"B1",9572,"M",3,FALSE,FALSE,3,7,0,6,7,"No",FALSE,61,4,NA,"No Card","Idk driving was good",NA,NA
+"ADK",42,"B2",2491,"F",6,TRUE,FALSE,9,0,11,4,3,"No",FALSE,14,2,NA,"No Card",NA,NA,NA
+"the real bAD man.",42,"B3",2635,"M",NA,FALSE,FALSE,1,0,2,1,3,"No",FALSE,NA,2,"6","No Card","Kind of just sat in AZ",NA,NA
+"FeeSH-E",42,"R1",2231,"F",4,FALSE,FALSE,15,5,3,7,2,"No",FALSE,1,1,NA,"No Card","Very fish",NA,NA
+"LJ",42,"R2",4469,"C",5,TRUE,FALSE,12,10,10,5,7,"No",FALSE,136,5,NA,"No Card","First auto swipe got a tech foul for crossing center line, passed from close to AZ. Short from mid close range and spent most of active cycling. Only stole once.",NA,NA
+"FL",42,"R3",5577,"M",NA,FALSE,FALSE,6,6,0,0,5,"No",FALSE,4,3,NA,"No Card","1 major and not that great of defense",NA,NA
+"JB",43,"B1",2393,"M",NA,FALSE,FALSE,5,3,1,1,7,"No",FALSE,1,2,NA,"No Card","Bad passing shooter was like. Rome or something, slow shooter",NA,NA
+"ADK",43,"B2",4087,"M",3,FALSE,FALSE,12,5,3,0,0,"No",FALSE,54,4,NA,"No Card","Good defense",NA,NA
+"the real bAD man.",43,"B3",364,"F",5,FALSE,FALSE,15,13,3,5,4,"No",FALSE,136,4,NA,"No Card","Agitation with hopper retraction is not that good, slowed down bps",NA,NA
+"FeeSH-E",43,"R1",11214,"M",NA,FALSE,FALSE,0,4,1,1,7,"No",FALSE,2,3,NA,"No Card","Not very fish",NA,NA
+"LJ",43,"R2",1816,"F",3,FALSE,FALSE,9,5,2,3,7,"No",FALSE,136,4,NA,"No Card","Some full field passing, some pass on the move, intake struggled to fill hopper fully.  Occasionally undershot,",NA,NA
+"FL",43,"R3",1023,"C",5,FALSE,FALSE,12,4,4,5,2,"No",FALSE,526,4,NA,"No Card","Did okay slow shooter and got defended kinda easily",NA,NA
+"JB",44,"B1",7840,"F",5,FALSE,FALSE,12,8,0,6,7,"No",FALSE,1,3,NA,"No Card","Shooter broke in end game, didn41391t shoot for 30 sec",NA,NA
+"ADK",44,"B2",6201,"M",1,FALSE,FALSE,5,2,2,0,0,"No",FALSE,4,2,NA,"No Card",NA,NA,NA
+"the real bAD man.",44,"B3",3753,"C",3,FALSE,FALSE,10,8,0,6,5,"No",FALSE,613,4,NA,"No Card",NA,NA,NA
+"FeeSH-E",44,"R1",7183,"M",NA,FALSE,FALSE,0,6,0,2,2,"No",FALSE,NA,2,NA,"No Card","Fish",NA,NA
+"LJ",44,"R2",8229,"C",5,TRUE,FALSE,18,5,5,5,8,"No",FALSE,163,4,NA,"No Card","Tendency to look for fuel in AZ first, floundered a little bit before going to cycle when starved. Lots of tower shots towards end of match after they overshot an entire cycle. Passed from middle of NZ ish",NA,NA
+"FL",44,"R3",7915,"F",3,TRUE,FALSE,8,6,3,1,7,"No",FALSE,156,2,NA,"No Card","Kinda scooting around",NA,NA
+"JB",45,"B1",2468,"C",3,TRUE,FALSE,18,9,2,9,8,"No",FALSE,36,4,NA,"No Card",NA,NA,NA
+"ADK",45,"B2",10991,NA,NA,FALSE,FALSE,0,3,0,1,7,"No",FALSE,1,2,NA,"No Card","Shoot preload in auto",NA,NA
+"the real bAD man.",45,"B3",3544,"F",5,FALSE,FALSE,9,14,1,4,0,"No",FALSE,263,3,NA,"No Card","Died briefly then came back",NA,NA
+"FeeSH-E",45,"R1",2582,"M",1,FALSE,FALSE,10,5,2,1,8,"No",FALSE,NA,2,NA,"No Card","Not very fish",NA,NA
+"LJ",45,"R2",5913,"F",3,TRUE,FALSE,19,5,5,5,1,"No",FALSE,1326,5,NA,"No Card","Intake broke with about 30 seconds left, played some tough NZ defense for like 5 seconds. Can pass from middle of NZ, flexible in cycling or cleaning up AZ.",NA,NA
+"FL is mean",45,"R3",614,"C",6,TRUE,FALSE,9,0,1,2,8,"L1",TRUE,4,3,NA,"No Card","Driver smashed intake so they played d",NA,NA
+"JB",46,"B1",6429,"M",NA,FALSE,FALSE,0,8,1,0,0,"No",FALSE,452,3,NA,"No Card","Shooter no work, perms defense and herding, defense was average",NA,NA
+"ADK",46,"B2",111,"C",4,TRUE,FALSE,13,0,10,6,3,"No",FALSE,16,3,NA,"No Card",NA,NA,NA
+"the real bAD man.",46,"B3",4450,"F",5,FALSE,FALSE,16,3,3,4,3,"No",FALSE,126,4,NA,"No Card","Had some connectivity issues, kept disconnected and reconnected mid match",NA,NA
+"RY",46,"R1",484,"C",5,TRUE,FALSE,19,7,2,8,0,"No",FALSE,12,4,NA,"No Card","Has this technique during teleop where they go out to neutral. very shortly by trenc.  and does a trenchshot rightafter. They repeat it like six times during one period.",NA,NA
+"Rs",46,"R2",7415,"M",41,TRUE,FALSE,9,0,8,5,5,"No",FALSE,6,3,NA,"No Card","Tipsy but didn41391t fall.",NA,NA
+"FL is mean",46,"R3",51,"F",3,FALSE,FALSE,5,1,0,3,7,"No",FALSE,NA,4,NA,"No Card","Hopper got caught on trench and broke intake and hopper",NA,NA
+"JB",47,"B1",6665,"M",NA,FALSE,FALSE,0,6,2,0,0,"No",FALSE,54,3,NA,"No Card","Defense entire time",NA,NA
+"ADK",47,"B2",3082,"M",NA,FALSE,FALSE,0,7,0,0,0,"No",FALSE,45,3,NA,"No Card","Did not intake nor shoot a single ball",NA,NA
+"the real bAD man.",47,"B3",2556,"F",56,TRUE,FALSE,10,3,4,7,5,"No",FALSE,6,4,NA,"No Card","Died on bump, came back",NA,NA
+"RY",47,"R1",3931,"C",5,TRUE,FALSE,12,5,1,5,7,"No",FALSE,16,5,NA,"No Card","Nothing wrong",NA,NA
+"Rs",47,"R2",4655,"F",34,TRUE,FALSE,10,4,3,5,4,"No",FALSE,1,4,NA,"No Card","Broken intake.",NA,NA
+"FL",47,"R3",2813,"M",NA,FALSE,FALSE,0,4,2,0,2,"No",FALSE,5,4,NA,"No Card","Kinda mogged. 3082 with def very good def overall but barely scored at all",NA,NA
+"JB",48,"B1",1690,"C",3,TRUE,FALSE,18,5,2,8,8,"No",FALSE,1356,5,NA,"No Card","Orbit is orbit",NA,NA
+"BH",48,"B2",11417,"M",NA,FALSE,FALSE,3,1,2,0,2,"No",FALSE,4,2,NA,"No Card","Played D",NA,NA
+"the real bAD man.",48,"B3",449,"F",56,TRUE,FALSE,0,1,1,0,0,"No",FALSE,25,4,NA,"No Card","Did not expand hopper",NA,NA
+"RY",48,"R1",6911,"F",3,FALSE,FALSE,10,10,0,3,6,"No",FALSE,NA,4,NA,"No Card","Solid",NA,NA
+"Rs",48,"R2",10034,"M",1,FALSE,FALSE,3,0,4,3,2,"No",FALSE,NA,2,"7","No Card",NA,NA,NA
+"FL",48,"R3",5181,"C",5,TRUE,FALSE,9,1,1,0,0,"No",FALSE,413,3,NA,"No Card","Kind of ineffective def but yknow its orbit soooo",NA,NA
+"MC",49,"B1",4766,"F",NA,FALSE,FALSE,10,3,3,6,3,"No",FALSE,26,4,NA,"No Card","Bps about same as us",NA,NA
+"ADK",49,"B2",9496,"C",5,TRUE,FALSE,20,3,11,6,2,"No",FALSE,46,2,NA,"No Card",NA,NA,NA
+"the real bAD man.",49,"B3",2590,"C",34,TRUE,FALSE,10,3,7,5,4,"No",FALSE,62,4,NA,"No Card",NA,NA,NA
+"FeeSH-E",49,"R2",4322,"C",5,FALSE,FALSE,0,10,0,2,0,"No",FALSE,NA,1,"2","No Card","Not so fish",NA,NA
+"FL",49,"R3",8858,"M",12,FALSE,FALSE,7,7,1,3,6,"No",FALSE,31,3,NA,"No Card","Did some alright defense but kind of mid",NA,NA
+NA,49,NA,NA,NA,NA,NA,FALSE,NA,NA,NA,NA,NA,"No",NA,NA,NA,NA,NA,NA,NA,NA
+"MC",50,"B1",4125,"C",5,FALSE,FALSE,4,3,2,0,0,"No",FALSE,4,3,NA,"No Card","Played defense",NA,NA
+"ADK",50,"B2",5705,"M",NA,FALSE,FALSE,0,4,0,1,2,"No",FALSE,NA,1,NA,"No Card","Low accuracy, slow driving and shooting",NA,NA
+"the real bAD man.",50,"B3",931,"M",NA,FALSE,FALSE,5,0,8,3,8,"No",FALSE,6,3,NA,"No Card","Climbed in auto",NA,NA
+"RY",50,"R1",11242,NA,NA,FALSE,FALSE,0,0,4,0,0,"No",FALSE,2,1,NA,"No Card","Broken auto, had trouble moving, couldn41391t intake",NA,NA
+"FL",50,"R3",4607,"C",5,FALSE,FALSE,9,13,3,6,2,"No",FALSE,4632,4,NA,"No Card","Effective defense good scoring as well",NA,NA
+"NS",51,"B1",1816,"F",1,FALSE,FALSE,5,3,1,3,0,"No",FALSE,NA,3,NA,"No Card","Began moving very slowly, diddled around in AZ for the rest of the match",NA,NA
+"ADK",51,"B2",6985,"C",4,TRUE,FALSE,3,0,8,1,2,"No",FALSE,4,1,"2","No Card","Ineffective defense, slow shooting speed",NA,NA
+"the real bAD man.",51,"B3",4020,"F",5,FALSE,FALSE,10,4,8,7,3,"No",FALSE,216,4,NA,"No Card","Mr reaaaalll bad man",NA,NA
+"RY",51,"R1",16,"M",NA,FALSE,FALSE,0,5,7,5,4,"No",FALSE,1,3,NA,"No Card","No auto",NA,NA
+"CR",51,"R2",3937,"F",34,TRUE,FALSE,15,7,3,5,0,"No",FALSE,31,4,NA,"No Card","Shoot on the move while intaking",NA,NA
+"BP",51,"R3",5895,"C",5,TRUE,FALSE,16,6,6,5,3,"No",FALSE,61,2,"3","No Card",NA,NA,NA
+"NS",52,"B1",11214,"M",NA,FALSE,FALSE,4,5,0,0,6,"No",FALSE,42,2,NA,"No Card","Rammed the other opponents",NA,NA
+"ADK",52,"B2",9572,"M",3,TRUE,FALSE,18,7,7,6,2,"No",FALSE,16,2,NA,"No Card","Didn41391t react well to defense, drive ok otherwise",NA,NA
+"the real bAD man.",52,"B3",7769,"F",56,TRUE,FALSE,20,6,6,6,0,"No",FALSE,2136,5,NA,"No Card",NA,NA,NA
+"RY",52,"R1",6528,"M",NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,4,1,"1","No Card","No intake ability and no auto",NA,NA
+"CR",52,"R2",1403,"C",5,FALSE,FALSE,12,6,4,4,0,"No",FALSE,13,4,NA,"No Card","N/A",NA,NA
+"BP",52,"R3",1768,"F",3,TRUE,FALSE,20,7,3,8,5,"No",FALSE,136,5,NA,"No Card","Insane bps, hopper gone in an instant",NA,NA
+"NS",53,"B1",4469,"F",5,TRUE,FALSE,20,4,2,7,0,"No",FALSE,6,3,NA,"No Card",NA,NA,NA
+"ADK",53,"B2",3544,"C",3,FALSE,FALSE,2,3,0,0,5,"No",FALSE,54,3,"6","No Card","Tried defense",NA,NA
+"the real bAD man.",53,"B3",8069,"M",NA,FALSE,FALSE,2,6,2,2,2,"No",FALSE,346,4,NA,"No Card","the REAALLLLL bad man is back at it",NA,NA
+"LJ",53,"R1",2054,"C",62,TRUE,FALSE,12,0,4,1,6,"No",FALSE,16,3,"1","No Card","Stopped moving from 45 seconds to about 15 seconds, RSL still on. Pass while moving from anywhere in NZ and slow SOTM cleaning up corner. Probably has single digit bps",NA,NA
+"CR",53,"R2",7183,"M",NA,FALSE,FALSE,0,11,1,4,0,"No",FALSE,NA,2,NA,"No Card","They constantly got in the way of their teamates",NA,NA
+"BP",53,"R3",3501,"F",4,TRUE,FALSE,8,0,6,4,6,"No",FALSE,16,2,"34","No Card","Easily defendable on bump",NA,NA
+"AM & ADK",54,"B2",2231,"F",51,TRUE,FALSE,6,3,3,3,8,"No",FALSE,261,4,NA,"No Card","Shoot on fly & phenomenal auto",NA,NA
+"the real bAD man.",54,"B3",6201,"M",1,FALSE,FALSE,7,3,2,0,0,"No",FALSE,4,4,NA,"No Card","Really good Oz defense",NA,NA
+"LJ",54,"R1",2468,"F",3,TRUE,FALSE,10,13,1,5,4,"No",FALSE,136,5,NA,"No Card","Auto was short returning to NZ over bump. Full field passing. and passing from NZ, cached lots of fuel for end game. Maybehad battery issues in last five seconds. Also lots of trench shots in response to defense, got at evading.",NA,NA
+"CR",54,"R2",484,"C",56,TRUE,FALSE,5,3,3,4,0,"No",FALSE,1,3,NA,"No Card","Low bps",NA,NA
+"BP",54,"R3",7840,"M",NA,FALSE,FALSE,2,4,0,0,0,"No",FALSE,213,2,NA,"No Card","Good feeding and herding",NA,NA
+"ADK",55,"B2",7915,"M",3,TRUE,FALSE,4,1,10,3,7,"No",FALSE,6,2,"2","No Card","Slow intake, ineffective during inactive",NA,NA
+"the real bAD man.",55,"B3",4450,"F",5,FALSE,FALSE,16,5,3,3,8,"No",FALSE,621,4,NA,"No Card","In this. match and the last match, shooter seemedinconsistent when around 1/2. capacity",NA,NA
+"LJ",55,"R1",2813,"F",3,TRUE,FALSE,20,5,3,7,8,"No",FALSE,16,4,NA,"No Card","Struggled heavily against defense, lots of missed hoppers from ramming and being turned. Still fit under trench when overfilled.",NA,NA
+"CR",55,"R2",1023,"C",5,FALSE,FALSE,1,3,2,4,0,"No",FALSE,1,4,NA,"No Card","N/A",NA,NA
+"BP",55,"R3",11244,"M",2,FALSE,FALSE,3,7,1,1,5,"No",FALSE,213,2,"6","No Card","They unintaked a lot, no defense, should be used to shovel to our AZ",NA,NA
+"AW",56,"B1",11417,"C",NA,FALSE,FALSE,0,0,4,0,0,"No",FALSE,4,2,"41","No Card","Played some pretty bad defense",NA,NA
+"ADK",56,"B2",10034,"M",1,FALSE,FALSE,4,0,4,0,0,"No",FALSE,NA,1,"1","No Card","Intake broke amid drive issues",NA,NA
+"the real bAD man.",56,"B3",8119,"F",5,FALSE,FALSE,10,10,4,4,9,"No",FALSE,1436,4,NA,"No Card","Intake ramp was broken off",NA,NA
+"CR",56,"R2",2491,"M",6,TRUE,FALSE,17,0,10,7,0,"No",FALSE,635,5,NA,"No Card","Very low cycle time, huge hopper, top plate fell off",NA,NA
+"BP",56,"R3",7415,"F",41,TRUE,FALSE,16,0,10,3,5,"No",FALSE,26,3,"4","No Card","Got stuck on bump on another bot, but good thievery",NA,NA
+"AW",57,"B1",3082,"C",3,FALSE,FALSE,0,2,1,0,0,"No",FALSE,43,4,"7","No Card","Played some pretty effective defense",NA,NA
+"ADK",57,"B2",5577,"M",NA,FALSE,FALSE,0,3,0,2,0,"No",FALSE,1,2,"1","No Card","Shot in auto no move, slow shooter, died twice, small hopper",NA,NA
+"the real bAD man.",57,"B3",364,"F",NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,"5","No Card",NA,NA,NA
+"LJ",57,"R1",10991,"M",NA,FALSE,FALSE,2,5,1,0,0,"No",FALSE,26,2,NA,"No Card","Auto routine backed off. from hub then drove back towardshub. Small hopper with open top, poor piece security. Played some counter defense without much success, opponent was still able to ram and block",NA,NA
+"CR",57,"R2",8159,"F",3,FALSE,FALSE,15,6,2,2,0,"No",FALSE,31,3,NA,"No Card","N/A",NA,NA
+"BP",57,"R3",3243,"C",5,FALSE,FALSE,5,10,0,2,6,"No",FALSE,6,1,NA,"No Card","Didn41391t a stop when shooting from the NZ",NA,NA
+"AW",58,"B1",6911,"M",1,FALSE,FALSE,5,9,1,5,0,"No",FALSE,361,4,NA,"No Card","Turret shot in the wrong direction a couple of times",NA,NA
+"ADK",58,"B2",4607,"M",3,FALSE,FALSE,5,3,6,3,0,"No",FALSE,56,2,NA,"No Card","Inaccurate shooting, unhelpful to alliance during inactive, small hopper",NA,NA
+"the real bAD man.",58,"B3",1756,"F",5,FALSE,FALSE,17,4,4,1,6,"No",FALSE,4,4,NA,"No Card","Intake very floppy",NA,NA
+"LJ",58,"R1",1391,"M",2,FALSE,FALSE,1,8,0,4,8,"No",FALSE,316,3,NA,"No Card","Struggled. against defense, was pushed and blocked easily. Likes near hub shots and cleaning upAZ",NA,NA
+"CR",58,"R2",614,"F",4,TRUE,FALSE,5,0,6,2,0,"No",FALSE,13,1,"2","No Card","Bump only",NA,NA
+"AW",59,"B1",2556,"C",34,TRUE,FALSE,6,4,4,3,4,"No",FALSE,63,3,NA,"No Card",NA,NA,NA
+"ADK",59,"B2",4766,"M",1,FALSE,FALSE,5,3,3,4,5,"No",FALSE,62,4,NA,"No Card",NA,NA,NA
+"the real bAD man.",59,"B3",2393,"F",56,FALSE,FALSE,10,4,2,4,6,"No",FALSE,61,3,"6","No Card",NA,NA,NA
+"LJ",59,"R1",449,"F",3,TRUE,FALSE,12,9,5,6,9,"No",FALSE,136,5,NA,"No Card","Cycled and filled well, missed a lot of shots, maybe because of distance.",NA,NA
+"CR",59,"R2",5913,"C",56,TRUE,FALSE,0,4,5,4,0,"No",FALSE,NA,1,"1","No Card","Missed every shot in auto, then died",NA,NA
+"BP",59,"R3",931,"M",NA,FALSE,FALSE,2,0,5,2,6,"No",FALSE,6,3,NA,"No Card","Auto climb",NA,NA
+"AW",60,"B1",10980,"C",34,TRUE,FALSE,10,2,6,3,0,"No",FALSE,61,3,NA,"No Card","Not always the most accurate",NA,NA
+"AM & ADK",60,"B2",3753,"M",2,FALSE,FALSE,1,5,0,1,4,"No",FALSE,5,2,NA,"No Card","Played defense throughout",NA,NA
+"the real bAD man.",60,"B3",1506,"F",NA,FALSE,FALSE,0,4,4,5,7,"No",FALSE,3416,4,"2","No Card","Beache in auto",NA,NA
+"LJ",60,"R1",2590,"F",3,TRUE,FALSE,8,2,7,2,6,"No",FALSE,1236,4,"6","No Card","Aggressive driving. Turret hood clipped trench with about 60s left, breaking shooter. Switched to reversing intake and herding quickly. Intake also broke and browned out with about 20 to 30s left",NA,NA
+"HR",60,"R2",4655,"C",56,TRUE,FALSE,7,8,2,6,5,"No",FALSE,12,3,NA,"No Card",NA,NA,NA
+"BP",60,"R3",5653,"M",1,FALSE,FALSE,8,20,1,2,8,"No",FALSE,136,1,NA,"No Card","Excessive and unnecessary crossings",NA,NA
+"CR",61,"B1",2582,"C",34,TRUE,FALSE,0,5,1,4,0,"No",FALSE,16,1,NA,"No Card","Stuck on bump during auto",NA,NA
+"AM & ADK",61,"B2",8229,"F",3,FALSE,FALSE,2,1,3,3,5,"No",FALSE,NA,4,NA,"No Card","Great bps",NA,NA
+"the real bAD man.",61,"B3",6665,"M",NA,FALSE,FALSE,0,10,2,0,0,"No",FALSE,42,3,NA,"No Card","No shooting or intake",NA,NA
+"LJ",61,"R1",5181,"C",5,TRUE,FALSE,7,8,2,2,3,"No",FALSE,136,3,NA,"No Card","SOTM did not work well, missed roughly half shots. Struggled against C-otters defense, could pass full. field wit.  50% consistency, mostly fromOZto NZ",NA,NA
+"HR",61,"R2",2635,"M",NA,FALSE,FALSE,1,0,3,0,2,"No",FALSE,2,2,NA,"No Card","They literally scored1 point in auto and like 5 in teleop",NA,NA
+"BP",61,"R3",5705,"F",NA,FALSE,FALSE,0,3,1,0,0,"No",FALSE,4,1,"4","No Card","Very easy to push, stuck for over a minute on bump",NA,NA
+"CR",62,"B1",111,"C",4,TRUE,FALSE,0,0,8,5,0,"No",FALSE,16,4,NA,"No Card","Likes to pass for the first half",NA,NA
+"AM & ADK",62,"B2",1690,"F",52,TRUE,FALSE,9,4,3,7,9,"No",FALSE,1256,5,NA,"No Card","Phenomenal",NA,NA
+"the real bAD man.",62,"B3",8858,"M",1,FALSE,FALSE,6,6,0,2,0,"No",FALSE,416,3,NA,"No Card","Drive train seemed kinda weak",NA,NA
+"LJ",62,"R1",11242,"M",NA,FALSE,FALSE,0,0,5,0,3,"No",FALSE,24,2,"2","No Card","Tank drive, tippy Kitbot. Did a lot. of meandering, good at making largeclumps for herding but slow to herd so was yoinked by Orbit.",NA,NA
+"HR",62,"R2",6429,"C",NA,FALSE,FALSE,0,7,0,0,2,"No",FALSE,4,2,NA,"No Card","They didn41391t do much at the start, missed a couple of shots, then defended",NA,NA
+"BP",62,"R3",4125,"F",3,FALSE,FALSE,5,2,2,0,4,"No",FALSE,4,1,"1","No Card",NA,NA,NA
+"CR",63,"B1",3931,"C",34,TRUE,FALSE,10,6,6,8,0,"No",FALSE,13,4,NA,"No Card","Steals only once during 4th shift",NA,NA
+"AM & ADK",63,"B2",2468,"F",56,TRUE,FALSE,10,3,4,5,9,"No",FALSE,16,3,NA,"No Card","Kinda mid at driving. Too easy to defend too",NA,NA
+"the real bAD man.",63,"B3",8069,"M",NA,FALSE,FALSE,2,5,6,1,0,"No",FALSE,24,2,NA,"No Card","Bulldozed in the end over emptying hopper, bad move",NA,NA
+"LJ",63,"R1",4322,"F",3,TRUE,FALSE,16,12,2,4,3,"No",FALSE,1563,4,NA,"No Card","Pass on the fly from anywhere in NZ, very mobile, played opportunistic defense with a sketchy pin. Slow and steady SOTM",NA,NA
+"HR",63,"R2",4087,"C",5,FALSE,FALSE,10,3,7,5,4,"No",FALSE,63,3,NA,"No Card",NA,NA,NA
+"BP",63,"R3",7915,"M",NA,FALSE,FALSE,4,7,4,3,7,"No",FALSE,62,2,NA,"No Card",NA,NA,NA
+"BP",64,"B1",3544,"C",5,FALSE,FALSE,0,8,2,0,0,"No",FALSE,4,2,NA,"No Card","Took so long to line up shot that they couldn41391t do it in their shift, easily defendable, if hit the have to realign",NA,NA
+"CR",64,"B2",7183,"M",NA,FALSE,FALSE,2,6,4,6,5,"No",FALSE,61,2,NA,"No Card","No clear pattern of whether they took trench or bump",NA,NA
+"ADK",64,"R1",1768,"C",3,TRUE,FALSE,0,6,5,0,0,"No",FALSE,16,3,NA,"No Card","Strong dumper, high accuracy from multiple places, didn41391t react well to defense",NA,NA
+"JB",64,"R2",5895,"F",5,FALSE,FALSE,0,0,8,6,7,"No",FALSE,12,3,NA,"No Card","Shoot on the move kinda works, but after shooting a bit, it just like whiffs a lot",NA,NA
+"The real bAD man.",64,"R3",11417,"M",NA,FALSE,FALSE,0,3,5,0,0,"No",FALSE,54,3,NA,"No Card","No auto at all, kitbot, really aggressive defense, gave 100 pts in penalties",NA,NA
+"BP",65,"B1",1403,"C",5,FALSE,FALSE,0,9,1,0,0,"No",FALSE,136,3,"6","No Card","Decent stoma but they were going forward and backward to intake fuel instead of just a lateral sweep parallel to driver wall",NA,NA
+"CR",65,"B2",1816,"M",1,FALSE,FALSE,2,0,6,0,0,"No",FALSE,136,2,NA,"No Card","Consistently overshoots the hub, can take trench but only took bump",NA,NA
+"HR",65,"B3",8159,"F",3,FALSE,FALSE,20,6,0,4,0,"No",FALSE,16,4,NA,"No Card","Double swipe trench auto, good shoot on move.",NA,NA
+"ADK",65,"R1",484,"C",3,TRUE,FALSE,0,10,0,0,0,"No",FALSE,1,3,NA,"No Card","Issues sustaining fireoate, possible agitation problem, high accuracy, solid passing",NA,NA
+"The real bAD man.",65,"R3",10034,"F",NA,FALSE,FALSE,0,0,5,0,0,"No",FALSE,16,2,"42","No Card","Kinda slow, driver made some poor tactical decisions, bump only",NA,NA
+"HR",65,NA,1023,"F",3,FALSE,FALSE,17,5,3,4,3,"No",FALSE,632,3,NA,"No Card","Slower shooter",NA,NA
+"BP",66,"B1",7415,"F",4,TRUE,FALSE,0,0,11,0,0,"No",FALSE,416,3,NA,"No Card","Got defended very easily on bump, boxed out for an entire shift, mediocre defense",NA,NA
+"CR",66,"B2",7769,"C",34,TRUE,FALSE,0,7,4,0,0,"No",FALSE,NA,5,"6","No Card","Browned out during endgame. Did two stealing cycles during the 3rd shift",NA,NA
+"HR",66,"B3",3501,"M",21,FALSE,FALSE,0,0,7,5,0,"No",FALSE,6,4,NA,"No Card","Depot/outpost auto starting from middle, good bps and capacity, but they are a bump robot, so a team was able to trap them in their alliance zone with varying levels of success",NA,NA
+"ADK",66,"R1",2813,"C",3,TRUE,FALSE,0,8,4,0,0,"No",FALSE,6,3,NA,"No Card","Had a small issue with shooter velocity where all shots fell short one cycle, when defended didn41391t seem to be able to x lock or shoot from a protected position, got pushed around and missed a full hopper worth of shots",NA,NA
+"JB",66,"R2",364,"M",3,FALSE,FALSE,0,1,0,0,0,"No",FALSE,5,2,NA,"No Card","Played defense the entire match, tried to defend in neutral zone (no oz defense), defense was kinda bad, didn41391t prevent any scoring really",NA,NA
+"The real bAD man.",66,"R3",2231,"F",56,TRUE,FALSE,0,10,3,0,0,"No",FALSE,2436,4,NA,"No Card","Had trouble getting over bump and under trench when their hopper was filled, couldn41391t get back into AZ during endgame",NA,NA
+"|",66,NA,11244,"F",NA,FALSE,FALSE,0,4,7,0,0,"No",FALSE,NA,1,NA,"No Card","Did a lot of nothing, shooter broke instantly and they kept on going back to try to score for some reason, driver looked lost, their inactive strategy seemed like intake full, go back, and wait, but their intake was bad and their shooter broke so did a lotta nothing, their defense was under average, didn41391t really defend anything",NA,NA
+"BP",67,"B1",449,"F",3,TRUE,FALSE,0,7,6,0,0,"No",FALSE,163,5,NA,"No Card","Fast cycling, good thievery, Oliver hella tuff, good unload, trench and hub shot mostly",NA,NA
+"CR",67,"B2",6528,"M",1,FALSE,FALSE,0,6,2,0,0,"No",FALSE,6,4,NA,"No Card","They kept getting in our way, very few cycles.",NA,NA
+"HR",67,"B3",2491,"C",6,TRUE,FALSE,10,0,13,8,0,"No",FALSE,613,5,NA,"No Card","Double swipe bump auto, interfered with our auto, which. messed up both robots41391 second passes.Were able to be defended and blocked rom entering alliance zone for a bit, costing them a cycle",NA,NA
+"GK",67,"R1",4450,"F",5,FALSE,FALSE,0,6,4,0,0,"No",FALSE,13,4,NA,"No Card","Liked the tower shot quite a lot",NA,NA
+"JB",67,"R2",7840,"C",3,FALSE,FALSE,0,4,4,0,0,"No",FALSE,1,3,NA,"No Card","Driving wasn41391t bad, their passing worked ok, they cleanup the sides,not bad, but sometimes look a little lost",NA,NA
+"the real bAD man.",67,"R3",3243,"M",1,FALSE,FALSE,0,15,3,0,0,"No",FALSE,1362,3,NA,"No Card","Shooting seemed a little iffy with agitator, mostly good though.",NA,NA
+"BP",68,"B1",16,"F",3,TRUE,FALSE,0,3,7,0,0,"No",FALSE,362,2,"3","No Card","Middle arc shot near trench, too high of an arc, some shots backwards, low accuracy",NA,NA
+NA,68,"B2",931,NA,NA,NA,FALSE,NA,NA,NA,NA,NA,"No",NA,NA,NA,NA,NA,NA,NA,NA
+"HR",68,"B3",1533,"C",5,FALSE,FALSE,0,4,0,0,0,"No",FALSE,462,4,NA,"No Card","Indexer/shooter malfunction, played pretty good neutral and opposing zone defense.",NA,NA
+"GK",68,"R1",3937,"C",3,TRUE,FALSE,0,4,1,0,0,"No",FALSE,14,4,NA,"Yellow","Got locked into OZ by opponents; intake broke",NA,NA
+"JB",68,"R2",1391,"F",3,TRUE,FALSE,0,6,2,0,0,"No",FALSE,561,3,NA,"No Card","Always shoot from close tower shot, clean up sides while active, inactive they did passing in the first one, and in the second one, they. played neutral zone defense while intaking full, defense was pretty good,",NA,NA
+"the real bAD man.",68,"R3",3753,"M",NA,FALSE,FALSE,0,12,0,0,0,"No",FALSE,316,4,NA,"No Card","Cycles under trench into OZ, steals ballls, then comes straight back through same trench for a up close hub shot.",NA,NA
+"BP",69,"B1",6911,"M",1,FALSE,FALSE,0,8,2,0,0,"No",FALSE,342,1,NA,"No Card","Middle and far arc mostly, driver kept trying to shoot without any balls. is thehopper",NA,NA
+"CR",69,"B2",51,"F",3,FALSE,FALSE,0,4,4,0,0,"No",FALSE,31,4,"6","No Card","Browned out during shift 2, no clear pattern between bump and trench",NA,NA
+"HR",69,"B3",2590,"C",56,FALSE,FALSE,20,2,6,4,0,"No",FALSE,NA,3,NA,"No Card","Double swipe trench/bump auto. Not great shooting on the move, which caused some inaccuracy41391s",NA,NA
+"JB",69,"R2",5705,"M",NA,FALSE,FALSE,0,8,0,0,0,"No",FALSE,5,1,NA,"No Card","Shooter broke, they tried playing defense and their defense was bad, they did a lot of nothing, looked like their robot was on a stroll in the middle, they blocked their teammates at one point, driver wasn41391t great",NA,NA
+"the real bAD man.",69,"R3",2393,"F",56,TRUE,FALSE,0,4,0,0,0,"No",FALSE,16,4,NA,"No Card","Seemed very slow, near arc shit, mainly stayed in AZ. and cleanedup the back row rather than cycling",NA,NA
+"BP",70,"B1",4607,"M",4,TRUE,FALSE,0,0,1,0,0,"No",FALSE,NA,1,"1","No Card","Died before I coup really see anything, but auto shots were middle arc",NA,NA
+"CR",70,"B2",4020,"F",3,FALSE,FALSE,0,12,0,0,0,"No",FALSE,NA,1,NA,"No Card","Stayed in their AZ the whole endgame,",NA,NA
+"HR",70,"B3",8858,"C",5,FALSE,FALSE,10,10,3,2,3,"No",FALSE,64,4,NA,"No Card","Not a super fast shooter, and with inconsistent accuracy, as about. 1/3 of their shots just barelyovershot.",NA,NA
+"AW",70,"R1",4655,"C",34,FALSE,FALSE,15,10,2,6,0,"No",FALSE,13,4,NA,"No Card","Did a lot of good passing from the neutral zone",NA,NA
+"JB",70,"R2",2582,NA,NA,FALSE,FALSE,0,3,7,0,0,"No",FALSE,16,3,NA,"No Card","Did the norm,passed in inactive, shot in active, whiffed sometimes from. farther away, didcleaning when active",NA,NA
+"the real bAD man.",70,"R3",4469,"F",56,TRUE,FALSE,0,8,10,0,0,"No",FALSE,346,4,NA,"No Card","Normally cycles into NZ both under trench and over bump, near arc shot",NA,NA
+"BP",71,"B1",1506,"F",3,TRUE,FALSE,0,11,1,0,0,"No",FALSE,352,4,"3","No Card","Tried to pass once or twice but failed, otherwise good smooth cycling, stealing, etc, mid arc",NA,NA
+"CR",71,"B2",8229,"C",3,FALSE,FALSE,0,4,4,0,0,"No",FALSE,6,3,NA,"No Card","Missed almost all shots, partially due to defense",NA,NA
+"HR",71,"B3",11242,"M",NA,FALSE,FALSE,0,0,2,0,0,"No",FALSE,25,3,NA,"No Card","Attempted a. climb in auto, but failed. Just hun.  out in NZ anddefended adherded, probably shooter was broken. Attempted l2 climb in endgame, but only got l1.",NA,NA
+"AW",71,"R1",8119,"C",3,FALSE,FALSE,6,6,1,2,6,"No",FALSE,63,3,"1","No Card","Got stuck in the opposite alliance zone for awhile bc they were being defended",NA,NA
+"LJ",71,"R2",10991,"M",NA,FALSE,FALSE,1,8,0,0,8,"No",FALSE,264,3,NA,"No Card","Shooting sprayed so not very accurate. Seemed to drive slowly, intake may have broken so they switched to other strategies. Only herded smaller clumps, pushed some to human players. On defense, tried ramming which was ineffective and got a foul for pinning too long.",NA,NA
+"the real bAD man.",71,"R3",3082,"F",5,FALSE,FALSE,0,6,5,0,0,"No",FALSE,43,3,NA,"No Card","Sometimes struggled to go over bump, mainly stole balls from OZ and outaked them into NZ or AZ",NA,NA
+"BP",72,"B1",111,"F",4,TRUE,FALSE,0,0,8,0,0,"No",FALSE,26,3,NA,"No Card","Mid and far arcs, accurate even from the corner, good bps",NA,NA
+"CR",72,"B2",2635,"M",NA,FALSE,FALSE,0,0,4,0,0,"No",FALSE,2,3,"6","No Card","Intake. seemed to be broken, but didn41391t play defense. Bulldozed for 1st half,then went to AZ and did nothing for 2nd half",NA,NA
+"HR",72,"B3",6985,"C",6,FALSE,FALSE,0,0,4,0,0,"No",FALSE,4,4,NA,"No Card","Shooter malfunction in auto, defended for the rest of the game. Defense was pretty good at stopping red from entering az, but got like one foul for pinning",NA,NA
+"AW",72,"R1",5913,"C",3,TRUE,FALSE,6,7,1,2,4,"No",FALSE,136,3,NA,"No Card","Couldn41391t get under trench when fully filled. up, did a lot of passing, was getting blockedfrom getting back into their alliance zone by defense for a bit",NA,NA
+"LJ",72,"R2",6487,"M",NA,FALSE,FALSE,0,3,5,0,0,"No",FALSE,45,3,NA,"No Card","Intake seemed to break since start of match, spent first 30. seconds meanderingbefore focusing on blocking 111. Played some decent interference stopping 111 over bump from. NZ but stillgot passed, tried slamming defense intake first for a bit in OZ. Knew to back off from pin count.",NA,NA
+"the real bAD man.",72,"R3",3931,"F",56,TRUE,FALSE,0,6,3,0,0,"No",FALSE,1346,4,NA,"No Card","Second auto cycle failed, first was good. Strong bps, near arc shot.",NA,NA
+"BP",73,"B1",614,"F",4,TRUE,FALSE,0,0,10,0,0,"No",FALSE,62,2,NA,"No Card","Sometimes a little slow for bump, intake broke (it41391s happened before),close arc",NA,NA
+"CR",73,"B2",4766,"M",12,FALSE,FALSE,0,10,0,0,0,"No",FALSE,6,2,NA,"No Card","Not technically. passing, but they intake full and then barf it out through theirintake in the AZ",NA,NA
+"HR",73,"B3",4322,"C",56,FALSE,FALSE,0,7,3,0,0,"No",FALSE,136,4,NA,"No Card","Double swipe trench/bump auto, good. at passing, bps was alright, shoot iron the move was alittle inaccurate",NA,NA
+"AW",73,"R1",5181,"F",5,TRUE,FALSE,10,6,2,4,0,"No",FALSE,316,4,NA,"No Card","Did good. stealing balls and passing from opposite alliancezone",NA,NA
+"LJ",73,"R2",11214,"M",NA,FALSE,FALSE,1,3,7,0,4,"No",FALSE,26,3,NA,"No Card","Overshot consistently, including from midrange. Avoided getting beached multiple times when going over bump. Focused mostly on herding for whole match, many small clumps over bump and through trench. Did not herd balls that were just falling out of blue hub, probably scared of fouls.",NA,NA
+"the real bAD man.",73,"R3",6429,"C",3,FALSE,FALSE,0,5,0,0,0,"No",FALSE,26,3,NA,"No Card","Intake jammed sometimes, middle-ish arc",NA,NA
+"BP",74,"B1",5577,"M",NA,FALSE,FALSE,0,3,0,0,0,"No",FALSE,2,2,"1","No Card","Died quite quickly",NA,NA
+"CR",74,"B2",2556,"F",4,TRUE,FALSE,0,3,5,0,0,"No",FALSE,NA,5,"26","No Card","Can go under trench, chooses bump during auto. Beached during auto. Browned out during endgame",NA,NA
+"HR",74,"B3",1756,NA,56,TRUE,FALSE,0,4,6,0,0,"No",FALSE,63,4,"1","No Card","Double swipe trench/bump auto, ok bps, died with 50 seconds left",NA,NA
+"AW",74,"R1",6201,"M",1,FALSE,FALSE,10,11,1,0,5,"No",FALSE,4,4,NA,"No Card","Played defense almost the entire game",NA,NA
+"LJ",74,"R2",10980,"F",5,TRUE,FALSE,10,3,5,3,4,"No",FALSE,6,4,NA,"No Card","EXTENDO HOPPER. They clipped the trench with it once, probably broke. it for the match. Turret didn41391t move atall in. NZ. Overshot enoughto be noticeable but still fairly accurate. Focused on filling big hopper then sitting in the corner to unload, SOTM not very good. Indexer seemed to jam in the last 15s for a bit.",NA,NA
+"the real bAD man.",74,"R3",1690,"C",34,TRUE,FALSE,0,8,5,0,0,"No",FALSE,136,5,NA,"No Card","Really good ball control and passing, far arc shot, sweeps back row while shooting",NA,NA
+"BP",75,"B1",4087,"F",3,FALSE,FALSE,0,4,4,0,0,"No",FALSE,634,3,NA,"No Card","Decent cycling, mid and far arc, sweep but fixed shooter",NA,NA
+"CR",75,"B2",2054,"M",6,TRUE,FALSE,0,0,4,0,0,"No",FALSE,6,3,"1","No Card","Very inaccurate when shooting in the move, especially when moving away from the hub",NA,NA
+"HR",75,"B3",4125,"C",5,FALSE,FALSE,0,1,4,0,0,"No",FALSE,3461,4,NA,"No Card","Auto got caught on the trench and sent the bot across the line and they got like 60 points of penalties for that. Got like 3 cycles in and played ok defense, as they weren41391t able to prevent big volley from teams like 9496",NA,NA
+"AW",75,"R1",5653,"F",5,FALSE,FALSE,15,16,0,4,0,"No",FALSE,63,3,NA,"No Card","Kinda mid shooting speed",NA,NA
+"LJ",75,"R2",9496,"C",3,TRUE,FALSE,12,8,6,6,0,"No",FALSE,136,4,NA,"No Card","Consistently thieved through opponent trench on their left, in and. out.Passed from far edg. ofNZ to AZ. Floundered a bit against blocking defense but was fairly resistant to ramming. In endgame focused on cleaning up large cache of fuel behind tower and by human players",NA,NA
+"the real bAD man.",75,"R3",6665,"M",4,TRUE,FALSE,0,5,1,0,0,"No",FALSE,24,3,NA,"No Card","Good defense with no penalties and herding, no shoot or intake,",NA,NA
+"BP",77,"B1",2590,"F",4,TRUE,FALSE,0,3,5,0,0,"No",FALSE,62,3,NA,"No Card","Back row sweep, far arc, ok bps but limited by low intake speed",NA,NA
+"CR",77,"B2",7915,"M",NA,FALSE,FALSE,0,7,5,0,0,"No",FALSE,NA,4,NA,"No Card","Made some tiny, useless cycles",NA,NA
+"HR",77,"B3",484,"C",56,FALSE,FALSE,0,12,2,0,9,"No",FALSE,643,4,NA,"No Card","Double swipe trench/bump auto, not good bps, played defense and stole balls on opposing shift, but was able to get 1 or 2 cycles per shift",NA,NA
+"AW",77,"R1",11417,"M",NA,FALSE,FALSE,10,1,3,0,0,"No",FALSE,43,2,NA,"No Card","Stopped moving for approx 10 seconds in the neutral zone in the middle of the match, defense was quite poor, just a lot of scooting around and nudging robots without actually stopping them",NA,NA
+"the real bAD man",77,"R2",1391,"C",34,TRUE,FALSE,0,6,2,0,0,"No",FALSE,6,4,NA,"No Card","Shoots hub shot/near arc, but can also do a tower shot to avoid defense",NA,NA
+"AM",77,"R3",7769,"F",6,TRUE,FALSE,9,3,4,7,7,"No",FALSE,16,5,NA,"No Card","Incredible rum shooter not full width yet insane bps. Intaking is great and they have been incredibly agile. Nets and good hopper capacity saw.",NA,NA
+"BP",78,"B1",8069,"M",NA,FALSE,FALSE,0,8,2,0,0,"No",FALSE,NA,2,NA,"No Card","Low bps, slow intake, no auto, not optimal drive pathing",NA,NA
+"CR",78,"B2",4655,NA,34,TRUE,FALSE,0,5,3,0,0,"No",FALSE,31,2,NA,"No Card","Intake broke partway through. For cycles, they pass balls to their AZ then go over bump with empty hopper.",NA,NA
+"HR",78,"B3",364,"C",5,FALSE,FALSE,0,6,4,0,2,"No",FALSE,634,3,NA,"No Card","Single sweep trench/bump auto, got like 2 cycles per shift, mid bps, honestly a mid robot",NA,NA
+"AW",78,"R1",2231,"C",3,TRUE,FALSE,16,4,4,6,0,"No",FALSE,126,4,NA,"No Card","Very fast stream of balls while passing",NA,NA
+"the real bAD man",78,"R2",931,"M",NA,FALSE,FALSE,0,0,1,0,0,"No",FALSE,5,2,NA,"No Card","Climbed in auto, kinda just sat in neutral zone near oz trench for the whole game, did not shoot. Got in their teammates way sometimes.",NA,NA
+"AM",78,"R3",6528,"F",25,FALSE,FALSE,6,2,1,4,7,"No",FALSE,16,2,NA,"No Card","Hopper capacity isn»t the brightest. Missed most of the shots it took toward minute 2.",NA,NA
+"BP",79,"B1",8229,"C",5,FALSE,FALSE,0,14,2,0,0,"No",FALSE,126,4,NA,"No Card","Good drum, shoots near arc, good at passing. They sometimes cycle even when there are reserves of fuel to be used, even during endgame",NA,NA
+"CR",79,"B2",3937,"F",34,TRUE,FALSE,0,3,5,0,0,"No",FALSE,1,3,NA,"No Card","Great passing cycles, but feeding cycles are too small and intake very few fuel",NA,NA
+"HR",79,"B3",5705,"M",NA,FALSE,FALSE,0,1,0,0,0,"No",FALSE,5,3,"1","No Card","No auto, shooter malfunction, no points scored, played some mid neutral zone defense and the died in their trench.",NA,NA
+"AW",79,"R1",4469,"C",3,TRUE,FALSE,17,6,8,6,1,"No",FALSE,136,5,NA,"No Card","Plays exactly our game with near hub shots, passing from close to AZ with occasional stealing, etc. reliable and accurate cycles, good at cleaning up in front of hubs in NZ. Cleaned up along DS in last inactive, then focused on cycling in end game.",NA,NA
+"the real bAD man",79,"R2",4450,"M",1,FALSE,FALSE,0,5,5,0,0,"No",FALSE,16,4,NA,"No Card","Far arc shot, cycles from NZ to AZ seemed kinda poorly time, scrambling to intake to full then shoot",NA,NA
+"AM",79,"R3",8159,"F",5,FALSE,FALSE,10,5,1,7,6,"No",FALSE,16,5,NA,"No Card","Shoot on the fly with a similar cycle to 1690.  They run single turret and their intake is phenomenal. Hitting it home, they pass consistently and stock up efficiently. 10/10",NA,NA
+"BP",80,"B1",3243,"C",5,FALSE,FALSE,0,3,3,0,0,"No",FALSE,45,2,NA,"No Card","Defense was not very effective for the heavier turret bots it defended",NA,NA
+"CR",80,"B2",2491,"M",6,FALSE,FALSE,0,0,12,0,0,"No",FALSE,62,3,NA,"No Card","Very flimsy top plate (attached by Velcro) fell off during shift 2 or 3.",NA,NA
+"LJ",80,"R1",5895,"M",5,TRUE,FALSE,20,7,5,4,4,"No",FALSE,16,4,NA,"No Card","Loves scraping along DS, did that basically every scoring period. Pass on the move from almost whole NZ. Solid SOTM, some passing from far edge of NZ were short so there was a bit of clustering there. Fairly accurate but occasionally undershot",NA,NA
+"the real bAD man",80,"R2",2393,"M",NA,FALSE,FALSE,0,4,0,0,0,"No",FALSE,14,3,NA,"No Card","Played defense, could pass balls from OZ pretty deep into NZ",NA,NA
+"AM",80,"R3",111,"C",62,TRUE,FALSE,10,0,5,5,6,"No",FALSE,16,3,NA,"No Card","They are great at intaking, large hop cap, but they were easy to defend. Their solution? They passed from NZ to their zone with their single shooter. They are still sort of slow. Keep in mind.",NA,NA
+"BP",81,"B1",5913,"C",5,TRUE,FALSE,0,3,3,0,6,"No",FALSE,56,3,NA,"No Card","Good at offense, drum shoots fast, but the bot itself moved slowly",NA,NA
+"CR",81,"B2",1023,"F",3,FALSE,FALSE,0,3,4,0,0,"No",FALSE,136,4,NA,"No Card","Very stretchy net, 1.5 cycle auto",NA,NA
+"HR",81,"B3",9572,"C",56,FALSE,FALSE,0,3,2,0,0,"No",FALSE,6,3,NA,"No Card","Pretty good bps, lots of cycles, but were defended a lot",NA,NA
+"LJ",81,"R1",8858,"C",3,FALSE,FALSE,2,5,0,1,5,"No",FALSE,4561,2,NA,"No Card","Shot mostly from the trench. Intake broke with more than a minute left, switched to defense. Able to avoid pin fouls, but ramming was ineffective. Did some blocking, but also meandered during end game.",NA,NA
+"the real bAD man",81,"R2",8119,"F",5,FALSE,FALSE,0,6,6,0,0,"No",FALSE,136,4,NA,"No Card","Good bps, passing from OZ to AZ, shoots from close and far",NA,NA
+"AM",81,"R3",614,"M",6,TRUE,FALSE,6,1,2,0,3,"No",FALSE,54,3,"2,6","No Card","Nearly beached themselves twice. Got stuck on bump, and didn»t shoot during teleop. Not their brightest match. Intake broken.",NA,NA
+"BP",82,"B1",1768,"C",5,TRUE,FALSE,0,9,2,0,0,"No",FALSE,1236,5,NA,"No Card","Mid arc and near, very quick unload and great feeding",NA,NA
+"CR",82,"B2",3931,"M",34,FALSE,FALSE,0,4,8,0,0,"No",FALSE,136,4,NA,"No Card","Intake broke during shift 5",NA,NA
+"HR",82,"B3",4607,"F",NA,FALSE,FALSE,0,10,2,0,0,"No",FALSE,162,5,"t shoot anything, but they had good bps and lots of cycles","No Card","Auto didn",NA,NA
+"LJ",82,"R1",7840,"F",5,FALSE,FALSE,8,8,0,1,8,"No",FALSE,136,3,NA,"No Card","Preferred far arc, no SOTM. Stayed mostly on left hand side of the field. Not super accurate and low throughput, struggled to cache a good amount of fuel in AZ",NA,NA
+"the real bAD man",82,"R2",5577,"M",NA,FALSE,FALSE,0,0,0,0,0,"No",FALSE,NA,1,"1","No Card",NA,NA,NA
+"AM",82,"R3",10034,"M",6,TRUE,FALSE,0,0,3,0,4,"No",FALSE,1,1,NA,"No Card","Didn't make shots it took. Never filled its hopper emnitrely. Good try but not optimal",NA,NA
+"BP",83,"B1",6487,"F",3,TRUE,FALSE,0,10,2,0,0,"No",FALSE,62,2,NA,"No Card","Kept trying to intake after intake was visibly broken, didnt go to herding or defense once they became unable to intake and score fuel",NA,NA
+"CR",83,"B2",11242,"M",NA,FALSE,FALSE,0,0,5,0,0,"No",TRUE,4,2,NA,"No Card","Intake seemed to be broken throughout the match, robot not heavy enough to play good defense",NA,NA
+"HR",83,"B3",4087,"C",5,FALSE,FALSE,0,6,3,0,0,"No",FALSE,42,5,NA,"No Card","Double cycle auto, possibly something broke which led them to do D, like 3 &D. Tenacious D, locked down the bump, deflected shots, herded in transition.",NA,NA
+"AZ",83,"R1",1756,"C",5,FALSE,FALSE,0,5,7,0,0,"No",FALSE,6,4,NA,"No Card","A lot of sweeps and small cycles",NA,NA
+"the real bAD man",83,"R2",1506,"F",56,TRUE,FALSE,0,6,2,0,0,"No",FALSE,NA,4,NA,"No Card","Far arc and tower shot to avoid defense, good movement",NA,NA
+"AM",83,"R3",11244,"M",1,FALSE,FALSE,10,1,1,3,4,"No",FALSE,26,3,NA,"No Card","Ok driving but their indexer sucks. They barfed balls just to agitate balls and fire from shooter. They have a small hopper capacity. Auto is not good. They did their best but it isn»t enough. Barely shot throughout.",NA,NA
+"BP",84,"B1",4766,"C",51,TRUE,FALSE,0,4,4,0,0,"No",FALSE,463,2,NA,"No Card","Struggled under defense from opposing robots, near and mid arcs",NA,NA
+"CR",84,"B2",2582,"F",34,TRUE,FALSE,0,5,3,0,0,"No",FALSE,61,4,NA,"No Card","They didn»t seem to be able to intake for the 1st half.",NA,NA
+"HR",84,"B3",3082,"C",5,FALSE,FALSE,0,8,1,0,0,"No",FALSE,31264,4,NA,"No Card","Invaded OZ, did megapassing the whole match, sometimes even when they were near he AZ, they shot out of the field. Turret, 3 and D, hella power, played utility the whole match. Outpost at the end of the match",NA,NA
+"AZ",84,"R1",4125,"F",5,TRUE,FALSE,0,8,6,0,0,"No",FALSE,34,3,"t understand their strategy","No Card","Mediocre driving, not a lot of full cycles, I don",NA,NA
+"the real bAD man",84,"R2",6911,"M",1,FALSE,FALSE,0,5,3,0,0,"No",FALSE,164,3,NA,"No Card","Good long distance passing, typically sweeps back row while shooting",NA,NA
+"BP",85,"B1",6429,"C",5,TRUE,FALSE,0,9,1,0,0,"No",FALSE,62,3,NA,"No Card","Decent cycler",NA,NA
+"CR",85,"B2",4020,"F",3,FALSE,FALSE,0,5,3,0,0,"No",FALSE,1,3,NA,"No Card","Likes to cycle and pass from the left side, far away from the opponent hub",NA,NA
+"HR",85,"B3",10980,"M",6,FALSE,FALSE,0,0,6,0,0,"No",FALSE,6,3,NA,"No Card","Citrus copy, but basically just bump bot hella inaccurate, kinda just diddled around during inactive, BPS low and took most of active to do a cycle/clean AZ",NA,NA
+"AZ",85,"R1",3544,"C",3,FALSE,FALSE,0,14,0,0,0,"No",FALSE,341,3,NA,"No Card","Not great driving, heavy focus on passing however not ever good at doing so.",NA,NA
+"the real bAD man",85,"R2",6665,"F",5,FALSE,FALSE,0,2,3,0,0,"No",FALSE,4,3,NA,"No Card","Good defense but a little aggressive, gave 30 penalty points to other team, no intake or shoot",NA,NA
+"BP",86,"B1",2054,"C",62,FALSE,FALSE,0,0,6,0,0,"No",FALSE,2,2,NA,"No Card","Slow moving, hard to get over bump, low bps",NA,NA
+"CR",86,"B2",2556,"F",3,FALSE,FALSE,0,5,6,0,0,"No",FALSE,16,3,NA,"No Card","Interesting 90 degree shooter, low bps, seems to only work on the left side of the field.",NA,NA
+"HR",86,"B3",5181,"M",21,FALSE,FALSE,5,1,1,0,4,"No",FALSE,45,5,NA,"No Card","Extremely good defense. Their driving sets a good example, and we should consider them for defense. Their hopper capacity isn»t great and shooter is average. Needs more power.",NA,NA
+"AZ",86,"R1",2635,"C",NA,FALSE,FALSE,0,0,7,0,0,"No",FALSE,NA,1,NA,"No Card","No intake, weird driving, no defense, didnt contribute",NA,NA
+"the real bAD man",86,"R3",7415,"M",41,TRUE,FALSE,0,0,10,0,0,"No",FALSE,36,3,NA,"No Card","Missed first round of auto shots, got completely blocked by 5181",NA,NA
+"BP",87,"B1",1690,"F",3,TRUE,FALSE,0,14,0,0,0,"No",FALSE,136,5,NA,"No Card","Got locked up in the corner for a little and undershot a lot then, otherwise impeccable feeding and quick shooting",NA,NA
+"ADK",87,"B3",2813,"C",5,TRUE,FALSE,0,9,5,0,0,"No",FALSE,1,2,NA,"No Card","Strong passing and solid shooting but several collisions with alliance partners while intaking and shooting",NA,NA
+"AZ",87,"R1",5653,"M",1,FALSE,FALSE,0,12,0,0,0,"No",FALSE,1,1,NA,"No Card","Low bps, poor cycles, not a lot of throughput",NA,NA
+"the real bAD man",87,"R2",51,"C",3,FALSE,FALSE,0,2,2,0,0,"No",FALSE,6,3,NA,"No Card","Nothing all that special, shot from far",NA,NA
+"CR",87,"R3",6985,"F",6,TRUE,FALSE,0,0,3,0,0,"No",FALSE,4,3,NA,"No Card","Played hard defense in OZ, which disrupted 1690s turret significantly",NA,NA
+"BP",88,"B1",10991,"M",NA,FALSE,FALSE,0,7,0,0,0,"No",FALSE,456,1,NA,"No Card","Not very effective at defense, bps and intake speed low, not great driving overall either",NA,NA
+"CR",88,"B2",4322,"F",34,FALSE,FALSE,0,10,2,0,0,"No",FALSE,12,2,NA,"No Card","Their intake broke partway through, but somehow started working again a while later.",NA,NA
+"ADK",88,"B3",2231,"C",5,TRUE,FALSE,0,5,7,0,0,"No",FALSE,1,3,NA,"No Card","Some difficult going over bump, good adaptation to defense, shoot on the move works well without loss of accuracy",NA,NA
+"AZ",88,"R1",16,"C",3,FALSE,FALSE,0,7,5,0,0,"No",FALSE,3,2,NA,"No Card","Vulnerable to defense or blocking, no full pass ability it seems, not best driving",NA,NA
+"the real bAD man",88,"R2",2393,"M",NA,FALSE,FALSE,0,2,4,0,0,"No",FALSE,16,3,NA,"No Card","Kinda slow drive base, near arc shot",NA,NA
+"BP",89,"B1",2468,"F",3,TRUE,FALSE,0,8,4,0,0,"No",FALSE,316,5,NA,"No Card","Is good at stealing from opposing zones, passing it back, repeat until their shift",NA,NA
+"CR",89,"B2",11417,"M",NA,FALSE,FALSE,0,2,0,0,0,"No",FALSE,4,3,NA,"No Card","Tries to play defense, but is too light.",NA,NA
+"ADK",89,"B3",8159,"F",5,FALSE,FALSE,0,10,0,0,0,"No",FALSE,1,2,NA,"No Card","Definite indexing issues, inconsistent fire rate but accurate when working",NA,NA
+"AZ",89,"R1",4450,"C",3,FALSE,FALSE,0,8,2,0,0,"No",FALSE,6,3,NA,"No Card","Questionable indexing¡ hmm idk",NA,NA
+"the real bAD man",89,"R2",1391,"F",56,TRUE,FALSE,0,6,0,0,0,"No",FALSE,62,4,NA,"No Card","Second auto cycle failed, high bps, good cycles",NA,NA
+"BP",90,"B1",3753,"C",5,FALSE,FALSE,0,6,2,0,0,"No",FALSE,62,2,NA,"No Card","Some aim issues; entire volley was misaligned in auto, some more misses throughout. Also not the best bps",NA,NA
+"CR",90,"B2",8069,"M",NA,FALSE,FALSE,0,6,1,0,0,"No",FALSE,462,2,NA,"No Card","Basically Kitbot with small over bumper intake. Decent defendedr, but left to bulldoze at the end for some reason.",NA,NA
+"ADK",90,"B3",111,"F",4,TRUE,FALSE,0,0,8,0,0,"No",FALSE,1,1,NA,"No Card","Significantly hindered by defense, though they technically passed only about 10 balls made to the AZ due to low accuracy and fire rate",NA,NA
+"AZ",90,"R1",7769,"F",5,FALSE,FALSE,0,7,7,0,0,"No",FALSE,16,5,NA,"No Card","Good driving, consistent bps, utilities bump heavily(compared to others) and can avoid defense",NA,NA
+"the real bAD man",90,"R2",4607,"C",3,FALSE,FALSE,0,13,1,0,0,"No",FALSE,463,4,NA,"No Card","Really good fast smooth movement, good cycle, did not shoot much but helped clear back of AZ",NA,NA
+"BP",91,"B1",3501,"F",4,TRUE,FALSE,0,0,8,0,0,"No",FALSE,621,3,NA,"No Card","Good passing but accuracy decreases a lot when defended",NA,NA
+"CR",91,"B2",614,"M",6,FALSE,FALSE,0,0,8,0,0,"No",FALSE,43,1,"2","No Card","Intake and hopper extension jammed partway through. In the endgame, they abandoned defense to try to climb, and failed, getting in their teammates way in the process. I expected more from a CHS team",NA,NA
+"ADK",91,"B3",7840,"C",5,FALSE,FALSE,0,5,2,0,0,"No",FALSE,4,1,NA,"No Card","Did not shoot nor pass a single ball, defense was ineffective and did not hinder opponent",NA,NA
+"AZ",91,"R1",931,"M",NA,FALSE,FALSE,0,0,1,0,0,"No",FALSE,NA,1,"1","No Card","Broken swerve no driving but auto climb successful!",NA,NA
+"the real bAD man",91,"R2",1506,"F",56,TRUE,FALSE,0,10,2,0,0,"No",FALSE,2436,4,NA,"No Card","Really good movement and high bps,",NA,NA
+"BP",92,"B1",3931,"F",3,TRUE,FALSE,0,7,3,0,0,"No",FALSE,61,3,NA,"No Card","Full field passing slightly inaccurate",NA,NA
+"CR",92,"B2",3243,"C",5,FALSE,FALSE,0,10,2,0,0,"No",FALSE,162,4,NA,"No Card","Only used the bump during endgame",NA,NA
+"ADK",92,"B3",11242,"M",NA,FALSE,FALSE,0,0,3,0,0,"No",FALSE,NA,1,NA,"No Card","Climb in auto, did not shoot or play defense for rest of match just sat in NZ",NA,NA
+"AZ",92,"R1",4469,"F",5,TRUE,FALSE,0,1,13,0,3,"No",FALSE,13,1,NA,"No Card","Lower bps but is very prepared, put up a lot of points, solid dumper, good auto, trench is secondary for them, they prefer bump,",NA,NA
+"the real bAD man",92,"R2",4766,"M",2,FALSE,FALSE,0,9,1,0,0,"No",FALSE,346,4,NA,"No Card","Almost always hub shot, had a climb up didn»t use it.",NA,NA

@@ -16,16 +16,16 @@ take_first_link <- function(link) {
 }
 
 #Process images from imported dataset and convert them to pngs (all in vector_pics array)
-pit_data <- read.csv("pit_scouting_mdbet.csv")
+pit_data <- read.csv("~/Documents/R/scouting2026/shinyapp/data/chcmp/pit_scouting_chcmp.csv")
 
 # with a function that takes the first link in each row of the column 
 # instead of just the first row
 pit_data <- pit_data |>
-    mutate(Upload.robot.photo = sapply(strsplit(Upload.one.ISOMETRIC.robot.photo, ', '), take_first_link))
+    mutate(Upload.robot.photo = sapply(strsplit(robot_photo, ', '), take_first_link))
 
 
 # taking links and converting them to images
-pic_link <- pit_data$Upload.one.ISOMETRIC.robot.photo
+pic_link <- pit_data$robot_photo
 # pics_link <- gsub("open\\?id=", "uc?export=download&id=", pic_link)
 pit_data$Timestamp <- NULL
 
@@ -76,12 +76,12 @@ vector_pics <- lapply(pics_link, whomp_whomp)
 
 
 write_pit_pics <- function(pit_data) { 
-if (!dir.exists("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/mdbet/images")) dir.create("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/mdbet/images")
+if (!dir.exists("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/chcmp/images")) dir.create("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/chcmp/images")
 for (i in seq_along(vector_pics)) {
     if (is.null(vector_pics[[i]])) {
       next
     }
-  path = file.path("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/mdbet/images", paste0(pit_data$Team.number..for.the.team.you.re.scouting.[i], ".png"))
+  path = file.path("/Users/rosyyu/Documents/R/scouting2026/shinyapp/data/chcmp/images", paste0(pit_data$Team.number..for.the.team.you.re.scouting.[i], ".png"))
   if (path == "NA.png") { 
     path = paste0("default_image",".png")
     print(path)

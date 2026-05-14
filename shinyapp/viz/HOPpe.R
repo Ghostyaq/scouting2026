@@ -3,6 +3,8 @@ pridge_hopper_offline <- function(event_key) {
     schedule <- read.csv(paste0(data_dir_path, "/schedule.csv"))
     tba_data <- read.csv(paste0(data_dir_path, "/tba_data.csv"))
     statbotics_data <- read.csv(paste0(data_dir_path, "/statbotics_data.csv"))
+    raw <- read.csv(paste0(data_dir_path, "/data.csv"))
+    pridge <- read.csv(paste0(data_dir_path, "/pridge.csv"))
     
     unique_teams <- sort(unique(unlist(schedule[,2:7])))
     design <- matrix(0, 
@@ -22,55 +24,73 @@ pridge_hopper_offline <- function(event_key) {
         chipotle <- filter(
             raw,
             match == matches[ceiling(i/2)], 
-            substring(robot, 1, 1) == ifelse(i %% 2, "B", "R"),)
-        design[i, as.character(chipotle$team)] = as.integer(chipotle$num_cycles*10 + chipotle$num_cycles_tenths)
+            (team == ifelse(i %% 2, schedule[matches[ceiling(i/2)],5], schedule[matches[ceiling(i/2)],2]) |
+                team == ifelse(i %% 2, schedule[matches[ceiling(i/2)],6], schedule[matches[ceiling(i/2)],3]) |
+                team == ifelse(i %% 2, schedule[matches[ceiling(i/2)],7], schedule[matches[ceiling(i/2)],4])) &
+                team %in% unique_teams) 
+        design[i, as.character(chipotle$team)] = as.integer(chipotle$auto_cycles + chipotle$num_cycles*10 + chipotle$num_cycles_tenths)/10
+        #if (length(unique(chipotle$team)) != 3){
+        #    print(ceiling(i/2))
+        #}
     }
     
-    response <- tba_data |>
+    response <- tba_data |> 
+        mutate(blue_fuel = blue_auto_fuel + blue_tele_fuel, 
+               red_fuel = red_auto_fuel + red_tele_fuel) |>
+        select(match, blue_fuel, red_fuel)
+    
+    response <- response |>
         pivot_longer(
-            cols = names(tba_data)[2:5],
+            cols = names(response)[2:3],
             names_to = "alliance",
             values_to = "score"
-        )
-    response = response[1:300,]
+        ) |> 
+        filter(match <= nrow(design)/2)
+
     
-    auto_priors <- statbotics_data$auto_fuel_epa
-    tele_priors <- statbotics_data$tele_fuel_epa
+    auto_priors <- statbotics_data$auto_fuel_pre_epa
+    tele_priors <- statbotics_data$tele_fuel_pre_epa
     names(auto_priors) <- names(tele_priors) <- statbotics_data$team
-    grid <- seq(0, 20, length.out = 1000)
-    tele_fuel_columns <- c('red_tele_fuel', 'blue_tele_fuel') # 80 char limit
+    grid <- seq(0, 0.5, length.out = 1000)
     
-    cols_to_keep <- apply(design != 0, 2, any)
+    cycles_df <- raw |> 
+        group_by(team) |>
+        summarize(cycles = mean(auto_cycles/10 + num_cycles + num_cycles_tenths/10))
+    
+    cols_to_keep <- colSums(design != 0) >= 2
+    cycles_df <- cycles_df[cols_to_keep, ]
     design <- design[, cols_to_keep]
     auto_priors <- auto_priors[cols_to_keep]
     tele_priors <- tele_priors[cols_to_keep]
+    priors <- (auto_priors + tele_priors)/cycles_df$cycles
     
-    auto_mses <- scoutR:::pridge_lambda_cv(
+    mses <- scoutR:::pridge_lambda_cv(
         design, 
-        response$score[!(response$alliance %in% tele_fuel_columns)], 
-        auto_priors, grid, plot_mses = FALSE, n_cores = 1)
+        response$score, 
+        priors, grid, plot_mses = TRUE)
     
-    tele_mses <- scoutR:::pridge_lambda_cv(
+    lambda_opt <- grid[which.min(mses)]
+    
+    fuel <- round(scoutR:::prior_ridge(
         design, 
-        response$score[response$alliance %in% tele_fuel_columns], 
-        tele_priors, grid, plot_mses = FALSE)
+        response$score,  
+        lambda_opt, priors), 2)
     
-    auto_lambda_opt <- grid[which.min(auto_mses)]
-    tele_lambda_opt <- grid[which.min(tele_mses)]
+    priors_df <- data.frame(team = colnames(design), 
+                            HOPpeR = fuel, 
+                            total_fuel = fuel*cycles_df$cycles, 
+                            mean_cycles = round(cycles_df$cycles,2))
+    for (i in 1:nrow(pridge)){
+        if(!cols_to_keep[i]){
+            priors_df[nrow(priors_df) + 1,] = c(unique_teams[i], 0, 0, 0)
+            rownames(priors_df)[nrow(priors_df)] = unique_teams[i]
+        }
+    }
+    priors_df <- priors_df |> arrange(as.integer(team))
     
-    auto_fuel <- round(scoutR:::prior_ridge(
-        design, 
-        response$score[
-            (response$alliance %in% c('red_auto_fuel', 'blue_auto_fuel'))],  
-        auto_lambda_opt, auto_priors), 2)
-    tele_fuel <- round(scoutR:::prior_ridge(
-        design, 
-        response$score[
-            response$alliance %in% c('red_tele_fuel', 'blue_tele_fuel')],  
-        tele_lambda_opt, tele_priors), 2)
+    pridge <- pridge |> mutate(HOPpeR = priors_df$HOPpeR, cycles = priors_df$mean_cycles)
     
-    priors_df <- data.frame(team = colnames(design), auto_fuel, tele_fuel)
     write.csv(
-        priors_df, 
-        paste0("shinyapp/data/", event_key, "/HOPpeR.csv"), row.names = FALSE)
+        pridge, 
+        paste0("shinyapp/data/", event_key, "/pridge.csv"), row.names = FALSE)
 }
