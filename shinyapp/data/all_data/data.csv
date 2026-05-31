@@ -80,7 +80,7 @@ BP,13,B1,611,M,1,FALSE,FALSE,0,0,5,0,4,No,FALSE,56,2,NA,No Card,NA
 AM,14,R1,2988,M,NA,FALSE,FALSE,7,8,0,1,3,No,FALSE,162,3,NA,No Card,No accuracy
 MY,14,R3,4638,C,2,FALSE,FALSE,0,8,2,0,0,No,FALSE,142,3,NA,No Card,"Liked I taking to hp, no shooting"
 CR,14,B2,5338,F,3,FALSE,FALSE,3,4,0,2,3,No,FALSE,26,4,NA,No Card,Hopper flexed
-NS,14,B3,2028,C,NA,FALSE,FALSE,0,0,6,0,0,L1,TRUE,12,3,NA,No Card,Got stuck on  bump mimentariky
+NS,14,B3,2028,C,NA,FALSE,FALSE,0,0,6,0,0,L1,TRUE,12,3,NA,No Card,Got stuck on? bump mimentariky
 BP,14,B1,10449,M,NA,FALSE,FALSE,0,4,0,0,1,No,FALSE,5,2,NA,No Card,Was41391t shooting
 RY,14,R2,2377,F,NA,FALSE,FALSE,4,1,2,2,3,No,FALSE,16,3,NA,No Card,Had some problems with turret shooting
 CR,15,B2,2363,C,3,FALSE,FALSE,0,4,0,5,0,No,FALSE,26,5,NA,No Card,NA
@@ -448,29 +448,29 @@ HR,81,R2,7886,F,NA,FALSE,FALSE,0,8,0,0,0,No,FALSE,"2,4,5",3,NA,No Card,"No auto,
 AC,81,R3,11318,M,2,FALSE,FALSE,0,4,0,0,0,No,FALSE,2,1,NA,No Card,I think it was trying to bulldoze? Very ineffective
 AD,81,B1,1389,M,NA,FALSE,FALSE,2,0,0,1,8,No,FALSE,5,3,NA,No Card,NA
 BS,81,B2,888,C,3,FALSE,FALSE,8,5,1,4,0,No,FALSE,1,4,NA,No Card,Very good passing and scored their full hopper every time
-AZ,81,B3,6882,F,NA,FALSE,FALSE,1,2,2,1,2,No,FALSE,2,3,NA,No Card,"Very small hopper, played defense pushed balls over bump and made sure other robots don»t enter their zone"
+AZ,81,B3,6882,F,NA,FALSE,FALSE,1,2,2,1,2,No,FALSE,2,3,NA,No Card,"Very small hopper, played defense pushed balls over bump and made sure other robots don?t enter their zone"
 BP,90,R1,6239,C,3,FALSE,FALSE,4,4,0,1,7,No,FALSE,5,2,NA,No Card,Bps is low and shooting is inaccurate
 HR,90,R2,7886,F,NA,FALSE,FALSE,0,5,0,0,0,No,FALSE,2,1,NA,No Card,"No auto, only bulldozing"
-AW,90,R3,2914,M,NA,FALSE,FALSE,3,0,0,0,0,No,FALSE,NA,1,1,No Card,"Twitched a little bit at the beginning of teleop, but didn»t manage to really move away from their original spot. Couldn»t shoot or intake, the only balls they held were preloaded ones"
+AW,90,R3,2914,M,NA,FALSE,FALSE,3,0,0,0,0,No,FALSE,NA,1,1,No Card,"Twitched a little bit at the beginning of teleop, but didn?t manage to really move away from their original spot. Couldn?t shoot or intake, the only balls they held were preloaded ones"
 AD,90,B1,4638,C,NA,FALSE,FALSE,0,3,6,0,0,No,FALSE,"1,3",3,NA,No Card,"A stop, no shoot"
 BS,90,B2,5353,F,3,FALSE,FALSE,3,4,0,3,0,No,FALSE,1,4,NA,No Card,Played a good game but teammates kinda sold
 AZ,90,B3,1389,M,NA,FALSE,FALSE,2,0,4,1,5,No,FALSE,NA,1,NA,No Card,NA
 BP,91,R1,11318,M,NA,FALSE,FALSE,4,12,0,3,2,No,FALSE,"5,3",3,NA,No Card,NA
 HR,91,R2,116,F,NA,FALSE,FALSE,5,0,9,3,0,L1,FALSE,6,3,NA,No Card,NA
 AW,91,R3,1727,C,3,FALSE,FALSE,8,8,1,4,0,No,FALSE,6,4,1,No Card,"Died towards the very end of the match. Inaccurate auto, shot past the hub."
-AD,91,B1,5587,C,NA,FALSE,FALSE,3,0,0,1,4,No,FALSE,5,2,NA,No Card,"Shooter seemed to be malfunctioning in the early match, collected but didn»t shoot more than 2"
-BS,91,B2,449,F,3,FALSE,FALSE,1,6,0,6,5,No,FALSE,1,5,NA,No Card,Very good driving if we get out auto to work better we»d be insane
-AZ,91,B3,11211,F,NA,FALSE,FALSE,0,0,1,0,6,No,FALSE,NA,1,NA,No Card,Didn»t do anything but move into neutral zone
+AD,91,B1,5587,C,NA,FALSE,FALSE,3,0,0,1,4,No,FALSE,5,2,NA,No Card,"Shooter seemed to be malfunctioning in the early match, collected but didn?t shoot more than 2"
+BS,91,B2,449,F,3,FALSE,FALSE,1,6,0,6,5,No,FALSE,1,5,NA,No Card,Very good driving if we get out auto to work better we?d be insane
+AZ,91,B3,11211,F,NA,FALSE,FALSE,0,0,1,0,6,No,FALSE,NA,1,NA,No Card,Didn?t do anything but move into neutral zone
 BP,92,R1,5243,C,NA,FALSE,TRUE,4,5,1,3,4,No,FALSE,5,3,NA,No Card,"Seemed to be manually aligning even with turret, some inaccuracy"
 HR,92,R2,5549,F,NA,FALSE,FALSE,10,5,1,3,5,No,FALSE,"1,6,5",4,NA,No Card,NA
-AW,92,R3,4821,M,NA,FALSE,FALSE,5,0,4,0,0,No,FALSE,4,4,NA,No Card,"Couldn»t shoot, Played good defense the entire match, especially against 1731"
+AW,92,R3,4821,M,NA,FALSE,FALSE,5,0,4,0,0,No,FALSE,4,4,NA,No Card,"Couldn?t shoot, Played good defense the entire match, especially against 1731"
 AD,92,B1,6882,M,NA,FALSE,FALSE,5,2,8,0,7,No,FALSE,"3,1",3,NA,No Card,NA
 BS,92,B2,1731,F,3,FALSE,FALSE,3,6,0,1,7,No,FALSE,1,4,NA,No Card,They played good but they got heavily defended mid match which affected them a lot
 SBS,92,B3,8590,C,NA,FALSE,FALSE,0,5,0,0,0,No,FALSE,2,2,NA,No Card,"No clue what they were even doing, seemed lost lwk"
 BP,93,R1,5353,C,3,FALSE,FALSE,7,8,0,3,6,No,FALSE,"6,5",3,NA,No Card,The start of each volley is far too low
 HR,93,R2,2900,F,NA,FALSE,FALSE,5,11,0,1,3,No,FALSE,"5,2,6",2,NA,No Card,NA
 AW,93,R3,5841,NA,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,NA
-AD,93,B1,6239,F,NA,FALSE,FALSE,0,8,0,3,9,No,FALSE,"1,5",2,NA,No Card,Had big stockpile but didn»t intake from stock
+AD,93,B1,6239,F,NA,FALSE,FALSE,0,8,0,3,9,No,FALSE,"1,5",2,NA,No Card,Had big stockpile but didn?t intake from stock
 BS,93,B2,1446,NA,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,NA
 SBS,93,B3,3373,C,1,FALSE,FALSE,6,1,3,3,0,No,FALSE,"6,2",4,NA,No Card,NA
 BP,94,R1,449,C,3,FALSE,FALSE,0,7,0,0,0,No,FALSE,3,2,NA,No Card,Intake broke off
@@ -489,7 +489,7 @@ JD,96,R1,2914,M,NA,FALSE,FALSE,0,0,1,0,0,No,FALSE,NA,1,NA,No Card,NA
 HR,96,R2,2912,C,NA,FALSE,FALSE,5,0,0,0,0,No,FALSE,2,1,NA,No Card,"Shooter malfunction, possibly drivetrain malfunction"
 RX,96,R3,4638,F,NA,FALSE,TRUE,0,1,1,0,0,No,FALSE,2,2,NA,No Card,Outake and intakes appeared broken
 AD,96,B1,11318,M,NA,FALSE,FALSE,2,8,0,3,6,No,FALSE,6,3,NA,No Card,NA
-BS,96,B2,3714,F,NA,FALSE,FALSE,0,0,2,0,0,No,FALSE,NA,3,NA,No Card,"Didn»t make a single fuel, slow"
+BS,96,B2,3714,F,NA,FALSE,FALSE,0,0,2,0,0,No,FALSE,NA,3,NA,No Card,"Didn?t make a single fuel, slow"
 AY,96,B3,4464,C,NA,FALSE,FALSE,0,2,0,0,0,No,FALSE,2,1,NA,No Card,Moved very slowly
 AW,97,R1,1727,F,3,FALSE,FALSE,10,5,0,4,0,No,FALSE,5,3,1,No Card,"Died in the last 30s or so, was susceptible to the defense being played 4821"
 HR,97,R2,11211,F,NA,FALSE,FALSE,0,0,5,0,0,No,FALSE,"4,5,2",3,NA,No Card,NA
@@ -543,13 +543,13 @@ AW,104,R1,5587,F,1,FALSE,FALSE,20,0,4,4,0,No,FALSE,5,3,NA,No Card,NA
 HR,104,R2,5549,C,3,FALSE,FALSE,10,2,3,5,3,No,FALSE,"2,1,6",5,NA,No Card,NA
 RX,104,R3,2900,F,NA,FALSE,FALSE,7,4,0,0,6,No,FALSE,6,3,NA,No Card,NA
 AD,104,B1,4821,F,NA,FALSE,FALSE,0,0,2,0,0,No,FALSE,4,3,NA,No Card,Only played defense in oz
-AC,104,B2,1389,C,1,FALSE,FALSE,2,0,2,2,6,No,FALSE,6,2,NA,No Card,"Didn»t intake full for most of the match, stayed in AZ for most of the match, sometimes legit just intook three balls and shot them without getting more"
+AC,104,B2,1389,C,1,FALSE,FALSE,2,0,2,2,6,No,FALSE,6,2,NA,No Card,"Didn?t intake full for most of the match, stayed in AZ for most of the match, sometimes legit just intook three balls and shot them without getting more"
 AZ,104,B3,11318,M,NA,FALSE,FALSE,5,18,0,8,2,No,FALSE,2,1,NA,No Card,Very small hopper capacity
-AW,105,R1,2912,C,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,"Couldn»t intake, didn»t move a lot, got stuck on the depot"
+AW,105,R1,2912,C,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,"Couldn?t intake, didn?t move a lot, got stuck on the depot"
 HR,105,R2,1446,C,NA,FALSE,FALSE,0,0,1,0,0,No,FALSE,NA,1,1,No Card,NA
 RX,105,R3,888,F,3,FALSE,FALSE,12,2,0,0,3,No,FALSE,"2,6",4,NA,No Card,Outake got jammed very early on
 AD,105,B1,5243,F,NA,FALSE,TRUE,5,2,2,2,9,L1,FALSE,NA,4,NA,No Card,NA
-BS,105,B2,2988,M,NA,FALSE,FALSE,0,3,1,0,0,No,FALSE,6,1,NA,No Card,Intake full during inactive but didn»t shoot
+BS,105,B2,2988,M,NA,FALSE,FALSE,0,3,1,0,0,No,FALSE,6,1,NA,No Card,Intake full during inactive but didn?t shoot
 AZ,105,B3,116,C,NA,FALSE,FALSE,2,0,4,1,3,L1,FALSE,6,2,NA,No Card,A ton of balls stuck between hopper wall and intake
 AW,106,R1,4472,F,3,FALSE,FALSE,16,4,1,4,5,No,FALSE,"1,5",4,NA,No Card,Not very accurate some of the time
 AD,106,R2,2914,M,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,"Did not die, but did nothing. Broken drive train?"
@@ -564,18 +564,18 @@ AD,107,B1,449,F,3,FALSE,FALSE,18,11,1,6,3,No,FALSE,"2,6",5,NA,No Card,NA
 BS,107,B2,6882,M,NA,FALSE,FALSE,3,3,1,0,0,No,FALSE,4,3,NA,No Card,Barely scored played defense the whole time
 AZ,107,B3,2537,C,3,FALSE,FALSE,0,10,0,4,2,No,FALSE,NA,5,NA,No Card,NA
 AW,108,R1,2421,M,NA,FALSE,FALSE,5,5,5,1,0,No,FALSE,NA,3,NA,No Card,"Got stuck on the bump twice, slow shooting, slow/unreliable intake"
-AC,108,R2,8590,F,NA,FALSE,FALSE,0,2,0,1,0,No,FALSE,6,2,NA,No Card,"Slow intake, didn»t seem to do anything auto"
+AC,108,R2,8590,F,NA,FALSE,FALSE,0,2,0,1,0,No,FALSE,6,2,NA,No Card,"Slow intake, didn?t seem to do anything auto"
 RX,108,R3,5549,C,3,FALSE,FALSE,0,5,1,4,0,No,FALSE,"1,6",4,NA,No Card,Almost got beached in auto
 AD,108,B1,4456,M,NA,FALSE,FALSE,2,5,0,3,8,No,FALSE,"2,6",3,NA,No Card,NA
 BS,108,B2,5587,C,1,FALSE,FALSE,6,1,2,3,0,No,FALSE,"1,6",1,NA,No Card,NA
 AZ,108,B3,7886,F,NA,FALSE,FALSE,0,11,1,0,0,No,FALSE,NA,4,NA,No Card,Just drive and no shooter
-AW,109,R1,2186,F,NA,FALSE,FALSE,4,0,0,0,5,F,FALSE,NA,2,NA,No Card,"Slowwwww, couldn»t really move much"
+AW,109,R1,2186,F,NA,FALSE,FALSE,4,0,0,0,5,F,FALSE,NA,2,NA,No Card,"Slowwwww, couldn?t really move much"
 AC,109,R2,2912,M,NA,FALSE,FALSE,0,1,0,0,0,No,FALSE,NA,1,NA,No Card,They just kinda jittered around NZ for the entirety of tele
 KO,109,R3,116,C,NA,FALSE,FALSE,2,0,4,0,4,L1,FALSE,2,2,NA,No Card,Mid accuracy because shooter too strong?
 AD,109,B1,1727,F,NA,FALSE,FALSE,0,6,2,4,3,No,FALSE,"6,2",4,NA,No Card,NA
 BS,109,B2,6239,M,NA,FALSE,FALSE,2,6,0,2,0,No,FALSE,6,3,NA,No Card,NA
 AZ,109,B3,4472,C,3,FALSE,FALSE,1,6,0,2,8,No,FALSE,1,4,NA,No Card,NA
-BP,83,R1,3714,M,NA,FALSE,FALSE,0,2,2,0,0,No,FALSE,3,2,NA,No Card,"Evidently tank, couldn»t shoot, got beached a couple of times"
+BP,83,R1,3714,M,NA,FALSE,FALSE,0,2,2,0,0,No,FALSE,3,2,NA,No Card,"Evidently tank, couldn?t shoot, got beached a couple of times"
 HR,83,R2,4472,F,3,FALSE,FALSE,10,6,0,4,2,No,FALSE,"1,6",4,NA,No Card,Some inaccuracy
 AC,83,R3,5549,C,3,FALSE,FALSE,10,8,0,6,0,No,FALSE,"2,6",4,NA,No Card,Poomfs kinda slow
 AD,83,B1,2900,M,NA,FALSE,FALSE,2,10,0,0,0,No,FALSE,1,3,NA,No Card,"Shooter jammed, made 0 balls in tele op, gave up on shooting and started passing"
@@ -633,36 +633,36 @@ FL,118,R1,3714,NA,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,NA
 FL,118,R2,2537,F,3,FALSE,FALSE,10,2,0,4,5,No,FALSE,"1,6",4,NA,No Card,NA
 HR,118,R3,6239,M,NA,FALSE,FALSE,3,10,0,2,8,No,FALSE,"2,6",2,NA,No Card,NA
 KO,118,B1,4464,C,NA,FALSE,FALSE,0,4,0,0,4,No,FALSE,2,2,NA,No Card,Had difficulty getting up the bump
-MY,118,B2,2914,F,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,"Did not intake, shoot, or move out of alliance zone. Tried to feed hp a little bit, but we»re not effective. Moved really slowly in general"
+MY,118,B2,2914,F,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,"Did not intake, shoot, or move out of alliance zone. Tried to feed hp a little bit, but we?re not effective. Moved really slowly in general"
 AZ,118,B3,1446,M,NA,FALSE,FALSE,0,4,4,0,0,No,FALSE,NA,2,NA,No Card,"Does not intake at all, played defense"
 FL,119,R1,2900,M,NA,FALSE,FALSE,5,8,0,0,1,No,FALSE,5,2,NA,No Card,NA
 FL,119,R2,116,F,NA,FALSE,FALSE,3,0,3,0,5,L1,FALSE,2,3,NA,No Card,"Bulldozing rly well at start, then not so good"
 HR,119,R3,449,C,3,FALSE,FALSE,15,8,1,4,7,No,FALSE,"6,2",5,NA,No Card,NA
 KO,119,B1,7886,C,NA,FALSE,FALSE,0,1,0,0,0,No,FALSE,2,2,NA,No Card,Beached under trench rip
 LJ,119,B2,2912,M,NA,FALSE,FALSE,2,1,1,0,0,No,FALSE,2,2,1,No Card,"Focused on herding towards HP, struggled to line up and drove slowly, could not un beach partners. Died with about 30 seconds left"
-AZ,119,B3,5243,F,NA,FALSE,TRUE,3,4,0,2,3,No,FALSE,NA,2,NA,No Card,Bad bc it»s not 449 but seriously played good defense against us
+AZ,119,B3,5243,F,NA,FALSE,TRUE,3,4,0,2,3,No,FALSE,NA,2,NA,No Card,Bad bc it?s not 449 but seriously played good defense against us
 HR,84,R2,5841,M,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,1,No Card,No auto
 AW,84,R3,1727,F,NA,FALSE,FALSE,0,6,4,3,5,No,FALSE,"1,6",3,NA,No Card,NA
 AD,84,B1,4638,NA,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,NA
-BS,84,B2,4456,M,NA,FALSE,FALSE,3,4,0,0,1,No,FALSE,4,4,NA,No Card,They»re shooter wasn»t working so they played defense the whole match
+BS,84,B2,4456,M,NA,FALSE,FALSE,3,4,0,0,1,No,FALSE,4,4,NA,No Card,They?re shooter wasn?t working so they played defense the whole match
 AZ,84,B3,449,F,3,FALSE,FALSE,10,10,0,3,8,No,FALSE,2,5,NA,No Card,"Shooter inertia decreases rapidly near the end of the match, shooter had trouble"
 BP,84,R1,1731,C,3,FALSE,FALSE,10,5,0,5,0,No,FALSE,"3,5",4,NA,No Card,Good effectiveness in many things
 FL,120,R1,11211,F,NA,FALSE,FALSE,0,0,1,0,1,No,FALSE,6,1,NA,No Card,Stayed in middle whole time bulldozing
 FL,120,R2,4456,M,NA,FALSE,FALSE,2,2,1,1,7,No,FALSE,6,3,NA,No Card,Died for 15 seconds a couple times throughout the match
 HR,120,R3,2186,C,NA,FALSE,FALSE,3,6,0,0,7,No,FALSE,2,3,NA,No Card,Jammed intake
-BS,120,B1,3373,C,1,FALSE,FALSE,1,0,4,2,4,No,FALSE,"6,2",4,NA,No Card,For the first half of the match didn»t go into neutral zone and just relied on balls from depot and teammates passing
+BS,120,B1,3373,C,1,FALSE,FALSE,1,0,4,2,4,No,FALSE,"6,2",4,NA,No Card,For the first half of the match didn?t go into neutral zone and just relied on balls from depot and teammates passing
 LJ,120,B2,5587,F,NA,FALSE,FALSE,2,0,4,2,1,No,FALSE,"2,6",3,NA,No Card,"Slow spin up time, took shoots pretty far from hub. Shots were a bit inaccurate"
 AY,120,B3,1389,M,NA,FALSE,FALSE,2,0,4,1,3,No,FALSE,NA,2,NA,No Card,"Shoot on the move is decent, Inaccurate, Struggled to intake"
 FL,121,R1,4638,F,NA,FALSE,TRUE,0,3,3,0,7,No,FALSE,6,2,NA,No Card,Saved a friend and broke side panel
 AW,121,R2,2988,M,NA,FALSE,FALSE,5,5,1,2,0,No,FALSE,6,3,NA,No Card,Was beached for about a third of the match before getting unteaches by a teammate
 HR,121,R3,6239,C,3,FALSE,FALSE,0,3,1,1,4,No,FALSE,"2,6",3,NA,No Card,Inaccurate shooter
-BS,121,B1,6882,M,NA,FALSE,FALSE,8,3,0,4,3,No,FALSE,"2,6",4,NA,No Card,Although they emptied their hopper a lot their hopper is supper small so they weren»t actually scoring much if I could estimate they scored about 60-65 fuel
+BS,121,B1,6882,M,NA,FALSE,FALSE,8,3,0,4,3,No,FALSE,"2,6",4,NA,No Card,Although they emptied their hopper a lot their hopper is supper small so they weren?t actually scoring much if I could estimate they scored about 60-65 fuel
 FL,121,B2,1727,C,3,FALSE,FALSE,5,2,3,2,7,No,FALSE,"1,6",3,NA,No Card,Died during endgame
 AY,121,B3,5549,F,3,FALSE,FALSE,5,3,1,5,3,No,FALSE,"2,6,1",5,NA,No Card,NA
 FL,122,R1,3714,C,NA,FALSE,FALSE,0,4,2,0,0,No,FALSE,"5,3",2,NA,No Card,NA
 AW,122,R2,5338,F,3,FALSE,FALSE,10,8,4,4,6,No,FALSE,6,4,NA,No Card,"Very versatile driver, could go over bump or under trench when the other was blocked"
 HR,122,R3,7886,M,NA,FALSE,FALSE,0,7,3,0,0,No,FALSE,"2,5",4,NA,No Card,NA
-BS,122,B1,1446,C,NA,FALSE,FALSE,0,5,2,0,0,No,FALSE,2,1,NA,No Card,Passed to human player a lot and passing was actually very good but they didn»t shoot
+BS,122,B1,1446,C,NA,FALSE,FALSE,0,5,2,0,0,No,FALSE,2,1,NA,No Card,Passed to human player a lot and passing was actually very good but they didn?t shoot
 FL,122,B2,5353,F,3,FALSE,FALSE,7,4,0,4,5,No,FALSE,2,5,NA,No Card,NA
 AY,122,B3,4821,M,NA,FALSE,FALSE,0,0,1,0,0,No,FALSE,4,2,NA,No Card,Got beached on enemy bump; got stuck in enemy side
 FL,123,R1,449,C,3,FALSE,FALSE,15,3,0,4,4,No,FALSE,"1,5,6",5,NA,No Card,NA
@@ -672,33 +672,33 @@ BS,123,B1,888,C,3,FALSE,FALSE,12,4,1,4,2,No,FALSE,"6,1",5,NA,No Card,NA
 FL,123,B2,2900,M,NA,FALSE,FALSE,0,8,0,0,2,No,FALSE,2,1,NA,No Card,Buns
 AY,123,B3,4472,F,3,FALSE,FALSE,9,0,0,2,2,No,FALSE,"1,6",4,NA,No Card,NA
 FL,124,R1,2537,F,13,FALSE,FALSE,15,5,0,0,7,No,FALSE,"3,4,6,5",4,NA,No Card,Intake broke after first cycle
-AW,124,R2,8590,M,NA,FALSE,FALSE,5,4,0,0,4,No,FALSE,2,2,1,No Card,"Genuinely bad piece security. Intake didn»t appear to break, but it got rammed into the walls and was flopping around"
+AW,124,R2,8590,M,NA,FALSE,FALSE,5,4,0,0,4,No,FALSE,2,2,1,No Card,"Genuinely bad piece security. Intake didn?t appear to break, but it got rammed into the walls and was flopping around"
 HR,124,R3,4464,C,3,FALSE,FALSE,0,10,4,0,0,No,FALSE,"2,5,4",3,NA,No Card,No intake
 BS,124,B1,1731,F,3,FALSE,FALSE,7,5,0,3,7,No,FALSE,"1,6",5,NA,No Card,Passing is probably the best out of all the teams also scored alot
 FL,124,B2,11318,C,NA,FALSE,FALSE,10,4,0,3,1,No,FALSE,"6,5",3,NA,No Card,They have a really teeny hopper tho
 AD,124,B3,2421,M,NA,FALSE,FALSE,2,7,3,1,1,No,FALSE,6,3,NA,No Card,NA
 FL,125,R1,4456,C,NA,FALSE,FALSE,2,8,0,1,6,No,FALSE,"6,5",2,NA,No Card,NA
-AW,125,R2,3714,M,NA,FALSE,FALSE,6,3,3,0,0,No,FALSE,4,3,NA,No Card,"Didn»t shoot, kept the preloaded fuel the entire match. For about half the match, the had a fuel stuck underneath them making movement weird. They played defense, but weren»t very good imo"
+AW,125,R2,3714,M,NA,FALSE,FALSE,6,3,3,0,0,No,FALSE,4,3,NA,No Card,"Didn?t shoot, kept the preloaded fuel the entire match. For about half the match, the had a fuel stuck underneath them making movement weird. They played defense, but weren?t very good imo"
 HR,125,R3,3373,F,1,FALSE,FALSE,0,0,4,2,0,No,FALSE,"2,6",2,NA,No Card,NA
-BS,125,B1,11211,C,NA,FALSE,FALSE,0,0,3,0,2,No,FALSE,2,3,NA,No Card,"Tried their best to pass and bulldoze but it just wasn»t working much, bot is slow"
+BS,125,B1,11211,C,NA,FALSE,FALSE,0,0,3,0,2,No,FALSE,2,3,NA,No Card,"Tried their best to pass and bulldoze but it just wasn?t working much, bot is slow"
 FL,125,B2,116,F,NA,FALSE,FALSE,2,0,6,1,2,L1,FALSE,"6,2",3,NA,No Card,Shooting aim is dookie
 AD,125,B3,6239,M,NA,FALSE,FALSE,5,8,0,3,5,No,FALSE,"6,2",3,NA,No Card,NA
 SBS,126,R1,5338,F,3,FALSE,FALSE,9,0,0,6,2,No,FALSE,"5,6",5,NA,No Card,NA
 AW,126,R2,2988,M,NA,FALSE,FALSE,8,1,3,1,0,No,FALSE,NA,2,NA,No Card,Beached for the vast majority of the match
 HR,126,R3,5549,C,3,FALSE,FALSE,8,3,1,4,0,No,FALSE,"1,6",5,NA,No Card,NA
-BS,126,B1,7886,C,NA,FALSE,FALSE,0,3,9,0,0,No,FALSE,"1,4,5",5,NA,No Card,Driver played very good defense but not couldn»t shoot
+BS,126,B1,7886,C,NA,FALSE,FALSE,0,3,9,0,0,No,FALSE,"1,4,5",5,NA,No Card,Driver played very good defense but not couldn?t shoot
 BP,126,B2,2900,F,3,FALSE,FALSE,10,5,0,0,1,No,FALSE,NA,1,NA,No Card,NA
 AD,126,B3,4638,M,NA,FALSE,TRUE,0,8,4,0,5,No,FALSE,NA,3,NA,No Card,NA
 SBS,127,R1,5353,C,3,FALSE,FALSE,0,4,0,4,6,No,TRUE,"5,6",3,NA,No Card,Turned around in auto
 AW,127,R2,2186,F,NA,FALSE,FALSE,5,8,0,1,0,L1,FALSE,2,4,NA,No Card,NA
 HR,127,R3,6882,M,NA,FALSE,FALSE,9,1,1,3,6,No,FALSE,"2,6",3,NA,No Card,NA
-BS,127,B1,2912,C,NA,FALSE,FALSE,0,2,2,0,0,No,FALSE,4,4,NA,No Card,Played decent defense and considering the fact that they didn»t shoot they actually contributed a good amount
+BS,127,B1,2912,C,NA,FALSE,FALSE,0,2,2,0,0,No,FALSE,4,4,NA,No Card,Played decent defense and considering the fact that they didn?t shoot they actually contributed a good amount
 BP,127,B2,11318,F,NA,FALSE,FALSE,8,3,2,5,6,No,FALSE,"2,6",3,NA,No Card,NA
 AD,127,B3,8590,M,NA,FALSE,FALSE,4,6,0,0,1,No,FALSE,2,3,1,No Card,Died during the third tele op shift
 BP,128,R1,5841,NA,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,Very skillful as you can see
-AW,128,R2,1446,NA,NA,FALSE,FALSE,0,9,1,0,0,No,FALSE,2,3,NA,No Card,"Couldn»t intake or shoot, got beached multiple times, herded/bulldozed the entire match"
+AW,128,R2,1446,NA,NA,FALSE,FALSE,0,9,1,0,0,No,FALSE,2,3,NA,No Card,"Couldn?t intake or shoot, got beached multiple times, herded/bulldozed the entire match"
 HR,128,R3,1389,M,NA,FALSE,FALSE,6,0,4,2,8,No,FALSE,6,1,NA,No Card,NA
-BS,128,B1,4464,M,NA,FALSE,FALSE,5,0,0,0,0,No,FALSE,NA,3,NA,No Card,Basically did nothing the whole game didn»t go under the trench or over the bump
+BS,128,B1,4464,M,NA,FALSE,FALSE,5,0,0,0,0,No,FALSE,NA,3,NA,No Card,Basically did nothing the whole game didn?t go under the trench or over the bump
 BP,128,B2,1731,C,3,FALSE,FALSE,0,1,0,7,8,No,FALSE,"2,6",5,NA,No Card,Missed they whole auto
 KO,128,B3,449,F,3,FALSE,FALSE,12,12,0,5,2,No,FALSE,"2,3,6,1",5,NA,No Card,NA
 MH,129,R1,888,F,NA,FALSE,FALSE,10,0,0,5,6,No,FALSE,NA,1,NA,No Card,NA
@@ -711,8 +711,8 @@ BP,85,R1,2988,M,NA,FALSE,FALSE,6,11,0,0,7,No,FALSE,"3,4,5",2,NA,No Card,Played d
 HR,85,R2,2914,NA,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,NA
 AW,85,R3,5353,C,3,FALSE,FALSE,13,8,2,5,4,No,FALSE,"1,6",3,NA,No Card,Bad piece security
 AD,85,B1,8590,M,NA,FALSE,FALSE,0,9,0,1,0,No,FALSE,"3,4,5",5,NA,No Card,Intake broke and maybe shooter broke. But the driver figured things out and played really defense
-BS,85,B2,5338,C,3,FALSE,FALSE,0,5,2,5,0,No,FALSE,"2,6",4,NA,No Card,Played a good game overall auto probably would»ve been good but crashed into trench on the way back
-AZ,85,B3,5587,F,NA,FALSE,FALSE,0,0,3,0,2,No,FALSE,6,1,NA,No Card,"Only like a few balls shot most were stuck inside hopper, indexer didn»t work and made contact with alliance partner in auto"
+BS,85,B2,5338,C,3,FALSE,FALSE,0,5,2,5,0,No,FALSE,"2,6",4,NA,No Card,Played a good game overall auto probably would?ve been good but crashed into trench on the way back
+AZ,85,B3,5587,F,NA,FALSE,FALSE,0,0,3,0,2,No,FALSE,6,1,NA,No Card,"Only like a few balls shot most were stuck inside hopper, indexer didn?t work and made contact with alliance partner in auto"
 KO,130,R1,5587,F,NA,FALSE,FALSE,6,0,4,1,0,No,FALSE,NA,2,NA,No Card,They were stopped during the first 30s or so
 AW,130,R2,5243,C,NA,FALSE,FALSE,5,6,0,2,0,L1,FALSE,"2,6",3,NA,No Card,Failed auto climb
 HR,130,R3,6882,M,NA,FALSE,FALSE,4,3,4,4,5,No,FALSE,6,3,NA,No Card,NA
@@ -769,11 +769,11 @@ BS,138,B2,2914,F,NA,FALSE,FALSE,0,2,0,0,0,No,FALSE,NA,3,1,No Card,"Did nothing d
 AD,138,B3,11318,C,1,FALSE,FALSE,14,12,0,5,8,No,FALSE,"2,4,6",5,NA,No Card,"Very good bulldozer, stockpiled lots of balls"
 EC,139,R1,2421,M,NA,FALSE,FALSE,7,0,2,0,0,No,FALSE,2,2,NA,No Card,Just drove around never shot during teleop
 BP,139,R2,1727,F,3,FALSE,FALSE,7,7,0,4,2,No,FALSE,6,4,NA,No Card,"Good hopper capacity, inactive shifts aren41391t optimized"
-NS2,139,R3,5353,C,3,FALSE,FALSE,12,9,3,1,0,No,FALSE,"2,4",4,NA,No Card,They maneuvered very cleanly  and they didn41391t shoot much. They focused heavily on defens.
+NS2,139,R3,5353,C,3,FALSE,FALSE,12,9,3,1,0,No,FALSE,"2,4",4,NA,No Card,They maneuvered very cleanly? and they didn41391t shoot much. They focused heavily on defens.
 AZ,139,B1,4472,C,3,FALSE,FALSE,13,3,1,1,0,No,FALSE,1,4,NA,No Card,"Intake is having issues, hopper plate broke off, tried to move balls to HP but was unsuccessful, big issues"
 BS,139,B2,4638,M,NA,FALSE,TRUE,0,3,4,0,1,F,FALSE,4,3,NA,No Card,"Played decent defense towards the start of the match but overall didn41391t contribute much, only made like 2 balls the whole match. They41391re consistently climbing in auto but failing in end game"
 AD,139,B3,1446,F,NA,FALSE,FALSE,0,10,3,0,0,No,FALSE,2,2,NA,No Card,"Had shooter, but didn41391t shoot. Prob broken. Tank drive"
-BP,86,R1,2912,M,NA,FALSE,FALSE,0,0,5,0,0,No,FALSE,3,1,NA,No Card,"Struggled to get over bump, didn»t shoot at all"
+BP,86,R1,2912,M,NA,FALSE,FALSE,0,0,5,0,0,No,FALSE,3,1,NA,No Card,"Struggled to get over bump, didn?t shoot at all"
 HR,86,R2,6239,C,3,FALSE,FALSE,5,6,0,0,5,No,FALSE,"2,6",2,NA,No Card,"Inaccurate auto, shooter malfunction"
 AW,86,R3,4464,F,NA,FALSE,FALSE,3,2,0,0,3,No,FALSE,NA,2,NA,No Card,"Tried to intake during inactive, but mostly just slowly spun around"
 AD,86,B1,11211,C,NA,FALSE,FALSE,0,0,1,0,1,No,FALSE,NA,1,1,No Card,"Died before first inactive period, dangling wires, cardboard hopper held together with tape."
@@ -825,15 +825,15 @@ BP,87,R1,5549,M,NA,FALSE,FALSE,4,2,1,3,6,No,FALSE,"5,6",3,NA,No Card,Net makes t
 HR,87,R2,888,F,NA,FALSE,FALSE,10,7,3,4,0,No,FALSE,"1,6",4,NA,No Card,Inaccurate auto
 AW,87,R3,2537,F,31,FALSE,FALSE,15,6,0,5,3,No,FALSE,"1,6",3,NA,No Card,NA
 AD,87,B1,3373,C,1,FALSE,FALSE,7,0,6,4,4,No,FALSE,"1,5",4,NA,No Card,NA
-BS,87,B2,6882,M,NA,FALSE,FALSE,0,4,2,2,2,No,FALSE,2,1,NA,No Card,Small hopper didn»t really score that much
+BS,87,B2,6882,M,NA,FALSE,FALSE,0,4,2,2,2,No,FALSE,2,1,NA,No Card,Small hopper didn?t really score that much
 AZ,87,B3,2900,F,NA,FALSE,FALSE,4,8,0,1,0,No,FALSE,6,1,NA,No Card,"Unable to shot any balls, blocked their own teammate and had trouble moving around"
 BP,88,R1,5243,F,NA,FALSE,FALSE,2,4,2,2,1,L1,FALSE,"6,5",2,NA,No Card,Has some trouble intaking to capacity
 HR,88,R2,2186,F,NA,FALSE,FALSE,3,9,0,0,0,No,FALSE,2,3,NA,No Card,Intake malfunction
 AW,88,R3,3714,M,NA,FALSE,FALSE,5,7,1,0,5,No,FALSE,2,2,NA,No Card,Shot some of the fuel it intaked as soon as it intaked it
 AD,88,B1,2988,M,NA,FALSE,FALSE,7,8,0,2,0,No,FALSE,NA,3,NA,No Card,NA
 BS,88,B2,2421,F,NA,FALSE,FALSE,0,3,0,1,3,No,FALSE,NA,3,NA,No Card,NA
-AZ,88,B3,5841,C,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,"Just driving no shooting, just drivetrain not even moving it didn»t connect so it didn»t do anything but block bump"
-BP,89,R1,8590,F,NA,FALSE,FALSE,0,0,0,0,8,No,FALSE,NA,1,NA,No Card,"Didn»t leave AZ, very inconsistent shooting"
+AZ,88,B3,5841,C,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,"Just driving no shooting, just drivetrain not even moving it didn?t connect so it didn?t do anything but block bump"
+BP,89,R1,8590,F,NA,FALSE,FALSE,0,0,0,0,8,No,FALSE,NA,1,NA,No Card,"Didn?t leave AZ, very inconsistent shooting"
 HR,89,R2,4456,C,NA,FALSE,FALSE,5,7,2,0,2,No,FALSE,"2,6",2,NA,No Card,Lost battery
 AW,89,R3,1446,NA,NA,FALSE,FALSE,0,0,0,0,0,No,FALSE,NA,1,NA,No Card,NA
 AD,89,B1,5338,C,3,FALSE,FALSE,0,9,0,8,0,No,FALSE,"1,5",5,NA,No Card,NA
@@ -841,15 +841,15 @@ BS,89,B2,1731,F,3,FALSE,FALSE,6,5,0,3,2,No,FALSE,1,4,NA,No Card,"Passed to human
 AZ,89,B3,2912,M,NA,FALSE,FALSE,0,0,1,1,0,No,FALSE,NA,1,NA,No Card,"No strategy, swerve looked broken, no auto, Kitbot, very bad movement"
 EC,147,B3,9072,C,3,TRUE,FALSE,20,4,2,6,6,No,FALSE,"1,2",4,NA,No Card,
 MC,147,R1,1719,M,,FALSE,FALSE,0,6,2,0,0,No,FALSE,"4,5",3,NA,No Card,Only defense
-AM,147,R3,401,F,3,TRUE,FALSE,2,2,3,2,7,No,FALSE,2,4,NA,No Card,"Intake broke in auto, turret. "
+AM,147,R3,401,F,3,TRUE,FALSE,2,2,3,2,7,No,FALSE,2,4,NA,No Card,"Intake broke in auto, turret.?"
 BP,147,B1,449,F,3,FALSE,FALSE,14,6,1,3,1,No,FALSE,"1,2,6",3,NA,No Card,Browned out and just bubbled shots at the end
-AZ,147,B2,540,M,,FALSE,FALSE,2,11,1,2,2,No,FALSE,"1,2,4",3,NA,No Card,A mix of all types of defense 
+AZ,147,B2,540,M,,FALSE,FALSE,2,11,1,2,2,No,FALSE,"1,2,4",3,NA,No Card,A mix of all types of defense?
 MH,147,R2,2106,C,3,TRUE,FALSE,17,7,9,6,5,No,FALSE,"3,6,1",3,NA,No Card,
 NS,148,R2,8590,M,,FALSE,FALSE,0,6,0,0,0,No,FALSE,"2,4",2,NA,No Card,"Ineffective defense, defense only"
 EC,148,B3,8592,M,3,FALSE,FALSE,4,0,3,3,4,No,FALSE,"2,1",1,NA,No Card,Slow
 HR,148,R1,3748,F,3,FALSE,FALSE,11,4,2,3,7,No,FALSE,,3,1,No Card,
 AD,148,B2,3258,C,,FALSE,FALSE,0,12,0,0,5,No,FALSE,2,4,NA,No Card,Intake jammed early in teleop
-AM,148,R3,4472,C,3,FALSE,FALSE,5,3,1,3,0,No,FALSE,"1,4,5,2,6",3,NA,No Card,Intake functionality was unreliable. Turret. 
+AM,148,R3,4472,C,3,FALSE,FALSE,5,3,1,3,0,No,FALSE,"1,4,5,2,6",3,NA,No Card,Intake functionality was unreliable. Turret.?
 BP,148,B1,2890,F,,FALSE,FALSE,0,0,6,2,8,No,FALSE,"6,2",2,3,No Card,Looked like failed bump NZ auto
 AM,149,R3,5549,C,3,TRUE,FALSE,8,3,2,1,0,No,FALSE,"2,4,5,6,3",2,NA,No Card,
 HR,149,R1,10224,F,,TRUE,FALSE,3,0,6,3,5,No,FALSE,6,3,"4,2",No Card,
@@ -862,35 +862,35 @@ HR,150,R1,1731,M,1,FALSE,FALSE,0,4,2,5,0,No,FALSE,6,4,NA,No Card,
 AM,150,R3,2199,C,3,FALSE,FALSE,13,14,2,4,9,No,FALSE,"1,2,6,3",3,NA,No Card,
 AD,150,B2,2537,F,3,FALSE,FALSE,0,6,0,4,4,No,FALSE,"2,6",4,NA,No Card,
 BP,150,B1,5804,C,3,TRUE,FALSE,1,0,6,1,8,No,FALSE,"6,2",2,3,No Card,
-JD,150,R2,4099,F,3,FALSE,FALSE,10,3,2,3,4,No,FALSE,"2,3",5,NA,No Card,Stuck but teammate got them unstuck 
+JD,150,R2,4099,F,3,FALSE,FALSE,10,3,2,3,4,No,FALSE,"2,3",5,NA,No Card,Stuck but teammate got them unstuck?
 HR,151,R1,5724,M,,FALSE,FALSE,0,10,0,0,0,No,FALSE,2,2,NA,No Card,Shooter malfunction
 CC,151,B3,122,F,3,FALSE,FALSE,6,2,0,4,6,No,FALSE,6,3,NA,No Card,
 AM,151,R3,422,F,3,TRUE,FALSE,10,3,11,4,2,No,FALSE,"2,6",4,NA,No Card,
-AZ,151,B2,1389,C,,TRUE,FALSE,3,0,6,3,4,No,FALSE,6,1,4,No Card,"Had trouble moving for some reason near the end, "
+AZ,151,B2,1389,C,,TRUE,FALSE,3,0,6,3,4,No,FALSE,6,1,4,No Card,"Had trouble moving for some reason near the end,?"
 JD,151,R2,11318,C,1,FALSE,FALSE,0,5,0,0,5,No,FALSE,"2,3",3,NA,No Card,
 BP,151,B1,10679,M,,FALSE,FALSE,0,14,1,0,0,No,FALSE,"2,4,5",1,NA,No Card,"Bulldozed some to opponents HP, did41391t shoot at all"
 HR,152,R1,5587,F,,FALSE,FALSE,0,0,0,0,0,No,FALSE,,2,NA,No Card,Auto shots missed and then they browned out
 BP,152,B1,836,C,3,FALSE,FALSE,9,5,7,6,0,No,FALSE,"1,2,6",5,NA,No Card,"Effective herding, quick accurate shooting"
 AM,152,R3,620,M,,FALSE,FALSE,3,0,8,1,2,No,FALSE,"3,6,4",3,NA,No Card,
 CC,152,B3,614,F,3,FALSE,FALSE,10,0,4,3,0,No,FALSE,"2,6",4,NA,No Card,
-JD,152,R2,619,C,3,FALSE,FALSE,2,4,1,1,4,No,FALSE,2,3,NA,No Card,Kinda slow 
+JD,152,R2,619,C,3,FALSE,FALSE,2,4,1,1,4,No,FALSE,2,3,NA,No Card,Kinda slow?
 AD,152,B2,3939,M,1,FALSE,FALSE,6,8,0,5,7,No,FALSE,6,4,NA,No Card,"Intake and hopper walls seem flimsy, intake looks like it might fall off in later rounds"
 AM,153,R3,1727,C,3,FALSE,FALSE,3,3,1,3,0,No,FALSE,6,3,NA,No Card,
 CC,153,B3,686,F,3,FALSE,FALSE,20,5,0,3,3,No,FALSE,"1,2",3,NA,No Card,
 AZ,153,B2,1895,C,,FALSE,FALSE,0,0,6,1,2,No,FALSE,2,3,NA,No Card,Weak intaking
 BP,153,B1,11425,M,,FALSE,FALSE,3,3,1,0,0,No,FALSE,"4,2",4,NA,No Card,Really good defense
-JD,153,R2,1629,F,3,FALSE,FALSE,4,6,1,1,3,No,FALSE,"2,3",3,NA,No Card,Shooter did not work very well 
+JD,153,R2,1629,F,3,FALSE,FALSE,4,6,1,1,3,No,FALSE,"2,3",3,NA,No Card,Shooter did not work very well?
 HR,153,R1,2421,M,,FALSE,FALSE,3,7,6,0,0,No,FALSE,"4,2,5",4,NA,No Card,Intake probably did41391t work
 HR,154,R1,1908,C,,TRUE,FALSE,8,7,3,5,6,No,FALSE,"3,6",4,NA,No Card,
 BP,154,B1,1262,C,3,TRUE,FALSE,0,6,0,2,0,No,FALSE,"2,6",2,NA,No Card,Bps is way too low for their huge hopper
-JD,154,R2,5243,M,,FALSE,FALSE,0,1,3,3,2,No,FALSE,2,3,NA,No Card,No real auto 
+JD,154,R2,5243,M,,FALSE,FALSE,0,1,3,3,2,No,FALSE,2,3,NA,No Card,No real auto?
 AM,154,R3,10004,F,3,FALSE,FALSE,10,6,2,1,0,No,FALSE,"2,6",3,NA,No Card,
 AD,154,B2,4541,M,,FALSE,FALSE,3,6,2,0,0,No,FALSE,4,2,2,No Card,Intake broke/did41391t deploy
 CC,154,B3,11415,F,3,FALSE,FALSE,20,2,0,4,8,No,FALSE,,1,NA,No Card,
 HR,155,R1,9033,M,,FALSE,FALSE,0,7,0,0,5,No,FALSE,"4,5",4,NA,No Card,
 CC,155,B3,888,F,3,FALSE,FALSE,10,5,0,4,6,No,FALSE,6,4,NA,No Card,
 JD,155,R2,5338,F,3,FALSE,FALSE,6,3,2,2,2,No,FALSE,2,4,4,No Card,
-AM,155,R3,3136,C,3,TRUE,FALSE,13,4,0,0,8,No,FALSE,"2,6",4,NA,No Card,Shooter stopped working. 
+AM,155,R3,3136,C,3,TRUE,FALSE,13,4,0,0,8,No,FALSE,"2,6",4,NA,No Card,Shooter stopped working.?
 BP,155,B1,2377,C,,FALSE,FALSE,0,4,0,7,0,No,FALSE,"2,6",3,NA,No Card,Small hopper makes unnecessary cycle counts and wasted time
 AZ,155,B2,339,M,,FALSE,FALSE,7,10,0,1,0,No,FALSE,2,2,NA,No Card,"No intaking, broken driving"
 DK,156,R1,540,C,3,FALSE,FALSE,10,4,0,3,4,No,FALSE,"1,3",4,NA,No Card,
@@ -917,7 +917,7 @@ BP,159,B1,686,F,3,FALSE,FALSE,10,8,0,1,0,No,FALSE,2,2,NA,No Card,"Either intake 
 CL,159,R2,619,C,3,FALSE,FALSE,14,3,0,4,7,No,FALSE,"2,1,6",4,NA,No Card,
 CC,159,B3,422,C,3,FALSE,FALSE,20,3,1,4,0,No,FALSE,"1,2,6",4,NA,No Card,
 AD,159,B2,3258,M,,FALSE,FALSE,0,1,0,0,0,No,FALSE,5,2,NA,No Card,"Intake jammed then unjammed, never shot"
-AM,160,R3,346,C,,FALSE,FALSE,0,0,5,2,6,No,FALSE,6,4,NA,No Card,Shooter inconsistent 
+AM,160,R3,346,C,,FALSE,FALSE,0,0,5,2,6,No,FALSE,6,4,NA,No Card,Shooter inconsistent?
 JD,160,R2,3748,F,3,FALSE,FALSE,7,7,0,5,4,No,FALSE,"1,2",4,NA,No Card,
 AW,160,B3,1908,F,3,FALSE,FALSE,13,6,2,7,5,No,FALSE,"6,3",4,2,No Card,
 AZ,160,B2,620,M,,FALSE,FALSE,2,0,6,3,8,No,FALSE,6,4,NA,No Card,No auto movement
@@ -936,11 +936,11 @@ AZ,162,B2,2377,C,3,FALSE,FALSE,1,8,0,4,5,No,FALSE,2,3,NA,No Card,Shooting troubl
 AW,162,B3,1895,M,,FALSE,FALSE,8,2,6,3,0,L1,TRUE,"2,6,4",3,NA,No Card,Played some not very effectual defense
 AM,162,R3,8590,M,3,FALSE,FALSE,3,12,0,0,0,No,FALSE,2,3,NA,No Card,
 AW,163,B3,836,F,,FALSE,FALSE,4,3,3,0,0,No,FALSE,"4,5",4,NA,No Card,Played some good defense
-SBS,163,R1,401,F,3,TRUE,FALSE,6,4,1,0,4,No,FALSE,,2,NA,No Card,Got defended and folded 
+SBS,163,R1,401,F,3,TRUE,FALSE,6,4,1,0,4,No,FALSE,,2,NA,No Card,Got defended and folded?
 BP,163,B1,9033,C,,FALSE,FALSE,0,2,0,3,3,No,FALSE,"6,2",2,NA,No Card,Missed about half of each small hopperload
 AM,163,R3,4541,M,1,FALSE,FALSE,5,7,1,1,0,No,FALSE,2,3,NA,No Card,
 JD,163,R2,4099,F,3,TRUE,FALSE,9,4,3,2,5,No,FALSE,"6,3",5,NA,No Card,Defense was played against them
-AD,163,B2,1629,M,,FALSE,FALSE,0,5,2,0,0,No,FALSE,"4,5",3,NA,No Card,Something prob not working with shooter 
+AD,163,B2,1629,M,,FALSE,FALSE,0,5,2,0,0,No,FALSE,"4,5",3,NA,No Card,Something prob not working with shooter?
 AM,164,R3,4472,C,,FALSE,FALSE,0,5,0,2,2,No,FALSE,,4,NA,No Card,Turret fell off
 SBS,164,R1,2537,F,3,FALSE,FALSE,10,6,0,4,0,No,FALSE,"6,2",4,NA,No Card,
 BP,164,B1,3939,C,3,TRUE,FALSE,4,4,0,4,0,No,FALSE,6,4,NA,No Card,
@@ -961,11 +961,11 @@ AD,166,B2,619,C,,FALSE,FALSE,4,8,0,4,3,No,FALSE,"2,6",4,NA,No Card,
 CC,166,B3,2421,M,,FALSE,FALSE,2,8,0,3,6,No,FALSE,,1,NA,No Card,
 AM,167,R3,5549,M,,FALSE,FALSE,0,5,7,5,0,No,FALSE,"1,2,6",4,NA,No Card,
 HR,167,R2,614,C,,TRUE,FALSE,9,0,4,3,5,No,FALSE,"1,6",4,NA,No Card,
-MY,167,B1,10004,F,3,FALSE,FALSE,5,4,1,5,6,No,FALSE,"1,6",4,NA,No Card,Good turret 
+MY,167,B1,10004,F,3,FALSE,FALSE,5,4,1,5,6,No,FALSE,"1,6",4,NA,No Card,Good turret?
 CC,167,B3,8592,C,,TRUE,FALSE,12,0,6,3,5,No,FALSE,"6,2",3,NA,No Card,
 SBS,167,R1,686,F,3,TRUE,FALSE,6,4,2,4,0,No,FALSE,"1,2",4,2,No Card,Browned out at the end and got beached in auto
 AD,167,B2,10679,M,,FALSE,FALSE,5,8,0,0,0,No,FALSE,"4,5,2",3,NA,No Card,No intake
-MY,168,B1,1719,M,,FALSE,FALSE,3,9,1,0,7,No,FALSE,4,4,4,No Card,Solid defense 
+MY,168,B1,1719,M,,FALSE,FALSE,3,9,1,0,7,No,FALSE,4,4,4,No Card,Solid defense?
 CC,168,B3,339,F,3,FALSE,FALSE,10,6,0,0,2,No,FALSE,2,4,NA,No Card,Collect fuel for HP
 AM,168,R3,3136,C,3,TRUE,FALSE,10,9,1,5,0,No,FALSE,"2,6",4,NA,No Card,
 AD,168,B2,3748,C,,FALSE,FALSE,20,3,0,1,0,No,FALSE,,3,1,No Card,
@@ -998,8 +998,8 @@ AM,172,R3,4472,C,3,FALSE,FALSE,4,8,0,2,6,No,FALSE,"1,2,6",4,NA,No Card,
 CC,173,B3,9033,C,3,FALSE,FALSE,0,9,0,2,3,No,FALSE,"2,3",3,NA,No Card,
 AZ,173,B2,401,F,3,TRUE,FALSE,14,0,3,3,9,No,FALSE,1,4,NA,No Card,"Energy issues, wield driving at the end, the hopper is bent"
 EC,173,B1,620,M,,FALSE,FALSE,0,6,0,3,7,No,FALSE,"2,6",4,NA,No Card,No auto and somehow got out weighted by 888
-JD,173,R1,1908,C,3,FALSE,FALSE,5,3,2,6,0,No,FALSE,"2,6,1",5,NA,No Card,Can shoot while intaking 
-`HR,173,R2,888,F,3,FALSE,FALSE,12,9,1,0,0,No,FALSE,"2,5",4,NA,No Card,
+JD,173,R1,1908,C,3,FALSE,FALSE,5,3,2,6,0,No,FALSE,"2,6,1",5,NA,No Card,Can shoot while intaking?
+HR,173,R2,888,F,3,FALSE,FALSE,12,9,1,0,0,No,FALSE,"2,5",4,NA,No Card,
 AM,173,R3,2537,M,,FALSE,FALSE,5,10,0,4,0,No,FALSE,"2,6",3,NA,No Card,
 EC,174,B1,5549,F,3,FALSE,FALSE,5,1,7,4,8,No,FALSE,"6,1",4,NA,No Card,Struggles to fully empty hopper
 JD,174,R1,5243,M,,FALSE,FALSE,0,0,5,3,3,No,FALSE,2,3,NA,No Card,
@@ -1009,12 +1009,12 @@ CC,174,B3,8592,C,3,TRUE,FALSE,6,0,8,3,3,No,FALSE,"2,6",4,NA,No Card,
 AZ,174,B2,2421,C,,FALSE,FALSE,0,20,2,0,0,No,FALSE,,4,NA,No Card,No intake
 EC,175,B1,10004,C,3,FALSE,FALSE,7,6,0,4,4,No,FALSE,"1,2",3,NA,No Card,Good turret system but the actual shooter struggles to pull fuel out of hopper
 AM,175,R3,3748,F,3,FALSE,FALSE,11,8,1,3,7,No,FALSE,"2,6,3",4,NA,No Card,
-JD,175,R1,11318,M,,FALSE,FALSE,0,2,1,3,0,No,FALSE,"2,6",3,NA,No Card,Shooter got bent 
+JD,175,R1,11318,M,,FALSE,FALSE,0,2,1,3,0,No,FALSE,"2,6",3,NA,No Card,Shooter got bent?
 CL,175,R2,1389,C,3,TRUE,FALSE,6,0,4,3,2,No,FALSE,"2,6",2,NA,No Card,
 CC,175,B3,4541,M,1,FALSE,FALSE,2,7,3,1,3,No,FALSE,"2,1,6,3",5,NA,No Card,
 BP,175,B2,614,F,3,TRUE,FALSE,10,0,6,4,7,No,FALSE,"6,2",4,NA,No Card,Large hopper but empties quickly
 BP,176,B2,1727,F,3,FALSE,FALSE,12,8,0,3,0,No,FALSE,1,4,NA,No Card,
-AM,176,R3,449,F,3,TRUE,FALSE,20,10,2,5,6,No,FALSE,"1,2,6",5,NA,No Card,GOAT. 
+AM,176,R3,449,F,3,TRUE,FALSE,20,10,2,5,6,No,FALSE,"1,2,6",5,NA,No Card,GOAT.?
 CL,176,R2,10679,M,,FALSE,FALSE,5,5,0,0,0,No,FALSE,"2,4,5",4,NA,No Card,
 JD,176,R1,3136,C,3,FALSE,FALSE,0,2,4,4,4,No,FALSE,"2,6",4,NA,No Card,
 EC,176,B1,1111,C,,FALSE,FALSE,0,4,0,2,4,No,FALSE,2,3,NA,No Card,
@@ -1065,7 +1065,7 @@ CC,184,B1,11318,C,3,FALSE,FALSE,5,5,0,1,1,No,TRUE,"2,6",2,NA,No Card,
 HR,184,R1,1719,M,,FALSE,FALSE,5,8,0,0,0,No,FALSE,"5,4",4,NA,No Card,
 AM,184,R3,2377,F,"3,1",FALSE,FALSE,1,3,1,0,0,No,FALSE,"6,2",4,NA,No Card,
 JD,184,R2,449,C,3,TRUE,FALSE,10,6,4,4,6,No,FALSE,"6,1,3",5,NA,No Card,
-MC,184,B2,10679,M,2,FALSE,FALSE,3,10,0,0,2,No,FALSE,"2,4,5",4,NA,No Card,Played pretty 
+MC,184,B2,10679,M,2,FALSE,FALSE,3,10,0,0,2,No,FALSE,"2,4,5",4,NA,No Card,Played pretty?
 BP,184,B3,1262,F,3,TRUE,FALSE,0,3,1,1,6,No,FALSE,6,3,3,No Card,"Ca41391t fully empty hopper, slow shooting"
 AM,185,R3,122,F,3,TRUE,FALSE,17,6,8,4,0,No,FALSE,6,5,NA,No Card,
 AZ,185,B2,4541,M,,FALSE,FALSE,6,7,2,0,2,No,FALSE,2,1,NA,No Card,Could not intake well or index into turret
@@ -1074,13 +1074,13 @@ JD,185,R2,2068,M,,FALSE,FALSE,5,4,4,2,4,No,FALSE,"2,6,3",4,NA,No Card,
 HR,185,R1,540,C,3,FALSE,FALSE,10,6,0,5,0,No,FALSE,"2,6",4,NA,No Card,
 CC,185,B1,9033,C,,FALSE,FALSE,7,6,2,0,0,No,FALSE,"4,3",2,NA,No Card,
 AM,186,R3,619,C,3,FALSE,FALSE,0,3,2,6,0,No,FALSE,"2,6",3,NA,No Card,
-JD,186,R2,2890,M,,FALSE,TRUE,5,0,4,1,0,L1,FALSE,"2,6",4,NA,No Card,Hopper brokeÊ
+JD,186,R2,2890,M,,FALSE,TRUE,5,0,4,1,0,L1,FALSE,"2,6",4,NA,No Card,Hopper broke?
 HR,186,R1,1629,F,3,FALSE,FALSE,18,8,2,3,0,No,FALSE,"2,6",4,NA,No Card,
 AZ,186,B2,5243,F,,FALSE,FALSE,2,4,4,0,0,No,FALSE,2,2,NA,No Card,"Attempted auto climb did not work, robot has trouble shooting"
 BP,186,B3,1111,M,,FALSE,FALSE,2,10,0,0,4,No,FALSE,"6,4",2,NA,No Card,"Never back to AZ in time to shoot, shot on inactive hub"
 CC,186,B1,2537,C,3,FALSE,FALSE,10,5,0,1,3,No,FALSE,"5,2",3,NA,No Card,
 HR,187,R1,8592,F,3,TRUE,FALSE,10,0,5,5,0,No,FALSE,"1,2,6",4,NA,No Card,Shoots on the move very well
-AM,187,R3,5804,M,,FALSE,FALSE,0,0,3,0,0,No,FALSE,,3,1,No Card,"Played defense, bumper fell off. "
+AM,187,R3,5804,M,,FALSE,FALSE,0,0,3,0,0,No,FALSE,,3,1,No Card,"Played defense, bumper fell off.?"
 BP,187,B3,1389,F,3,TRUE,FALSE,2,0,4,4,3,No,FALSE,"6,2",3,NA,No Card,Long line up time but fast-ish shooting
 AZ,187,B2,10224,C,3,TRUE,FALSE,0,0,6,1,6,No,FALSE,6,2,NA,No Card,"Broken auto, indexer is not good enlightening to index without the driver moving back and forth"
 BH,187,R2,1727,C,3,FALSE,FALSE,8,4,3,5,1,No,FALSE,1,4,NA,No Card,
@@ -1100,12 +1100,12 @@ BH,189,R2,401,F,3,TRUE,FALSE,20,0,4,2,5,No,FALSE,"3,1",3,1,No Card,They died hal
 AM,190,R3,11425,M,,FALSE,FALSE,5,7,2,0,0,No,FALSE,"2,6",1,2,No Card,
 BP,190,B3,3258,M,,FALSE,FALSE,0,3,0,0,0,No,FALSE,,1,1,No Card,"Did41391t do an auto, died in teleop"
 AD,190,B2,1908,F,3,TRUE,FALSE,10,7,4,8,3,No,FALSE,"1,2,6",4,NA,No Card,
-BH,190,R2,5724,C,,FALSE,FALSE,3,2,0,1,2,No,FALSE,,2,NA,No Card,Intake hella slow also they like depot also accuracy is pretty bad. Also either really bad or no inactive strategy 
+BH,190,R2,5724,C,,FALSE,FALSE,3,2,0,1,2,No,FALSE,,2,NA,No Card,Intake hella slow also they like depot also accuracy is pretty bad. Also either really bad or no inactive strategy?
 CC,190,B1,9072,C,3,FALSE,FALSE,18,0,9,3,7,No,FALSE,"6,2",4,NA,No Card,
 HR,190,R1,5549,F,3,TRUE,FALSE,0,2,4,5,0,No,FALSE,"1,6",4,NA,No Card,
 HR,191,R1,339,C,3,FALSE,FALSE,2,6,3,0,0,No,FALSE,"4,2",3,NA,No Card,
-AZ,191,B2,5587,C,,FALSE,FALSE,0,7,0,0,0,No,FALSE,2,2,NA,No Card, No intaking and no auto
-AM,191,R3,10004,F,3,FALSE,FALSE,10,4,1,5,0,No,FALSE,"1,2,6",3,NA,No Card,Inconsistent feeding. 
+AZ,191,B2,5587,C,,FALSE,FALSE,0,7,0,0,0,No,FALSE,2,2,NA,No Card,?No intaking and no auto
+AM,191,R3,10004,F,3,FALSE,FALSE,10,4,1,5,0,No,FALSE,"1,2,6",3,NA,No Card,Inconsistent feeding.?
 BH,191,R2,346,M,3,TRUE,FALSE,8,0,6,3,8,No,FALSE,6,4,NA,No Card,Browned out toward the end
 BP,191,B3,2106,F,3,FALSE,FALSE,18,3,2,6,5,No,TRUE,"2,1,3,6",5,NA,No Card,Great shoot-on-move and feeding put them shooting all active period
 CC,191,B1,8590,M,,FALSE,FALSE,1,2,0,0,6,No,FALSE,,1,NA,No Card,"No inactive strategy, garbage driver"
@@ -1119,7 +1119,7 @@ AZ,193,B2,9033,M,,FALSE,FALSE,0,0,3,0,0,No,FALSE,,2,1,No Card,No auto movement
 CC,193,B1,1262,C,3,FALSE,FALSE,10,7,0,2,4,No,FALSE,2,3,NA,No Card,
 HR,193,R1,3748,C,3,FALSE,FALSE,3,6,2,5,0,No,FALSE,"1,2,6",4,NA,No Card,
 Ashwin,193,R2,8592,F,3,TRUE,FALSE,8,0,11,5,5,No,FALSE,1,4,NA,No Card,Good bump. Also I hate IRI scouting >:((((((
-AM,193,R3,620,M,,FALSE,FALSE,5,0,6,2,0,No,FALSE,6,3,NA,No Card,"Massive hopper, can only shoot directly in front of the hub. "
+AM,193,R3,620,M,,FALSE,FALSE,5,0,6,2,0,No,FALSE,6,3,NA,No Card,"Massive hopper, can only shoot directly in front of the hub.?"
 BP,193,B3,619,F,3,FALSE,FALSE,12,10,0,5,1,No,FALSE,"1,6,3",3,NA,No Card,"Shot well, prepared effectively for active shift"
 HR,194,R1,2537,F,3,FALSE,FALSE,0,2,0,0,0,No,FALSE,"2,4,5",3,NA,No Card,
 AM,194,R3,5338,C,3,TRUE,FALSE,20,8,0,7,0,No,FALSE,"2,6",4,NA,No Card,
@@ -1128,23 +1128,23 @@ BP,194,B3,10224,M,,FALSE,FALSE,2,0,6,3,7,No,FALSE,"6,2",2,3,No Card,Tippy
 AD,194,B2,1086,C,3,TRUE,FALSE,5,0,7,5,4,No,FALSE,"2,6",3,NA,No Card,"Kept hitting 11415, bad communication?"
 Ashwin,194,R2,4541,M,,FALSE,FALSE,3,2,3,2,9,No,FALSE,6,3,NA,No Card,Tends to shoot near tower. Frank the prankster gangster
 BP,195,B3,888,C,3,FALSE,FALSE,15,2,4,2,4,No,FALSE,"6,2",3,NA,No Card,Browning out later in the matches
-AM,195,R3,449,F,3,TRUE,FALSE,16,13,2,1,4,No,FALSE,"6,3,4",5,NA,No Card,GOATED. Intake broke. 
+AM,195,R3,449,F,3,TRUE,FALSE,16,13,2,1,4,No,FALSE,"6,3,4",5,NA,No Card,GOATED. Intake broke.?
 CC,195,B1,4472,M,1,FALSE,FALSE,5,8,1,0,6,No,FALSE,1,4,NA,No Card,
 AZ,195,B2,1731,F,,FALSE,FALSE,16,9,0,4,7,No,FALSE,2,5,NA,No Card,
 HR,195,R1,836,C,3,FALSE,FALSE,10,4,2,7,0,No,FALSE,"1,6",5,NA,No Card,
 Ashwin,195,R2,11318,M,,FALSE,FALSE,2,4,1,2,5,No,FALSE,2,4,NA,No Card,
 HR,196,R1,3258,M,,FALSE,FALSE,0,1,0,0,0,No,FALSE,,2,1,No Card,
 AM,196,R3,401,F,3,TRUE,FALSE,15,8,0,3,0,No,FALSE,"1,2,6",4,NA,No Card,
-AZ,196,B2,5243,F,,FALSE,FALSE,0,2,2,2,0,No,FALSE,,3,NA,No Card, Weird movement and basically no auto action
+AZ,196,B2,5243,F,,FALSE,FALSE,0,2,2,2,0,No,FALSE,,3,NA,No Card,?Weird movement and basically no auto action
 CC,196,B1,422,C,3,TRUE,FALSE,10,6,0,1,0,No,FALSE,"4,2",4,NA,No Card,
 BP,196,B3,2068,M,,FALSE,FALSE,2,4,0,0,5,No,FALSE,"6,2",1,NA,No Card,Moving very slowly at the end
 MC,196,R2,3136,C,2,FALSE,FALSE,18,10,0,7,4,No,FALSE,2,4,NA,No Card,
 CC,197,B1,5587,M,1,FALSE,FALSE,4,6,0,2,2,No,FALSE,"2,4,1",1,NA,No Card,
-MC,197,R2,9072,C,2,FALSE,FALSE,17,6,3,2,4,No,FALSE,"2,6,1",4,NA,No Card,Intake fried 
+MC,197,R2,9072,C,2,FALSE,FALSE,17,6,3,2,4,No,FALSE,"2,6,1",4,NA,No Card,Intake fried?
 AZ,197,B2,2377,C,3,FALSE,FALSE,11,6,0,3,5,No,FALSE,2,4,NA,No Card,
 BP,197,B3,10004,F,3,FALSE,FALSE,5,8,2,2,2,No,FALSE,4,2,NA,No Card,
-RY,197,R1,3361,M,,FALSE,FALSE,0,8,0,0,0,No,FALSE,"4,5,2",1,NA,No Card,does NOT know what they're doing.  Literally blocks their own alliance and messes them up. Spun in a circle for like five seconds. Goes into OZ during inactive and blocks alliance during active.
-AM,197,R3,2421,F,,FALSE,FALSE,0,7,5,0,0,No,FALSE,2,3,NA,No Card,Had swerve issues. 
+RY,197,R1,3361,M,,FALSE,FALSE,0,8,0,0,0,No,FALSE,"4,5,2",1,NA,No Card,does NOT know what they're doing.? Literally blocks their own alliance and messes them up. Spun in a circle for like five seconds. Goes into OZ during inactive and blocks alliance during active.
+AM,197,R3,2421,F,,FALSE,FALSE,0,7,5,0,0,No,FALSE,2,3,NA,No Card,Had swerve issues.?
 MC,198,R2,5724,F,,FALSE,FALSE,0,0,0,0,0,No,FALSE,,1,5,No Card,
 AM,198,R3,1719,C,3,FALSE,FALSE,0,5,1,0,0,No,FALSE,2,3,NA,No Card,
 CC,198,B1,1727,M,1,FALSE,FALSE,4,5,1,1,2,No,FALSE,"1,6",4,NA,No Card,
@@ -1152,7 +1152,7 @@ BP,198,B3,346,F,3,TRUE,FALSE,2,0,8,6,0,No,FALSE,"2,6",4,NA,No Card,Surprisingly 
 AD,198,B2,2106,C,3,TRUE,FALSE,18,7,4,10,2,No,FALSE,"1,6",5,NA,No Card,"Really really good accuracy and shoot on the move, consistently shot while driving. Across the whole zone and made every one"
 MY,198,R1,614,F,3,TRUE,FALSE,8,0,7,5,6,L1,FALSE,"2,6",3,NA,No Card,"shooter got jammed, lots of fuel scored. They seemed a little bit lost in the nz sometimes, but tey were mostly on top of it . mostly soloed this match."
 EC,199,R1,540,C,3,FALSE,FALSE,7,6,1,5,2,No,FALSE,"2,3",4,NA,No Card,
-AM,199,R3,686,F,3,TRUE,FALSE,18,8,2,5,0,No,FALSE,"1,2,6",4,NA,No Card,Good drum shooter. 
+AM,199,R3,686,F,3,TRUE,FALSE,18,8,2,5,0,No,FALSE,"1,2,6",4,NA,No Card,Good drum shooter.?
 BP,199,B3,339,F,,FALSE,FALSE,0,8,0,0,0,No,FALSE,"4,2",1,NA,No Card,Weird RSL twitch brownouts; could barely move after a while
 AD,199,B2,1908,F,3,TRUE,FALSE,10,10,2,10,7,No,FALSE,"1,2,3,6",4,NA,No Card,
 FL,199,B1,5549,C,3,TRUE,FALSE,8,1,5,3,6,No,FALSE,"2,6",4,NA,No Card,
@@ -1162,14 +1162,14 @@ MC,200,R2,11425,F,2,FALSE,FALSE,3,6,2,0,4,No,FALSE,"2,5,3",4,NA,No Card,Gives lo
 JB,200,R1,1111,C,2,FALSE,FALSE,1,0,0,0,0,No,FALSE,2,1,NA,No Card,Coul41391ve picked up balls better
 AM,200,R3,8590,M,,FALSE,FALSE,0,5,0,2,3,No,FALSE,"2,6",2,NA,No Card,Do41391t have left and right autos. Can41391t shoot full hopper.
 AZ,200,B2,2199,F,3,FALSE,FALSE,19,9,1,5,7,No,FALSE,,4,NA,No Card,
-FL,200,B1,3939,M,1,FALSE,FALSE,6,6,0,1,7,No,FALSE,6,3,NA,No Card,Lowk intakes slowly rip goat 
+FL,200,B1,3939,M,1,FALSE,FALSE,6,6,0,1,7,No,FALSE,6,3,NA,No Card,Lowk intakes slowly rip goat?
 MY,201,R1,3748,F,1,FALSE,FALSE,9,5,3,2,6,No,FALSE,"1,3,4",4,4,No Card,stole from oz and passed it to nz.
 BP,201,B3,4541,M,,FALSE,FALSE,2,7,2,2,3,No,FALSE,"6,2",3,NA,No Card,
 SZ,201,R3,888,F,3,TRUE,FALSE,15,8,0,2,0,No,FALSE,"6,4,3",4,NA,No Card,Intake/shoot broken?
 EC,201,R2,5338,C,3,TRUE,FALSE,20,7,2,4,2,No,FALSE,2,3,1,No Card,The lights flashing but no on41391s home (endgame)
 AZ,201,B2,449,F,,FALSE,FALSE,0,9,3,4,8,No,FALSE,,5,NA,No Card,At the last few seconds there were issues with indexing or in intaking
 FL,201,B1,1629,C,3,FALSE,FALSE,16,2,0,3,4,No,FALSE,6,2,NA,No Card,I migh41391ve f ed up. 449 capturing my attention
-AM,202,R3,2537,C,3,FALSE,FALSE,10,16,0,0,0,No,FALSE,"4,2",4,NA,No Card,Only played defense. 
+AM,202,R3,2537,C,3,FALSE,FALSE,10,16,0,0,0,No,FALSE,"4,2",4,NA,No Card,Only played defense.?
 AD,202,R2,122,F,3,TRUE,FALSE,16,4,4,6,4,No,FALSE,"2,6",3,NA,No Card,Outtakes balls into their side
 CC,202,B1,8592,M,,FALSE,FALSE,2,0,10,2,7,No,FALSE,"1,6",4,NA,No Card,
 BP,202,B2,836,C,3,FALSE,FALSE,7,4,4,3,8,No,FALSE,"1,6,4",3,NA,No Card,Got stuck with another robot in auto
@@ -1178,7 +1178,7 @@ DK,202,B3,3136,F,3,FALSE,FALSE,6,0,1,1,7,No,FALSE,"3,6,2",4,NA,No Card,Good at f
 CC,203,B1,620,M,1,FALSE,FALSE,3,0,12,0,0,No,FALSE,"2,4",2,NA,No Card,
 AM,203,R3,1731,F,"3,1",FALSE,FALSE,13,6,0,6,0,No,FALSE,"6,2",4,NA,No Card,
 AD,203,R2,11415,C,3,FALSE,FALSE,15,5,1,7,5,No,FALSE,"1,2,6",4,NA,No Card,
-AZ,203,R1,2068,M,,FALSE,FALSE,0,11,1,1,6,No,FALSE,"4,5",3,NA,No Card,Very poor indexing 
+AZ,203,R1,2068,M,,FALSE,FALSE,0,11,1,1,6,No,FALSE,"4,5",3,NA,No Card,Very poor indexing?
 MC,203,B3,2890,F,2,TRUE,TRUE,10,0,12,3,4,L1,FALSE,"6,1",3,NA,No Card,Intake fried
 BP,203,B2,2421,C,3,FALSE,FALSE,3,14,0,1,4,No,FALSE,"4,5,2",3,NA,No Card,Good herding and ok defense
 AM,204,R3,4099,F,3,TRUE,FALSE,8,5,3,3,0,No,FALSE,"2,6,4",5,NA,No Card,
@@ -1190,13 +1190,13 @@ CC,204,B1,5724,M,,FALSE,FALSE,0,3,0,0,0,No,FALSE,,3,1,No Card,
 RY,205,B3,1262,C,3,TRUE,FALSE,2,0,6,4,0,No,FALSE,"4,6,3,2,5",4,NA,No Card,"Drives really fast, even ruthlessly. Takes too long to aim to shoot. Really good driver on a mid robot. Can only shoot in the center infront of hub. Tries too hard to do everything bruh."
 AM,205,R3,5587,M,,FALSE,FALSE,5,0,6,0,0,No,FALSE,"4,5",4,NA,No Card,
 BP,205,B2,540,F,3,FALSE,FALSE,9,4,4,4,7,No,FALSE,"4,6",4,NA,No Card,Good defense
-AZ,205,R1,9072,F,,TRUE,FALSE,19,5,7,4,6,No,FALSE,,5,NA,No Card,Opponents played good defense 
+AZ,205,R1,9072,F,,TRUE,FALSE,19,5,7,4,6,No,FALSE,,5,NA,No Card,Opponents played good defense?
 AD,205,R2,686,C,3,FALSE,FALSE,10,8,1,6,0,No,FALSE,"2,6",4,NA,No Card,
 CC,205,B1,3361,M,,FALSE,FALSE,0,10,0,1,1,No,FALSE,"1,2,3",3,NA,No Card,
 AM,206,R3,401,F,3,TRUE,FALSE,9,6,0,2,7,No,FALSE,"2,6",4,NA,No Card,
 MC,206,R2,8590,M,2,FALSE,FALSE,3,11,0,2,6,No,FALSE,"3,5,4",4,NA,No Card,Ok defense
 BP,206,B2,619,F,3,FALSE,FALSE,8,5,1,4,5,No,FALSE,"6,2",3,NA,No Card,Good reverse intake feeding
-AZ,206,R1,1389,M,,FALSE,FALSE,2,0,4,1,8,No,FALSE,6,1,NA,No Card,"Bad indexing, poor output, limited mobility "
+AZ,206,R1,1389,M,,FALSE,FALSE,2,0,4,1,8,No,FALSE,6,1,NA,No Card,"Bad indexing, poor output, limited mobility?"
 MH,206,B3,10679,M,,FALSE,FALSE,2,8,0,0,0,No,FALSE,"4,5",2,NA,No Card,not effective defense
 CC,206,B1,5549,C,,TRUE,FALSE,20,6,3,5,0,No,FALSE,"2,6",4,NA,No Card,
 MC,207,R2,1727,C,3,FALSE,FALSE,0,1,5,4,6,No,FALSE,"2,1,6",4,NA,No Card,
@@ -1213,16 +1213,16 @@ NY,208,B3,1719,M,,FALSE,FALSE,2,4,4,0,0,No,FALSE,"2,4,5",3,NA,No Card,Broken int
 CC,208,B1,1908,F,3,TRUE,FALSE,20,9,0,4,6,No,FALSE,"1,2",3,NA,No Card,Aman glazes it way to much
 EC,209,R1,5804,C,3,TRUE,FALSE,0,1,1,0,0,No,FALSE,4,3,1,No Card,Died pretty early on so driver rating is broad
 LJ,209,B3,1086,C,3,TRUE,FALSE,2,0,8,2,9,No,FALSE,"6,2,1,3",3,1,No Card,"Demonstrated a wide range of strategies, timing sense a bit bad, midrange shots."
-EC,209,R3,1895,M,,FALSE,FALSE,8,8,0,2,2,No,FALSE,2,3,1,No Card,S-stopped. Has climb for auto but failed 
+EC,209,R3,1895,M,,FALSE,FALSE,8,8,0,2,2,No,FALSE,2,3,1,No Card,S-stopped. Has climb for auto but failed?
 CC,209,B1,3939,M,1,FALSE,FALSE,4,8,0,3,0,No,FALSE,"2,1",3,NA,No Card,
 AD,209,R2,9033,F,3,FALSE,FALSE,0,8,0,6,6,No,FALSE,"1,2,3,6",4,NA,No Card,Very poor accuracy
 BP,209,B2,10004,F,3,FALSE,FALSE,0,8,0,1,4,No,FALSE,6,2,NA,No Card,Took forever to line up a shot
 EC,210,R3,11415,C,3,FALSE,FALSE,10,7,4,7,0,No,FALSE,"1,2",4,NA,No Card,
 CC,210,B1,8592,F,,FALSE,FALSE,0,0,8,5,3,No,FALSE,"1,2,6",3,NA,No Card,
-AZ,210,R1,4099,F,3,FALSE,FALSE,8,4,4,3,3,No,FALSE,"4,2,6",5,NA,No Card,"Low output, but very consistent "
+AZ,210,R1,4099,F,3,FALSE,FALSE,8,4,4,3,3,No,FALSE,"4,2,6",5,NA,No Card,"Low output, but very consistent?"
 AD,210,R2,1629,M,,TRUE,FALSE,6,8,1,8,0,No,FALSE,"2,3,6",4,NA,No Card,
 BP,210,B2,2068,C,1,FALSE,FALSE,2,10,0,1,2,No,FALSE,"4,2,6",2,NA,No Card,Slow shooting and shot lineup
-NY,210,B3,11318,M,3,FALSE,FALSE,0,3,4,0,0,No,FALSE,"2,4",2,NA,No Card,Got stuck under climb at some point (I think) 
+NY,210,B3,11318,M,3,FALSE,FALSE,0,3,4,0,0,No,FALSE,"2,4",2,NA,No Card,Got stuck under climb at some point (I think)?
 AM,211,R1,3258,C,,FALSE,FALSE,0,3,0,0,0,No,FALSE,3,1,NA,No Card,
 HR,211,R2,3361,F,,FALSE,FALSE,0,3,0,1,0,No,FALSE,"2,6",1,NA,No Card,
 EC,211,R3,620,M,1,FALSE,FALSE,6,0,6,1,2,No,FALSE,"6,2",3,NA,No Card,Started stuttering at the end
@@ -1234,12 +1234,12 @@ BP,212,B2,1262,F,3,FALSE,FALSE,0,7,1,2,8,No,FALSE,"3,2,6",2,NA,No Card,Slow shot
 HR,212,R2,2537,M,,FALSE,FALSE,3,7,0,5,6,No,FALSE,"2,6",3,NA,No Card,
 EC,212,R3,346,F,3,TRUE,FALSE,8,0,8,3,8,No,FALSE,"6,2",3,NA,No Card,Slow when full hopper
 CC,212,B1,8590,M,,FALSE,FALSE,2,4,0,1,4,No,FALSE,2,3,NA,No Card,
-RY,212,B3,2421,C,,FALSE,FALSE,0,15,5,0,0,No,FALSE,"4,5,2",2,3,No Card,Genuinely I don41391t think they know what they41391re doing. Meaningless crossing around the field trying defend but has absolutely no impact. Did not shoot at all.Ê Mid herding.
+RY,212,B3,2421,C,,FALSE,FALSE,0,15,5,0,0,No,FALSE,"4,5,2",2,3,No Card,Genuinely I don41391t think they know what they41391re doing. Meaningless crossing around the field trying defend but has absolutely no impact. Did not shoot at all.? Mid herding.
 BP,213,B2,5724,M,,FALSE,FALSE,2,11,0,0,0,No,FALSE,2,1,NA,No Card,Did only bulldozing
 HR,213,R2,5549,F,3,TRUE,FALSE,10,3,2,5,5,No,FALSE,"1,6",5,1,No Card,
 AZ,213,R1,1731,C,3,FALSE,FALSE,15,6,2,5,0,No,FALSE,"2,1",5,NA,No Card,
 EC,213,R3,540,M,3,FALSE,FALSE,5,6,0,2,7,No,FALSE,6,4,NA,No Card,Seemed to have moderately damaged their intake but it managed to hold together and work (just a bit wobbly)
-MY,213,B3,888,F,3,FALSE,FALSE,17,8,0,4,4,No,FALSE,,3,NA,No Card,"Preshot by a fair amount, 540 defended them pretty good for some part of the match. Ê"
+MY,213,B3,888,F,3,FALSE,FALSE,17,8,0,4,4,No,FALSE,,3,NA,No Card,"Preshot by a fair amount, 540 defended them pretty good for some part of the match. ?"
 CC,213,B1,1727,C,3,FALSE,FALSE,11,5,4,3,4,No,FALSE,"1,2,6",4,NA,No Card,
 HR,214,R2,339,M,,FALSE,FALSE,3,7,0,1,3,No,FALSE,"2,4,6",3,NA,No Card,
 EC,214,R3,2106,F,3,TRUE,FALSE,18,4,1,4,7,No,FALSE,"1,2,6",3,NA,No Card,The intake lags in performance sometimes
@@ -1247,7 +1247,7 @@ CC,214,B1,686,C,3,FALSE,FALSE,15,10,0,4,0,No,FALSE,"1,2,3,6",4,NA,No Card,
 AZ,214,R1,4541,C,,FALSE,FALSE,0,5,1,2,0,No,FALSE,2,3,NA,No Card,"Broken auto, incredibly limited hopper size, strange strategy decisions like not going into AZ during endgame"
 BP,214,B2,2199,F,3,FALSE,FALSE,5,5,1,4,4,No,FALSE,"1,2,6",4,NA,No Card,Good shooting from back near the drivers and behind ladder
 NS,214,B3,619,M,1,FALSE,FALSE,10,2,0,2,0,No,FALSE,"4,6",3,3,No Card,"Stuck on ball, teammate didn41391t help (686)"
-AZ,215,R1,1895,C,,FALSE,FALSE,0,3,0,0,0,No,FALSE,2,1,1,No Card,"Auto didn41391t work, can41391t intake and died ImmediatelyÊ"
+AZ,215,R1,1895,C,,FALSE,FALSE,0,3,0,0,0,No,FALSE,2,1,1,No Card,"Auto didn41391t work, can41391t intake and died Immediately?"
 EC,215,R3,3939,M,2,FALSE,FALSE,4,4,0,4,1,No,FALSE,"2,6",3,NA,No Card,Misses a bit
 CC,215,B1,1908,C,3,TRUE,FALSE,16,9,1,6,3,No,FALSE,"1,2,3",4,NA,No Card,
 HR,215,R2,422,F,3,TRUE,FALSE,0,6,6,2,0,No,FALSE,"2,6",4,NA,No Card,"Auto failed, intake broke at end"
@@ -1264,7 +1264,7 @@ EC,217,B3,1111,M,,FALSE,FALSE,3,5,1,0,0,No,FALSE,"2,4",2,NA,No Card,Driver seemi
 BP,217,B2,5587,F,,FALSE,FALSE,3,3,5,0,3,No,FALSE,"4,5",1,3,No Card,"Could barely intake, defense wasn41391t great"
 FL,217,R1,10004,F,3,FALSE,FALSE,2,6,0,1,3,No,FALSE,6,3,NA,No Card,Shooter stuck end of match
 LJ,217,B1,4472,C,3,FALSE,FALSE,8,4,0,2,2,No,FALSE,6,3,NA,No Card,"Struggled with defense, low bps when sotm. Primary scorer, played cleanup in inactive 2 and endgame"
-AM,217,R3,9033,M,1,FALSE,FALSE,7,8,1,3,5,No,FALSE,"3,6,1,2",3,NA,No Card,Terrible accuracy.Ê
+AM,217,R3,9033,M,1,FALSE,FALSE,7,8,1,3,5,No,FALSE,"3,6,1,2",3,NA,No Card,Terrible accuracy.?
 HR,218,R2,5804,F,3,TRUE,FALSE,10,0,1,0,0,No,FALSE,"2,5",4,NA,No Card,
 AM,218,R3,5243,C,,FALSE,FALSE,3,2,4,2,7,No,FALSE,6,2,NA,No Card,Failed climb in auto
 FL,218,R1,10679,M,,FALSE,FALSE,10,4,0,0,0,No,FALSE,4,2,NA,No Card,Kinda irrelevant defense
@@ -1333,7 +1333,7 @@ AZ,228,R1,3258,M,3,FALSE,FALSE,3,7,3,0,0,No,FALSE,,1,NA,No Card,"No hopper exten
 FL,228,B3,1629,C,3,FALSE,FALSE,7,8,1,6,3,No,FALSE,"3,2,5",4,NA,No Card,Coook
 AM,229,R3,1908,C,3,TRUE,FALSE,4,9,4,6,5,No,FALSE,"1,2,6",5,NA,No Card,
 HR,229,R2,5724,M,,FALSE,FALSE,0,4,0,1,2,No,FALSE,,3,NA,No Card,
-AZ,229,R1,449,F,,TRUE,FALSE,13,5,5,6,6,No,FALSE,1,5,4,No Card,"The goat, no words, just spectacularÊ"
+AZ,229,R1,449,F,,TRUE,FALSE,13,5,5,6,6,No,FALSE,1,5,4,No Card,"The goat, no words, just spectacular?"
 BP,229,B2,8592,C,3,TRUE,FALSE,2,0,8,3,6,No,FALSE,"1,2,6",3,NA,No Card,
 EC,229,B1,2377,M,1,FALSE,FALSE,5,1,3,0,0,No,FALSE,"4,5",3,1,No Card,"A-stop, possible intake issues"
 FL,229,B3,619,F,3,FALSE,FALSE,9,12,0,6,5,No,FALSE,"2,5,6",3,NA,No Card,Rip matchup. Can41391t beat the goat
@@ -1346,8 +1346,8 @@ HR,230,R2,1895,M,,FALSE,FALSE,0,4,0,1,0,No,FALSE,"4,6",3,1,No Card,It stopped an
 FL,231,B3,3361,M,,FALSE,FALSE,3,6,0,0,0,No,FALSE,"2,4",2,NA,No Card,Shooter jam/broke. Drifting aimlessly
 HR,231,R2,4541,M,,FALSE,FALSE,3,5,0,4,0,No,FALSE,"6,2",3,NA,No Card,
 AM,231,R3,11425,F,,FALSE,FALSE,3,2,5,0,0,No,FALSE,"4,2",2,4,No Card,
-EC,231,B1,10004,F,3,FALSE,FALSE,0,10,2,2,6,No,FALSE,"2,1,5",2,NA,No Card,"A-stop, driver very hesitant "
-AZ,231,R1,2890,C,2,FALSE,FALSE,6,0,6,2,5,No,FALSE,,1,NA,No Card,"Attempted climb in auto, did not work, needs improvement "
+EC,231,B1,10004,F,3,FALSE,FALSE,0,10,2,2,6,No,FALSE,"2,1,5",2,NA,No Card,"A-stop, driver very hesitant?"
+AZ,231,R1,2890,C,2,FALSE,FALSE,6,0,6,2,5,No,FALSE,,1,NA,No Card,"Attempted climb in auto, did not work, needs improvement?"
 BP,231,B2,422,C,3,TRUE,FALSE,13,2,10,6,4,No,FALSE,"6,2,1",5,3,No Card,"Good cycle times, great back row scoring"
 EC,232,B1,3136,F,3,TRUE,FALSE,10,7,1,2,0,No,FALSE,"3,2",3,NA,No Card,Became unnaturally slow
 AM,232,R3,836,F,3,FALSE,FALSE,10,9,4,5,7,No,FALSE,"2,1,6",5,NA,No Card,
@@ -1364,11 +1364,11 @@ BP,233,B2,401,C,3,TRUE,FALSE,12,4,4,3,5,No,FALSE,"6,2,1,3",3,3,No Card,Got a lot
 EC,234,B1,5338,C,3,TRUE,FALSE,13,8,0,5,0,No,FALSE,"2,5,6",3,NA,No Card,
 HR,234,R2,339,C,3,FALSE,FALSE,6,12,0,2,0,No,FALSE,"4,6",2,NA,No Card,
 BH,234,B3,614,F,3,TRUE,FALSE,7,0,3,2,3,No,FALSE,"1,2",2,2,No Card,
-AM,234,R3,2421,M,,FALSE,FALSE,3,10,0,0,3,No,FALSE,6,2,NA,No Card,Shooter and indexer/feeder barely works. 
+AM,234,R3,2421,M,,FALSE,FALSE,3,10,0,0,3,No,FALSE,6,2,NA,No Card,Shooter and indexer/feeder barely works.?
 BP,234,B2,11318,M,,FALSE,FALSE,2,8,2,1,6,No,FALSE,"2,6",3,NA,No Card,So easily defended
 AZ,234,R1,9033,F,3,FALSE,FALSE,0,0,0,0,0,No,FALSE,4,3,NA,No Card,Ran straight to OZ in auto and played defense the whole time
 HR,235,R2,5587,M,,FALSE,FALSE,3,8,2,1,0,No,FALSE,"6,4",3,NA,No Card,
-AM,235,R3,5243,C,,FALSE,FALSE,2,0,5,2,8,No,FALSE,6,2,NA,No Card,Failed auto climb 
+AM,235,R3,5243,C,,FALSE,FALSE,2,0,5,2,8,No,FALSE,6,2,NA,No Card,Failed auto climb?
 BP,235,B2,1731,F,3,FALSE,FALSE,11,12,2,5,7,No,FALSE,"1,2,6",4,NA,No Card,Great feeding in first inactive shift
 BH,235,B3,1389,F,,FALSE,FALSE,3,0,4,2,0,No,FALSE,,3,NA,No Card,
 AZ,235,R1,1262,F,3,FALSE,FALSE,9,8,4,2,6,No,FALSE,3,3,NA,No Card,
@@ -1381,7 +1381,7 @@ BP,236,B2,8590,F,3,FALSE,FALSE,6,4,1,0,0,No,FALSE,"1,4,5",2,NA,No Card,Ca41391t 
 BH,236,B3,620,M,2,FALSE,FALSE,5,0,4,2,6,No,FALSE,6,3,NA,No Card,
 BH,237,B3,2106,C,3,TRUE,FALSE,0,2,3,6,0,No,FALSE,,5,NA,No Card,
 HR,237,R2,10004,F,3,FALSE,FALSE,0,4,4,1,2,No,FALSE,"6,3",3,NA,No Card,
-AM,237,R3,3258,C,,FALSE,FALSE,0,9,3,0,0,No,FALSE,,4,NA,No Card,No intake. 
+AM,237,R3,3258,C,,FALSE,FALSE,0,9,3,0,0,No,FALSE,,4,NA,No Card,No intake.?
 BP,237,B2,2537,F,,FALSE,FALSE,0,7,1,0,3,No,FALSE,"4,2",3,NA,No Card,Good herding and defense
 AZ,237,R1,5724,M,,FALSE,FALSE,0,4,0,0,7,No,FALSE,,1,NA,No Card,"Bad movement, lost all its balls when indexing, could41391t really do anything"
 EC,237,B1,1895,M,,FALSE,FALSE,5,2,1,0,0,No,FALSE,,1,1,No Card,Failed auto climb
