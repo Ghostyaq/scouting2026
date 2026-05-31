@@ -541,6 +541,14 @@ ui <- navbarPage(
                              size = "md",
                              block = TRUE
                          ),
+                         actionBttn(
+                             inputId = "all_data",
+                             label = "All Data",
+                             style = "unite",
+                             color = "success",
+                             size = "md",
+                             block = TRUE
+                         ),
                      )
                  )
              ),
