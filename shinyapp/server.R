@@ -80,7 +80,8 @@ server <- function(input, output, session) {
         hop = "Hopper",
         joh = "Johnson",
         mil = "Milstein",
-        new = "Newton"
+        new = "Newton", 
+        all_data = "All Data"
     )
     
     lapply(names(events), function(id) {
