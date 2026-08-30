@@ -3,7 +3,8 @@ function resizeFrame() {
         var activeTab = document.querySelector('.tab-pane.active');
         var navbar = document.querySelector('.navbar');
         var navHeight = navbar ? navbar.offsetHeight : 0;
-        var h = activeTab ? activeTab.scrollHeight + navHeight + 20 : document.body.scrollHeight;
+        var h = activeTab ? activeTab.scrollHeight + navHeight + 20
+        : document.body.scrollHeight;
         
         window.frameElement.style.height = h + 'px';
         window.frameElement.style.overflow = 'hidden';
