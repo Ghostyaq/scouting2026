@@ -161,7 +161,7 @@ server <- function(input, output, session) {
                 pageLength = nrow(dataframe)
             )
         )
-    })
+    }, server = FALSE)
     
     #AUTO PICKLISTING
     observeEvent(input$open_weights, {
@@ -217,7 +217,7 @@ server <- function(input, output, session) {
                 backgroundSize = '100% 90%',
                 backgroundRepeat = 'no-repeat',
                 backgroundPosition = 'center')    
-    }) 
+    }, server = FALSE) 
     
     #COMPARE POINT SUMMARY
     output$summary_point_comp <- renderPlot({
@@ -280,7 +280,7 @@ server <- function(input, output, session) {
                 pageLength = nrow(df)
             )
         )
-    })
+    }, server = FALSE)
     
     #SCORE PREDICTION
     output$score_prediction <- renderText({
@@ -304,7 +304,7 @@ server <- function(input, output, session) {
     output$summary_stats_comp <- renderDT({
         req(input$selected_teams_comp)
         summary_stats(raw(), pridge(), teams_selected(), metric_selected())
-    })
+    }, server = FALSE)
     
     output$end_bar_match <- renderPlot({
         req(isTruthy(input$selected_match) || 
@@ -355,7 +355,7 @@ server <- function(input, output, session) {
                 isTruthy(input$selected_red) || 
                 isTruthy(input$selected_blue))
         summary_stat()
-    })
+    }, server = FALSE)
     
     output$comments_df_match <- renderDT({
         req(isTruthy(input$selected_match) || 
@@ -376,7 +376,7 @@ server <- function(input, output, session) {
                 pageLength = nrow(df)
             )
         )
-    })
+    }, server = FALSE)
     
     output$qual_radar_chart <- renderPlot({
         req(isTruthy(input$selected_teams_qual))
@@ -447,7 +447,7 @@ server <- function(input, output, session) {
                         ) 
                     }
                     datatable(data, rownames = FALSE)
-                })
+                }, server = FALSE)
                 
                 output[[paste0("general_comments_qual_", idx)]] <- renderDT({
                     if (user_logged_in()) {
@@ -461,7 +461,7 @@ server <- function(input, output, session) {
                         ) 
                     }
                     datatable(data, rownames = FALSE)
-                })
+                }, server = FALSE)
             })
         }
     })
@@ -611,7 +611,7 @@ server <- function(input, output, session) {
                 height = 1000
             )
         )
-    })
+    }, server = FALSE)
     
     output$login_ui <- renderUI({
         if (!user_logged_in()) {

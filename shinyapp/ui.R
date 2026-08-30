@@ -23,6 +23,7 @@ source("viz/introduction_page_text.R")
 source("server.R")
 
 options(sass.cache = FALSE)
+addResourcePath("assets", "www")
 
 ui <- navbarPage(
     title = "2026 REBUILT 449 Shinyapp",
@@ -32,43 +33,8 @@ ui <- navbarPage(
     ),
     collapsible = TRUE,
     header = tagList(
-        tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
-        tags$head(tags$script(HTML("
-            function resizeFrame() {
-                if (window.frameElement) {
-                    var activeTab = document.querySelector('.tab-pane.active');
-                    var navbar = document.querySelector('.navbar');
-                    var navHeight = navbar ? navbar.offsetHeight : 0;
-                    var h = activeTab ? activeTab.scrollHeight + navHeight + 20
-                    : document.body.scrollHeight;
-                    
-                    window.frameElement.style.height = h + 'px';
-                    window.frameElement.style.overflow = 'hidden';
-                }
-                document.documentElement.style.overflow = 'hidden';
-                document.body.style.overflow = 'hidden';
-            }
-
-            // On tab click
-            document.addEventListener('click', function(e) {
-                var tab = e.target.closest('a[data-bs-toggle=\"tab\"], a[data-toggle=\"tab\"]');
-                if (tab) {
-                    setTimeout(resizeFrame, 400);
-                }
-            });
-            
-            // When any Shiny output finishes rendering, resize
-            $(document).on('shiny:value shiny:outputinvalidated', function() {
-                setTimeout(resizeFrame, 300);
-            });
-            
-            // Watch for image/plot loads specifically
-            $(document).on('shiny:idle', function() {
-                setTimeout(resizeFrame, 300);
-            });
-            
-            setTimeout(resizeFrame, 2000);"
-        ))),
+        tags$link(rel = "stylesheet", type = "text/css", href = "assets/styles.css"),
+        tags$head(tags$script(src = "assets/script.js", type = "text/javascript")),
     ),
     tabPanel(#--------------------------INTRODUCTION------------------------
              title = "Introductory Page",
